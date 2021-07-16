@@ -16,6 +16,14 @@ export function clearToken() {
 api.interceptors.request.use(
   function(config) {
     console.log(config);
+    if (
+      config.url !== "/login" &&
+      config.headers &&
+      config.headers.common &&
+      !config.headers.common.Authorization
+    ) {
+      window.location.href = "/login";
+    }
     return config;
   },
   function(error) {
