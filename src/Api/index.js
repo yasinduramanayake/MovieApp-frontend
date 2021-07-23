@@ -15,7 +15,6 @@ export function clearToken() {
 
 api.interceptors.request.use(
   function(config) {
-    console.log(config);
     if (
       config.url !== "/login" &&
       config.headers &&

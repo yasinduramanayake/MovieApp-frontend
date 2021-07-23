@@ -1,21 +1,18 @@
-import { api, setToken, clearToken } from "@/Api/index";
+import { api } from "@/Api/index";
+import { setToken } from "../index";
 
 export default {
   async login(payload) {
-    // eslint-disable-next-line no-return-await
     return await api.post("/login", payload).then(res => {
-      const token = res.data;
+      const token = res.data.token;
       setToken(token);
       sessionStorage.setItem("token", token);
     });
   },
   async profile() {
-    // eslint-disable-next-line no-return-await
     return await api.get("/profile");
   },
   async logout() {
-    // eslint-disable-next-line no-return-await
-    sessionStorage.clear();
-    clearToken();
+    return await api.get("/logout");
   }
 };

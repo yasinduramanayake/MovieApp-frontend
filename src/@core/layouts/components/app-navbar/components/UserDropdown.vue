@@ -47,6 +47,8 @@ import {
 } from "bootstrap-vue";
 import { avatarText } from "@core/utils/filter";
 import authApi from "@/Api/Modules/auth";
+import { isUserLoggedIn } from "@/AuthChecking/middleware";
+import { clearToken } from "@/Api/index";
 
 export default {
   components: {
@@ -61,18 +63,25 @@ export default {
       avatarText
     };
   },
-  async mounted() {
-    await this.profile();
+  mounted() {
+    const is_name_available = setInterval(() => {
+      if (localStorage.getItem("token")) {
+        this.profile();
+        clearInterval(is_name_available);
+      }
+    }, 100);
   },
   methods: {
     async profile() {
       const res = await authApi.profile();
       this.userData = res.data.data;
-      console.log(this.userData);
+      sessionStorage.setItem("data", this.userData);
     },
-    logout() {
-      authApi.logout();
-      this.$router.push("/login");
+    async logout() {
+      await authApi.logout();
+      clearToken();
+      sessionStorage.clear();
+      await this.$router.push("/login");
     }
   }
 };

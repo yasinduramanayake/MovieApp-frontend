@@ -48,9 +48,9 @@ export default {
     }
   },
   beforeCreate() {
-    if (checkout.check() === false) {
-      this.$router.push("/login");
-    }
+    // if (checkout.check() === false) {
+    //   this.$router.push("/login");
+    // }
     // Set colors in theme
     const colors = [
       "primary",
