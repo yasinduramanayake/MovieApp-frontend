@@ -1,5 +1,8 @@
-import { ref } from '@vue/composition-api'
+import { ref, computed } from '@vue/composition-api'
 import { isNavGroupActive } from '@core/layouts/utils'
+
+// ACL
+// import ability from '@/libs/acl/ability'
 
 export default function useHorizontalNavMenuHeaderGroup(item) {
   // ------------------------------------------------
@@ -21,10 +24,32 @@ export default function useHorizontalNavMenuHeaderGroup(item) {
     isActive.value = isNavGroupActive(item.children)
   }
 
+  // ------------------------------------------------
+  // hasAbilityToAccess
+  // ------------------------------------------------
+
+  // eslint-disable-next-line arrow-body-style
+  const hasAbilityToAccess = computed(() => {
+    return item.children.some(grpOrItem => {
+      // If it have children => It's grp
+      if (grpOrItem.children) {
+        return true
+        // return grpOrItem.children.some(i => ability.can(i.action, i.resource))
+      }
+
+      // Else it's item
+      return true
+      // return ability.can(grpOrItem.action, grpOrItem.resource)
+    })
+  })
+
   return {
     isOpen,
     isActive,
     updateGroupOpen,
     updateIsActive,
+
+    // ACL
+    hasAbilityToAccess,
   }
 }

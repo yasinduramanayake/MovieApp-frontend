@@ -19,10 +19,11 @@
             :class="`text-${variant}`"
             v-text="title"
           />
+          <!-- eslint-disable -->
           <small
             v-if="text"
             class="d-inline-block text-body"
-            v-text="text"
+            v-html="text"
           />
         </div>
         <span

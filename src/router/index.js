@@ -1,50 +1,30 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import dashboardRoute from './modules/dashboard_route'
+import errorRoute from './modules/error_route'
+import loginRoute from './modules/login_route'
+import patientRoute from './modules/patient_route'
+import itemRoute from './modules/item_route'
+import unitRoute from './modules/unit_route'
+import membersRoute from './modules/members_route'
 
-// Routes
-import { canNavigate } from "@/libs/acl/routeProtection";
-import { isUserLoggedIn } from "@/AuthChecking/middleware";
-import dashboard from "./routes/dashboard";
-import pages from "./routes/pages";
-import news from "./routes/new";
-
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
   scrollBehavior() {
-    return { x: 0, y: 0 };
+    return { x: 0, y: 0 }
   },
   routes: [
-    { path: "/", redirect: { name: "dashboard-ecommerce" } },
-    ...dashboard,
-    ...pages,
-    ...news,
-    {
-      path: "*",
-      redirect: "error-404"
-    }
-  ]
-});
+    ...dashboardRoute,
+    ...patientRoute,
+    ...itemRoute,
+    ...unitRoute,
+    ...loginRoute,
+    ...errorRoute,
+    ...membersRoute,
+  ],
+})
 
-// router.beforeEach((to, _, next) => {
-//   const isLoggedIn = isUserLoggedIn();
-//
-//   if (!canNavigate(to)) {
-//     // Redirect to login if not logged in
-//     if (isLoggedIn === null) return next({ name: "auth-login" });
-//
-//     // If logged in => not authorized
-//     return next({ name: "misc-not-authorized" });
-//   }
-//
-//   // Redirect if logged in
-//   if (isLoggedIn !== null) {
-//     return next({ name: "dashboard-ecommerce" });
-//   }
-//
-//   return next();
-// });
-
-export default router;
+export default router

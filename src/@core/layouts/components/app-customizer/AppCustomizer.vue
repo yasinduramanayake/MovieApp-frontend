@@ -183,7 +183,7 @@ import {
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
-// import useAppCustomizer from './useAppCustomizer'
+import useAppCustomizer from './useAppCustomizer'
 
 export default {
   components: {

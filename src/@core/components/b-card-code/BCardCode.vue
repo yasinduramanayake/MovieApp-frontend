@@ -78,6 +78,10 @@ export default {
   },
   inheritAttrs: false,
   props: {
+    collapsed: {
+      type: Boolean,
+      default: false,
+    },
     codeLanguage: {
       default: 'markup',
       type: String,

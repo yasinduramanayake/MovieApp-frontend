@@ -154,6 +154,14 @@ $vs-dropdown-box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
   }
 }
 
+.vs__selected-options {
+  input {
+    &::placeholder {
+      color: #c2c2cb;
+    }
+  }
+}
+
 // Dropdown Position
 .vs__dropdown-menu {
   top: calc(100% + 1rem);

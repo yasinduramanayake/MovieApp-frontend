@@ -166,12 +166,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.dropdown-cart {
-  .media {
-    .media-aside {
-      align-items: center;
-    }
-  }
-}
+<style>
+
 </style>

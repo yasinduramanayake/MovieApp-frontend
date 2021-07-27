@@ -15,13 +15,8 @@ export function clearToken() {
 
 api.interceptors.request.use(
   function(config) {
-    if (
-      config.url !== "/login" &&
-      config.headers &&
-      config.headers.common &&
-      !config.headers.common.Authorization
-    ) {
-      window.location.href = "/login";
+    if (localStorage.token) {
+      config.headers.Authorization = `Bearer ${localStorage.token}`;
     }
     return config;
   },
@@ -45,10 +40,10 @@ api.interceptors.response.use(
       } else if (error.response.status === 405) {
         notification.toast("Method Not Allowed", "warning");
       } else if (error.response.status === 422) {
-        notification.toast("The given data was invalid", "error");
+        notification.toast("Given data is invalid", "error");
       }
       if (error.response.status === 500) {
-        notification.toast("Internal Server Error", "warning");
+        notification.toast("Internal Server Error", "error");
       }
     }
     return Promise.reject(error);

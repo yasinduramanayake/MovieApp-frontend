@@ -1,13 +1,13 @@
 import Vue from "vue";
-import VueToast from "vue-toast-notification";
-import "vue-toast-notification/dist/theme-sugar.css";
-Vue.use(VueToast);
+import Toast from "vue-toastification";
+// Import the CSS or use your own!
+import "vue-toastification/dist/index.css";
+Vue.use(Toast);
 
 export default {
-  toast: function toast(message, type) {
-    Vue.$toast.open({
-      message,
-      type
+  toast: function toast(massage, type) {
+    Vue.$toast(massage, {
+      type: type
     });
   }
 };

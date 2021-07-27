@@ -3,14 +3,10 @@
     <component :is="layout">
       <router-view />
     </component>
-
-    <scroll-to-top v-if="enableScrollToTop" />
   </div>
 </template>
 
 <script>
-import ScrollToTop from "@core/components/scroll-to-top/ScrollToTop.vue";
-
 // This will be populated in `beforeCreate` hook
 import { $themeColors, $themeBreakpoints, $themeConfig } from "@themeConfig";
 import { provideToast } from "vue-toastification/composition";
@@ -20,7 +16,6 @@ import useAppConfig from "@core/app-config/useAppConfig";
 import { useWindowSize, useCssVar } from "@vueuse/core";
 
 import store from "@/store";
-import checkout from "@/AuthChecking/middleware";
 
 const LayoutVertical = () => import("@/layouts/vertical/LayoutVertical.vue");
 const LayoutHorizontal = () =>
@@ -32,9 +27,7 @@ export default {
     // Layouts
     LayoutHorizontal,
     LayoutVertical,
-    LayoutFull,
-
-    ScrollToTop
+    LayoutFull
   },
   // ! We can move this computed: layout & contentLayoutType once we get to use Vue 3
   // Currently, router.currentRoute is not reactive and doesn't trigger any change
@@ -48,9 +41,6 @@ export default {
     }
   },
   beforeCreate() {
-    // if (checkout.check() === false) {
-    //   this.$router.push("/login");
-    // }
     // Set colors in theme
     const colors = [
       "primary",
@@ -90,7 +80,6 @@ export default {
   },
   setup() {
     const { skin, skinClasses } = useAppConfig();
-    const { enableScrollToTop } = $themeConfig.layout;
 
     // If skin is dark when initialized => Add class to body
     if (skin.value === "dark") document.body.classList.add("dark-layout");
@@ -115,8 +104,7 @@ export default {
     });
 
     return {
-      skinClasses,
-      enableScrollToTop
+      skinClasses
     };
   }
 };
