@@ -1,7 +1,7 @@
 import { api } from "@/Api/index";
 import { setToken, clearToken } from "../index";
 import notification from "@/ApiConstance/toast";
-
+//test
 export default {
   async login(payload) {
     return await api.post("/login", payload).then(res => {
