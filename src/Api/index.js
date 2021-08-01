@@ -5,6 +5,7 @@ export const api = axios.create({
   baseURL: process.env.VUE_APP_API_BASE_URL
 });
 
+//a
 export function setToken(token) {
   api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 }
