@@ -1,79 +1,79 @@
-import profile from "@/Api/Modules/auth";
-import Cookies from "js-cookie";
-import router from "@/router/index";
+import profile from '@/Api/Modules/auth'
+import Cookies from 'js-cookie'
+import router from '@/router/index'
 
 export default {
   state: {
     current_user_data: null,
-    current_user_permission: null
+    current_user_permission: null,
   },
   mutations: {
-    CLEAR_CURRENT_USER: state => {
-      state.current_user_data = undefined;
-      state.current_user_permission = undefined;
-      localStorage.clear();
+    CLEAR_CURRENT_USER: (state) => {
+      state.current_user_data = undefined
+      state.current_user_permission = undefined
+      localStorage.clear()
     },
     SET_CURRENT_USER_PERMISSION: (state, value) => {
-      state.current_user_permission = value;
+      state.current_user_permission = value
     },
     SET_CURRENT_USER: (state, value) => {
-      state.current_user_data = value;
+      state.current_user_data = value
     },
     UPDATE_USER_INFO: (state, { displayName, photoURL }) => {
-      state.current_user_data.user.name = displayName;
-      state.current_user_data.user.image = photoURL;
-    }
+      state.current_user_data.user.name = displayName
+      state.current_user_data.user.image = photoURL
+    },
   },
   getters: {
-    isLogedIn: state =>
-      state.current_user_data !== undefined && state.current_user_data !== null
+    isLogedIn: (state) =>
+      state.current_user_data !== undefined && state.current_user_data !== null,
     // currentUser: state => state.current_user_data,
     // permissions: state => state.current_user_permission
   },
   actions: {
     setCurrentUser: ({ commit }, payload) => {
-      commit("SET_CURRENT_USER", payload);
+      commit('SET_CURRENT_USER', payload)
     },
     // eslint-disable-next-line no-unused-vars
     async afterLogin({ commit }, fromLogin) {
-      if (!fromLogin) router.replace("/dashboard");
+      if (!fromLogin) router.replace('/dashboard')
     },
     async autoLogin({ commit }) {
       try {
-        const cacheUserToken = localStorage.getItem("token");
+        const cacheUserToken = localStorage.getItem('token')
         if (!this.getters.isLogedIn && cacheUserToken) {
-          const cacheUserData = (await profile.profile()).data.data;
-          commit("SET_CURRENT_USER", {
+          const cacheUserData = (await profile.profile()).data.data
+          commit('SET_CURRENT_USER', {
             user: cacheUserData,
-            access_token: cacheUserToken
-          });
-          commit("UPDATE_USER_INFO", {
-            displayName: cacheUserData.name
-          });
-          await this.dispatch("afterLogin", true);
+            access_token: cacheUserToken,
+          })
+          commit('UPDATE_USER_INFO', {
+            displayName: cacheUserData.name,
+          })
+          await this.dispatch('afterLogin', true)
         }
       } catch (e) {
         // console.log(e)
-        await this.dispatch("logout");
+        await this.dispatch('logout')
       }
     },
     async login({ commit }, payload) {
-      const loginData = (await profile.login(payload)).data.data;
-      commit("SET_CURRENT_USER", loginData);
-      await this.dispatch("afterLogin");
+      const loginData = (await profile.login(payload)).data.data
+      commit('SET_CURRENT_USER', loginData)
+      // await this.dispatch('afterLogin')
     },
     async logout({ commit }) {
       try {
-        await profile.logout();
+        await profile.logout()
       } catch (error) {
-        await commit("CLEAR_CURRENT_USER");
+        await commit('CLEAR_CURRENT_USER')
       }
-      await commit("CLEAR_CURRENT_USER");
+      await commit('CLEAR_CURRENT_USER')
     },
     async updateCurrentUserPhotoUrl({ commit }, newUrl) {
-      commit("UPDATE_USER_INFO", {
-        photoURL: newUrl
-      });
-    }
-  }
-};
+      commit('UPDATE_USER_INFO', {
+        photoURL: newUrl,
+      })
+    },
+  },
+}

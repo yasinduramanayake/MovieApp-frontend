@@ -1,23 +1,18 @@
 <template>
   <div class="navbar-container d-flex content align-items-center">
-
     <!-- Nav Menu Toggler -->
     <ul class="nav navbar-nav d-xl-none">
       <li class="nav-item">
-        <b-link
-          class="nav-link"
-          @click="toggleVerticalMenuActive"
-        >
-          <feather-icon
-            icon="MenuIcon"
-            size="21"
-          />
+        <b-link class="nav-link" @click="toggleVerticalMenuActive">
+          <feather-icon icon="MenuIcon" size="21" />
         </b-link>
       </li>
     </ul>
 
     <!-- Left Col -->
-    <div class="bookmark-wrapper align-items-center flex-grow-1 d-none d-lg-flex">
+    <div
+      class="bookmark-wrapper align-items-center flex-grow-1 d-none d-lg-flex"
+    >
       <dark-Toggler class="d-none d-lg-block" />
     </div>
 
@@ -30,7 +25,7 @@
         <template #button-content>
           <div class="d-sm-flex d-none user-nav">
             <p class="user-name font-weight-bolder mb-0">
-              John Doe
+              {{ name }}
             </p>
             <span class="user-status">Admin</span>
           </div>
@@ -45,38 +40,22 @@
         </template>
 
         <b-dropdown-item link-class="d-flex align-items-center">
-          <feather-icon
-            size="16"
-            icon="UserIcon"
-            class="mr-50"
-          />
+          <feather-icon size="16" icon="UserIcon" class="mr-50" />
           <span>Profile</span>
         </b-dropdown-item>
 
         <b-dropdown-item link-class="d-flex align-items-center">
-          <feather-icon
-            size="16"
-            icon="MailIcon"
-            class="mr-50"
-          />
+          <feather-icon size="16" icon="MailIcon" class="mr-50" />
           <span>Inbox</span>
         </b-dropdown-item>
 
         <b-dropdown-item link-class="d-flex align-items-center">
-          <feather-icon
-            size="16"
-            icon="CheckSquareIcon"
-            class="mr-50"
-          />
+          <feather-icon size="16" icon="CheckSquareIcon" class="mr-50" />
           <span>Task</span>
         </b-dropdown-item>
 
         <b-dropdown-item link-class="d-flex align-items-center">
-          <feather-icon
-            size="16"
-            icon="MessageSquareIcon"
-            class="mr-50"
-          />
+          <feather-icon size="16" icon="MessageSquareIcon" class="mr-50" />
           <span>Chat</span>
         </b-dropdown-item>
 
@@ -86,11 +65,7 @@
           link-class="d-flex align-items-center"
           @click="localLogout"
         >
-          <feather-icon
-            size="16"
-            icon="LogOutIcon"
-            class="mr-50"
-          />
+          <feather-icon size="16" icon="LogOutIcon" class="mr-50" />
           <span>Logout</span>
         </b-dropdown-item>
       </b-nav-item-dropdown>
@@ -100,10 +75,15 @@
 
 <script>
 import {
-  BLink, BNavbarNav, BNavItemDropdown, BDropdownItem, BDropdownDivider, BAvatar,
-} from 'bootstrap-vue'
-import DarkToggler from '@core/layouts/components/app-navbar/components/DarkToggler.vue'
-import { mapActions, mapGetters } from 'vuex'
+  BLink,
+  BNavbarNav,
+  BNavItemDropdown,
+  BDropdownItem,
+  BDropdownDivider,
+  BAvatar,
+} from "bootstrap-vue";
+import DarkToggler from "@core/layouts/components/app-navbar/components/DarkToggler.vue";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
@@ -117,6 +97,11 @@ export default {
     // Navbar Components
     DarkToggler,
   },
+  data() {
+    return {
+      name: localStorage.name,
+    };
+  },
   props: {
     toggleVerticalMenuActive: {
       type: Function,
@@ -124,14 +109,14 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['currentUser']),
+    ...mapGetters(["currentUser"]),
   },
   methods: {
-    ...mapActions(['logout']),
+    ...mapActions(["logout"]),
     async localLogout() {
-      await this.logout()
-      this.$router.push({ name: 'login' })
+      await this.logout();
+      this.$router.push({ name: "login" });
     },
   },
-}
+};
 </script>
