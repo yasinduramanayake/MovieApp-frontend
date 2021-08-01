@@ -3,10 +3,6 @@ export default {
     router.beforeEach(async (to, _, next) => {
       await store.dispatch("autoLogin");
 
-      //   if (!canNavigate(to)) {
-      //     if (!isLoggedIn) return next({ name: 'auth-login' })
-      //     return next({ name: 'misc-not-authorized' })
-      //   }
 
       const { isLogedIn } = store.getters;
 
