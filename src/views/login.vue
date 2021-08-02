@@ -1,41 +1,47 @@
 <template>
   <div style="background-color:black">
-    <b-button
-      v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-      v-b-toggle.sidebar-variant
-      style="background-color: transparent;"
-      variant="flat-primary"
-    >
-      <feather-icon icon="AlignJustifyIcon" size="25%" class="mr-50" />
-    </b-button>
+    <b-container>
+      <b-row>
+        <b-col class="nev" cols="11">
+          <b-link>
+            <vuexy-logo />
+          </b-link>
+        </b-col>
 
-    <!-- Brand logo-->
+        <!-- Brand logo-->
+        <b-col cols="1">
+          <b-button
+            v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+            v-b-toggle.sidebar-right
+            style="background-color: transparent;"
+            variant="flat-primary"
+          >
+            <feather-icon icon="AlignJustifyIcon" size="25%" class="mr-50" />
+          </b-button>
+        </b-col>
+      </b-row>
+    </b-container>
 
-    <b-link class="nev">
-      <vuexy-logo />
-    </b-link>
-
-    <b-nav class="middle">
+    <b-nav class="nev1">
       <b-nav-item>
-        fghjgfd
+        Home
       </b-nav-item>
-      <b-nav-item> dfghtrt</b-nav-item>
+      <b-nav-item> Movies</b-nav-item>
+      <b-nav-item> Movies</b-nav-item>
     </b-nav>
 
     <!-- /Brand logo-->
     <b-sidebar
-      id="sidebar-variant"
+      id="sidebar-right"
       bg-variant="dark"
       text-variant="light"
-      shadow
+      right
       backdrop
+      shadow
     >
       <b-card-title title-tag="h2" style="color:white" class="mb-2">
-        Welcome to Vuexy! 👋
+        Sign in!
       </b-card-title>
-      <b-card-text class="mb-2">
-        Please sign-in to your account and start the adventure
-      </b-card-text>
       <validation-observer ref="loginValidation">
         <b-form class="auth-login-form mt-2" @submit.prevent>
           <!-- email -->
@@ -148,8 +154,12 @@ import {
   BCardTitle,
   BForm,
   BButton,
+  BContainer,
+  BCol,
+  BRow,
   BOverlay,
   BSidebar,
+  // BCard,
   VBToggle,
 } from "bootstrap-vue";
 // import vSelect from "vue-select";
@@ -163,8 +173,11 @@ export default {
   components: {
     BNav,
     BNavItem,
+    BContainer,
+    BCol,
+    BRow,
     // vSelect,
-
+    // BCard,
     BSidebar,
     BLink,
     BFormGroup,
@@ -236,18 +249,22 @@ export default {
 @import "@core/scss/vue/libs/vue-select.scss";
 
 .nev {
-  padding-left: 0%;
-  padding-top: 2%;
+  padding-top: 1%;
+  padding-left: 2%;
 }
 .nev1 {
-  padding-left: 1%;
+  padding-left: 10%;
   padding-top: 0%;
   padding-bottom: 0%;
 }
 .middle {
-  padding-bottom: 1%;
+  padding-bottom: 32%;
+  padding-left: 40%;
+  padding-right: 40%;
+}
+.open {
   padding-left: 10%;
-  padding-right: 20%;
+  padding-top: 2%;
 }
 .middle1 {
   padding-top: 0%;
