@@ -23,11 +23,22 @@
     </b-container>
 
     <b-nav class="nev1">
-      <b-nav-item>
-        Home
+      <b-nav-item active>
+        Movies
       </b-nav-item>
-      <b-nav-item> Movies</b-nav-item>
-      <b-nav-item> Movies</b-nav-item>
+      <b-nav-item>Theaters</b-nav-item>
+      <b-nav-item-dropdown
+        id="my-nav-dropdown"
+        text="Profile"
+        toggle-class="nav-link-custom"
+        right
+      >
+        <b-dropdown-item v-b-toggle.sidebar-right>Login</b-dropdown-item>
+        <b-dropdown-divider />
+        <b-dropdown-item>profile</b-dropdown-item>
+        <b-dropdown-divider />
+        <b-dropdown-item>Logout</b-dropdown-item>
+      </b-nav-item-dropdown>
     </b-nav>
 
     <!-- /Brand logo-->
@@ -134,6 +145,85 @@
     </b-sidebar>
 
     <br /><br /><br />
+    <br /><br /><br />
+
+    <b-row class="match-height">
+      <b-col md="6" lg="4">
+        <b-card
+          :img-src="require('@/assets/images/The_Kissing_Booth_2_poster.jpg')"
+          img-alt="Card image cap"
+          img-top
+          title="Card title"
+        >
+          <b-card-text>
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </b-card-text>
+          <b-button
+            v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+            variant="outline-primary"
+          >
+            Go Somewhere
+          </b-button>
+        </b-card>
+      </b-col>
+      <b-col md="6" lg="4">
+        <b-card no-body>
+          <b-card-body>
+            <b-card-title>Card title</b-card-title>
+            <b-card-sub-title>Support card subtitle</b-card-sub-title>
+          </b-card-body>
+          <b-img
+            fluid
+            :src="
+              require('@/assets/images/MV5BYzE1YzViNzktZTU5Ny00ZjYzLWE0YjItZWNkNDU1MzFiOWNhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg')
+            "
+            alt="Card image cap"
+          />
+          <b-card-body>
+            <b-card-text>Bear claw sesame snaps gummies chocolate.</b-card-text>
+            <b-link class="card-link">
+              Card link
+            </b-link>
+            <b-link class="card-link">
+              Another link
+            </b-link>
+          </b-card-body>
+        </b-card>
+      </b-col>
+      <b-col md="6" lg="4">
+        <b-card title="Card title" sub-title="Support card subtitle">
+          <b-img
+            fluid
+            class="mb-2"
+            :src="
+              require('@/assets/images/01-f9-dm-mainstage-mobile-banner-1080x793-pl-f01-013120-5e3867f0cf333-1.jpg')
+            "
+          />
+          <b-card-text>Bear claw sesame snaps gummies chocolate.</b-card-text>
+          <b-link class="card-link">
+            Card link
+          </b-link>
+          <b-link class="card-link">
+            Another link
+          </b-link>
+        </b-card>
+      </b-col>
+    </b-row>
+
+    <br /><br /><br />
+    <div>
+      <transition-group name="fade" tag="div">
+        <div v-for="i in [currentIndex]" :key="i">
+          <img :src="currentImg" />
+        </div>
+      </transition-group>
+      <a class="prev" @click="prev" href="#">&#10094; Previous</a>
+      <a class="next" @click="next" href="#">&#10095; Next</a>
+    </div>
+
+    <br /><br /><br />
+    <br /><br /><br />
     <!-- Left Text-->
   </div>
 </template>
@@ -145,20 +235,25 @@ import VuexyLogo from "@core/layouts/components/Logo.vue";
 import {
   BLink,
   BFormGroup,
+  BNavItemDropdown,
   BNav,
   BNavItem,
   BFormInput,
   BInputGroupAppend,
   BInputGroup,
   BCardText,
+  BDropdownDivider,
+  BDropdownItem,
   BCardTitle,
   BForm,
   BButton,
   BContainer,
   BCol,
+  BCard,
   BRow,
   BOverlay,
   BSidebar,
+
   // BCard,
   VBToggle,
 } from "bootstrap-vue";
@@ -171,7 +266,11 @@ import { mapActions } from "vuex";
 
 export default {
   components: {
+    BNavItemDropdown,
     BNav,
+    BCard,
+    BDropdownDivider,
+    BDropdownItem,
     BNavItem,
     BContainer,
     BCol,
@@ -200,6 +299,13 @@ export default {
   mixins: [togglePasswordVisibility],
   data() {
     return {
+      images: [
+        "https://cdn.pixabay.com/photo/2015/12/12/15/24/amsterdam-1089646_1280.jpg",
+        "https://cdn.pixabay.com/photo/2016/02/17/23/03/usa-1206240_1280.jpg",
+        "https://cdn.pixabay.com/photo/2015/05/15/14/27/eiffel-tower-768501_1280.jpg",
+      ],
+      timer: null,
+      currentIndex: 0,
       selected: { title: "Colombo" },
       option: [{ title: "Panadura" }, { title: "Rathnapura" }],
       selected1: { title1: "sigma" },
@@ -211,7 +317,13 @@ export default {
       loading: false,
     };
   },
+  mounted: function() {
+    this.startSlide();
+  },
   computed: {
+    currentImg: function() {
+      return this.images[Math.abs(this.currentIndex) % this.images.length];
+    },
     passwordToggleIcon() {
       return this.passwordFieldType === "password" ? "EyeIcon" : "EyeOffIcon";
     },
@@ -239,6 +351,16 @@ export default {
           this.$vs.loading.close();
         });
       }
+    },
+    startSlide: function() {
+      this.timer = setInterval(this.next, 4000);
+    },
+
+    next: function() {
+      this.currentIndex += 1;
+    },
+    prev: function() {
+      this.currentIndex -= 1;
     },
   },
 };
@@ -271,5 +393,55 @@ export default {
   padding-bottom: 0%;
   padding-left: 40%;
   padding-right: 40%;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.9s ease;
+  overflow: hidden;
+  visibility: visible;
+  position: absolute;
+  width: 100%;
+  opacity: 1;
+}
+
+.fade-enter,
+.fade-leave-to {
+  visibility: hidden;
+  width: 100%;
+  opacity: 0;
+}
+
+img {
+  height: 600px;
+  width: 100%;
+}
+
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  width: auto;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.7s ease;
+  border-radius: 0 4px 4px 0;
+  text-decoration: none;
+  user-select: none;
+}
+
+.next {
+  right: 0;
+}
+
+.prev {
+  left: 0;
+}
+
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.9);
 }
 </style>
