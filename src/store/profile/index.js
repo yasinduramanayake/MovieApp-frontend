@@ -36,7 +36,11 @@ export default {
     },
     // eslint-disable-next-line no-unused-vars
     async afterLogin({ commit }, fromLogin) {
-      if (!fromLogin) router.replace('/dashboard')
+      if (!fromLogin) {
+        if (localStorage.role === 'admin') {
+          router.replace('/dashboard')
+        }
+      }
     },
     async autoLogin({ commit }) {
       try {
