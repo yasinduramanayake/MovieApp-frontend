@@ -198,6 +198,7 @@
 /* eslint-disable global-require */
 import { ValidationProvider, ValidationObserver } from "vee-validate";
 import VuexyLogo from "@core/layouts/components/Logo.vue";
+
 import {
   BRow,
   BCol,
@@ -224,6 +225,7 @@ export default {
     BImg,
     BCol,
     BLink,
+
     BButton,
     BForm,
     BCardText,
