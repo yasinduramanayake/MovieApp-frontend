@@ -40,87 +40,84 @@
       shadow
     >
       <b-card-title title-tag="h2" style="color:white" class="mb-2">
-        Sign in!
+        <b-col cols="12">
+          Sign in!
+        </b-col>
       </b-card-title>
       <validation-observer ref="loginValidation">
         <b-form class="auth-login-form mt-2" @submit.prevent>
           <!-- email -->
-          <b-form-group>
-            <label for="login-email" style="color:white">E-mail</label>
-            <validation-provider
-              #default="{ errors }"
-              name="Email"
-              rules="required|email"
-            >
-              <b-form-input
-                id="login-email"
-                v-model="userEmail"
-                :state="errors.length > 0 ? false : null"
-                name="login-email"
-              />
-              <small class="text-danger">{{ errors[0] }}</small>
-            </validation-provider>
-          </b-form-group>
-
-          <!-- forgot password -->
-          <b-form-group>
-            <div class="d-flex justify-content-between">
-              <label for="login-password" style="color:white">Password</label>
-              <!-- <b-link :to="{name:'auth-forgot-password-v2'}">
-                    <small>Forgot Password?</small>
-                  </b-link> -->
-            </div>
-            <validation-provider
-              #default="{ errors }"
-              name="Password"
-              rules="required"
-            >
-              <b-input-group
-                class="input-group-merge"
-                :class="errors.length > 0 ? 'is-invalid' : null"
+          <b-col cols="12">
+            <b-form-group>
+              <label for="login-email" style="color:white">E-mail</label>
+              <validation-provider
+                #default="{ errors }"
+                name="Email"
+                rules="required|email"
               >
                 <b-form-input
-                  id="login-password"
-                  v-model="password"
+                  id="login-email"
+                  v-model="userEmail"
                   :state="errors.length > 0 ? false : null"
-                  class="form-control-merge"
-                  :type="passwordFieldType"
-                  name="login-password"
+                  name="login-email"
                 />
-                <b-input-group-append is-text>
-                  <feather-icon
-                    class="cursor-pointer"
-                    :icon="passwordToggleIcon"
-                    @click="togglePasswordVisibility"
-                  />
-                </b-input-group-append>
-              </b-input-group>
-              <small class="text-danger">{{ errors[0] }}</small>
-            </validation-provider>
-          </b-form-group>
+                <small class="text-danger">{{ errors[0] }}</small>
+              </validation-provider>
+            </b-form-group>
+          </b-col>
 
-          <!-- checkbox -->
-          <!-- <b-form-group>
-                <b-form-checkbox
-                  id="remember-me"
-                  v-model="status"
-                  name="checkbox-1"
+          <!-- forgot password -->
+          <b-col cols="12">
+            <b-form-group>
+              <div class="d-flex justify-content-between">
+                <label for="login-password" style="color:white">Password</label>
+                <!-- <b-link :to="{name:'auth-forgot-password-v2'}">
+                    <small>Forgot Password?</small>
+                  </b-link> -->
+              </div>
+              <validation-provider
+                #default="{ errors }"
+                name="Password"
+                rules="required"
+              >
+                <b-input-group
+                  class="input-group-merge"
+                  :class="errors.length > 0 ? 'is-invalid' : null"
                 >
-                  Remember Me
-                </b-form-checkbox>
-              </b-form-group> -->
+                  <b-form-input
+                    id="login-password"
+                    v-model="password"
+                    :state="errors.length > 0 ? false : null"
+                    class="form-control-merge"
+                    :type="passwordFieldType"
+                    name="login-password"
+                  />
+                  <b-input-group-append is-text>
+                    <feather-icon
+                      class="cursor-pointer"
+                      :icon="passwordToggleIcon"
+                      @click="togglePasswordVisibility"
+                    />
+                  </b-input-group-append>
+                </b-input-group>
+                <small class="text-danger">{{ errors[0] }}</small>
+              </validation-provider>
+            </b-form-group>
+          </b-col>
 
           <!-- submit buttons -->
           <b-overlay :show="loading" :opacity="0.5" rounded="sm">
-            <b-button
-              type="submit"
-              variant="primary"
-              block
-              :disabled="loading"
-              @click="validationForm"
-            >
-              Sign in
-            </b-button>
+            <b-col cols="12">
+              <b-button
+                type="submit"
+                variant="primary"
+                block
+                :disabled="loading"
+                @click="validationForm"
+              >
+                Sign in
+              </b-button>
+            </b-col>
           </b-overlay>
         </b-form>
       </validation-observer>
