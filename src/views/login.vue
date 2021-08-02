@@ -144,14 +144,15 @@
     <br /><br /><br />
     <br /><br /><br />
 
-    <b-row class="match-height">
-      <b-col md="6" lg="4">
-        <b-card
-          :img-src="require('@/assets/images/The_Kissing_Booth_2_poster.jpg')"
-          img-alt="Card image cap"
-          img-top
-          title="Card title"
-        >
+    <b-row>
+      <b-col md="1" lg="4">
+        <b-card img-height="200" img-width="200" title="Card title">
+          <b-card-img
+            :src="
+              require('@/assets/images/MV5BYzE1YzViNzktZTU5Ny00ZjYzLWE0YjItZWNkNDU1MzFiOWNhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg')
+            "
+            width="10px"
+          ></b-card-img>
           <b-card-text>
             Some quick example text to build on the card title and make up the
             bulk of the card's content.
@@ -165,45 +166,39 @@
         </b-card>
       </b-col>
       <b-col md="6" lg="4">
-        <b-card no-body>
-          <b-card-body>
-            <b-card-title>Card title</b-card-title>
-            <b-card-sub-title>Support card subtitle</b-card-sub-title>
-          </b-card-body>
-          <b-img
-            fluid
-            :src="
-              require('@/assets/images/MV5BYzE1YzViNzktZTU5Ny00ZjYzLWE0YjItZWNkNDU1MzFiOWNhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg')
-            "
-            alt="Card image cap"
-          />
-          <b-card-body>
-            <b-card-text>Bear claw sesame snaps gummies chocolate.</b-card-text>
-            <b-link class="card-link">
-              Card link
-            </b-link>
-            <b-link class="card-link">
-              Another link
-            </b-link>
-          </b-card-body>
-        </b-card>
-      </b-col>
-      <b-col md="6" lg="4">
-        <b-card title="Card title" sub-title="Support card subtitle">
-          <b-img
-            fluid
-            class="mb-2"
+        <b-card title="Card title">
+          <b-card-img
             :src="
               require('@/assets/images/01-f9-dm-mainstage-mobile-banner-1080x793-pl-f01-013120-5e3867f0cf333-1.jpg')
             "
-          />
-          <b-card-text>Bear claw sesame snaps gummies chocolate.</b-card-text>
-          <b-link class="card-link">
-            Card link
-          </b-link>
-          <b-link class="card-link">
-            Another link
-          </b-link>
+          ></b-card-img>
+          <b-card-text>
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </b-card-text>
+          <b-button
+            v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+            variant="outline-primary"
+          >
+            Go Somewhere
+          </b-button>
+        </b-card>
+      </b-col>
+      <b-col md="6" lg="4">
+        <b-card title="Card title">
+          <b-card-img
+            :src="require('@/assets/images/The_Kissing_Booth_2_poster.jpg')"
+          ></b-card-img>
+          <b-card-text>
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </b-card-text>
+          <b-button
+            v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+            variant="outline-primary"
+          >
+            Go Somewhere
+          </b-button>
         </b-card>
       </b-col>
     </b-row>
@@ -215,8 +210,6 @@
           <img :src="currentImg" />
         </div>
       </transition-group>
-      <a class="prev" @click="prev" href="#">&#10094; Previous</a>
-      <a class="next" @click="next" href="#">&#10095; Next</a>
     </div>
 
     <br /><br /><br />
@@ -247,6 +240,7 @@ import {
   BContainer,
   BCol,
   BCard,
+  BCardImg,
   BRow,
   BOverlay,
   BSidebar,
@@ -265,6 +259,7 @@ export default {
   components: {
     BNavItemDropdown,
     BNav,
+    BCardImg,
     BCard,
     BDropdownDivider,
     BDropdownItem,
