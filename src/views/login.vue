@@ -1,15 +1,16 @@
 <template>
-  <div style="background-color:black">
+  <div style="background-color:#24262b">
     <Header />
     <!-- /Brand logo-->
-    <br /><br />
+    <br />
+    <br />
 
     <Slider />
 
-    <br />
-    <br />
-
+    <div class="background2">
     <b-container>
+    <br />
+    <br />
     <b-row>
       <b-col md="1" lg="4">
         <b-card img-height="200" img-width="200" title="Card title">
@@ -28,7 +29,7 @@
             v-b-modal.modal-info
             variant="outline-info"
           >
-            Info
+            View Details
           </b-button>
         </b-card>
       </b-col>
@@ -48,7 +49,7 @@
             v-b-modal.modal-info
             variant="outline-info"
           >
-            Info
+            View Details
           </b-button>
         </b-card>
       </b-col>
@@ -67,7 +68,7 @@
             v-b-modal.modal-info
             variant="outline-info"
           >
-            Info
+            View Details
           </b-button>
         </b-card>
       </b-col>
@@ -86,7 +87,7 @@
             v-b-modal.modal-info
             variant="outline-info"
           >
-            Info
+            View Details
           </b-button>
         </b-card>
       </b-col>
@@ -94,7 +95,9 @@
       <b-col md="6" lg="4">
         <b-card title="Card title">
           <b-card-img
-            :src="require('@/assets/images/The_Kissing_Booth_2_poster.jpg')"
+            :src="
+              require('@/assets/images/MV5BYzE1YzViNzktZTU5Ny00ZjYzLWE0YjItZWNkNDU1MzFiOWNhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg')
+            "
           ></b-card-img>
           <b-card-text>
             Some quick example text to build on the card title and make up the
@@ -105,7 +108,7 @@
             v-b-modal.modal-info
             variant="outline-info"
           >
-            Info
+            View Details
           </b-button>
         </b-card>
       </b-col>
@@ -113,7 +116,7 @@
       <b-col md="6" lg="4">
         <b-card title="Card title">
           <b-card-img
-            :src="require('@/assets/images/The_Kissing_Booth_2_poster.jpg')"
+            :src="require('@/assets/images/01-f9-dm-mainstage-mobile-banner-1080x793-pl-f01-013120-5e3867f0cf333-1.jpg')"
           ></b-card-img>
           <b-card-text>
             Some quick example text to build on the card title and make up the
@@ -124,12 +127,15 @@
             v-b-modal.modal-info
             variant="outline-info"
           >
-            Info
+            View Details
           </b-button>
         </b-card>
       </b-col>
     </b-row>
+      <br />
+      <br />
   </b-container>
+      </div>
     <b-modal
       id="modal-info"
       ok-only
@@ -146,13 +152,6 @@
         love. Donut powder cupcake ice cream tootsie roll jelly.
       </b-card-text>
     </b-modal>
-
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-
     <div>
       <Footer />
     </div>
@@ -248,5 +247,9 @@ export default {
 img {
   height: 250px;
   width: 100%;
+}
+
+.background2{
+  background-color:white;
 }
 </style>
