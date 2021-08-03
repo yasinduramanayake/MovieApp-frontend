@@ -4,7 +4,7 @@ import dashboardRoute from './modules/dashboard_route'
 import errorRoute from './modules/error_route'
 import loginRoute from './modules/login_route'
 import patientRoute from './modules/patient_route'
-import itemRoute from './modules/item_route'
+import moviesRoute from './modules/movies_route'
 import unitRoute from './modules/unit_route'
 import membersRoute from './modules/members_route'
 import registerRoute from './modules/register_route'
@@ -20,7 +20,7 @@ const router = new VueRouter({
   routes: [
     ...dashboardRoute,
     ...patientRoute,
-    ...itemRoute,
+    ...moviesRoute,
     ...unitRoute,
     ...loginRoute,
     ...errorRoute,
