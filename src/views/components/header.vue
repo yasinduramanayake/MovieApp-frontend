@@ -21,14 +21,18 @@
       </b-row>
     </b-container>
 
-    <b-nav class="nev1">
-      <b-nav-item active>Movies</b-nav-item>
-      <b-nav-item v-if="token">My bookings</b-nav-item>
-      <b-nav-item v-if="!token" v-b-toggle.sidebar-right>Login</b-nav-item>
-      <b-nav-item v-if="token">Profile</b-nav-item>
-      <b-nav-item v-if="token">Logout</b-nav-item>
-    </b-nav>
+    <b-row>
+      <b-col cols="1">
+      </b-col>
+      <b-col cols="11">
+        <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+      </b-col>
 
+    </b-row>
     <b-sidebar
       id="sidebar-right"
       bg-variant="dark"
@@ -48,8 +52,6 @@ import login from "@/views/components/loginform.vue";
 import Ripple from "vue-ripple-directive";
 import {
   BLink,
-  BNav,
-  BNavItem,
   BContainer,
   BCol,
   BRow,
@@ -61,13 +63,10 @@ import {
 export default {
   name: "Header",
   components: {
-    BNav,
     BSidebar,
     BButton,
 
     login,
-
-    BNavItem,
     BContainer,
     BCol,
     BRow,
@@ -94,12 +93,6 @@ export default {
   padding-top: 1%;
   padding-left: 2%;
 }
-.nev1 {
-  padding-left: 10%;
-  padding-top: 0%;
-  padding-bottom: 0%;
-  font-size: 1.2rem;
-}
 .middle {
   padding-bottom: 32%;
   padding-left: 40%;
@@ -114,5 +107,33 @@ export default {
   padding-bottom: 0%;
   padding-left: 40%;
   padding-right: 40%;
+}
+.header1{
+  height: 5%;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 10;
+  overflow: hidden;
+  background-color: #24262b;
+}
+li {
+  float: left;
+}
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 22px;
+  text-decoration: cornsilk;
+  font-size: 20px;
+}
+li a:hover:not(.active) {
+  background-color: #111;
+}
+.active {
+  background-color: #04AA6D;
 }
 </style>
