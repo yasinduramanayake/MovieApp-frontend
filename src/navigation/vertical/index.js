@@ -5,23 +5,28 @@ export default [
     icon: 'HomeIcon',
   },
   {
-    title: 'Items',
-    route: 'items',
-    icon: 'LayersIcon',
+    title: 'Manage Movies',
+    icon: 'AirplayIcon',
+    children: [
+      {
+        title: 'All Movies',
+        route: 'items',
+      },
+    ],
   },
-  {
-    title: 'Units',
-    route: 'units',
-    icon: 'DivideSquareIcon',
-  },
-  {
-    title: 'Patients',
-    route: 'patients',
-    icon: 'UsersIcon',
-  },
-  {
-    title: 'Members',
-    route: 'members',
-    icon: 'UsersIcon',
-  },
+  // {
+  //   title: 'Units',
+  //   route: 'units',
+  //   icon: 'DivideSquareIcon',
+  // },
+  // {
+  //   title: 'Patients',
+  //   route: 'patients',
+  //   icon: 'UsersIcon',
+  // },
+  // {
+  //   title: 'Members',
+  //   route: 'members',
+  //   icon: 'UsersIcon',
+  // },
 ]

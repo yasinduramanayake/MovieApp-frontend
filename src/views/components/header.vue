@@ -22,10 +22,10 @@
     </b-container>
 
     <b-row>
-      <b-col cols="1">
-      </b-col>
+      <b-col cols="1"> </b-col>
       <b-col cols="11">
         <ul>
+<<<<<<< HEAD
       <li><a href="#home">Home</a></li>
       <li><a href="#news">News</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -42,8 +42,17 @@
   </div> 
       </li>
     </ul>
+=======
+          <li><a href="#home">Home</a></li>
+          <li><a href="#news">Movies</a></li>
+          <li v-if="!token" v-b-toggle.sidebar-right>
+            <a href="#contact">Login</a>
+          </li>
+          <li v-if="token"><a href="#contact">Profile</a></li>
+          <li v-if="token"><a href="#contact">Logout</a></li>
+        </ul>
+>>>>>>> yasindu
       </b-col>
-
     </b-row>
     <b-sidebar
       id="sidebar-right"
@@ -122,7 +131,7 @@ export default {
   padding-left: 40%;
   padding-right: 40%;
 }
-.header1{
+.header1 {
   height: 5%;
 }
 
@@ -148,7 +157,7 @@ li a:hover:not(.active) {
   background-color: #111;
 }
 .active {
-  background-color: #04AA6D;
+  background-color: #04aa6d;
 }
 
 .dropdown {

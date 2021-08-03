@@ -8,134 +8,266 @@
     <Slider />
 
     <div class="background2">
-    <b-container>
-    <br />
-    <br />
-    <b-row>
-      <b-col md="1" lg="4">
-        <b-card img-height="200" img-width="200" title="Card title">
-          <b-card-img
-            :src="
-              require('@/assets/images/MV5BYzE1YzViNzktZTU5Ny00ZjYzLWE0YjItZWNkNDU1MzFiOWNhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg')
-            "
-            width="10px"
-          ></b-card-img>
-          <b-card-text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </b-card-text>
-          <b-button
-            v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-            v-b-modal.modal-info
-            variant="outline-info"
-          >
-            View Details
-          </b-button>
-        </b-card>
-      </b-col>
-      <b-col md="6" lg="4">
-        <b-card title="Card title">
-          <b-card-img
-            :src="
-              require('@/assets/images/01-f9-dm-mainstage-mobile-banner-1080x793-pl-f01-013120-5e3867f0cf333-1.jpg')
-            "
-          ></b-card-img>
-          <b-card-text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </b-card-text>
-          <b-button
-            v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-            v-b-modal.modal-info
-            variant="outline-info"
-          >
-            View Details
-          </b-button>
-        </b-card>
-      </b-col>
+      <b-container>
+        <br />
+        <br />
 
-      <b-col md="6" lg="4">
-        <b-card title="Card title">
-          <b-card-img
-            :src="require('@/assets/images/The_Kissing_Booth_2_poster.jpg')"
-          ></b-card-img>
-          <b-card-text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </b-card-text>
-          <b-button
-            v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-            v-b-modal.modal-info
-            variant="outline-info"
-          >
-            View Details
-          </b-button>
-        </b-card>
-      </b-col>
+        <b-container>
+          <b-row>
+            <b-col md="1" lg="4">
+              <b-card title="Card title">
+                <b-card-img
+                  :src="
+                    require('@/assets/images/MV5BYzE1YzViNzktZTU5Ny00ZjYzLWE0YjItZWNkNDU1MzFiOWNhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg')
+                  "
+                  width="10px"
+                ></b-card-img>
+                <b-card-text>
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </b-card-text>
+                <b-button
+                  v-ripple.400="'rgba(0, 207, 232, 0.15)'"
+                  v-b-modal.modal-info
+                  variant="outline-info"
+                >
+                  Info
+                </b-button>
+              </b-card>
+            </b-col>
+            <b-col md="6" lg="4">
+              <b-card title="Card title">
+                <b-card-img
+                  :src="
+                    require('@/assets/images/01-f9-dm-mainstage-mobile-banner-1080x793-pl-f01-013120-5e3867f0cf333-1.jpg')
+                  "
+                ></b-card-img>
+                <b-card-text>
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </b-card-text>
+                <b-button
+                  v-ripple.400="'rgba(0, 207, 232, 0.15)'"
+                  v-b-modal.modal-info
+                  variant="outline-info"
+                >
+                  Info
+                </b-button>
+              </b-card>
+            </b-col>
 
-      <b-col md="6" lg="4">
-        <b-card title="Card title">
-          <b-card-img
-            :src="require('@/assets/images/The_Kissing_Booth_2_poster.jpg')"
-          ></b-card-img>
-          <b-card-text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </b-card-text>
-          <b-button
-            v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-            v-b-modal.modal-info
-            variant="outline-info"
-          >
-            View Details
-          </b-button>
-        </b-card>
-      </b-col>
+            <b-col md="6" lg="4">
+              <b-card title="Card title">
+                <b-card-img
+                  :src="
+                    require('@/assets/images/The_Kissing_Booth_2_poster.jpg')
+                  "
+                ></b-card-img>
+                <b-card-text>
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </b-card-text>
+                <b-button
+                  v-ripple.400="'rgba(0, 207, 232, 0.15)'"
+                  v-b-modal.modal-info
+                  variant="outline-info"
+                >
+                  Info
+                </b-button>
+              </b-card>
+            </b-col>
 
-      <b-col md="6" lg="4">
-        <b-card title="Card title">
-          <b-card-img
-            :src="
-              require('@/assets/images/MV5BYzE1YzViNzktZTU5Ny00ZjYzLWE0YjItZWNkNDU1MzFiOWNhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg')
-            "
-          ></b-card-img>
-          <b-card-text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </b-card-text>
-          <b-button
-            v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-            v-b-modal.modal-info
-            variant="outline-info"
-          >
-            View Details
-          </b-button>
-        </b-card>
-      </b-col>
+            <b-col md="6" lg="4">
+              <b-card title="Card title">
+                <b-card-img
+                  :src="
+                    require('@/assets/images/The_Kissing_Booth_2_poster.jpg')
+                  "
+                ></b-card-img>
+                <b-card-text>
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </b-card-text>
+                <b-button
+                  v-ripple.400="'rgba(0, 207, 232, 0.15)'"
+                  v-b-modal.modal-info
+                  variant="outline-info"
+                >
+                  Info
+                </b-button>
+              </b-card>
+            </b-col>
 
-      <b-col md="6" lg="4">
-        <b-card title="Card title">
-          <b-card-img
-            :src="require('@/assets/images/01-f9-dm-mainstage-mobile-banner-1080x793-pl-f01-013120-5e3867f0cf333-1.jpg')"
-          ></b-card-img>
-          <b-card-text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </b-card-text>
-          <b-button
-            v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-            v-b-modal.modal-info
-            variant="outline-info"
-          >
-            View Details
-          </b-button>
-        </b-card>
-      </b-col>
-    </b-row>
-      <br />
-      <br />
-  </b-container>
-      </div>
+            <b-col md="6" lg="4">
+              <b-card title="Card title">
+                <b-card-img
+                  :src="
+                    require('@/assets/images/The_Kissing_Booth_2_poster.jpg')
+                  "
+                ></b-card-img>
+                <b-card-text>
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </b-card-text>
+                <b-button
+                  v-ripple.400="'rgba(0, 207, 232, 0.15)'"
+                  v-b-modal.modal-info
+                  variant="outline-info"
+                >
+                  Info
+                </b-button>
+              </b-card>
+            </b-col>
+
+            <b-col md="6" lg="4">
+              <b-card title="Card title">
+                <b-card-img
+                  :src="
+                    require('@/assets/images/The_Kissing_Booth_2_poster.jpg')
+                  "
+                ></b-card-img>
+                <b-card-text>
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </b-card-text>
+                <b-button
+                  v-ripple.400="'rgba(0, 207, 232, 0.15)'"
+                  v-b-modal.modal-info
+                  variant="outline-info"
+                >
+                  Info
+                </b-button>
+              </b-card>
+            </b-col>
+          </b-row>
+        </b-container>
+        <b-row>
+          <b-col md="1" lg="4">
+            <b-card img-height="200" img-width="200" title="Card title">
+              <b-card-img
+                :src="
+                  require('@/assets/images/MV5BYzE1YzViNzktZTU5Ny00ZjYzLWE0YjItZWNkNDU1MzFiOWNhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg')
+                "
+                width="10px"
+              ></b-card-img>
+              <b-card-text>
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </b-card-text>
+              <b-button
+                v-ripple.400="'rgba(0, 207, 232, 0.15)'"
+                v-b-modal.modal-info
+                variant="outline-info"
+              >
+                View Details
+              </b-button>
+            </b-card>
+          </b-col>
+          <b-col md="6" lg="4">
+            <b-card title="Card title">
+              <b-card-img
+                :src="
+                  require('@/assets/images/01-f9-dm-mainstage-mobile-banner-1080x793-pl-f01-013120-5e3867f0cf333-1.jpg')
+                "
+              ></b-card-img>
+              <b-card-text>
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </b-card-text>
+              <b-button
+                v-ripple.400="'rgba(0, 207, 232, 0.15)'"
+                v-b-modal.modal-info
+                variant="outline-info"
+              >
+                View Details
+              </b-button>
+            </b-card>
+          </b-col>
+
+          <b-col md="6" lg="4">
+            <b-card title="Card title">
+              <b-card-img
+                :src="require('@/assets/images/The_Kissing_Booth_2_poster.jpg')"
+              ></b-card-img>
+              <b-card-text>
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </b-card-text>
+              <b-button
+                v-ripple.400="'rgba(0, 207, 232, 0.15)'"
+                v-b-modal.modal-info
+                variant="outline-info"
+              >
+                View Details
+              </b-button>
+            </b-card>
+          </b-col>
+
+          <b-col md="6" lg="4">
+            <b-card title="Card title">
+              <b-card-img
+                :src="require('@/assets/images/The_Kissing_Booth_2_poster.jpg')"
+              ></b-card-img>
+              <b-card-text>
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </b-card-text>
+              <b-button
+                v-ripple.400="'rgba(0, 207, 232, 0.15)'"
+                v-b-modal.modal-info
+                variant="outline-info"
+              >
+                View Details
+              </b-button>
+            </b-card>
+          </b-col>
+
+          <b-col md="6" lg="4">
+            <b-card title="Card title">
+              <b-card-img
+                :src="
+                  require('@/assets/images/MV5BYzE1YzViNzktZTU5Ny00ZjYzLWE0YjItZWNkNDU1MzFiOWNhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg')
+                "
+              ></b-card-img>
+              <b-card-text>
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </b-card-text>
+              <b-button
+                v-ripple.400="'rgba(0, 207, 232, 0.15)'"
+                v-b-modal.modal-info
+                variant="outline-info"
+              >
+                View Details
+              </b-button>
+            </b-card>
+          </b-col>
+
+          <b-col md="6" lg="4">
+            <b-card title="Card title">
+              <b-card-img
+                :src="
+                  require('@/assets/images/01-f9-dm-mainstage-mobile-banner-1080x793-pl-f01-013120-5e3867f0cf333-1.jpg')
+                "
+              ></b-card-img>
+              <b-card-text>
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </b-card-text>
+              <b-button
+                v-ripple.400="'rgba(0, 207, 232, 0.15)'"
+                v-b-modal.modal-info
+                variant="outline-info"
+              >
+                View Details
+              </b-button>
+            </b-card>
+          </b-col>
+        </b-row>
+        <br />
+        <br />
+      </b-container>
+    </div>
     <b-modal
       id="modal-info"
       ok-only
@@ -217,24 +349,11 @@ export default {
       status: "",
       password: "",
       userEmail: "",
-      sideImg: require("@/assets/images/pages/login-v2.svg"),
-      loading: false,
     };
-  },
-  mounted: function() {
-    this.startSlide();
   },
   computed: {
     passwordToggleIcon() {
       return this.passwordFieldType === "password" ? "EyeIcon" : "EyeOffIcon";
-    },
-    imgUrl() {
-      if (store.state.appConfig.layout.skin === "dark") {
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.sideImg = require("@/assets/images/pages/login-v2-dark.svg");
-        return this.sideImg;
-      }
-      return this.sideImg;
     },
   },
 };
@@ -246,10 +365,9 @@ export default {
 
 img {
   height: 250px;
-  width: 100%;
 }
 
-.background2{
-  background-color:white;
+.background2 {
+  background-color: white;
 }
 </style>
