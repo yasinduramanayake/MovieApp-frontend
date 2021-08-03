@@ -8,6 +8,7 @@ import itemRoute from './modules/item_route'
 import unitRoute from './modules/unit_route'
 import membersRoute from './modules/members_route'
 import registerRoute from './modules/register_route'
+import paydetailsRoute from './modules/paydetails_route'
 
 Vue.use(VueRouter)
 
@@ -26,6 +27,8 @@ const router = new VueRouter({
     ...errorRoute,
     ...membersRoute,
     ...registerRoute,
+    ...paydetailsRoute
+
   ],
 })
 
