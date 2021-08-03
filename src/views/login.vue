@@ -9,6 +9,7 @@
     <br />
     <br />
 
+    <b-container>
     <b-row>
       <b-col md="1" lg="4">
         <b-card img-height="200" img-width="200" title="Card title">
@@ -89,8 +90,46 @@
           </b-button>
         </b-card>
       </b-col>
-    </b-row>
 
+      <b-col md="6" lg="4">
+        <b-card title="Card title">
+          <b-card-img
+            :src="require('@/assets/images/The_Kissing_Booth_2_poster.jpg')"
+          ></b-card-img>
+          <b-card-text>
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </b-card-text>
+          <b-button
+            v-ripple.400="'rgba(0, 207, 232, 0.15)'"
+            v-b-modal.modal-info
+            variant="outline-info"
+          >
+            Info
+          </b-button>
+        </b-card>
+      </b-col>
+
+      <b-col md="6" lg="4">
+        <b-card title="Card title">
+          <b-card-img
+            :src="require('@/assets/images/The_Kissing_Booth_2_poster.jpg')"
+          ></b-card-img>
+          <b-card-text>
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </b-card-text>
+          <b-button
+            v-ripple.400="'rgba(0, 207, 232, 0.15)'"
+            v-b-modal.modal-info
+            variant="outline-info"
+          >
+            Info
+          </b-button>
+        </b-card>
+      </b-col>
+    </b-row>
+  </b-container>
     <b-modal
       id="modal-info"
       ok-only
@@ -132,6 +171,7 @@ import {
   BButton,
   BModal,
   VBModal,
+  BContainer,
   BCol,
   BCard,
   BCardImg,
@@ -151,6 +191,7 @@ export default {
     Slider,
     BCardImg,
     BCard,
+    BContainer,
     Header,
     BCol,
     BModal,
