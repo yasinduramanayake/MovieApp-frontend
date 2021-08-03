@@ -10,7 +10,7 @@ export default [
     children: [
       {
         title: 'All Movies',
-        route: 'items',
+        route: 'movies',
       },
     ],
   },

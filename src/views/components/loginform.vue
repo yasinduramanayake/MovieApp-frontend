@@ -18,7 +18,7 @@
             >
               <b-form-input
                 id="login-email"
-                placeholder="Enter Email..."
+                placeholder="Email..."
                 v-model="userEmail"
                 :state="errors.length > 0 ? false : null"
                 name="login-email"
@@ -48,7 +48,7 @@
               >
                 <b-form-input
                   id="login-password"
-                  placeholder="Enter Password..."
+                  placeholder="Password..."
                   v-model="password"
                   :state="errors.length > 0 ? false : null"
                   class="form-control-merge"
