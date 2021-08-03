@@ -14,7 +14,6 @@
         template.</b-card-text
       >
     </b-card>
-
     <b-card title="Want to integrate JWT? 🔒">
       <b-card-text
         >We carefully crafted JWT flow so you can implement JWT with ease and
@@ -25,9 +24,6 @@
         authentication.</b-card-text
       >
     </b-card>
-
-
-    
   </div>
 </template>
 
@@ -42,5 +38,4 @@ export default {
   },
 };
 </script>
-
 <style></style>

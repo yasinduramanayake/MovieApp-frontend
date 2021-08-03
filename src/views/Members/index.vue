@@ -6,8 +6,8 @@ export default {
   data() {
     return {
       name: {
-        first_name: "yasindu",
-        last_name: "ramanayake"
+        first_name: "RM",
+        last_name: "Prasad"
       }
     };
   }
