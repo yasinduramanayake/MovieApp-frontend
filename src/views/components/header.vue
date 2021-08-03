@@ -62,6 +62,7 @@
 import VuexyLogo from "@core/layouts/components/Logo.vue";
 import login from "@/views/components/loginform.vue";
 import Ripple from "vue-ripple-directive";
+import Dropdown from 'vue-simple-search-dropdown';
 import {
   BLink,
   BContainer,
@@ -97,6 +98,7 @@ export default {
   directives: {
     "b-toggle": VBToggle,
     Ripple,
+    Dropdown,
   },
 };
 </script>
