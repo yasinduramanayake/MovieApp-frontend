@@ -15,10 +15,10 @@ export default {
   data() {
     return {
       images: [
-        require("@/assets/images/01-f9-dm-mainstage-mobile-banner-1080x793-pl-f01-013120-5e3867f0cf333-1.jpg"),
-        require("@/assets/images/The_Kissing_Booth_2_poster.jpg"),
-        require("@/assets/images/The_Kissing_Booth_2_poster.jpg"),
-        "https://cdn.pixabay.com/photo/2016/12/04/19/30/berlin-cathedral-1882397_1280.jpg",
+        require("@/assets/images/banner06.jpg"),
+        require("@/assets/images/banner03.jpg"),
+        require("@/assets/images/banner04.jpg"),
+        require("@/assets/images/banner05.jpg"),
       ],
       timer: null,
       currentIndex: 0,
@@ -64,7 +64,7 @@ export default {
 }
 
 img {
-  height: 400px;
+  height: 480px;
   width: 100%;
 }
 

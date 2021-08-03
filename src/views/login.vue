@@ -2,11 +2,10 @@
   <div style="background-color:black">
     <Header />
     <!-- /Brand logo-->
-    <br /><br /><br />
+    <br /><br />
 
     <Slider />
 
-    <br />
     <br />
     <br />
 

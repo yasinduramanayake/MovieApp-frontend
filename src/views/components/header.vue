@@ -22,11 +22,8 @@
     </b-container>
 
     <b-nav class="nev1">
-      <b-nav-item active>
-        Movies
-      </b-nav-item>
+      <b-nav-item active>Movies</b-nav-item>
       <b-nav-item v-if="token">My bookings</b-nav-item>
-
       <b-nav-item v-if="!token" v-b-toggle.sidebar-right>Login</b-nav-item>
       <b-nav-item v-if="token">Profile</b-nav-item>
       <b-nav-item v-if="token">Logout</b-nav-item>
@@ -101,6 +98,7 @@ export default {
   padding-left: 10%;
   padding-top: 0%;
   padding-bottom: 0%;
+  font-size: 1.2rem;
 }
 .middle {
   padding-bottom: 32%;
