@@ -18,6 +18,7 @@
             >
               <b-form-input
                 id="login-email"
+                placeholder="Email..."
                 v-model="userEmail"
                 :state="errors.length > 0 ? false : null"
                 name="login-email"
@@ -47,6 +48,7 @@
               >
                 <b-form-input
                   id="login-password"
+                  placeholder="Password..."
                   v-model="password"
                   :state="errors.length > 0 ? false : null"
                   class="form-control-merge"
@@ -135,6 +137,7 @@ export default {
   mixins: [togglePasswordVisibility],
   data() {
     return {
+      backgroundLoading: "#22c16b",
       selected: { title: "Colombo" },
       option: [{ title: "Panadura" }, { title: "Rathnapura" }],
       selected1: { title1: "sigma" },
@@ -142,21 +145,11 @@ export default {
       status: "",
       password: "",
       userEmail: "",
-      sideImg: require("@/assets/images/pages/login-v2.svg"),
-      loading: false,
     };
   },
   computed: {
     passwordToggleIcon() {
       return this.passwordFieldType === "password" ? "EyeIcon" : "EyeOffIcon";
-    },
-    imgUrl() {
-      if (store.state.appConfig.layout.skin === "dark") {
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.sideImg = require("@/assets/images/pages/login-v2-dark.svg");
-        return this.sideImg;
-      }
-      return this.sideImg;
     },
   },
   methods: {
@@ -174,6 +167,10 @@ export default {
           this.$vs.loading.close();
         });
       }
+      setTimeout(() => {
+        this.userEmail = "";
+        this.password = "";
+      }, 3000);
     },
   },
 };

@@ -26,6 +26,7 @@
       <b-col cols="11">
         <ul>
           <li><a href="#home">Home</a></li>
+<<<<<<< HEAD
           <li><a href="#news">News</a></li>
           <li><a href="#contact">Contact</a></li>
           <li>
@@ -41,6 +42,14 @@
               </div>
             </div>
           </li>
+=======
+          <li><a href="#news">Movies</a></li>
+          <li v-if="!token" v-b-toggle.sidebar-right>
+            <a href="#contact">Login</a>
+          </li>
+          <li v-if="token"><a href="#contact">Profile</a></li>
+          <li v-if="token"><a href="#contact">Logout</a></li>
+>>>>>>> yasindu
         </ul>
       </b-col>
     </b-row>
@@ -148,6 +157,7 @@ li a:hover:not(.active) {
 }
 .active {
   background-color: #04aa6d;
+<<<<<<< HEAD
 }
 
 .dropdown {
@@ -195,5 +205,7 @@ li a:hover:not(.active) {
 
 .dropdown:hover .dropdown-content {
   display: block;
+=======
+>>>>>>> yasindu
 }
 </style>

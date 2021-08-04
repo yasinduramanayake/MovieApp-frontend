@@ -1,12 +1,27 @@
 export default [
-    {
-      path: '/booking',
-      name: 'booking',
-      component: () => import('@/views/payment/booking.vue'),
-      meta: {
-        layout: 'full',
-        redirectIfLoggedIn: true,
-        noAuth: true,
-      },
+  {
+    path: '/booking',
+    name: 'booking',
+    component: () => import('@/views/Bookings/UserView/booking.vue'),
+    meta: {
+      layout: 'full',
+      redirectIfLoggedIn: true,
+      noAuth: true,
     },
-  ]
+  },
+
+  {
+    path: '/Allbookings',
+    name: 'Allbookings',
+    component: () => import('@/views/Bookings/AdminView/index.vue'),
+    meta: {
+      pageTitle: 'Bookings',
+      breadcrumb: [
+        {
+          text: 'All Bookings',
+          active: true,
+        },
+      ],
+    },
+  },
+]

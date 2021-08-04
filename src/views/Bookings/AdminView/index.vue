@@ -1,27 +1,5 @@
 <template>
   <div>
-    <portal to="appbar_button">
-      <b-button
-        v-b-toggle.sidebar-right
-        type="filled"
-        @click="shift()"
-        variant="success"
-      >
-        <feather-icon icon="PlusIcon" class="mr-50" />
-        Add Member
-      </b-button>
-    </portal>
-
-    <b-sidebar id="sidebar-right" bg-variant="white" shadow backdrop right>
-      <div v-if="shiftmode === 'Add'">
-        <Form :data="modeobj.Addmode" :databutton="modeobj.Addbutton" />
-      </div>
-
-      <div v-if="shiftmode === 'Edit'">
-        <Form :data="modeobj.Editmode" :databutton="modeobj.Updatebutton" />
-      </div>
-    </b-sidebar>
-
     <b-row>
       <b-col md="2" sm="4" class="my-1">
         <b-form-group class="mb-0">
@@ -79,26 +57,6 @@
           <template #cell(Image)="data">
             <b-avatar :src="data.value" size="60px" />
           </template>
-
-          <template #cell(action)="row">
-            <b-nav>
-              <b-nav-item-dropdown
-                id="my-nav-dropdown"
-                text="Action"
-                toggle-class="nav-link-custom"
-                right
-              >
-                <b-dropdown-item
-                  v-if="row.item.role === 'Admin'"
-                  v-b-toggle.sidebar-right
-                  @click="info(row.item, row.index, $event.target)"
-                  >Edit</b-dropdown-item
-                >
-                <b-dropdown-divider />
-                <b-dropdown-item>Delete</b-dropdown-item>
-              </b-nav-item-dropdown>
-            </b-nav>
-          </template>
         </b-table>
       </b-col>
 
@@ -121,7 +79,6 @@
 // import Items from '@/apis/modules/items'
 
 import {
-  BSidebar,
   VBToggle,
   BTable,
   BAvatar,
@@ -134,17 +91,11 @@ import {
   BFormInput,
   BInputGroupAppend,
   BButton,
-  BNav,
-  BNavItemDropdown,
-  BDropdownDivider,
-  BDropdownItem,
 } from "bootstrap-vue";
-import Form from "@/views/Members/components/Form.vue";
+import Form from "@/views/Movies/Components/Form.vue";
 
 export default {
   components: {
-    BSidebar,
-    Form,
     BTable,
     BAvatar,
     BRow,
@@ -156,21 +107,9 @@ export default {
     BFormInput,
     BInputGroupAppend,
     BButton,
-    BNav,
-    BNavItemDropdown,
-    BDropdownDivider,
-    BDropdownItem,
   },
   data() {
     return {
-      data1: "yasindu",
-      shiftmode: "",
-      modeobj: {
-        Addmode: "Add Member",
-        Editmode: "Edit Member",
-        Addbutton: "Add",
-        Updatebutton: "Update",
-      },
       perPage: 5,
       pageOptions: [3, 5, 10],
       totalRows: 1,
@@ -190,59 +129,74 @@ export default {
           key: "Image",
           label: "Image",
         },
-        { key: "full_name", label: " Full Name", sortable: true },
+        {
+          key: "movie_name",
+          label: "Movie Name",
+        },
+        {
+          key: "price",
+          label: "Price",
+        },
+        { key: "theater_details", label: "Theater Name", sortable: true },
+        { key: "full_name", label: "Full Name", sortable: true },
         { key: "email", label: "Email", sortable: true },
-        { key: "mobile", label: "Mobile", sortable: true },
-        { key: "role", label: "Role", sortable: true },
-        { key: "action", label: "Action", sortable: true },
+        { key: "noofseats", label: "No Of Seates", sortable: true },
+        { key: "showtime", label: "Show Time", sortable: true },
+        { key: "movietype", label: "Movie Type", sortable: true },
+        { key: "theatertype", label: "Theater  Type", sortable: true },
       ],
       items: [
         {
           // eslint-disable-next-line global-require
-          Image: require("@/assets/images/125191853_2699384830310844_5638529771115210821_n.jpg"),
-          full_name: "Yasindu Ramanayake",
-          email: "yasinduramanayake123@gmail.com",
-          mobile: "0713531234",
-          role: "Admin",
+          Image: require("@/assets/images/banner06.jpg"),
+          movie_name: "Jumanji",
+          price: "200.00",
+          theater_details: "priska , kalutara",
+          full_name: "pubudi gamage",
+          email: "abc@gmail.com",
+          noofseats: "2",
+          showtime: "2.00 - 4.00",
+          movietype: "18+",
+          theatertype: "Balcony",
         },
         {
           // eslint-disable-next-line global-require
-          Image: require("@/assets/images/Screenshot_2021-07-17-15-56-17-05.png"),
-          full_name: "Madura Prasad",
-          email: "maduraprasad@gmail.com",
-          mobile: "0715671234",
-          role: "Admin",
+          Image: require("@/assets/images/banner03.jpg"),
+          movie_name: "World War",
+          price: "100.00",
+          theater_details: "sigma , panadura",
+          full_name: "pubudi Fernando",
+          email: "abcd@gmail.com",
+          noofseats: "4",
+          showtime: "2.00 - 4.00",
+          movietype: "kids",
+          theatertype: "Balcony",
         },
         {
           // eslint-disable-next-line global-require
-          Image: require("@/assets/images/133753918_429404674879921_6610452570295338387_n.jpg"),
-          full_name: "Pubudi Fernando",
-          email: "pubudi.fernando@gmail.com",
-          mobile: "0713123890",
-          role: "Admin",
-        },
-        {
-          Image: require("@/assets/images/avatars/6.png"),
-          full_name: "David Williom",
-          email: "davidwilliom@gmail.com",
-          mobile: "+3456898987",
-          role: "User",
-        },
-        {
-          // eslint-disable-next-line global-require
-          Image: require("@/assets/images/avatars/1.png"),
-          full_name: "Mariya Dupezo",
-          email: "mariya.233@gmail.com",
-          mobile: "+456787654",
-          role: "User",
+          Image: require("@/assets/images/banner04.jpg"),
+          movie_name: "Workld War",
+          price: "600.00",
+          theater_details: "sigma , colombo",
+          full_name: "pubudi Fernando",
+          email: "abcd@gmail.com",
+          noofseats: "4",
+          showtime: "2.00 - 4.00",
+          movietype: "18+",
+          theatertype: "3d",
         },
         {
           // eslint-disable-next-line global-require
-          Image: require("@/assets/images/avatars/3.png"),
-          full_name: "Seleena De Soiza",
-          email: "seleena34.7@gmail.com",
-          mobile: "+6890987654",
-          role: "User",
+          Image: require("@/assets/images/banner05.jpg"),
+          movie_name: "Tenet",
+          price: "400.00",
+          theater_details: "baska , Kadawatha",
+          full_name: "Madura Fernando",
+          email: "Madura@gmail.com",
+          noofseats: "2",
+          showtime: "4.00 - 6.00",
+          movietype: "Adult",
+          theatertype: "3d - Balcony",
         },
       ],
     };

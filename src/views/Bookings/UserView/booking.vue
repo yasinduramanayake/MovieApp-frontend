@@ -14,7 +14,7 @@
                   :src="
                     require('@/assets/images/MV5BYzE1YzViNzktZTU5Ny00ZjYzLWE0YjItZWNkNDU1MzFiOWNhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg')
                   "
-                  height="600px"
+                  height="730px"
                 >
                 </b-card-img>
               </b-card>
@@ -24,19 +24,45 @@
                 <validation-observer ref="simpleRules">
                   <b-form>
                     <b-row>
-
-                    <!--Theater-->
+                      <!--Theater-->
                       <b-col cols="12">
-                      <b-card-text>
-                      Movie
-                      <br />
-                      The Kissing Booth 3
-                      <br/> <br/>
-                      Theater
-                      <br/>
-                      Savoy, Colombo 3.
-                      <br/><br/>
-                      </b-card-text>
+                        <b-card-text>
+                          Movie
+                          <br />
+                          The Kissing Booth 3
+                          <br />
+                          <br />
+                          Theater
+                          <br />
+                          Savoy, Colombo 3.
+                          <br /><br />
+                        </b-card-text>
+                        <b-card-text>
+                          Movie
+                          <br />
+                          The Kissing Booth 3
+                          <br />
+                          <br />
+                          Movie Type
+                          <br />
+                          Teen
+                          <br />
+                          <br />
+                          Theater
+                          <br />
+                          Savoy, Colombo 3.
+                          <br /><br />
+                          Theater Type
+                          <br />
+                          Balcony
+                          <br />
+                          <br />
+                          Ticket Price
+                          <br />
+                          <br />
+                          Rs. 600.00
+                          <br /><br />
+                        </b-card-text>
                       </b-col>
                       <!--  name -->
                       <b-col md="12">
@@ -183,12 +209,9 @@ import {
   alphaDash,
   length,
 } from "@validations";
-import { BDropdown, BDropdownItem, BDropdownDivider } from "bootstrap-vue";
-
 import {
   BCardText,
   BButton,
-  BModal,
   VBModal,
   BCard,
   BCardImg,
@@ -197,7 +220,6 @@ import {
   BCol,
   BFormGroup,
   BFormInput,
-  BFormCheckbox,
 
   // BCard,
   VBToggle,
@@ -209,24 +231,18 @@ import store from "@/store/index";
 
 export default {
   components: {
-    BCardText,
-    BButton,
-    BModal,
     BCardImg,
     BRow,
     BForm,
     BCol,
     BFormGroup,
     BFormInput,
-    BFormCheckbox,
+
     Header,
     Footer,
     BCard,
     BCardText,
     BButton,
-    BDropdown,
-    BDropdownDivider,
-    BDropdownItem,
   },
   data() {
     return {

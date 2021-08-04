@@ -106,6 +106,7 @@
               </b-form-group>
 
               <b-form-group>
+                <!--Confirm  password -->
                 <label>Confirm password</label>
                 <validation-provider
                   #default="{ errors }"
@@ -123,6 +124,7 @@
               </b-form-group>
 
               <b-form-group>
+                <!-- Contact Number -->
                 <label>Contact number</label>
                 <validation-provider
                   #default="{ errors }"
@@ -155,6 +157,7 @@
                 </b-form-checkbox>
               </b-form-group>
 
+              <!--Button-->
               <b-button
                 variant="primary"
                 block
@@ -171,21 +174,6 @@
             <div class="divider-text">
               or
             </div>
-          </div>
-
-          <div class="auth-footer-btn d-flex justify-content-center">
-            <b-button variant="facebook" href="javascript:void(0)">
-              <feather-icon icon="FacebookIcon" />
-            </b-button>
-            <b-button variant="twitter" href="javascript:void(0)">
-              <feather-icon icon="TwitterIcon" />
-            </b-button>
-            <b-button variant="google" href="javascript:void(0)">
-              <feather-icon ico n="MailIcon" />
-            </b-button>
-            <b-button variant="github" href="javascript:void(0)">
-              <feather-icon icon="GithubIcon" />
-            </b-button>
           </div>
         </b-col>
       </b-col>

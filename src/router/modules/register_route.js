@@ -6,6 +6,7 @@ export default [
     meta: {
       layout: 'full',
       redirectIfLoggedIn: true,
+      noAuth: true,
     },
   },
 ]

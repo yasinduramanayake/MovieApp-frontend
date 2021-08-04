@@ -1,7 +1,6 @@
-import { api } from "@/Api/index";
-import { setToken, clearToken } from "../index";
-import notification from "@/ApiConstance/toast";
-
+import { api } from '@/Api/index'
+import { setToken, clearToken } from '../index'
+import notification from '@/ApiConstance/toast'
 
 export default {
   async register(payload) {

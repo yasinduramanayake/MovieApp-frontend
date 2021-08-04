@@ -8,10 +8,11 @@
         variant="success"
       >
         <feather-icon icon="PlusIcon" class="mr-50" />
-        Add Member
+        Add Movie
       </b-button>
     </portal>
 
+    <!-- Side Bar -->
     <b-sidebar id="sidebar-right" bg-variant="white" shadow backdrop right>
       <div v-if="shiftmode === 'Add'">
         <Form :data="modeobj.Addmode" :databutton="modeobj.Addbutton" />
@@ -22,6 +23,7 @@
       </div>
     </b-sidebar>
 
+    <!-- Table Header-->
     <b-row>
       <b-col md="2" sm="4" class="my-1">
         <b-form-group class="mb-0">
@@ -60,6 +62,7 @@
         </b-form-group>
       </b-col>
 
+      <!-- Table -->
       <b-col cols="12">
         <b-table
           striped
@@ -89,7 +92,6 @@
                 right
               >
                 <b-dropdown-item
-                  v-if="row.item.role === 'Admin'"
                   v-b-toggle.sidebar-right
                   @click="info(row.item, row.index, $event.target)"
                   >Edit</b-dropdown-item
@@ -139,7 +141,7 @@ import {
   BDropdownDivider,
   BDropdownItem,
 } from "bootstrap-vue";
-import Form from "@/views/Members/components/Form.vue";
+import Form from "@/views/Movies/Components/Form.vue";
 
 export default {
   components: {
@@ -166,11 +168,13 @@ export default {
       data1: "yasindu",
       shiftmode: "",
       modeobj: {
-        Addmode: "Add Member",
-        Editmode: "Edit Member",
+        Addmode: "Add Movie",
+        Editmode: "Edit Movie",
         Addbutton: "Add",
-        Updatebutton: "Update",
+        Updatebutton: "Update ",
       },
+      Addmode: "Add Movie",
+      Editmode: "Edit Movie",
       perPage: 5,
       pageOptions: [3, 5, 10],
       totalRows: 1,
@@ -185,64 +189,67 @@ export default {
         title: "",
         content: "",
       },
+      // colomns
       fields: [
         {
           key: "Image",
           label: "Image",
         },
-        { key: "full_name", label: " Full Name", sortable: true },
-        { key: "email", label: "Email", sortable: true },
-        { key: "mobile", label: "Mobile", sortable: true },
-        { key: "role", label: "Role", sortable: true },
+        { key: "movie_name", label: "Name", sortable: true },
+        { key: "description", label: "Description", sortable: true },
+        { key: "type", label: "Type", sortable: true },
         { key: "action", label: "Action", sortable: true },
       ],
+      // data
       items: [
         {
           // eslint-disable-next-line global-require
-          Image: require("@/assets/images/125191853_2699384830310844_5638529771115210821_n.jpg"),
-          full_name: "Yasindu Ramanayake",
-          email: "yasinduramanayake123@gmail.com",
-          mobile: "0713531234",
-          role: "Admin",
+          Image: require("@/assets/images/banner06.jpg"),
+          movie_name: "Jumanji",
+          description: "this is.....",
+          type: "18+",
         },
         {
           // eslint-disable-next-line global-require
-          Image: require("@/assets/images/Screenshot_2021-07-17-15-56-17-05.png"),
-          full_name: "Madura Prasad",
-          email: "maduraprasad@gmail.com",
-          mobile: "0715671234",
-          role: "Admin",
+          Image: require("@/assets/images/banner03.jpg"),
+          movie_name: "World War",
+          description: "this is.....",
+          type: "Kids",
         },
         {
           // eslint-disable-next-line global-require
-          Image: require("@/assets/images/133753918_429404674879921_6610452570295338387_n.jpg"),
-          full_name: "Pubudi Fernando",
-          email: "pubudi.fernando@gmail.com",
-          mobile: "0713123890",
-          role: "Admin",
-        },
-        {
-          Image: require("@/assets/images/avatars/6.png"),
-          full_name: "David Williom",
-          email: "davidwilliom@gmail.com",
-          mobile: "+3456898987",
-          role: "User",
+          Image: require("@/assets/images/banner04.jpg"),
+          movie_name: "Workld War",
+          description: "this is.....",
+          type: "Teen",
         },
         {
           // eslint-disable-next-line global-require
-          Image: require("@/assets/images/avatars/1.png"),
-          full_name: "Mariya Dupezo",
-          email: "mariya.233@gmail.com",
-          mobile: "+456787654",
-          role: "User",
+          Image: require("@/assets/images/banner05.jpg"),
+          movie_name: "Tenet",
+          description: "this is.....",
+          type: "Adult",
         },
         {
           // eslint-disable-next-line global-require
-          Image: require("@/assets/images/avatars/3.png"),
-          full_name: "Seleena De Soiza",
-          email: "seleena34.7@gmail.com",
-          mobile: "+6890987654",
-          role: "User",
+          Image: require("@/assets/images/banner06.jpg"),
+          movie_name: "Jumanji",
+          description: "this is.....",
+          type: "For All",
+        },
+        {
+          // eslint-disable-next-line global-require
+          Image: require("@/assets/images/banner06.jpg"),
+          movie_name: "Jumanji",
+          description: "this is.....",
+          type: "For All",
+        },
+        {
+          // eslint-disable-next-line global-require
+          Image: require("@/assets/images/banner06.jpg"),
+          movie_name: "Jumanji",
+          description: "this is.....",
+          type: "For All",
         },
       ],
     };

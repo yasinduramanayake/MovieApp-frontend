@@ -203,8 +203,6 @@ import {
 import {
   BCardText,
   BButton,
-  BModal,
-  VBModal,
   BCard,
   BCardImg,
   BRow,
@@ -225,9 +223,6 @@ import Ripple from "vue-ripple-directive";
 
 export default {
   components: {
-    BCardText,
-    BButton,
-    BModal,
     BCardImg,
     BRow,
     BForm,
@@ -268,11 +263,6 @@ export default {
       length,
       alphaDash,
     };
-  },
-  directives: {
-    "b-toggle": VBToggle,
-    "b-modal": VBModal,
-    Ripple,
   },
   methods: {
     validationForm() {

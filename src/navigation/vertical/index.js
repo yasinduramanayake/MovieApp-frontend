@@ -5,23 +5,58 @@ export default [
     icon: 'HomeIcon',
   },
   {
-    title: 'Items',
-    route: 'items',
-    icon: 'LayersIcon',
+    title: 'Manage Movies',
+    icon: 'AirplayIcon',
+    children: [
+      {
+        title: 'All Movies',
+        route: 'movies',
+      },
+    ],
   },
   {
-    title: 'Units',
-    route: 'units',
-    icon: 'DivideSquareIcon',
+    title: 'Manage Booking',
+    icon: 'FilmIcon',
+    children: [
+      {
+        title: 'All Bookings',
+        route: 'Allbookings',
+      },
+    ],
   },
   {
-    title: 'Patients',
-    route: 'patients',
+    title: 'Manage Theaters',
+    icon: 'BookmarkIcon',
+    children: [
+      {
+        title: 'All Theaters',
+        route: 'theaters',
+      },
+    ],
+  },
+  {
+    title: 'Manage Users',
     icon: 'UsersIcon',
+    children: [
+      {
+        title: 'All Users',
+        route: 'members',
+      },
+    ],
   },
-  {
-    title: 'Members',
-    route: 'members',
-    icon: 'UsersIcon',
-  },
+  // {
+  //   title: 'Units',
+  //   route: 'units',
+  //   icon: 'DivideSquareIcon',
+  // },
+  // {
+  //   title: 'Patients',
+  //   route: 'patients',
+  //   icon: 'UsersIcon',
+  // },
+  // {
+  //   title: 'Members',
+  //   route: 'members',
+  //   icon: 'UsersIcon',
+  // },
 ]

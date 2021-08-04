@@ -8,7 +8,7 @@
         variant="success"
       >
         <feather-icon icon="PlusIcon" class="mr-50" />
-        Add Member
+        Add Theater
       </b-button>
     </portal>
 
@@ -89,7 +89,6 @@
                 right
               >
                 <b-dropdown-item
-                  v-if="row.item.role === 'Admin'"
                   v-b-toggle.sidebar-right
                   @click="info(row.item, row.index, $event.target)"
                   >Edit</b-dropdown-item
@@ -139,7 +138,7 @@ import {
   BDropdownDivider,
   BDropdownItem,
 } from "bootstrap-vue";
-import Form from "@/views/Members/components/Form.vue";
+import Form from "@/views/Theaters/AdminView/components/Form.vue";
 
 export default {
   components: {
@@ -166,8 +165,8 @@ export default {
       data1: "yasindu",
       shiftmode: "",
       modeobj: {
-        Addmode: "Add Member",
-        Editmode: "Edit Member",
+        Addmode: "Add Theater",
+        Editmode: "Edit Theater",
         Addbutton: "Add",
         Updatebutton: "Update",
       },
@@ -190,59 +189,64 @@ export default {
           key: "Image",
           label: "Image",
         },
-        { key: "full_name", label: " Full Name", sortable: true },
-        { key: "email", label: "Email", sortable: true },
-        { key: "mobile", label: "Mobile", sortable: true },
-        { key: "role", label: "Role", sortable: true },
+        { key: "venue", label: "Venue", sortable: true },
+        { key: "name", label: "Name", sortable: true },
+        { key: "time1", label: "Show 1", sortable: true },
+        { key: "time2", label: "Show 2", sortable: true },
+        { key: "time3", label: "Show 3", sortable: true },
+        { key: "type", label: "Type", sortable: true },
         { key: "action", label: "Action", sortable: true },
       ],
       items: [
         {
           // eslint-disable-next-line global-require
-          Image: require("@/assets/images/125191853_2699384830310844_5638529771115210821_n.jpg"),
-          full_name: "Yasindu Ramanayake",
-          email: "yasinduramanayake123@gmail.com",
-          mobile: "0713531234",
-          role: "Admin",
+          Image: require("@/assets/images/banner06.jpg"),
+          name: "sigma",
+          venue: "Colombo",
+          time1: "8.00 a.m-10.00 a.m",
+          time2: "2.00 p.m-4.00 p.m",
+          time3: "6.00 p.m-8.00 p.m",
+          type: "Balcony",
         },
         {
           // eslint-disable-next-line global-require
-          Image: require("@/assets/images/Screenshot_2021-07-17-15-56-17-05.png"),
-          full_name: "Madura Prasad",
-          email: "maduraprasad@gmail.com",
-          mobile: "0715671234",
-          role: "Admin",
+          Image: require("@/assets/images/banner03.jpg"),
+          name: "Priska",
+          venue: "Kalutara",
+          time1: "8.00 a.m-10.00 a.m",
+          time2: "2.00 p.m-4.00 p.m",
+          time3: "6.00 p.m-8.00 p.m",
+          type: "3D , Balcony ",
         },
         {
           // eslint-disable-next-line global-require
-          Image: require("@/assets/images/133753918_429404674879921_6610452570295338387_n.jpg"),
-          full_name: "Pubudi Fernando",
-          email: "pubudi.fernando@gmail.com",
-          mobile: "0713123890",
-          role: "Admin",
-        },
-        {
-          Image: require("@/assets/images/avatars/6.png"),
-          full_name: "David Williom",
-          email: "davidwilliom@gmail.com",
-          mobile: "+3456898987",
-          role: "User",
+          Image: require("@/assets/images/banner04.jpg"),
+          name: "baska",
+          venue: "Kadawatha",
+          time1: "8.00 a.m-10.00 a.m",
+          time2: "2.00 p.m-4.00 p.m",
+          time3: "6.00 p.m-8.00 p.m",
+          type: "3D , Balcony ",
         },
         {
           // eslint-disable-next-line global-require
-          Image: require("@/assets/images/avatars/1.png"),
-          full_name: "Mariya Dupezo",
-          email: "mariya.233@gmail.com",
-          mobile: "+456787654",
-          role: "User",
+          Image: require("@/assets/images/banner05.jpg"),
+          name: "Reegal",
+          venue: "Gampaha",
+          time1: "8.00 a.m-10.00 a.m",
+          time2: "2.00 p.m-4.00 p.m",
+          time3: "6.00 p.m-8.00 p.m",
+          type: "3D",
         },
         {
           // eslint-disable-next-line global-require
-          Image: require("@/assets/images/avatars/3.png"),
-          full_name: "Seleena De Soiza",
-          email: "seleena34.7@gmail.com",
-          mobile: "+6890987654",
-          role: "User",
+          Image: require("@/assets/images/banner06.jpg"),
+          name: "World War",
+          venue: "Colombo",
+          time1: "8.00 a.m-10.00 a.m",
+          time2: "2.00 p.m-4.00 p.m",
+          time3: "6.00 p.m-8.00 p.m",
+          type: "A/C",
         },
       ],
     };
