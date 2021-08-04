@@ -9,6 +9,7 @@ import unitRoute from './modules/unit_route'
 import membersRoute from './modules/members_route'
 import registerRoute from './modules/register_route'
 import movieRoute from './modules/main_movie'
+import tamilMovie from './modules/tamil_movie'
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,7 @@ const router = new VueRouter({
     ...membersRoute,
     ...registerRoute,
     ...movieRoute,
+    ...tamilMovie,
   ],
 })
 

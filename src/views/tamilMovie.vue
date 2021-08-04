@@ -1,4 +1,5 @@
 <template>
+
   <div style="background-color:#24262b">
     <Header />
     <!-- /Brand logo-->
@@ -7,31 +8,30 @@
     <div class="background2">
       <b-container>
         <br />
-        <br />   
-        <!--/Search Bar-->
-            <b-row>
+        <br />
+         <!--/Search Bar-->
+        <b-row>
               <b-col cols="10">
                 <b-form-input list="my-list-id" size="lg"></b-form-input>
               </b-col>
               <b-col cols="2">
                 <b-button variant="dark" size="lg">Search</b-button>
-              </b-col>
-            </b-row>    
+              </b-col>        
+        </b-row>
         <br />
         <br />
         <!--/Content-->
         <b-row>
-                <b-col md="1" lg="4">
-                  <b-card title="Card title">
-                    <b-card-img
-                      :src="
-                        require('@/assets/images/english2.jpg')
-                      "
-                    ></b-card-img>
-                    <b-card-text>
-                      Some quick example text to build on the card title and.
-                    </b-card-text>
-                    <b-row>
+          <b-col md="1" lg="4">
+            <b-card title="MOVIE 001">
+              <b-card-img
+              height="250px"
+                :src="require('@/assets/images/tamil1.jpg')"
+              ></b-card-img>
+              <b-card-text>
+                Some quick example text to build on the card title and.
+              </b-card-text>
+              <b-row>
                 <b-col cols="6">
                   <b-button class="btn" variant="gradient-dark">
                     View Details
@@ -44,21 +44,18 @@
                   </b-button>
                 </b-col>
               </b-row>
-                  </b-card>
-                </b-col>
+            </b-card>
+          </b-col>
 
-                <b-col md="1" lg="4">
-                  <b-card title="Card title">
-                    <b-card-img
-                    
-                      :src="
-                        require('@/assets/images/english4.jpg')
-                      "
-                    ></b-card-img>
-                    <b-card-text>
-                      Some quick example text to build on the card title and
-                    </b-card-text>
-                    <b-row>
+          <b-col md="1" lg="4">
+            <b-card title="MOVIE 002">
+              <b-card-img
+                :src="require('@/assets/images/tamil2.jpg')"
+              ></b-card-img>
+              <b-card-text>
+                Some quick example text to build on the card title and
+              </b-card-text>
+              <b-row>
                 <b-col cols="6">
                   <b-button class="btn" variant="gradient-dark">
                     View Details
@@ -71,20 +68,17 @@
                   </b-button>
                 </b-col>
               </b-row>
-                  </b-card>
-                </b-col>
-                <b-col md="1" lg="4">
-                  <b-card title="Card title">
-                    <b-card-img
-                    
-                      :src="
-                        require('@/assets/images/en5.jpg')
-                      "
-                    ></b-card-img>
-                    <b-card-text>
-                      Some quick example text to build on the card title and
-                    </b-card-text>
-                    <b-row>
+            </b-card>
+          </b-col>
+          <b-col md="1" lg="4">
+            <b-card title="MOVIE 003">
+              <b-card-img
+                :src="require('@/assets/images/tamil3.jpg')"
+              ></b-card-img>
+              <b-card-text>
+                Some quick example text to build on the card title and
+              </b-card-text>
+              <b-row>
                 <b-col cols="6">
                   <b-button class="btn" variant="gradient-dark">
                     View Details
@@ -97,19 +91,17 @@
                   </b-button>
                 </b-col>
               </b-row>
-                  </b-card>
-                </b-col>
-                <b-col md="1" lg="4">
-                  <b-card title="Card title">
-                    <b-card-img
-                      :src="
-                        require('@/assets/images/banner03.jpg')
-                      "
-                    ></b-card-img>
-                    <b-card-text>
-                      Some quick example text to build on the card title and
-                    </b-card-text>
-                    <b-row>
+            </b-card>
+          </b-col>
+          <b-col md="1" lg="4">
+            <b-card title="MOVIE 004">
+              <b-card-img
+                :src="require('@/assets/images/tamil4.jpg')"
+              ></b-card-img>
+              <b-card-text>
+                Some quick example text to build on the card title and
+              </b-card-text>
+              <b-row>
                 <b-col cols="6">
                   <b-button class="btn" variant="gradient-dark">
                     View Details
@@ -122,19 +114,17 @@
                   </b-button>
                 </b-col>
               </b-row>
-                  </b-card>
-                </b-col>
-                <b-col md="1" lg="4">
-                  <b-card title="Card title">
-                    <b-card-img
-                      :src="
-                        require('@/assets/images/en7.jpg')
-                      "
-                    ></b-card-img>
-                    <b-card-text>
-                      Some quick example text to build on the card title and
-                    </b-card-text>
-                   <b-row>
+            </b-card>
+          </b-col>
+          <b-col md="1" lg="4">
+            <b-card title="MOVIE 005">
+              <b-card-img
+                :src="require('@/assets/images/tamil5.jpg')"
+              ></b-card-img>
+              <b-card-text>
+                Some quick example text to build on the card title and
+              </b-card-text>
+              <b-row>
                 <b-col cols="6">
                   <b-button class="btn" variant="gradient-dark">
                     View Details
@@ -147,19 +137,17 @@
                   </b-button>
                 </b-col>
               </b-row>
-                  </b-card>
-                </b-col>
-                <b-col md="1" lg="4">
-                  <b-card title="Card title">
-                    <b-card-img
-                      :src="
-                        require('@/assets/images/banner03.jpg')
-                      "
-                    ></b-card-img>
-                    <b-card-text>
-                      Some quick example text to build on the card title and
-                    </b-card-text>
-                   <b-row>
+            </b-card>
+          </b-col>
+          <b-col md="1" lg="4">
+            <b-card title="MOVIE 006">
+              <b-card-img
+                :src="require('@/assets/images/tamil6.jpg')"
+              ></b-card-img>
+              <b-card-text>
+                Some quick example text to build on the card title and
+              </b-card-text>
+              <b-row>
                 <b-col cols="6">
                   <b-button class="btn" variant="gradient-dark">
                     View Details
@@ -172,8 +160,8 @@
                   </b-button>
                 </b-col>
               </b-row>
-                  </b-card>
-                </b-col>
+            </b-card>
+          </b-col>
         </b-row>
         <br />
         <br />
@@ -201,6 +189,7 @@
 
     <!-- Left Text-->
   </div>
+
 </template>
 
 <script>
@@ -253,9 +242,7 @@ export default {
   },
   mixins: [togglePasswordVisibility],
   data() {
-    return {
-     
-    };
+    return {};
   },
 };
 </script>
