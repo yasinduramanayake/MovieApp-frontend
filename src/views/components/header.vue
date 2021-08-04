@@ -26,6 +26,21 @@
       <b-col cols="11">
         <ul>
           <li><a href="#home">Home</a></li>
+          <li><a href="#news">News</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li>
+            <div class="dropdown">
+              <button class="dropbtn">
+                Dropdown
+                <i class="fa fa-caret-down"></i>
+              </button>
+              <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+              </div>
+            </div>
+          </li>
           <li><a href="#news">Movies</a></li>
           <li v-if="!token" v-b-toggle.sidebar-right>
             <a href="#contact">Login</a>
@@ -52,6 +67,7 @@
 import VuexyLogo from "@core/layouts/components/Logo.vue";
 import login from "@/views/components/loginform.vue";
 import Ripple from "vue-ripple-directive";
+import Dropdown from "vue-simple-search-dropdown";
 import {
   BLink,
   BContainer,
@@ -87,6 +103,7 @@ export default {
   directives: {
     "b-toggle": VBToggle,
     Ripple,
+    Dropdown,
   },
 };
 </script>
@@ -137,5 +154,52 @@ li a:hover:not(.active) {
 }
 .active {
   background-color: #04aa6d;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover,
+.dropdown:hover .dropbtn {
+  background-color: #111;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 </style>
