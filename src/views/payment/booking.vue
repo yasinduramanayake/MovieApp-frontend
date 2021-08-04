@@ -14,7 +14,7 @@
                   :src="
                     require('@/assets/images/MV5BYzE1YzViNzktZTU5Ny00ZjYzLWE0YjItZWNkNDU1MzFiOWNhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg')
                   "
-                  height="600px"
+                  height="730px"
                 >
                 </b-card-img>
               </b-card>
@@ -32,9 +32,21 @@
                       <br />
                       The Kissing Booth 3
                       <br/> <br/>
+                      Movie Type
+                      <br/>
+                      Teen
+                      <br/> <br/>
                       Theater
                       <br/>
                       Savoy, Colombo 3.
+                      <br/><br/>
+                      Theater Type
+                      <br/>
+                      Balcony
+                      <br/> <br/>
+                      Ticket Price
+                      <br/> <br/>
+                      Rs. 600.00
                       <br/><br/>
                       </b-card-text>
                       </b-col>

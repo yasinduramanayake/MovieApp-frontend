@@ -29,7 +29,7 @@ const router = new VueRouter({
     ...membersRoute,
     ...registerRoute,
     ...paydetailsRoute,
-    ...bookingRoute
+    ...bookingRoute,
 
   ],
 })
