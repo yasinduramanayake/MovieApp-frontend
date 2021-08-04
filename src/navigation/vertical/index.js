@@ -16,11 +16,21 @@ export default [
   },
   {
     title: 'Manage Booking',
-    icon: 'AirplayIcon',
+    icon: 'BookmarkIcon',
     children: [
       {
         title: 'All Bookings',
-        route: 'movies',
+        route: 'Allbookings',
+      },
+    ],
+  },
+  {
+    title: 'Manage Theaters',
+    icon: 'BookmarkIcon',
+    children: [
+      {
+        title: 'All Theaters',
+        route: 'AllTheaters',
       },
     ],
   },

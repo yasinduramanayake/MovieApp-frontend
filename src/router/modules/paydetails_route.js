@@ -1,11 +1,12 @@
 export default [
   {
     path: '/paydetails',
-    name: 'payment',
+    name: 'paydetails',
     component: () => import('@/views/payment/paydetails.vue'),
     meta: {
       layout: 'full',
       redirectIfLoggedIn: true,
+      noAuth: true,
     },
   },
 ]

@@ -28,15 +28,4 @@ export default {
     clearToken()
     return await api.get('/logout')
   },
-  array() {
-    const array = [
-      {
-        name: 'yasindu',
-        date_of_birth: 'fghjhgf',
-        sex: 'hgf',
-      },
-    ]
-
-    return array
-  },
 }

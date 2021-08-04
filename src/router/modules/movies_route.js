@@ -7,7 +7,7 @@ export default [
       pageTitle: 'Movies',
       breadcrumb: [
         {
-          text: 'Movies',
+          text: 'All Movies',
           active: true,
         },
       ],
