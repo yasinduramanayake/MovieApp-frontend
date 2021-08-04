@@ -8,14 +8,11 @@ import moviesRoute from './modules/movies_route'
 import unitRoute from './modules/unit_route'
 import membersRoute from './modules/members_route'
 import registerRoute from './modules/register_route'
-<<<<<<< HEAD
 import movieRoute from './modules/main_movie'
 import tamilMovie from './modules/tamil_movie'
-=======
 import paydetailsRoute from './modules/paydetails_route'
 import bookingRoute from './modules/booking_route'
 import theaterRoute from './modules/theater_route'
->>>>>>> yasindu
 
 Vue.use(VueRouter)
 
@@ -34,14 +31,11 @@ const router = new VueRouter({
     ...errorRoute,
     ...membersRoute,
     ...registerRoute,
-<<<<<<< HEAD
     ...movieRoute,
     ...tamilMovie,
-=======
     ...paydetailsRoute,
     ...bookingRoute,
     ...theaterRoute,
->>>>>>> yasindu
   ],
 })
 
