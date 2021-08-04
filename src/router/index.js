@@ -31,7 +31,11 @@ const router = new VueRouter({
     ...registerRoute,
     ...paydetailsRoute,
     ...bookingRoute,
+<<<<<<< HEAD
     ...theaterRoute,
+=======
+
+>>>>>>> pubudi
   ],
 })
 

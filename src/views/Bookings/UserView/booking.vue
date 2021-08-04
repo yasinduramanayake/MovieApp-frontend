@@ -14,7 +14,7 @@
                   :src="
                     require('@/assets/images/MV5BYzE1YzViNzktZTU5Ny00ZjYzLWE0YjItZWNkNDU1MzFiOWNhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg')
                   "
-                  height="600px"
+                  height="730px"
                 >
                 </b-card-img>
               </b-card>
@@ -26,6 +26,7 @@
                     <b-row>
                       <!--Theater-->
                       <b-col cols="12">
+<<<<<<< HEAD:src/views/Bookings/UserView/booking.vue
                         <b-card-text>
                           Movie
                           <br />
@@ -37,6 +38,30 @@
                           Savoy, Colombo 3.
                           <br /><br />
                         </b-card-text>
+=======
+                      <b-card-text>
+                      Movie
+                      <br />
+                      The Kissing Booth 3
+                      <br/> <br/>
+                      Movie Type
+                      <br/>
+                      Teen
+                      <br/> <br/>
+                      Theater
+                      <br/>
+                      Savoy, Colombo 3.
+                      <br/><br/>
+                      Theater Type
+                      <br/>
+                      Balcony
+                      <br/> <br/>
+                      Ticket Price
+                      <br/> <br/>
+                      Rs. 600.00
+                      <br/><br/>
+                      </b-card-text>
+>>>>>>> pubudi:src/views/payment/booking.vue
                       </b-col>
                       <!--  name -->
                       <b-col md="12">
