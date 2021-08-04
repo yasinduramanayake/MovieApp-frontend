@@ -14,6 +14,16 @@ export default [
       },
     ],
   },
+  {
+    title: 'Manage Booking',
+    icon: 'AirplayIcon',
+    children: [
+      {
+        title: 'All Bookings',
+        route: 'movies',
+      },
+    ],
+  },
   // {
   //   title: 'Units',
   //   route: 'units',

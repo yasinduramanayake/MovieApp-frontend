@@ -21,7 +21,7 @@ export default {
       }
 
       if (!to.meta.noAuth & !isLogedIn) {
-        if (to.name !== 'register') {
+        if (to.name !== 'register' || to.name !== 'payment') {
           notification.toast(
             'You required login before enter this page',
             'error',

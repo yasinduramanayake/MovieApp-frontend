@@ -7,7 +7,11 @@
       class="mb-5"
       collapseAction
     >
-      <form-builder :formStructure="filterInputs" v-model="filters" @input="filterHander(filters)" />
+      <form-builder
+        :formStructure="filterInputs"
+        v-model="filters"
+        @input="filterHander(filters)"
+      />
     </vx-card>
     <vx-card :title="cardTitle">
       <vs-table
@@ -56,72 +60,71 @@
 </template>
 
 <script>
-import FormBuilder from '@/layouts/components/form-builder/FormBuilder'
-import FilterMixin from '@/mixins/FilterMixin'
+import FormBuilder from "@/layouts/components/form-builder/FormBuilder";
+import FilterMixin from "@/mixins/FilterMixin";
 
 export default {
   props: {
     cardTitle: String,
     tableHeaders: Array,
     filterInputs: Array,
-    dataFetch: Function
+    dataFetch: Function,
   },
   mixins: [FilterMixin],
   components: { FormBuilder },
-  data () {
+  data() {
     return {
       tablePagination: {
         per_page: 10,
         total_pages: 1,
-        current_page: 1
+        current_page: 1,
       },
       tableData: [],
       filter: {},
-      filters: {}
-    }
+      filters: {},
+    };
   },
-  async mounted () {
-    await this.fetchData()
-    this.$refs.filterCard.isContentCollapsed = true
-    this.$refs.filterCard.maxHeight = '1.5rem'
+  async mounted() {
+    await this.fetchData();
+    this.$refs.filterCard.isContentCollapsed = true;
+    this.$refs.filterCard.maxHeight = "1.5rem";
   },
   methods: {
-    async trigger () {
+    async trigger() {
       // console.log('sadasd')
     },
-    async filterQueryUpdate () {
-      this.filter.filters = this.filterQuery
+    async filterQueryUpdate() {
+      this.filter.filters = this.filterQuery;
       if (this.tablePagination.current_page === 1) {
-        await this.fetchData()
+        await this.fetchData();
       } else {
-        this.tablePagination.current_page = 1
+        this.tablePagination.current_page = 1;
       }
     },
-    async fetchData () {
+    async fetchData() {
       this.$vs.loading({
-        container: '#table',
-        scale: 1
-      })
+        container: "#table",
+        scale: 1,
+      });
       try {
         const request = (
-          await this.dataFetch(this.lodash.values(this.filter).join('&'))
-        ).data.success
-        this.tableData = request.data
-        this.tablePagination = request.pagination
+          await this.dataFetch(this.lodash.values(this.filter).join("&"))
+        ).data.success;
+        this.tableData = request.data;
+        this.tablePagination = request.pagination;
       } catch (error) {
-        this.convertAndNotifyError(error)
+        this.convertAndNotifyError(error);
       }
-      this.$vs.loading.close('#table > .con-vs-loading')
-    }
+      this.$vs.loading.close("#table > .con-vs-loading");
+    },
   },
   watch: {
-    async 'tablePagination.current_page' (current_page) {
-      this.filter.current_page = `page=${current_page}`
-      await this.fetchData()
-    }
-  }
-}
+    async "tablePagination.current_page"(current_page) {
+      this.filter.current_page = `page=${current_page}`;
+      await this.fetchData();
+    },
+  },
+};
 </script>
 
-<style>
-</style>
+<style></style>

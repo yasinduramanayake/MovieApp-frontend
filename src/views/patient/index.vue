@@ -1,15 +1,8 @@
 <template>
   <div>
     <portal to="appbar_button">
-      <b-button
-        v-b-toggle.sidebar-right
-        type="filled"
-        variant="success"
-      >
-        <feather-icon
-          icon="PlusIcon"
-          class="mr-50"
-        />
+      <b-button v-b-toggle.sidebar-right type="filled" variant="success">
+        <feather-icon icon="PlusIcon" class="mr-50" />
         Add Patient
       </b-button>
     </portal>
@@ -23,20 +16,20 @@
       backdrop
       no-header
       right
-      @hidden="formData={};mode='add';$refs.formbuilder.clearValidation()"
+      @hidden="
+        formData = {};
+        mode = 'add';
+        $refs.formbuilder.clearValidation();
+      "
     >
       <template #default="{ hide }">
-        <div class="d-flex justify-content-between align-items-center content-sidebar-header px-2 py-1">
-          <h5
-            v-if="mode==='add'"
-            class="mb-0"
-          >
+        <div
+          class="d-flex justify-content-between align-items-center content-sidebar-header px-2 py-1"
+        >
+          <h5 v-if="mode === 'add'" class="mb-0">
             Create a patient
           </h5>
-          <h5
-            v-else-if="mode==='edit'"
-            class="mb-0"
-          >
+          <h5 v-else-if="mode === 'edit'" class="mb-0">
             Edit a patient
           </h5>
           <feather-icon
@@ -53,18 +46,10 @@
           :form-structure="formStructure"
         >
           <template slot="buttons">
-            <b-button
-              v-if="mode==='add'"
-              type="submit"
-              variant="warning"
-            >
+            <b-button v-if="mode === 'add'" type="submit" variant="warning">
               Create
             </b-button>
-            <b-button
-              v-if="mode==='edit'"
-              type="submit"
-              variant="warning"
-            >
+            <b-button v-if="mode === 'edit'" type="submit" variant="warning">
               Update
             </b-button>
           </template>
@@ -79,10 +64,7 @@
       :data-fetch="fetch"
       :filter-inputs="filters"
     >
-      <template
-        slot="action"
-        slot-scope="row"
-      >
+      <template slot="action" slot-scope="row">
         <b-button
           v-b-toggle.sidebar-right
           class="mr-1"
@@ -105,132 +87,135 @@
 </template>
 
 <script>
-import FormBuilder from '@/libs/builders/form-builder/FormBuilder.vue'
-import TableBuilder from '@/libs/builders/table-builder/TableBuilder.vue'
+import FormBuilder from "@/libs/builders/form-builder/FormBuilder.vue";
+import TableBuilder from "@/libs/builders/table-builder/TableBuilder.vue";
 // import Patients from '@/apis/modules/patients'
 
-import { BButton, BSidebar, VBToggle } from 'bootstrap-vue'
+import { BButton, BSidebar, VBToggle } from "bootstrap-vue";
 
 export default {
   components: {
-    TableBuilder, BButton, BSidebar, FormBuilder,
+    TableBuilder,
+    BButton,
+    BSidebar,
+    FormBuilder,
   },
   directives: {
-    'b-toggle': VBToggle,
+    "b-toggle": VBToggle,
   },
   data() {
     return {
       active: false,
       sidebarOpen: false,
-      mode: 'add',
+      mode: "add",
       formStructure: [
         {
-          type: 'input',
-          placeholder: 'Patient name here',
-          inputType: 'text',
-          title: 'Patient name',
-          value: 'name',
-          class: 'mt-1',
-          validation: 'required',
+          type: "input",
+          placeholder: "Patient name here",
+          inputType: "text",
+          title: "Patient name",
+          value: "name",
+          class: "mt-1",
+          validation: "required",
         },
         {
-          type: 'input',
-          placeholder: 'Patient NIC here',
-          inputType: 'text',
-          title: 'NIC',
-          value: 'nic',
-          class: 'mt-1',
-          validation: 'required',
+          type: "input",
+          placeholder: "Patient NIC here",
+          inputType: "text",
+          title: "NIC",
+          value: "nic",
+          class: "mt-1",
+          validation: "required",
         },
         {
-          type: 'date',
-          placeholder: 'Patient date of birthday here',
-          inputType: 'date',
-          title: 'Date of birth',
-          value: 'date_of_birth',
-          class: 'mt-1',
-          validation: 'required',
+          type: "date",
+          placeholder: "Patient date of birthday here",
+          inputType: "date",
+          title: "Date of birth",
+          value: "date_of_birth",
+          class: "mt-1",
+          validation: "required",
         },
         {
-          type: 'v-select',
-          placeholder: 'Select a gender',
-          inputType: 'select',
-          title: 'Gender',
+          type: "v-select",
+          placeholder: "Select a gender",
+          inputType: "select",
+          title: "Gender",
           options: [
-            { label: 'Male', value: 'm' },
-            { label: 'Female', value: 'f' },
+            { label: "Male", value: "m" },
+            { label: "Female", value: "f" },
           ],
-          value: 'gender',
-          class: 'mt-1',
-          validation: 'required',
+          value: "gender",
+          class: "mt-1",
+          validation: "required",
         },
         {
-          type: 'number',
-          placeholder: 'Patient mobile number',
-          inputType: 'number',
-          title: 'Mobile number',
-          value: 'mobile_number',
-          class: 'mt-1',
-          validation: 'required',
+          type: "number",
+          placeholder: "Patient mobile number",
+          inputType: "number",
+          title: "Mobile number",
+          value: "mobile_number",
+          class: "mt-1",
+          validation: "required",
         },
         {
-          type: 'textarea',
-          inputType: 'text',
-          title: 'Patient address',
-          value: 'address',
-          class: 'mt-1',
-          validation: 'required',
+          type: "textarea",
+          inputType: "text",
+          title: "Patient address",
+          value: "address",
+          class: "mt-1",
+          validation: "required",
         },
       ],
       formData: {},
       filters: [
         {
-          type: 'input',
-          inputType: 'search',
-          title: 'Patient Name',
-          placeholder: 'Search...',
-          value: 'name',
+          type: "input",
+          inputType: "search",
+          title: "Patient Name",
+          placeholder: "Search...",
+          value: "name",
         },
         {
-          type: 'input',
-          inputType: 'search',
-          title: 'Date of Birth',
-          placeholder: 'Search...',
-          value: 'date_of_birth',
+          type: "input",
+          inputType: "search",
+          title: "Date of Birth",
+          placeholder: "Search...",
+          value: "date_of_birth",
         },
         {
-          type: 'select',
-          title: 'Gender',
-          placeholder: 'Search...',
-          value: 'sex',
-          default: { label: 'Any', value: undefined },
+          type: "select",
+          title: "Gender",
+          placeholder: "Search...",
+          value: "sex",
+          default: { label: "Any", value: undefined },
           options: [
-            { label: 'Male', value: 'm' },
-            { label: 'Female', value: 'f' },
+            { label: "Male", value: "m" },
+            { label: "Female", value: "f" },
           ],
         },
       ],
       headers: [
         {
-          label: 'Patient Name',
-          field: 'name',
+          label: "Patient Name",
+          field: "name",
         },
         {
-          label: 'Date of Birth',
-          field: 'date_of_birth',
+          label: "Date of Birth",
+          field: "date_of_birth",
         },
         {
-          label: 'Gender',
-          field: 'sex',
-          formatter: data => (data === 'm' ? 'Male' : 'Female'),
+          label: "Gender",
+          field: "sex",
+          formatter: (data) => (data === "m" ? "Male" : "Female"),
         },
         {
-          label: 'Action',
-          field: 'action',
+          label: "Action",
+          field: "action",
           sortable: false,
         },
       ],
-    }
+    };
   },
   // methods: {
   //   fetch: Patients.index,
@@ -287,8 +272,7 @@ export default {
   //     }
   //   },
   // },
-}
+};
 </script>
 
-<style>
-</style>
+<style></style>
