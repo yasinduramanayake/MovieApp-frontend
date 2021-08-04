@@ -7,8 +7,8 @@
     </b-card-title>
     <validation-observer ref="registerForm" #default="{invalid}">
       <b-form class="auth-register-form mt-2" @submit.prevent="register">
-        <!-- username -->
         <b-col cols="12">
+          <!-- Movie Name -->
           <b-form-group label="Movie Name" label-for="name">
             <validation-provider
               #default="{ errors }"
@@ -28,119 +28,67 @@
         </b-col>
 
         <b-col cols="12">
-          <b-form-group label="Location">
+          <!-- Movie Description -->
+          <b-form-group label="Movie Description" label-for="description">
             <validation-provider
               #default="{ errors }"
-              name="location"
-              vid="location"
+              name="description"
+              vid="description"
               rules="required"
             >
-              <b-form-input
-                id="location"
-                name="location"
-                :state="errors.length > 0 ? false : null"
-                placeholder="Colombo"
+              <b-form-textarea
+                id="textarea-rows"
+                placeholder="Tall textarea"
+                rows="8"
               />
               <small class="text-danger">{{ errors[0] }}</small>
             </validation-provider>
           </b-form-group>
         </b-col>
-        <!-- password -->
+
+        <!-- Theater -->
         <b-col cols="12">
           <b-form-group label="Theater">
             <validation-provider
               #default="{ errors }"
               name="theater"
               vid="thater"
-              rules="theater"
+              rules="required"
             >
-              <b-input-group
-                class="input-group-merge"
-                :class="errors.length > 0 ? 'is-invalid' : null"
-              >
-                <b-form-input
-                  id="theater"
-                  class="form-control-merge"
-                  :state="errors.length > 0 ? false : null"
-                  name="theater"
-                  placeholder="Priska"
-                />
-                <b-input-group-append is-text>
-                  <feather-icon class="cursor-pointer" />
-                </b-input-group-append>
-              </b-input-group>
+              <v-select
+                v-model="selected2"
+                :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
+                multiple
+                label="title"
+                :options="option1"
+              />
+
               <small class="text-danger">{{ errors[0] }}</small>
             </validation-provider>
           </b-form-group>
         </b-col>
 
         <b-col cols="12">
+          <!-- Movie Type -->
           <b-form-group>
-            <label>Show time 1</label>
+            <label>Select Movie Type</label>
             <validation-provider
               #default="{ errors }"
               rules="required"
-              name="Numeric"
+              name="text"
             >
-              <div>
-                <b-form-timepicker locale="en" />
-                <div class="mt-2"></div>
-              </div>
-              <small class="text-danger">{{ errors[0] }}</small>
-            </validation-provider>
-          </b-form-group>
-        </b-col>
-        <b-col cols="12">
-          <b-form-group>
-            <label>Show time 2</label>
-            <validation-provider
-              #default="{ errors }"
-              rules="required"
-              name="Numeric"
-            >
-              <div>
-                <b-form-timepicker locale="en" />
-                <div class="mt-2"></div>
-              </div>
-              <small class="text-danger">{{ errors[0] }}</small>
-            </validation-provider>
-          </b-form-group>
-        </b-col>
-        <b-col cols="12">
-          <b-form-group>
-            <label>Show time 3</label>
-            <validation-provider
-              #default="{ errors }"
-              rules="required"
-              name="Numeric"
-            >
-              <div>
-                <b-form-timepicker locale="en" />
-                <div class="mt-2"></div>
-              </div>
-              <small class="text-danger">{{ errors[0] }}</small>
-            </validation-provider>
-          </b-form-group>
-        </b-col>
-
-        <b-col cols="12">
-          <b-form-group>
-            <label>Price</label>
-            <validation-provider
-              #default="{ errors }"
-              rules="required|integer|double"
-              name="Number"
-            >
-              <b-form-input
-                :state="errors.length > 0 ? false : null"
-                placeholder="200.00"
-                type="number"
+              <v-select
+                v-model="selected"
+                :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
+                label="title"
+                :options="option"
               />
               <small class="text-danger">{{ errors[0] }}</small>
             </validation-provider>
           </b-form-group>
         </b-col>
 
+        <!-- Button -->
         <b-button variant="primary" block type="submit" :disabled="invalid">
           {{ databutton }}
         </b-button>
@@ -150,23 +98,23 @@
 </template>
 <script>
 import { ValidationProvider, ValidationObserver } from "vee-validate";
+import vSelect from "vue-select";
 import {
   BCol,
   BButton,
-  BFormTimepicker,
   BForm,
   BFormGroup,
   BCardTitle,
   BFormInput,
-  BInputGroup,
-  BInputGroupAppend,
+  BFormTextarea,
 } from "bootstrap-vue";
 import { data } from "vue-echarts";
 
 export default {
   components: {
+    vSelect,
     ValidationProvider,
-    BFormTimepicker,
+    BFormTextarea,
     ValidationObserver,
     BCardTitle,
     BButton,
@@ -174,9 +122,33 @@ export default {
     BForm,
     BFormGroup,
     BFormInput,
-    BInputGroup,
-    BInputGroupAppend,
+  },
+  data() {
+    return {
+      selected: { title: "Kids" },
+      option: [
+        { title: "Kids" },
+        { title: "Teen" },
+        { title: "Superhero" },
+        { title: "Cartoon" },
+        { title: "Adult" },
+      ],
+      option1: [
+        { title: "Multiplex" },
+        { title: "Independent and Second-Run" },
+        { title: "IMAX" },
+        { title: "Drive-In" },
+        { title: "Ac , 3D" },
+        { title: "Ac" },
+        { title: "3D" },
+      ],
+      dir: "ltr",
+      selected2: [{ title: "Multiplex" }, { title: "IMAX" }],
+    };
   },
   props: { data: String, databutton: String },
 };
 </script>
+<style lang="scss">
+@import "@core/scss/vue/libs/vue-select.scss";
+</style>

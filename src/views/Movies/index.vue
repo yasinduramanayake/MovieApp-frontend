@@ -12,6 +12,7 @@
       </b-button>
     </portal>
 
+    <!-- Side Bar -->
     <b-sidebar id="sidebar-right" bg-variant="white" shadow backdrop right>
       <div v-if="shiftmode === 'Add'">
         <Form :data="modeobj.Addmode" :databutton="modeobj.Addbutton" />
@@ -22,6 +23,7 @@
       </div>
     </b-sidebar>
 
+    <!-- Table Header-->
     <b-row>
       <b-col md="2" sm="4" class="my-1">
         <b-form-group class="mb-0">
@@ -60,6 +62,7 @@
         </b-form-group>
       </b-col>
 
+      <!-- Table -->
       <b-col cols="12">
         <b-table
           striped
@@ -186,6 +189,7 @@ export default {
         title: "",
         content: "",
       },
+      // colomns
       fields: [
         {
           key: "Image",
@@ -196,6 +200,7 @@ export default {
         { key: "type", label: "Type", sortable: true },
         { key: "action", label: "Action", sortable: true },
       ],
+      // data
       items: [
         {
           // eslint-disable-next-line global-require

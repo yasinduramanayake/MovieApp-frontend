@@ -16,7 +16,7 @@ export default [
   },
   {
     title: 'Manage Booking',
-    icon: 'BookmarkIcon',
+    icon: 'FilmIcon',
     children: [
       {
         title: 'All Bookings',
@@ -30,7 +30,17 @@ export default [
     children: [
       {
         title: 'All Theaters',
-        route: 'AllTheaters',
+        route: 'theaters',
+      },
+    ],
+  },
+  {
+    title: 'Manage Users',
+    icon: 'UsersIcon',
+    children: [
+      {
+        title: 'All Users',
+        route: 'members',
       },
     ],
   },

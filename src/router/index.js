@@ -10,6 +10,7 @@ import membersRoute from './modules/members_route'
 import registerRoute from './modules/register_route'
 import paydetailsRoute from './modules/paydetails_route'
 import bookingRoute from './modules/booking_route'
+import theaterRoute from './modules/theater_route'
 
 Vue.use(VueRouter)
 
@@ -29,8 +30,8 @@ const router = new VueRouter({
     ...membersRoute,
     ...registerRoute,
     ...paydetailsRoute,
-    ...bookingRoute
-
+    ...bookingRoute,
+    ...theaterRoute,
   ],
 })
 
