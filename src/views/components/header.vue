@@ -24,25 +24,21 @@
     <b-row>
       <b-col cols="1"> </b-col>
       <b-col cols="11">
-        <ul>
-<<<<<<< HEAD
-      <li><a href="#home">Home</a></li>
-      <li><a href="#news">News</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li>
           <div class="dropdown">
-    <button class="dropbtn">Dropdown 
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a href="#">Link 1</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
-    </div>
-  </div> 
-      </li>
-    </ul>
-=======
+            <button class="dropbtn">Dropdown</button>
+            <div class="dropdown-content">
+              <a href="#">Link 1</a>
+              <a href="#">Link 2</a>
+              <a href="#">Link 3</a>
+            </div>
+          </div>
+        </li>
+      </b-col>
+      <!--<ul>
           <li><a href="#home">Home</a></li>
           <li><a href="#news">Movies</a></li>
           <li v-if="!token" v-b-toggle.sidebar-right>
@@ -50,9 +46,8 @@
           </li>
           <li v-if="token"><a href="#contact">Profile</a></li>
           <li v-if="token"><a href="#contact">Logout</a></li>
-        </ul>
->>>>>>> yasindu
-      </b-col>
+      </ul>
+    -->
     </b-row>
     <b-sidebar
       id="sidebar-right"
@@ -71,7 +66,7 @@
 import VuexyLogo from "@core/layouts/components/Logo.vue";
 import login from "@/views/components/loginform.vue";
 import Ripple from "vue-ripple-directive";
-import Dropdown from 'vue-simple-search-dropdown';
+import Dropdown from "vue-simple-search-dropdown";
 import {
   BLink,
   BContainer,
@@ -166,7 +161,7 @@ li a:hover:not(.active) {
 }
 
 .dropdown .dropbtn {
-  font-size: 16px;  
+  font-size: 16px;
   border: none;
   outline: none;
   color: white;
@@ -176,7 +171,8 @@ li a:hover:not(.active) {
   margin: 0;
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
+.navbar a:hover,
+.dropdown:hover {
   background-color: #111;
 }
 
@@ -185,7 +181,7 @@ li a:hover:not(.active) {
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
