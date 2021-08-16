@@ -1,29 +1,5 @@
 <template>
   <div>
-    <portal to="appbar_button">
-      <b-button
-        v-b-toggle.sidebar-right
-        type="filled"
-        @click="shift()"
-        variant="success"
-      >
-        <feather-icon icon="PlusIcon" class="mr-50" />
-        Add Movie
-      </b-button>
-    </portal>
-
-    <!-- Side Bar -->
-    <b-sidebar id="sidebar-right" bg-variant="white" shadow backdrop right>
-      <div v-if="shiftmode === 'Add'">
-        <Form :data="modeobj.Addmode" :databutton="modeobj.Addbutton" />
-      </div>
-
-      <div v-if="shiftmode === 'Edit'">
-        <Form :data="modeobj.Editmode" :databutton="modeobj.Updatebutton" />
-      </div>
-    </b-sidebar>
-
-    <!-- Table Header-->
     <b-row>
       <b-col md="2" sm="4" class="my-1">
         <b-form-group class="mb-0">
@@ -62,7 +38,6 @@
         </b-form-group>
       </b-col>
 
-      <!-- Table -->
       <b-col cols="12">
         <b-table
           striped
@@ -81,25 +56,6 @@
         >
           <template #cell(Image)="data">
             <b-avatar :src="data.value" size="60px" />
-          </template>
-
-          <template #cell(action)="row">
-            <b-nav>
-              <b-nav-item-dropdown
-                id="my-nav-dropdown"
-                text="Action"
-                toggle-class="nav-link-custom"
-                right
-              >
-                <b-dropdown-item
-                  v-b-toggle.sidebar-right
-                  @click="info(row.item, row.index, $event.target)"
-                  >Edit</b-dropdown-item
-                >
-                <b-dropdown-divider />
-                <b-dropdown-item>Delete</b-dropdown-item>
-              </b-nav-item-dropdown>
-            </b-nav>
           </template>
         </b-table>
       </b-col>
@@ -123,7 +79,6 @@
 // import Items from '@/apis/modules/items'
 
 import {
-  BSidebar,
   VBToggle,
   BTable,
   BAvatar,
@@ -136,17 +91,11 @@ import {
   BFormInput,
   BInputGroupAppend,
   BButton,
-  BNav,
-  BNavItemDropdown,
-  BDropdownDivider,
-  BDropdownItem,
 } from "bootstrap-vue";
 import Form from "@/views/Movies/Components/Form.vue";
 
 export default {
   components: {
-    BSidebar,
-    Form,
     BTable,
     BAvatar,
     BRow,
@@ -158,23 +107,9 @@ export default {
     BFormInput,
     BInputGroupAppend,
     BButton,
-    BNav,
-    BNavItemDropdown,
-    BDropdownDivider,
-    BDropdownItem,
   },
   data() {
     return {
-      data1: "yasindu",
-      shiftmode: "",
-      modeobj: {
-        Addmode: "Add Movie",
-        Editmode: "Edit Movie",
-        Addbutton: "Add",
-        Updatebutton: "Update ",
-      },
-      Addmode: "Add Movie",
-      Editmode: "Edit Movie",
       perPage: 5,
       pageOptions: [3, 5, 10],
       totalRows: 1,
@@ -189,67 +124,79 @@ export default {
         title: "",
         content: "",
       },
-      // colomns
       fields: [
         {
           key: "Image",
           label: "Image",
         },
-        { key: "movie_name", label: "Name", sortable: true },
-        { key: "description", label: "Description", sortable: true },
-        { key: "type", label: "Type", sortable: true },
-        { key: "action", label: "Action", sortable: true },
+        {
+          key: "movie_name",
+          label: "Movie Name",
+        },
+        {
+          key: "price",
+          label: "Price",
+        },
+        { key: "theater_details", label: "Theater Name", sortable: true },
+        { key: "full_name", label: "Full Name", sortable: true },
+        { key: "email", label: "Email", sortable: true },
+        { key: "noofseats", label: "No Of Seates", sortable: true },
+        { key: "showtime", label: "Show Time", sortable: true },
+        { key: "movietype", label: "Movie Type", sortable: true },
+        { key: "theatertype", label: "Theater  Type", sortable: true },
       ],
-      // data
       items: [
         {
           // eslint-disable-next-line global-require
           Image: require("@/assets/images/banner06.jpg"),
           movie_name: "Jumanji",
-          description: "this is.....",
-          type: "18+",
+          price: "200.00",
+          theater_details: "priska , kalutara",
+          full_name: "pubudi gamage",
+          email: "abc@gmail.com",
+          noofseats: "2",
+          showtime: "2.00 - 4.00",
+          movietype: "18+",
+          theatertype: "Balcony",
         },
         {
           // eslint-disable-next-line global-require
           Image: require("@/assets/images/banner03.jpg"),
           movie_name: "World War",
-          description: "this is.....",
-          type: "Kids",
+          price: "100.00",
+          theater_details: "sigma , panadura",
+          full_name: "pubudi Fernando",
+          email: "abcd@gmail.com",
+          noofseats: "4",
+          showtime: "2.00 - 4.00",
+          movietype: "kids",
+          theatertype: "Balcony",
         },
         {
           // eslint-disable-next-line global-require
           Image: require("@/assets/images/banner04.jpg"),
           movie_name: "Workld War",
-          description: "this is.....",
-          type: "Teen",
+          price: "600.00",
+          theater_details: "sigma , colombo",
+          full_name: "pubudi Fernando",
+          email: "abcd@gmail.com",
+          noofseats: "4",
+          showtime: "2.00 - 4.00",
+          movietype: "18+",
+          theatertype: "3d",
         },
         {
           // eslint-disable-next-line global-require
           Image: require("@/assets/images/banner05.jpg"),
           movie_name: "Tenet",
-          description: "this is.....",
-          type: "Adult",
-        },
-        {
-          // eslint-disable-next-line global-require
-          Image: require("@/assets/images/banner06.jpg"),
-          movie_name: "Jumanji",
-          description: "this is.....",
-          type: "For All",
-        },
-        {
-          // eslint-disable-next-line global-require
-          Image: require("@/assets/images/banner06.jpg"),
-          movie_name: "Jumanji",
-          description: "this is.....",
-          type: "For All",
-        },
-        {
-          // eslint-disable-next-line global-require
-          Image: require("@/assets/images/banner06.jpg"),
-          movie_name: "Jumanji",
-          description: "this is.....",
-          type: "For All",
+          price: "400.00",
+          theater_details: "baska , Kadawatha",
+          full_name: "Madura Fernando",
+          email: "Madura@gmail.com",
+          noofseats: "2",
+          showtime: "4.00 - 6.00",
+          movietype: "Adult",
+          theatertype: "3d - Balcony",
         },
       ],
     };

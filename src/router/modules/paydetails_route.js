@@ -1,8 +1,8 @@
 export default [
   {
-    path: '/register',
-    name: 'register',
-    component: () => import('@/views/register.vue'),
+    path: '/paydetails',
+    name: 'payment',
+    component: () => import('@/views/payment/paydetails.vue'),
     meta: {
       layout: 'full',
       redirectIfLoggedIn: true,

@@ -8,11 +8,10 @@
         variant="success"
       >
         <feather-icon icon="PlusIcon" class="mr-50" />
-        Add Movie
+        Add Theater
       </b-button>
     </portal>
 
-    <!-- Side Bar -->
     <b-sidebar id="sidebar-right" bg-variant="white" shadow backdrop right>
       <div v-if="shiftmode === 'Add'">
         <Form :data="modeobj.Addmode" :databutton="modeobj.Addbutton" />
@@ -23,7 +22,6 @@
       </div>
     </b-sidebar>
 
-    <!-- Table Header-->
     <b-row>
       <b-col md="2" sm="4" class="my-1">
         <b-form-group class="mb-0">
@@ -62,7 +60,6 @@
         </b-form-group>
       </b-col>
 
-      <!-- Table -->
       <b-col cols="12">
         <b-table
           striped
@@ -141,7 +138,7 @@ import {
   BDropdownDivider,
   BDropdownItem,
 } from "bootstrap-vue";
-import Form from "@/views/Movies/Components/Form.vue";
+import Form from "@/views/Theaters/AdminView/components/Form.vue";
 
 export default {
   components: {
@@ -168,13 +165,11 @@ export default {
       data1: "yasindu",
       shiftmode: "",
       modeobj: {
-        Addmode: "Add Movie",
-        Editmode: "Edit Movie",
+        Addmode: "Add Theater",
+        Editmode: "Edit Theater",
         Addbutton: "Add",
-        Updatebutton: "Update ",
+        Updatebutton: "Update",
       },
-      Addmode: "Add Movie",
-      Editmode: "Edit Movie",
       perPage: 5,
       pageOptions: [3, 5, 10],
       totalRows: 1,
@@ -189,67 +184,69 @@ export default {
         title: "",
         content: "",
       },
-      // colomns
       fields: [
         {
           key: "Image",
           label: "Image",
         },
-        { key: "movie_name", label: "Name", sortable: true },
-        { key: "description", label: "Description", sortable: true },
+        { key: "venue", label: "Venue", sortable: true },
+        { key: "name", label: "Name", sortable: true },
+        { key: "time1", label: "Show 1", sortable: true },
+        { key: "time2", label: "Show 2", sortable: true },
+        { key: "time3", label: "Show 3", sortable: true },
         { key: "type", label: "Type", sortable: true },
         { key: "action", label: "Action", sortable: true },
       ],
-      // data
       items: [
         {
           // eslint-disable-next-line global-require
           Image: require("@/assets/images/banner06.jpg"),
-          movie_name: "Jumanji",
-          description: "this is.....",
-          type: "18+",
+          name: "sigma",
+          venue: "Colombo",
+          time1: "8.00 a.m-10.00 a.m",
+          time2: "2.00 p.m-4.00 p.m",
+          time3: "6.00 p.m-8.00 p.m",
+          type: "Balcony",
         },
         {
           // eslint-disable-next-line global-require
           Image: require("@/assets/images/banner03.jpg"),
-          movie_name: "World War",
-          description: "this is.....",
-          type: "Kids",
+          name: "Priska",
+          venue: "Kalutara",
+          time1: "8.00 a.m-10.00 a.m",
+          time2: "2.00 p.m-4.00 p.m",
+          time3: "6.00 p.m-8.00 p.m",
+          type: "3D , Balcony ",
         },
         {
           // eslint-disable-next-line global-require
           Image: require("@/assets/images/banner04.jpg"),
-          movie_name: "Workld War",
-          description: "this is.....",
-          type: "Teen",
+          name: "baska",
+          venue: "Kadawatha",
+          time1: "8.00 a.m-10.00 a.m",
+          time2: "2.00 p.m-4.00 p.m",
+          time3: "6.00 p.m-8.00 p.m",
+          type: "3D , Balcony ",
         },
         {
           // eslint-disable-next-line global-require
           Image: require("@/assets/images/banner05.jpg"),
-          movie_name: "Tenet",
-          description: "this is.....",
-          type: "Adult",
+          name: "Reegal",
+          venue: "Gampaha",
+          time1: "8.00 a.m-10.00 a.m",
+          time2: "2.00 p.m-4.00 p.m",
+          time3: "6.00 p.m-8.00 p.m",
+          type: "3D",
         },
         {
           // eslint-disable-next-line global-require
           Image: require("@/assets/images/banner06.jpg"),
-          movie_name: "Jumanji",
-          description: "this is.....",
-          type: "For All",
-        },
-        {
-          // eslint-disable-next-line global-require
-          Image: require("@/assets/images/banner06.jpg"),
-          movie_name: "Jumanji",
-          description: "this is.....",
-          type: "For All",
-        },
-        {
-          // eslint-disable-next-line global-require
-          Image: require("@/assets/images/banner06.jpg"),
-          movie_name: "Jumanji",
-          description: "this is.....",
-          type: "For All",
+          name: "World War",
+          venue: "Colombo",
+          time1: "8.00 a.m-10.00 a.m",
+          time2: "2.00 p.m-4.00 p.m",
+          time3: "6.00 p.m-8.00 p.m",
+          type: "A/C",
         },
       ],
     };

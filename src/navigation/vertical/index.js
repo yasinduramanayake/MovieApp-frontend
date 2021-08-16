@@ -10,7 +10,37 @@ export default [
     children: [
       {
         title: 'All Movies',
-        route: 'items',
+        route: 'movies',
+      },
+    ],
+  },
+  {
+    title: 'Manage Booking',
+    icon: 'FilmIcon',
+    children: [
+      {
+        title: 'All Bookings',
+        route: 'Allbookings',
+      },
+    ],
+  },
+  {
+    title: 'Manage Theaters',
+    icon: 'BookmarkIcon',
+    children: [
+      {
+        title: 'All Theaters',
+        route: 'theaters',
+      },
+    ],
+  },
+  {
+    title: 'Manage Users',
+    icon: 'UsersIcon',
+    children: [
+      {
+        title: 'All Users',
+        route: 'members',
       },
     ],
   },

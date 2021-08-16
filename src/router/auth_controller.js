@@ -21,20 +21,14 @@ export default {
       }
 
       if (!to.meta.noAuth & !isLogedIn) {
-        if (to.name !== 'register') {
-          notification.toast(
-            'You required login before enter this page',
-            'error',
-          )
-          next({
-            path: '/',
-            replace: true,
-          })
-        } else {
-          next()
-        }
+        notification.toast('You required login before enter this page', 'error')
+        next({
+          path: '/',
+          replace: true,
+        })
+      } else {
+        next()
       }
-
       return next()
     })
   },
