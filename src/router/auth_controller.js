@@ -12,12 +12,10 @@ export default {
       const { isLogedIn } = store.getters
 
       if (to.meta.redirectIfLoggedIn && isLogedIn) {
-        if (localStorage.role === 'admin') {
-          next({
-            path: '/dashboard',
-            replace: true,
-          })
-        }
+        next({
+          path: '/dashboard',
+          replace: true,
+        })
       }
 
       if (!to.meta.noAuth & !isLogedIn) {

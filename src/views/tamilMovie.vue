@@ -1,5 +1,4 @@
 <template>
-
   <div style="background-color:#24262b">
     <Header />
     <!-- /Brand logo-->
@@ -9,14 +8,21 @@
       <b-container>
         <br />
         <br />
-         <!--/Search Bar-->
+        <!--/Search Bar-->
         <b-row>
-              <b-col cols="10">
-                <b-form-input list="my-list-id" size="lg"></b-form-input>
-              </b-col>
-              <b-col cols="2">
-                <b-button variant="dark" size="lg">Search</b-button>
-              </b-col>        
+          <b-col cols="9">
+            <b-form-group>
+              <v-select
+                v-model="selected"
+                :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
+                label="title"
+                :options="option"
+              />
+            </b-form-group>
+          </b-col>
+          <b-col cols="3">
+            <b-button variant="dark">Search movie.....</b-button>
+          </b-col>
         </b-row>
         <br />
         <br />
@@ -25,7 +31,7 @@
           <b-col md="1" lg="4">
             <b-card title="MOVIE 001">
               <b-card-img
-              height="250px"
+                height="250px"
                 :src="require('@/assets/images/tamil1.jpg')"
               ></b-card-img>
               <b-card-text>
@@ -33,13 +39,13 @@
               </b-card-text>
               <b-row>
                 <b-col cols="6">
-                  <b-button class="btn" variant="gradient-dark">
+                  <b-button class="btn" variant="gradient-primary">
                     View Details
                   </b-button>
                 </b-col>
 
                 <b-col cols="6">
-                  <b-button variant="gradient-dark">
+                  <b-button variant="gradient-primary">
                     Buy Tickets
                   </b-button>
                 </b-col>
@@ -57,13 +63,13 @@
               </b-card-text>
               <b-row>
                 <b-col cols="6">
-                  <b-button class="btn" variant="gradient-dark">
+                  <b-button class="btn" variant="gradient-primary">
                     View Details
                   </b-button>
                 </b-col>
 
                 <b-col cols="6">
-                  <b-button variant="gradient-dark">
+                  <b-button variant="gradient-primary">
                     Buy Tickets
                   </b-button>
                 </b-col>
@@ -80,13 +86,13 @@
               </b-card-text>
               <b-row>
                 <b-col cols="6">
-                  <b-button class="btn" variant="gradient-dark">
+                  <b-button class="btn" variant="gradient-primary">
                     View Details
                   </b-button>
                 </b-col>
 
                 <b-col cols="6">
-                  <b-button variant="gradient-dark">
+                  <b-button variant="gradient-primary">
                     Buy Tickets
                   </b-button>
                 </b-col>
@@ -103,13 +109,13 @@
               </b-card-text>
               <b-row>
                 <b-col cols="6">
-                  <b-button class="btn" variant="gradient-dark">
+                  <b-button class="btn" variant="gradient-primary">
                     View Details
                   </b-button>
                 </b-col>
 
                 <b-col cols="6">
-                  <b-button variant="gradient-dark">
+                  <b-button variant="gradient-primary">
                     Buy Tickets
                   </b-button>
                 </b-col>
@@ -126,13 +132,13 @@
               </b-card-text>
               <b-row>
                 <b-col cols="6">
-                  <b-button class="btn" variant="gradient-dark">
+                  <b-button class="btn" variant="gradient-primary">
                     View Details
                   </b-button>
                 </b-col>
 
                 <b-col cols="6">
-                  <b-button variant="gradient-dark">
+                  <b-button variant="gradient-primary">
                     Buy Tickets
                   </b-button>
                 </b-col>
@@ -149,13 +155,13 @@
               </b-card-text>
               <b-row>
                 <b-col cols="6">
-                  <b-button class="btn" variant="gradient-dark">
+                  <b-button class="btn" variant="gradient-primary">
                     View Details
                   </b-button>
                 </b-col>
 
                 <b-col cols="6">
-                  <b-button variant="gradient-dark">
+                  <b-button variant="gradient-primary">
                     Buy Tickets
                   </b-button>
                 </b-col>
@@ -189,25 +195,24 @@
 
     <!-- Left Text-->
   </div>
-
 </template>
 
 <script>
 /* eslint-disable global-require */
 import Header from "@/views/components/header.vue";
 import Footer from "@/views/footer.vue";
+import vSelect from "vue-select";
 import {
   BCardText,
   BButton,
   BModal,
   VBModal,
   BContainer,
-  BFormInput,
   BCol,
   BCard,
   BCardImg,
   BRow,
-
+  BFormInput,
   // BCard,
   VBToggle,
 } from "bootstrap-vue";
@@ -221,7 +226,9 @@ import Dropdown from "vue-simple-search-dropdown";
 export default {
   components: {
     BCardImg,
+    BFormInput,
     BCard,
+    vSelect,
     BContainer,
     Header,
     BCol,
@@ -242,7 +249,10 @@ export default {
   },
   mixins: [togglePasswordVisibility],
   data() {
-    return {};
+    return {
+      selected: { title: "Master" },
+      option: [{ title: "Palavi" }, { title: "Mathura" }, { title: "Billa" }],
+    };
   },
 };
 </script>
@@ -250,7 +260,7 @@ export default {
 <style lang="scss">
 @import "@core/scss/vue/pages/page-auth.scss";
 @import "@core/scss/vue/libs/vue-select.scss";
-
+@import "@core/scss/vue/libs/vue-select.scss";
 img {
   height: 250px;
   width: 100%;
@@ -260,7 +270,7 @@ img {
   background-color: white;
 }
 .btn {
-  padding-left: 50px;
+  padding-left: 20px;
   padding-right: 50px;
 }
 </style>

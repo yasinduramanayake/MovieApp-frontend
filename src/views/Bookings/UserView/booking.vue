@@ -149,11 +149,19 @@
                           label="Show Time"
                           label-for="v-expirydate"
                         >
-                          <b-form-input
-                            id="v-expirydate"
-                            type="time"
-                            placeholder="time"
-                          />
+                          <validation-provider
+                            #default="{ errors }"
+                            rules="required"
+                            name="Time"
+                          >
+                            <b-form-input
+                              id="v-expirydate"
+                              type="time"
+                              v-model="date"
+                              placeholder="time"
+                            />
+                            <small class="text-danger">{{ errors[0] }}</small>
+                          </validation-provider>
                         </b-form-group>
                       </b-col>
 

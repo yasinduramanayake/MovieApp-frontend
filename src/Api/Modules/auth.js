@@ -4,7 +4,10 @@ import notification from '@/ApiConstance/toast'
 
 export default {
   async register(payload) {
-    return await api.post('/register', payload)
+    return await api.post('/register', payload).then((res) => {
+      notification.toast('Successfully Registered', 'success')
+      window.location.href = '/'
+    })
   },
   async login(payload) {
     return await api.post('/login', payload).then((res) => {

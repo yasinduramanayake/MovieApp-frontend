@@ -208,7 +208,7 @@ export default {
           time1: "8.00 a.m-10.00 a.m",
           time2: "2.00 p.m-4.00 p.m",
           time3: "6.00 p.m-8.00 p.m",
-          type: "Balcony",
+          type: "A/c",
         },
         {
           // eslint-disable-next-line global-require
@@ -218,7 +218,7 @@ export default {
           time1: "8.00 a.m-10.00 a.m",
           time2: "2.00 p.m-4.00 p.m",
           time3: "6.00 p.m-8.00 p.m",
-          type: "3D , Balcony ",
+          type: "3D  ",
         },
         {
           // eslint-disable-next-line global-require
@@ -228,7 +228,7 @@ export default {
           time1: "8.00 a.m-10.00 a.m",
           time2: "2.00 p.m-4.00 p.m",
           time3: "6.00 p.m-8.00 p.m",
-          type: "3D , Balcony ",
+          type: "3D , A/C ",
         },
         {
           // eslint-disable-next-line global-require

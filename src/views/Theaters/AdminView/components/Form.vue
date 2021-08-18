@@ -19,6 +19,7 @@
               <b-form-input
                 id="theayername"
                 name="theatername"
+                v-model="name"
                 :state="errors.length > 0 ? false : null"
                 placeholder="Priska"
               />
@@ -39,6 +40,7 @@
               <b-form-input
                 id="location"
                 name="location"
+                v-model="location"
                 :state="errors.length > 0 ? false : null"
                 placeholder="Colombo"
               />
@@ -78,10 +80,8 @@
               rules="required"
               name="time1"
             >
-              <div>
-                <b-form-timepicker locale="en" />
-                <div class="mt-2"></div>
-              </div>
+              <b-form-timepicker locale="en" required v-model="time1" />
+
               <small class="text-danger">{{ errors[0] }}</small>
             </validation-provider>
           </b-form-group>
@@ -96,7 +96,7 @@
               name="time2"
             >
               <div>
-                <b-form-timepicker locale="en" />
+                <b-form-timepicker locale="en" required v-model="time2" />
                 <div class="mt-2"></div>
               </div>
               <small class="text-danger">{{ errors[0] }}</small>
@@ -114,7 +114,7 @@
               name="time3"
             >
               <div>
-                <b-form-timepicker locale="en" />
+                <b-form-timepicker locale="en" required v-model="time3" />
                 <div class="mt-2"></div>
               </div>
               <small class="text-danger">{{ errors[0] }}</small>
@@ -162,6 +162,20 @@ import {
   BFormInput,
 } from "bootstrap-vue";
 import { data } from "vue-echarts";
+import {
+  required,
+  email,
+  confirmed,
+  url,
+  between,
+  alpha,
+  integer,
+  password,
+  min,
+  digits,
+  alphaDash,
+  length,
+} from "@validations";
 
 export default {
   components: {
@@ -197,6 +211,18 @@ export default {
       ],
       dir: "ltr",
       selected3: [{ title: "Kids" }, { title: "Teen" }],
+      required,
+      email,
+      confirmed,
+      url,
+      between,
+      alpha,
+      integer,
+      password,
+      min,
+      digits,
+      alphaDash,
+      length,
     };
   },
   props: { data: String, databutton: String },

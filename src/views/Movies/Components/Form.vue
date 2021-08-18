@@ -13,12 +13,12 @@
             <validation-provider
               #default="{ errors }"
               name="name"
-              vid="name"
               rules="required"
             >
               <b-form-input
-                id="moviename"
-                name="moviename"
+                id="name"
+                name="name"
+                v-model="name"
                 :state="errors.length > 0 ? false : null"
                 placeholder="Tenet"
               />
@@ -32,13 +32,13 @@
           <b-form-group label="Movie Description" label-for="description">
             <validation-provider
               #default="{ errors }"
-              name="description"
-              vid="description"
               rules="required"
+              name="description"
             >
               <b-form-textarea
                 id="textarea-rows"
                 placeholder="Tall textarea"
+                v-model="area"
                 rows="8"
               />
               <small class="text-danger">{{ errors[0] }}</small>
@@ -51,9 +51,8 @@
           <b-form-group label="Theater">
             <validation-provider
               #default="{ errors }"
-              name="theater"
-              vid="thater"
               rules="required"
+              name="theater"
             >
               <v-select
                 v-model="selected2"
@@ -109,6 +108,15 @@ import {
   BFormTextarea,
 } from "bootstrap-vue";
 import { data } from "vue-echarts";
+import {
+  required,
+  email,
+  integer,
+  password,
+  min,
+  alphaDash,
+  length,
+} from "@validations";
 
 export default {
   components: {
@@ -144,6 +152,13 @@ export default {
       ],
       dir: "ltr",
       selected2: [{ title: "Multiplex" }, { title: "IMAX" }],
+      required,
+      email,
+      integer,
+      password,
+      min,
+      alphaDash,
+      length,
     };
   },
   props: { data: String, databutton: String },

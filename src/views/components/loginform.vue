@@ -28,7 +28,6 @@
           </b-form-group>
         </b-col>
 
-        <!-- forgot password -->
         <b-col cols="12">
           <b-form-group>
             <div class="d-flex justify-content-between">
@@ -40,8 +39,9 @@
             <validation-provider
               #default="{ errors }"
               name="Password"
-              rules="required"
+              rules="required|min:3"
             >
+              <!-- must update lower case upper case validity   -->
               <b-input-group
                 class="input-group-merge"
                 :class="errors.length > 0 ? 'is-invalid' : null"
@@ -90,6 +90,10 @@
       <b-link :to="{ name: 'register' }">
         <span>&nbsp;Sign up</span>
       </b-link>
+      <br />
+      <b-link :to="{ name: 'register' }">
+        <span>&nbsp;Forget Passoword?</span>
+      </b-link>
     </b-card-text>
   </div>
 </template>
@@ -116,11 +120,18 @@ import { togglePasswordVisibility } from "@core/mixins/ui/forms";
 import store from "@/store/index";
 import { mapActions } from "vuex";
 // import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
-
+import {
+  required,
+  email,
+  integer,
+  password,
+  min,
+  alphaDash,
+  length,
+} from "@validations";
 export default {
   components: {
     BCol,
-
     BLink,
     BFormGroup,
     BFormInput,
@@ -137,14 +148,16 @@ export default {
   mixins: [togglePasswordVisibility],
   data() {
     return {
-      backgroundLoading: "#22c16b",
-      selected: { title: "Colombo" },
-      option: [{ title: "Panadura" }, { title: "Rathnapura" }],
-      selected1: { title1: "sigma" },
-      option1: [{ title1: "priska" }, { title1: "Rathna" }],
       status: "",
       password: "",
       userEmail: "",
+      required,
+      password,
+      email,
+      min,
+      integer,
+      length,
+      alphaDash,
     };
   },
   computed: {

@@ -13,6 +13,8 @@ import tamilMovie from './modules/tamil_movie'
 import paydetailsRoute from './modules/paydetails_route'
 import bookingRoute from './modules/booking_route'
 import theaterRoute from './modules/theater_route'
+import forgetRoute from './modules/forgetpassword_route'
+import resetRoute from './modules/resetpassword_route'
 
 Vue.use(VueRouter)
 
@@ -36,6 +38,8 @@ const router = new VueRouter({
     ...paydetailsRoute,
     ...bookingRoute,
     ...theaterRoute,
+    ...forgetRoute,
+    ...resetRoute,
   ],
 })
 

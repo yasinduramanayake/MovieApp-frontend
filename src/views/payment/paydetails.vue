@@ -9,7 +9,7 @@
 
     <b-row>
       <b-col center>
-        <b-card title="My Payments">
+        <b-card title="Add Payment">
           <b-row>
             <b-col md="1" lg="6">
               <b-card img-height="200" img-width="200" title="Payment Details">
