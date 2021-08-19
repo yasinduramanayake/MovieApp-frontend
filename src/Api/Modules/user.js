@@ -6,9 +6,9 @@ export default {
     return await api.get('/getusers')
   },
 
-  async store(payload, role) {
+  async store(payload) {
     return await api.post('/adduser', payload).then((res) => {
-      notification.toast(`Successfully Added ${role.title}`, 'success')
+      notification.toast('Successfully Added', 'success')
       window.location.href = '/members'
     })
   },

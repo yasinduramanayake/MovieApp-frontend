@@ -28,19 +28,7 @@
           <li><a href="#home">Home</a></li>
           <li><a href="#news">News</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li>
-            <div class="dropdown">
-              <button class="dropbtn">
-                Dropdown
-                <i class="fa fa-caret-down"></i>
-              </button>
-              <div class="dropdown-content">
-                <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
-              </div>
-            </div>
-          </li>
+
           <li><a href="#news">Movies</a></li>
           <li v-if="!token" v-b-toggle.sidebar-right>
             <a href="#contact">Login</a>

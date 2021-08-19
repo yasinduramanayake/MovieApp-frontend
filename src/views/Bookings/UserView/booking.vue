@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color:black">
+  <div style="background-color:#24262b">
     <Header />
     <!-- /Brand logo-->
     <br /><br />
