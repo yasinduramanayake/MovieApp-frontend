@@ -2,8 +2,8 @@ import { api } from '@/Api/index'
 import notification from '@/ApiConstance/toast'
 
 export default {
-  async index() {
-    return await api.get('/getmovies')
+  async index(type) {
+    return await api.get(`/getmovies?filter[type]=${type}`)
   },
 
   async store(payload) {
@@ -25,5 +25,9 @@ export default {
       notification.toast('Successfully Deleted ', 'success')
       window.location.href = '/movies'
     })
+  },
+
+  async show(id) {
+    return await api.get(`/showmovie/${id}`).then((res) => {})
   },
 }

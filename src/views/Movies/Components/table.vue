@@ -334,10 +334,10 @@ export default {
       mode: "",
       button: "",
       option: [
-        { title: "Kids" },
-        { title: "Super hero" },
-        { title: "18+" },
-        { title: "Drive-In" },
+        { title: "Tamil" },
+        { title: "English" },
+        { title: "Hindi" },
+        { title: "Korean" },
       ],
       theaters: [],
       dir: "ltr",
@@ -442,7 +442,7 @@ export default {
       this.form.theaters = item.theaters;
     },
     async Alltheaters() {
-      const res = await TheaterApi.index();
+      const res = await TheaterApi.index("");
       this.theaters = res.data.data.data;
     },
     resetInfoModal() {
@@ -456,7 +456,7 @@ export default {
     },
 
     async index() {
-      const res = await MovieApi.index();
+      const res = await MovieApi.index("");
       this.movies = res.data.data.data;
       this.items = this.movies;
     },

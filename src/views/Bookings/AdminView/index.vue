@@ -54,8 +54,8 @@
           :filter-included-fields="filterOn"
           @filtered="onFiltered"
         >
-          <template #cell(Image)="data">
-            <b-avatar :src="data.value" size="60px" />
+          <template #cell(price)="data">
+            {{ getPrice(data.value) }}
           </template>
         </b-table>
       </b-col>
@@ -112,6 +112,7 @@ export default {
     return {
       // table data
       bookings: [],
+      items: [],
       perPage: 5,
       pageOptions: [3, 5, 10],
       totalRows: 1,
@@ -128,16 +129,12 @@ export default {
       },
       fields: [
         {
-          key: "image",
-          label: "Image",
-        },
-        {
           key: "movie_name",
           label: "Movie Name",
         },
         {
           key: "price",
-          label: "Price",
+          label: "Amount",
         },
         { key: "theater_name", label: "Theater Name", sortable: true },
         { key: "full_name", label: "Full Name", sortable: true },

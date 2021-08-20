@@ -1,172 +1,156 @@
 <template>
-  <div style="background-color:black">
+  <div style="background-color:#24262b">
     <Header />
     <!-- /Brand logo-->
     <br /><br /><br />
     <br />
     <br />
     <br />
+    <div style="background-color:#24262b">
+      <b-card style="padding-left:450px;padding-right:10px">
+        <b-row>
+          <b-card title="Booking Summary">
+            <b-card style="padding-left:1px;padding-right:10px">
+              <b-card-text>
+                {{ getPrice(baseprice) }}
+                <br />
+                {{ name }}
+                <br />
+                Tickets Quntity: {{ seats }}
+                <br />
+                ------------------------------------------------
+                <br />
+                <div class="row lower">
+                  <div class="col text-left">Subtotal</div>
+                  <div class="col text-right">{{ getPrice(total) }}</div>
+                </div>
+                <div class="row lower">
+                  <div class="col text-left">Booking</div>
+                  <div class="col text-right">Free</div>
+                </div>
+                <div class="row lower">
+                  <div class="col text-left"><b>Total to pay</b></div>
+                  <div class="col text-right">
+                    <b>{{ getPrice(total) }}</b>
+                  </div>
+                </div>
+                <div class="row lower">
+                  <div class="col text-left">
+                    <a href="#"><u>Add promo code</u></a>
+                  </div>
+                </div>
+              </b-card-text>
+              <b-button variant="primary" type="submit" v-b-modal.modal-info>
+                Proceed
+              </b-button>
+            </b-card>
+          </b-card>
+        </b-row>
+      </b-card>
+    </div>
+    <b-modal id="modal-info" :hide-footer="true">
+      <div>
+        <!--edit & create form -->
+        <b-card-title title-tag="h2" style="color:black" class="mb-2">
+          <b-col cols="12">
+            <b>{{ makeUpperCase("Add Payment") }}</b>
+          </b-col>
+        </b-card-title>
 
-    <b-row>
-      <b-col center>
-        <b-card title="Add Payment">
-          <b-row>
-            <b-col md="1" lg="6">
-              <b-card img-height="200" img-width="200" title="Payment Details">
-                <validation-observer ref="simpleRules">
-                  <b-form>
-                    <b-row>
-                      <!--Cardholder's name:-->
-                      <b-col cols="12">
-                        <b-form-group>
-                          <label>Cardholder's name:</label>
-                          <validation-provider
-                            #default="{ errors }"
-                            rules="required"
-                            name="Cardholder's name:"
-                          >
-                            <b-form-input
-                              v-model="name"
-                              :state="errors.length > 0 ? false : null"
-                              placeholder="Cardholder's name:"
-                            />
-                            <small class="text-danger">{{ errors[0] }}</small>
-                          </validation-provider>
-                        </b-form-group>
-                      </b-col>
-
-                      <!--Card Number-->
-                      <b-col cols="12">
-                        <b-form-group>
-                          <label>Card Number</label>
-                          <validation-provider
-                            #default="{ errors }"
-                            rules="required|integer|digits:16 "
-                            name="Number"
-                          >
-                            <b-form-input
-                              v-model="number"
-                              :state="errors.length > 0 ? false : null"
-                              placeholder="Enter Number Only"
-                            />
-                            <small class="text-danger">{{ errors[0] }}</small>
-                          </validation-provider>
-                        </b-form-group>
-                      </b-col>
-
-                      <!-- Expiry date -->
-                      <b-col cols="12">
-                        <b-form-group
-                          label="Expiry date "
-                          label-for="v-expirydate"
-                        >
-                          <b-form-input
-                            id="v-expirydate"
-                            type="month"
-                            placeholder="MM/YYYY"
-                          />
-                        </b-form-group>
-                      </b-col>
-
-                      <!-- Cvv -->
-                      <b-col cols="12">
-                        <b-form-group>
-                          <label>Cvv</label>
-                          <validation-provider
-                            #default="{ errors }"
-                            rules="required|digits:3"
-                            name="Numeric"
-                          >
-                            <b-form-input
-                              v-model="digitValue2"
-                              :state="errors.length > 0 ? false : null"
-                              placeholder="cvv"
-                            />
-                            <small class="text-danger">{{ errors[0] }}</small>
-                          </validation-provider>
-                        </b-form-group>
-                      </b-col>
-
-                      <!-- checkbox -->
-                      <b-col cols="12">
-                        <b-form-group>
-                          <b-form-checkbox
-                            id="checkbox"
-                            name="checkbox"
-                            value="savethis"
-                          >
-                            Save this card
-                          </b-form-checkbox>
-                        </b-form-group>
-                      </b-col>
-
-                      <!-- submit button -->
-                      <b-col cols="12">
-                        <b-button
-                          variant="primary"
-                          type="submit"
-                          @click.prevent="validationForm"
-                        >
-                          Submit
-                        </b-button>
-                      </b-col>
-                    </b-row>
-                  </b-form>
-                </validation-observer>
-              </b-card>
+        <validation-observer ref="paymentForm">
+          <b-form
+            class="auth-register-form mt-2"
+            enctype="multipart/form-data"
+            @submit.prevent
+          >
+            <!--Cardholder's name:-->
+            <b-col cols="12">
+              <b-form-group>
+                <label>Cardholder's name:</label>
+                <validation-provider
+                  #default="{ errors }"
+                  rules="required"
+                  name="Cardholder's name:"
+                >
+                  <b-form-input
+                    v-model="form.name"
+                    :state="errors.length > 0 ? false : null"
+                    placeholder="Cardholder's name:"
+                  />
+                  <small class="text-danger">{{ errors[0] }}</small>
+                </validation-provider>
+              </b-form-group>
             </b-col>
-            <b-col md="1" lg="6">
-              <b-card title="Booking Summary">
-                <b-col md="1" lg="6">
-                  <b-card>
-                    <b-card-img
-                      :src="
-                        require('@/assets/images/MV5BYzE1YzViNzktZTU5Ny00ZjYzLWE0YjItZWNkNDU1MzFiOWNhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg')
-                      "
-                      width="3px"
-                    ></b-card-img>
-                    <b-card-text>
-                      Rs.600.00
-                      <br />
-                      The Kissing Booth3
-                      <br />
-                      Tickets Quntity: 2
-                      <br />
-                      ------------------------------------------------
-                      <br />
-                      <div class="row lower">
-                        <div class="col text-left">Subtotal</div>
-                        <div class="col text-right">Rs. 1200.00</div>
-                      </div>
-                      <div class="row lower">
-                        <div class="col text-left">Booking</div>
-                        <div class="col text-right">Free</div>
-                      </div>
-                      <div class="row lower">
-                        <div class="col text-left"><b>Total to pay</b></div>
-                        <div class="col text-right"><b>Rs. 1200.00</b></div>
-                      </div>
-                      <div class="row lower">
-                        <div class="col text-left">
-                          <a href="#"><u>Add promo code</u></a>
-                        </div>
-                      </div>
-                    </b-card-text>
-                    <b-button
-                      variant="primary"
-                      type="submit"
-                      @click.prevent="validationForm"
-                    >
-                      Proceed
-                    </b-button>
-                  </b-card>
-                </b-col>
-              </b-card>
+
+            <!--Card Number-->
+            <b-col cols="12">
+              <b-form-group>
+                <label>Card Number</label>
+                <validation-provider
+                  #default="{ errors }"
+                  rules="required|integer|digits:16 "
+                  name="Number"
+                >
+                  <b-form-input
+                    v-model="form.cardnumber"
+                    type="number"
+                    :state="errors.length > 0 ? false : null"
+                    placeholder="Card Number"
+                  />
+                  <small class="text-danger">{{ errors[0] }}</small>
+                </validation-provider>
+              </b-form-group>
             </b-col>
-          </b-row>
-        </b-card>
-      </b-col>
-    </b-row>
+
+            <!-- Expiry date -->
+            <b-col cols="12">
+              <b-form-group label="Expiry date " label-for="v-expirydate">
+                <validation-provider
+                  #default="{ errors }"
+                  rules="required"
+                  name="Numeric"
+                >
+                  <b-form-input
+                    id="v-expirydate"
+                    type="month"
+                    v-model="form.expiredate"
+                    placeholder="MM/YYYY"
+                  />
+                  <small class="text-danger">{{ errors[0] }}</small>
+                </validation-provider>
+              </b-form-group>
+            </b-col>
+
+            <!-- Cvv -->
+            <b-col cols="12">
+              <b-form-group>
+                <label>Cvv</label>
+                <validation-provider
+                  #default="{ errors }"
+                  rules="required|digits:3"
+                  name="Numeric"
+                >
+                  <b-form-input
+                    v-model="form.cvv"
+                    type="number"
+                    :state="errors.length > 0 ? false : null"
+                    placeholder="cvv"
+                  />
+                  <small class="text-danger">{{ errors[0] }}</small>
+                </validation-provider>
+              </b-form-group>
+            </b-col>
+
+            <!-- submit button -->
+            <b-col cols="12">
+              <b-button variant="primary" type="submit" @click="AddPayment()">
+                Submit
+              </b-button>
+            </b-col>
+          </b-form>
+        </validation-observer>
+      </div>
+    </b-modal>
 
     <br />
     <br />
@@ -202,6 +186,7 @@ import {
 } from "@validations";
 import {
   BCardText,
+  BCardTitle,
   BButton,
   BCard,
   BCardImg,
@@ -211,6 +196,7 @@ import {
   BFormGroup,
   BFormInput,
   BFormCheckbox,
+  VBModal,
 
   // BCard,
   VBToggle,
@@ -219,6 +205,7 @@ import {
 import { togglePasswordVisibility } from "@core/mixins/ui/forms";
 import store from "@/store/index";
 import Ripple from "vue-ripple-directive";
+import PaymentApi from "@/Api/Modules/payment";
 // import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
 export default {
@@ -230,26 +217,26 @@ export default {
     BFormGroup,
     BFormInput,
     BFormCheckbox,
+    BCardTitle,
     Header,
     Footer,
     BCard,
     BCardText,
     BButton,
+
+    ValidationProvider,
+    ValidationObserver,
   },
   data() {
     return {
-      name: "",
-      passwordValue: "",
-      passwordCon: "",
-      emailValue: "",
-      number: "",
-      numberRange: "",
-      numberRegx: "",
-      URL: "",
-      Alphabetic: "",
-      digitValue: "",
-      digitValue2: "",
-      character: "",
+      // form data
+      form: {},
+
+      baseprice: this.$route.params.baseprice,
+      name: this.$route.params.name,
+      seats: this.$route.params.seats,
+      total: this.$route.params.total,
+      // validations
       required,
       confirmed,
       password,
@@ -264,14 +251,28 @@ export default {
       alphaDash,
     };
   },
+  directives: {
+    "b-modal": VBModal,
+  },
   methods: {
-    validationForm() {
-      this.$refs.simpleRules.validate().then((success) => {
-        if (success) {
-          // eslint-disable-next-line
-          alert("form submitted!");
-        }
-      });
+    async AddPayment() {
+      if (await this.$refs.paymentForm.validate()) {
+        await this.$vs.loading({
+          scale: 0.8,
+        });
+        this.form.email = "yasindurramanayake123@gmail.com";
+        await PaymentApi.store(this.form)
+          .then(({ res }) => {
+            this.$vs.loading.close();
+          })
+          .catch(({ res }) => {
+            this.$vs.loading.close();
+          });
+      }
+
+      setTimeout(() => {
+        this.form = "";
+      }, 8000);
     },
   },
 };

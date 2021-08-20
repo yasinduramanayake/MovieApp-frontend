@@ -29,34 +29,82 @@
         <br />
         <br />
         <!--/Content-->
-        <b-card
-          class="profile-header mb-2"
-          :img-src="require('@/assets/images/banner04.jpg')"
-          img-top
-          alt="cover photo"
-          body-class="p-0"
-        ></b-card>
+        <b-card title="About Movie">
+          <b-card-text>
+            {{ this.description }}
+          </b-card-text>
+        </b-card>
         <br />
         <br />
         <b-row>
-          <b-col md="1" lg="4" v-for="theater in theaters" :key="theater.name">
-            <b-card :title="'theater' + ' ' + theater">
-              <b-card-img
-                height="250px"
-                :src="
-                  require('@/assets/images/cinema-movie-theatre-red-seats-rows-black-background-horizontal-banner-copy-space-194858282.jpg')
-                "
-              ></b-card-img>
+          <b-col v-for="theater in theaters" :key="theater.id" md="1" lg="4">
+            <b-card :title="theater.name">
+              <b-card-img height="250px" :src="theater.image"></b-card-img>
               <b-card-text> </b-card-text>
               <b-row>
                 <b-col cols="12">
-                  <b> Show time 1</b> : 8.00 A.M - 10.00 A.M <br />
-                  <b>Show time 2</b> : 2.00 P.M - 4.00 P.M <br />
-                  <b> Show time 3</b> : 7.00 P.M - 10.00 P.M <br /><br />
-                  <b> Type</b> : A/C , 3D <br /><br />
-                  <b-button variant="gradient-primary">
-                    Book Now!
-                  </b-button>
+                  <b> Show time 1</b> : {{ theater.time1 }} A.M <br />
+                  <b>Show time 2</b> : {{ theater.time2 }} P.M <br />
+                  <b> Show time 3</b> : {{ theater.time3 }} P.M <br /><br />
+                  <b> Type</b> : {{ theater.type }} <br /><br />
+
+                  <validation-observer ref="bookForm" #default="{invalid}">
+                    <b-form class="auth-register-form mt-2" @submit.prevent>
+                      <b-row>
+                        <b-col cols="12">
+                          <b-form-group>
+                            <label>Add Seats</label>
+                            <validation-provider
+                              #default="{ errors }"
+                              rules="required|between:1,20"
+                              name="Number of Seats"
+                            >
+                              <b-form-input
+                                v-model="form.seats"
+                                type="number"
+                                :state="errors.length > 0 ? false : null"
+                                placeholder="No of Seats"
+                              />
+                              <small class="text-danger">{{ errors[0] }}</small>
+                            </validation-provider>
+                          </b-form-group>
+                        </b-col>
+
+                        <b-col cols="12">
+                          <!-- Show Time  -->
+                          <b-form-group>
+                            <label>Select Show time </label>
+                            <validation-provider
+                              #default="{ errors }"
+                              rules="required"
+                              name="time1"
+                            >
+                              <b-form-timepicker
+                                locale="en"
+                                required
+                                v-model="form.showtime"
+                              />
+
+                              <small class="text-danger">{{ errors[0] }}</small>
+                            </validation-provider>
+                          </b-form-group>
+                        </b-col>
+
+                        <input type="text" hidden v-model="form.theater_type" />
+                        <input type="text" hidden v-model="form.theater_name" />
+                      </b-row>
+
+                      <b-button
+                        @click="AddBooking(theater.type, theater.name)"
+                        :disabled="invalid"
+                        type="submit"
+                        block
+                        variant="gradient-primary"
+                      >
+                        Book Now!
+                      </b-button>
+                    </b-form>
+                  </validation-observer>
                 </b-col>
               </b-row>
             </b-card>
@@ -97,24 +145,43 @@ import Footer from "@/views/footer.vue";
 import {
   BCardText,
   BButton,
+  BFormGroup,
   BModal,
   VBModal,
+  BFormTimepicker,
   BContainer,
-  BFormInput,
-  BCol,
   BCard,
   BCardImg,
   BRow,
+  BForm,
+  BCol,
+  BFormInput,
+
+  // BCard,
 
   // BCard,
   VBToggle,
 } from "bootstrap-vue";
+import {
+  required,
+  email,
+  confirmed,
+  url,
+  between,
+  alpha,
+  integer,
+  password,
+  min,
+  digits,
+  alphaDash,
+  length,
+} from "@validations";
 // import vSelect from "vue-select";
-import { togglePasswordVisibility } from "@core/mixins/ui/forms";
-import store from "@/store/index";
+import { ValidationProvider, ValidationObserver } from "vee-validate";
 import Ripple from "vue-ripple-directive";
-import Dropdown from "vue-simple-search-dropdown";
 import vSelect from "vue-select";
+import Theaterapi from "@/Api/Modules/theater";
+import BookingApi from "@/Api/Modules/booking";
 // import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
 export default {
@@ -124,11 +191,23 @@ export default {
     vSelect,
     BContainer,
     Header,
+    BFormGroup,
     BCol,
+    BFormTimepicker,
+    ValidationProvider,
+    ValidationObserver,
     BModal,
     BRow,
     BFormInput,
     Footer,
+    BCardText,
+    BButton,
+    VBModal,
+
+    BForm,
+
+    // BCard,
+    VBToggle,
     // vSelect,
     // BCard,
     BCardText,
@@ -136,7 +215,20 @@ export default {
   },
   data() {
     return {
-      theaters: [1, 2, 3, 4, 5, 6],
+      form: {
+        full_name: "Yasindu Ramanayake",
+        email: "Yasindu Ramanayake123@gmail.com",
+        movie_name: this.$route.params.name,
+        movie_type: this.$route.params.type,
+        theater_type: null,
+        theater_name: null,
+        price: null,
+      },
+      baseprice: 200.0,
+      theater_param: this.$route.params.theaters,
+      theaters: [],
+
+      description: this.$route.params.description,
       selected: { title: "Colombo" },
       option: [
         { title: "Colombo" },
@@ -144,15 +236,61 @@ export default {
         { title: "Panadura" },
         { title: "Kaluthara" },
       ],
+
+      // validations
+      required,
+      email,
+      confirmed,
+      url,
+      between,
+      alpha,
+      integer,
+      password,
+      min,
+      digits,
+      alphaDash,
+      length,
     };
   },
   directives: {
     "b-toggle": VBToggle,
     "b-modal": VBModal,
-    Ripple,
-    Dropdown,
   },
-  mixins: [togglePasswordVisibility],
+  async mounted() {
+    await this.FetchTheaters();
+  },
+  methods: {
+    async FetchTheaters() {
+      const res = await Theaterapi.index(this.theater_param);
+      this.theaters = res.data.data.data;
+    },
+
+    async AddBooking(e, e1) {
+      await this.$vs.loading({
+        scale: 0.8,
+      });
+
+      this.form.theater_type = e;
+      this.form.theater_name = e1;
+      this.form.price = this.baseprice * this.form.seats;
+
+      await BookingApi.store(this.form)
+        .then(({ res }) => {
+          this.$vs.loading.close();
+        })
+        .catch(({ res }) => {
+          this.$vs.loading.close();
+        });
+
+      this.$router.push(
+        `/paydetails/${this.baseprice}/${this.form.movie_name}/${this.form.seats}/${this.form.price}`
+      );
+
+      setTimeout(() => {
+        this.form = "";
+      }, 8000);
+    },
+  },
 };
 </script>
 

@@ -14,9 +14,11 @@ export default {
       const token = res.data.token
       const name = res.data.data.name
       const role = res.data.data.role
+      const email = res.data.data.email
       setToken(token)
       localStorage.setItem('token', token)
       localStorage.setItem('name', name)
+      localStorage.setItem('email', email)
       localStorage.setItem('role', role)
       notification.toast('Successfully logged in', 'success')
       if (localStorage.role === 'admin') {

@@ -2,8 +2,8 @@ import { api } from '@/Api/index'
 import notification from '@/ApiConstance/toast'
 
 export default {
-  async index() {
-    return await api.get('/gettheaters')
+  async index(name) {
+    return await api.get(`/gettheaters?filter[name]=${name}`)
   },
 
   async store(payload) {

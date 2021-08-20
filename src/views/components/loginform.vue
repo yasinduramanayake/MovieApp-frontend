@@ -69,13 +69,12 @@
         </b-col>
 
         <!-- submit buttons -->
-        <b-overlay :show="loading" :opacity="0.5" rounded="sm">
+        <b-overlay :opacity="0.5" rounded="sm">
           <b-col cols="12">
             <b-button
               type="submit"
               variant="primary"
               block
-              :disabled="loading"
               @click="validationForm"
             >
               Sign in
@@ -151,6 +150,7 @@ export default {
       status: "",
       password: "",
       userEmail: "",
+
       required,
       password,
       email,

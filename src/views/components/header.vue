@@ -31,7 +31,7 @@
 
           <li><a href="#news">Movies</a></li>
           <li v-if="!token" v-b-toggle.sidebar-right>
-            <a href="#contact">Login</a>
+            <a style="color:white">Login</a>
           </li>
           <li v-if="token"><a href="#contact">Profile</a></li>
           <li v-if="token"><a href="#contact">Logout</a></li>

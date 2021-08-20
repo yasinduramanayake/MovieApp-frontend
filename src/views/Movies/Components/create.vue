@@ -174,10 +174,10 @@ export default {
       mode: "",
       button: "",
       option: [
-        { title: "Kids" },
-        { title: "Super hero" },
-        { title: "18+" },
-        { title: "Drive-In" },
+        { title: "Tamil" },
+        { title: "English" },
+        { title: "Hindi" },
+        { title: "Korean" },
       ],
       theaters: [],
 
@@ -197,6 +197,7 @@ export default {
   },
   async mounted() {
     await this.Alltheaters();
+    await this.showmeth();
   },
   methods: {
     onChange(e) {
@@ -208,7 +209,7 @@ export default {
       };
     },
     async Alltheaters() {
-      const res = await TheaterApi.index();
+      const res = await TheaterApi.index("");
       this.theaters = res.data.data.data;
     },
 
