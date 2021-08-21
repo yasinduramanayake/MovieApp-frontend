@@ -39,16 +39,20 @@
         </li>
       </b-col>
       <!--<ul>
+        <ul>
           <li><a href="#home">Home</a></li>
+          <li><a href="#news">News</a></li>
+          <li><a href="#contact">Contact</a></li>
+
           <li><a href="#news">Movies</a></li>
           <li v-if="!token" v-b-toggle.sidebar-right>
-            <a href="#contact">Login</a>
+            <a style="color:white">Login</a>
           </li>
           <li v-if="token"><a href="#contact">Profile</a></li>
           <li v-if="token"><a href="#contact">Logout</a></li>
       </ul>
     -->
-    </b-row>
+      </b-row>
     <b-sidebar
       id="sidebar-right"
       bg-variant="dark"
@@ -172,7 +176,9 @@ li a:hover:not(.active) {
 }
 
 .navbar a:hover,
-.dropdown:hover {
+.dropdown:hover, 
+.dropdown:hover,
+ .dropbtn {
   background-color: #111;
 }
 

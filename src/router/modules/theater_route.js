@@ -13,4 +13,14 @@ export default [
       ],
     },
   },
+  {
+    path: '/theaterdetails/:name/:type/:description/:theaters',
+    name: 'theaterdetails',
+    component: () => import('@/views/Theaters/UserView/index.vue'),
+    meta: {
+      layout: 'full',
+      redirectIfLoggedIn: true,
+      noAuth: true,
+    },
+  },
 ]

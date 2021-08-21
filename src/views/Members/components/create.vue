@@ -2,14 +2,14 @@
   <div>
     <b-card-title title-tag="h2" style="color:black" class="mb-2">
       <b-col cols="12">
-        {{ data }}
+        Add Member
       </b-col>
     </b-card-title>
     <validation-observer ref="registerForm" #default="{invalid}">
-      <b-form class="auth-register-form mt-2" @submit.prevent="register">
+      <b-form class="auth-register-form mt-2" @submit.prevent>
         <!-- username -->
         <b-col cols="12">
-          <b-form-group label="Username" label-for="register-username">
+          <b-form-group label="Username" label-for="add-username">
             <validation-provider
               #default="{ errors }"
               name="Username"
@@ -17,9 +17,9 @@
               rules="required"
             >
               <b-form-input
-                id="register-username"
-                v-model="username"
-                name="register-username"
+                id="add-username"
+                v-model="name"
+                name="add-username"
                 :state="errors.length > 0 ? false : null"
                 placeholder="johndoe"
               />
@@ -30,7 +30,7 @@
         <!-- email -->
 
         <b-col cols="12">
-          <b-form-group label="Email" label-for="register-email">
+          <b-form-group label="Email" label-for="add-email">
             <validation-provider
               #default="{ errors }"
               name="Email"
@@ -38,9 +38,9 @@
               rules="required|email"
             >
               <b-form-input
-                id="register-email"
-                v-model="userEmail"
-                name="register-email"
+                id="add-email"
+                v-model="email"
+                name="addr-email"
                 :state="errors.length > 0 ? false : null"
                 placeholder="john@example.com"
               />
@@ -51,28 +51,24 @@
         <!-- password -->
 
         <b-col cols="12">
-          <b-form-group
-            label-for="register-password"
-            label="Password"
-            v-if="databutton === 'Add' && data === 'Add Member'"
-          >
+          <b-form-group label-for="add-password" label="Password">
             <validation-provider
               #default="{ errors }"
               name="Password"
               vid="password"
-              rules="required"
+              rules="required|password|min:6"
             >
               <b-input-group
                 class="input-group-merge"
                 :class="errors.length > 0 ? 'is-invalid' : null"
               >
                 <b-form-input
-                  id="register-password"
+                  id="add-password"
                   v-model="password"
                   class="form-control-merge"
                   :type="passwordFieldType"
                   :state="errors.length > 0 ? false : null"
-                  name="register-password"
+                  name="add-password"
                   placeholder="············"
                 />
                 <b-input-group-append is-text>
@@ -89,7 +85,7 @@
         </b-col>
         <!-- password Confirmation -->
         <b-col cols="12">
-          <b-form-group v-if="databutton === 'Add' && data === 'Add Member'">
+          <b-form-group>
             <label>Confirm password</label>
             <validation-provider
               #default="{ errors }"
@@ -97,10 +93,30 @@
               name="Confirm Password"
             >
               <b-form-input
-                v-model="passwordCon"
+                v-model="password_confirmation"
                 type="password"
                 :state="errors.length > 0 ? false : null"
                 placeholder="Repeat Password"
+              />
+              <small class="text-danger">{{ errors[0] }}</small>
+            </validation-provider>
+          </b-form-group>
+        </b-col>
+
+        <!-- role-->
+        <b-col cols="12">
+          <b-form-group label="Userrole" label-for="Add-userrole">
+            <validation-provider
+              #default="{ errors }"
+              name="Userrole"
+              vid="userrole"
+              rules="required"
+            >
+              <v-select
+                v-model="role"
+                :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
+                label="title"
+                :options="option"
               />
               <small class="text-danger">{{ errors[0] }}</small>
             </validation-provider>
@@ -113,27 +129,28 @@
             <label>Contact number</label>
             <validation-provider
               #default="{ errors }"
-              rules="required|digits:10"
+              rules="required|digits:10|integer"
               name="Numeric"
             >
               <b-form-input
-                v-model="digitValue2"
+                v-model="mobile"
                 type="number"
                 :state="errors.length > 0 ? false : null"
-                placeholder="Enter Exactyly 10 digit"
+                placeholder="Mobile Number"
               />
               <small class="text-danger">{{ errors[0] }}</small>
             </validation-provider>
           </b-form-group>
         </b-col>
 
-        <!-- Button -->
-        <b-form-group>
-          <b-form-input id="h-email" type="text" hidden />
-        </b-form-group>
-
-        <b-button variant="primary" block type="submit" :disabled="invalid">
-          {{ databutton }}
+        <b-button
+          variant="primary"
+          @click="Adduser()"
+          block
+          type="submit"
+          :disabled="invalid"
+        >
+          Create
         </b-button>
       </b-form>
     </validation-observer>
@@ -151,7 +168,22 @@ import {
   BInputGroupAppend,
   BCardTitle,
 } from "bootstrap-vue";
-import { required, email } from "@validations";
+import {
+  required,
+  email,
+  confirmed,
+  url,
+  between,
+  alpha,
+  integer,
+  password,
+  min,
+  digits,
+  alphaDash,
+  length,
+} from "@validations";
+import user from "@/Api/Modules/user";
+import vSelect from "vue-select";
 import { togglePasswordVisibility } from "@core/mixins/ui/forms";
 
 export default {
@@ -159,6 +191,7 @@ export default {
     BCol,
     BButton,
     BForm,
+    vSelect,
     BCardTitle,
     BFormGroup,
     BFormInput,
@@ -171,19 +204,70 @@ export default {
   mixins: [togglePasswordVisibility],
   data() {
     return {
-      status: "",
-      username: "",
-      userEmail: "",
+      role: { title: "Admin" },
+      option: [{ title: "User" }, { title: "Admin" }],
+      name: "",
+      email: "",
+      mobile: "",
       password: "",
+      password_confirmation: "",
+      status: "",
+      payload: {},
+
+      // validations
       required,
       email,
+      confirmed,
+      url,
+      between,
+      alpha,
+      integer,
+      password,
+      min,
+      digits,
+      alphaDash,
+      length,
     };
   },
+
   computed: {
     passwordToggleIcon() {
       return this.passwordFieldType === "password" ? "EyeIcon" : "EyeOffIcon";
     },
   },
-  props: { data: String, databutton: String },
+
+  methods: {
+    async Adduser() {
+      if (await this.$refs.registerForm.validate()) {
+        await this.$vs.loading({
+          scale: 0.8,
+        });
+        this.payload = {
+          name: this.name,
+          email: this.email,
+          mobile: this.mobile,
+          role: this.role.title,
+          password: this.password,
+          password_confirmation: this.password_confirmation,
+        };
+        await user
+          .store(this.payload, this.role)
+          .then(({ res }) => {
+            this.$vs.loading.close();
+          })
+          .catch(({ res }) => {
+            this.$vs.loading.close();
+          });
+      }
+
+      setTimeout(() => {
+        this.payload = "";
+      }, 8000);
+    },
+  },
 };
 </script>
+
+<style lang="scss">
+@import "@core/scss/vue/libs/vue-select.scss";
+</style>

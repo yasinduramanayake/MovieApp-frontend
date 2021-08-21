@@ -1,40 +1,27 @@
 <template>
-  <div class="auth-wrapper auth-v2">
-    <b-row class="auth-inner m-0">
-      <!-- Brand logo-->
-      <b-link class="brand-logo">
-        <vuexy-logo />
+  <div class="auth-wrapper auth-v1 px-2">
+    <div class="auth-inner py-2">
+      <!-- Register v1 -->
+      <b-card class="mb-0">
+        <b-link class="brand-logo">
+          <vuexy-logo />
+          <h2 class="brand-text text-primary ml-1">
+            Vuexy
+          </h2>
+        </b-link>
 
-        <h2 class="brand-text text-primary ml-1">
-          Vuexy
-        </h2>
-      </b-link>
-      <!-- /Brand logo-->
+        <b-card-title class="mb-1">
+          Adventure starts here 🚀
+        </b-card-title>
+        <b-card-text class="mb-2">
+          Make your app management easy and fun!
+        </b-card-text>
 
-      <!-- Left Text-->
-      <b-col lg="8" class="d-none d-lg-flex align-items-center p-5">
-        <div
-          class="w-100 d-lg-flex align-items-center justify-content-center px-5"
-        >
-          <b-img fluid :src="imgUrl" alt="Register V2" />
-        </div>
-      </b-col>
-      <!-- /Left Text-->
-
-      <!-- Register-->
-      <b-col lg="4" class="d-flex align-items-center auth-bg px-2 p-lg-5">
-        <b-col sm="8" md="6" lg="12" class="px-xl-2 mx-auto">
-          <b-card-title class="mb-1">
-            Adventure starts here 🚀
-          </b-card-title>
-          <b-card-text class="mb-2">
-            Make your app management easy and fun!
-          </b-card-text>
-
-          <!-- form -->
-          <validation-observer ref="registerForm" #default="{invalid}">
-            <b-form class="auth-register-form mt-2" @submit.prevent="register">
-              <!-- username -->
+        <!-- form -->
+        <validation-observer ref="registerForm" #default="{invalid}">
+          <b-form class="auth-register-form mt-2" @submit.prevent>
+            <!-- username -->
+            <b-col cols="12">
               <b-form-group label="Username" label-for="register-username">
                 <validation-provider
                   #default="{ errors }"
@@ -44,7 +31,7 @@
                 >
                   <b-form-input
                     id="register-username"
-                    v-model="username"
+                    v-model="form.name"
                     name="register-username"
                     :state="errors.length > 0 ? false : null"
                     placeholder="johndoe"
@@ -52,8 +39,10 @@
                   <small class="text-danger">{{ errors[0] }}</small>
                 </validation-provider>
               </b-form-group>
+            </b-col>
+            <!-- email -->
 
-              <!-- email -->
+            <b-col cols="12">
               <b-form-group label="Email" label-for="register-email">
                 <validation-provider
                   #default="{ errors }"
@@ -63,7 +52,7 @@
                 >
                   <b-form-input
                     id="register-email"
-                    v-model="userEmail"
+                    v-model="form.email"
                     name="register-email"
                     :state="errors.length > 0 ? false : null"
                     placeholder="john@example.com"
@@ -71,14 +60,16 @@
                   <small class="text-danger">{{ errors[0] }}</small>
                 </validation-provider>
               </b-form-group>
+            </b-col>
+            <!-- password -->
 
-              <!-- password -->
+            <b-col cols="12">
               <b-form-group label-for="register-password" label="Password">
                 <validation-provider
                   #default="{ errors }"
                   name="Password"
                   vid="password"
-                  rules="required"
+                  rules="required|password|min:6"
                 >
                   <b-input-group
                     class="input-group-merge"
@@ -86,7 +77,7 @@
                   >
                     <b-form-input
                       id="register-password"
-                      v-model="password"
+                      v-model="form.password"
                       class="form-control-merge"
                       :type="passwordFieldType"
                       :state="errors.length > 0 ? false : null"
@@ -104,9 +95,10 @@
                   <small class="text-danger">{{ errors[0] }}</small>
                 </validation-provider>
               </b-form-group>
-
+            </b-col>
+            <!-- password Confirmation -->
+            <b-col cols="12">
               <b-form-group>
-                <!--Confirm  password -->
                 <label>Confirm password</label>
                 <validation-provider
                   #default="{ errors }"
@@ -114,7 +106,7 @@
                   name="Confirm Password"
                 >
                   <b-form-input
-                    v-model="passwordCon"
+                    v-model="form.password_confirmation"
                     type="password"
                     :state="errors.length > 0 ? false : null"
                     placeholder="Repeat Password"
@@ -122,107 +114,105 @@
                   <small class="text-danger">{{ errors[0] }}</small>
                 </validation-provider>
               </b-form-group>
+            </b-col>
 
+            <!-- Contact Number -->
+            <b-col cols="12">
               <b-form-group>
-                <!-- Contact Number -->
                 <label>Contact number</label>
                 <validation-provider
                   #default="{ errors }"
-                  rules="required|digits:10"
+                  rules="required|digits:10|integer"
                   name="Numeric"
                 >
                   <b-form-input
-                    v-model="digitValue2"
+                    v-model="form.mobile"
                     type="number"
                     :state="errors.length > 0 ? false : null"
-                    placeholder="Enter Exactyly 10 digit"
+                    placeholder="Mobile Number"
                   />
                   <small class="text-danger">{{ errors[0] }}</small>
                 </validation-provider>
               </b-form-group>
+            </b-col>
 
-              <b-form-group>
-                <b-form-input id="h-email" type="text" hidden />
-              </b-form-group>
+            <!-- Button -->
+            <b-form-group>
+              <b-form-input id="h-email" type="text" hidden />
+            </b-form-group>
 
-              <b-form-group>
-                <b-form-checkbox
-                  id="register-privacy-policy"
-                  v-model="status"
-                  name="checkbox-1"
-                >
-                  I agree to
-
-                  <b-link>privacy policy & terms</b-link>
-                </b-form-checkbox>
-              </b-form-group>
-
-              <!--Button-->
-              <b-button
-                variant="primary"
-                block
-                type="submit"
-                :disabled="invalid"
-              >
-                Sign up
-              </b-button>
-            </b-form>
-          </validation-observer>
-
-          <!-- divider -->
-          <div class="divider my-2">
-            <div class="divider-text">
-              or
-            </div>
-          </div>
-        </b-col>
-      </b-col>
-      <!-- /Register-->
-    </b-row>
+            <b-button
+              variant="primary"
+              block
+              type="submit"
+              @click="register()"
+              :disabled="invalid"
+            >
+              Sign up
+            </b-button>
+          </b-form>
+        </validation-observer>
+        <b-card-text class="text-center mt-2">
+          <span>Already have an account? </span>
+          <b-link :to="{ name: 'login' }">
+            <span>Sign in instead</span>
+          </b-link>
+        </b-card-text>
+      </b-card>
+      <!-- /Register v1 -->
+    </div>
   </div>
 </template>
 
 <script>
-/* eslint-disable global-require */
 import { ValidationProvider, ValidationObserver } from "vee-validate";
-import VuexyLogo from "@core/layouts/components/Logo.vue";
-
 import {
-  BRow,
-  BCol,
+  BCard,
   BLink,
-  BButton,
-  BForm,
-  BFormCheckbox,
-  BFormGroup,
-  BFormInput,
-  BInputGroup,
-  BInputGroupAppend,
-  BImg,
   BCardTitle,
   BCardText,
+  BForm,
+  BButton,
+  BFormInput,
+  BFormGroup,
+  BInputGroup,
+  BInputGroupAppend,
+  BFormCheckbox,
 } from "bootstrap-vue";
-import { required, email } from "@validations";
+import VuexyLogo from "@core/layouts/components/Logo.vue";
+import {
+  required,
+  email,
+  confirmed,
+  url,
+  between,
+  alpha,
+  integer,
+  password,
+  min,
+  digits,
+  alphaDash,
+  length,
+} from "@validations";
 import { togglePasswordVisibility } from "@core/mixins/ui/forms";
-import store from "@/store/index";
-
+import ToastificationContent from "@core/components/toastification/ToastificationContent.vue";
+import Auth from "@/Api/Modules/auth";
 export default {
+  name: "Register",
   components: {
     VuexyLogo,
-    BRow,
-    BImg,
-    BCol,
+    // BSV
+    BCard,
     BLink,
-
-    BButton,
-    BForm,
-    BCardText,
     BCardTitle,
-    BFormCheckbox,
-    BFormGroup,
+    BCardText,
+    BForm,
+    BButton,
     BFormInput,
+    BFormGroup,
     BInputGroup,
     BInputGroupAppend,
+    BFormCheckbox,
     // validations
     ValidationProvider,
     ValidationObserver,
@@ -230,58 +220,51 @@ export default {
   mixins: [togglePasswordVisibility],
   data() {
     return {
-      status: "",
-      username: "",
-      userEmail: "",
-      password: "",
-      sideImg: require("@/assets/images/pages/register-v2.svg"),
-      // validation
+      form: {
+        role: "User",
+      },
+
+      // validation rules
       required,
       email,
+      confirmed,
+      url,
+      between,
+      alpha,
+      integer,
+      password,
+      min,
+      digits,
+      alphaDash,
+      length,
     };
   },
   computed: {
     passwordToggleIcon() {
       return this.passwordFieldType === "password" ? "EyeIcon" : "EyeOffIcon";
     },
-    imgUrl() {
-      if (store.state.appConfig.layout.skin === "dark") {
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.sideImg = require("@/assets/images/pages/register-v2-dark.svg");
-        return this.sideImg;
-      }
-      return this.sideImg;
-    },
   },
   methods: {
-    // register() {
-    //   this.$refs.registerForm.validate().then((success) => {
-    //     if (success) {
-    //       useJwt
-    //         .register({
-    //           username: this.username,
-    //           email: this.userEmail,
-    //           password: this.password,
-    //         })
-    //         .then((response) => {
-    //           useJwt.setToken(response.data.accessToken);
-    //           useJwt.setRefreshToken(response.data.refreshToken);
-    //           localStorage.setItem(
-    //             "userData",
-    //             JSON.stringify(response.data.userData)
-    //           );
-    //           this.$ability.update(response.data.userData.ability);
-    //           this.$router.push("/");
-    //         })
-    //         .catch((error) => {
-    //           this.$refs.registerForm.setErrors(error.response.data.error);
-    //         });
-    //     }
-    //   });
-    // },
+    async register() {
+      if (await this.$refs.registerForm.validate()) {
+        await this.$vs.loading({
+          scale: 0.8,
+        });
+
+        await Auth.register(this.form)
+          .then(({ res }) => {
+            this.$vs.loading.close();
+          })
+          .catch(({ res }) => {
+            this.$vs.loading.close();
+          });
+      }
+      setTimeout(() => {
+        this.form = "";
+      }, 8000);
+    },
   },
 };
-/* eslint-disable global-require */
 </script>
 
 <style lang="scss">

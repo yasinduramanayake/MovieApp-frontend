@@ -8,16 +8,16 @@
         variant="success"
       >
         <feather-icon icon="PlusIcon" class="mr-50" />
-        Add Theater
+        Add Member
       </b-button>
     </portal>
 
-    <!-- Side Bar-->
-    <b-sidebar id="sidebar-right" bg-variant="white" shadow backdrop right>
-      <Create />
-    </b-sidebar>
+    <div v-if="shiftmode === 'Add'">
+      <b-sidebar id="sidebar-right" bg-variant="white" shadow backdrop right>
+        <CreateForm />
+      </b-sidebar>
+    </div>
 
-    <!-- Table And edit-->
     <Table />
   </div>
 </template>
@@ -25,18 +25,30 @@
 <script>
 // import Units from '@/apis/modules/units'
 // import Items from '@/apis/modules/items'
-import { BButton, BSidebar, VBToggle } from "bootstrap-vue";
-import Create from "@/views/Theaters/AdminView/components/create.vue";
-import Table from "@/views/Theaters/AdminView/components/table.vue";
+import { BSidebar, VBToggle, BButton } from "bootstrap-vue";
+import CreateForm from "@/views/Members/components/create.vue";
+import Table from "@/views/Members/components/table.vue";
 
 export default {
   components: {
-    BButton,
+    CreateForm,
     BSidebar,
-    Create,
     Table,
+    BButton,
   },
 
+  data() {
+    return {
+      // Genaral data
+      users: [],
+      data1: "yasindu",
+      shiftmode: "",
+      items: [],
+      dateFilter: null,
+      perPage: 5,
+      editabledata: {},
+    };
+  },
   directives: {
     "b-toggle": VBToggle,
   },
@@ -49,6 +61,7 @@ export default {
 };
 </script>
 
+<style></style>
 <style lang="scss">
 @import "@core/scss/vue/libs/vue-select.scss";
 </style>

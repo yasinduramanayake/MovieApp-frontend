@@ -2,11 +2,15 @@
   <div>
     <b-card-title title-tag="h2" style="color:black" class="mb-2">
       <b-col cols="12">
-        {{ data }}
+        {{ makeUpperCase("Add Movie") }}
       </b-col>
     </b-card-title>
-    <validation-observer ref="registerForm" #default="{invalid}">
-      <b-form class="auth-register-form mt-2" @submit.prevent="register">
+    <validation-observer ref="movieForm" #default="{invalid}">
+      <b-form
+        class="auth-register-form mt-2"
+        enctype="multipart/form-data"
+        @submit.prevent
+      >
         <b-col cols="12">
           <!-- Movie Name -->
           <b-form-group label="Movie Name" label-for="name">
@@ -18,7 +22,7 @@
               <b-form-input
                 id="name"
                 name="name"
-                v-model="name"
+                v-model="form.name"
                 :state="errors.length > 0 ? false : null"
                 placeholder="Tenet"
               />
@@ -38,7 +42,7 @@
               <b-form-textarea
                 id="textarea-rows"
                 placeholder="Tall textarea"
-                v-model="area"
+                v-model="form.description"
                 rows="8"
               />
               <small class="text-danger">{{ errors[0] }}</small>
@@ -46,22 +50,41 @@
           </b-form-group>
         </b-col>
 
-        <!-- Theater -->
+        <!-- Theaters Array -->
         <b-col cols="12">
-          <b-form-group label="Theater">
+          <b-form-group>
+            <label>Select Theater/s</label>
             <validation-provider
               #default="{ errors }"
               rules="required"
-              name="theater"
+              name="text"
             >
-              <v-select
-                v-model="selected2"
-                :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
-                multiple
-                label="title"
-                :options="option1"
-              />
+              <b-form-select v-model="form.theaters" multiple class="mb-1">
+                <b-form-select-option
+                  v-for="theater in theaters"
+                  :key="theater.id"
+                  :value="theater.name"
+                  >{{
+                    firstLetterUpperCase(theater.name)
+                  }}</b-form-select-option
+                >
+              </b-form-select>
+              <small class="text-danger">{{ errors[0] }}</small>
+            </validation-provider>
+          </b-form-group>
+        </b-col>
 
+        <!-- Image -->
+        <b-col cols="12">
+          <b-form-group label="Image">
+            <validation-provider #default="{ errors }" name="image" id="image">
+              <b-form-file
+                placeholder="Choose a file or drop it here..."
+                drop-placeholder="Drop file here..."
+                no-drop
+                v-model="image"
+                @change="onChange"
+              />
               <small class="text-danger">{{ errors[0] }}</small>
             </validation-provider>
           </b-form-group>
@@ -77,7 +100,7 @@
               name="text"
             >
               <v-select
-                v-model="selected"
+                v-model="type"
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
                 label="title"
                 :options="option"
@@ -88,8 +111,14 @@
         </b-col>
 
         <!-- Button -->
-        <b-button variant="primary" block type="submit" :disabled="invalid">
-          {{ databutton }}
+        <b-button
+          variant="primary"
+          block
+          @click="AddMovie()"
+          type="submit"
+          :disabled="invalid"
+        >
+          {{ makeUpperCase("Create") }}
         </b-button>
       </b-form>
     </validation-observer>
@@ -98,16 +127,19 @@
 <script>
 import { ValidationProvider, ValidationObserver } from "vee-validate";
 import vSelect from "vue-select";
+import TheaterApi from "@/Api/Modules/theater";
 import {
   BCol,
   BButton,
+  BFormSelect,
+  BFormSelectOption,
+  BFormFile,
   BForm,
   BFormGroup,
   BCardTitle,
   BFormInput,
   BFormTextarea,
 } from "bootstrap-vue";
-import { data } from "vue-echarts";
 import {
   required,
   email,
@@ -117,13 +149,16 @@ import {
   alphaDash,
   length,
 } from "@validations";
-
+import MovieApi from "@/Api/Modules/movie";
 export default {
   components: {
     vSelect,
     ValidationProvider,
+    BFormSelectOption,
+    BFormFile,
     BFormTextarea,
     ValidationObserver,
+    BFormSelect,
     BCardTitle,
     BButton,
     BCol,
@@ -133,25 +168,24 @@ export default {
   },
   data() {
     return {
-      selected: { title: "Kids" },
+      // form data
+
+      selctedFile: "",
+      mode: "",
+      button: "",
       option: [
-        { title: "Kids" },
-        { title: "Teen" },
-        { title: "Superhero" },
-        { title: "Cartoon" },
-        { title: "Adult" },
+        { title: "Tamil" },
+        { title: "English" },
+        { title: "Hindi" },
+        { title: "Korean" },
       ],
-      option1: [
-        { title: "Multiplex" },
-        { title: "Independent and Second-Run" },
-        { title: "IMAX" },
-        { title: "Drive-In" },
-        { title: "Ac , 3D" },
-        { title: "Ac" },
-        { title: "3D" },
-      ],
+      theaters: [],
+
       dir: "ltr",
-      selected2: [{ title: "Multiplex" }, { title: "IMAX" }],
+      form: { theaters: [] },
+      type: { title: "Tenet" },
+      image: "",
+
       required,
       email,
       integer,
@@ -161,7 +195,45 @@ export default {
       length,
     };
   },
-  props: { data: String, databutton: String },
+  async mounted() {
+    await this.Alltheaters();
+    await this.showmeth();
+  },
+  methods: {
+    onChange(e) {
+      const image = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(image);
+      reader.onload = (e) => {
+        this.form.image = e.target.result;
+      };
+    },
+    async Alltheaters() {
+      const res = await TheaterApi.index("");
+      this.theaters = res.data.data.data;
+    },
+
+    async AddMovie() {
+      if (await this.$refs.movieForm.validate()) {
+        await this.$vs.loading({
+          scale: 0.8,
+        });
+
+        this.form.type = this.type.title;
+        await MovieApi.store(this.form)
+          .then(({ res }) => {
+            this.$vs.loading.close();
+          })
+          .catch(({ res }) => {
+            this.$vs.loading.close();
+          });
+      }
+
+      setTimeout(() => {
+        this.payload = "";
+      }, 8000);
+    },
+  },
 };
 </script>
 <style lang="scss">

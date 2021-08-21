@@ -54,8 +54,8 @@
           :filter-included-fields="filterOn"
           @filtered="onFiltered"
         >
-          <template #cell(Image)="data">
-            <b-avatar :src="data.value" size="60px" />
+          <template #cell(price)="data">
+            {{ getPrice(data.value) }}
           </template>
         </b-table>
       </b-col>
@@ -92,7 +92,7 @@ import {
   BInputGroupAppend,
   BButton,
 } from "bootstrap-vue";
-import Form from "@/views/Movies/Components/Form.vue";
+import BookingApi from "@/Api/Modules/booking";
 
 export default {
   components: {
@@ -110,6 +110,9 @@ export default {
   },
   data() {
     return {
+      // table data
+      bookings: [],
+      items: [],
       perPage: 5,
       pageOptions: [3, 5, 10],
       totalRows: 1,
@@ -126,78 +129,20 @@ export default {
       },
       fields: [
         {
-          key: "Image",
-          label: "Image",
-        },
-        {
           key: "movie_name",
           label: "Movie Name",
         },
         {
           key: "price",
-          label: "Price",
+          label: "Amount",
         },
-        { key: "theater_details", label: "Theater Name", sortable: true },
+        { key: "theater_name", label: "Theater Name", sortable: true },
         { key: "full_name", label: "Full Name", sortable: true },
         { key: "email", label: "Email", sortable: true },
-        { key: "noofseats", label: "No Of Seates", sortable: true },
+        { key: "seats", label: "No Of Seates", sortable: true },
         { key: "showtime", label: "Show Time", sortable: true },
-        { key: "movietype", label: "Movie Type", sortable: true },
-        { key: "theatertype", label: "Theater  Type", sortable: true },
-      ],
-      items: [
-        {
-          // eslint-disable-next-line global-require
-          Image: require("@/assets/images/banner06.jpg"),
-          movie_name: "Jumanji",
-          price: "200.00",
-          theater_details: "priska , kalutara",
-          full_name: "pubudi gamage",
-          email: "abc@gmail.com",
-          noofseats: "2",
-          showtime: "2.00 - 4.00",
-          movietype: "18+",
-          theatertype: "Balcony",
-        },
-        {
-          // eslint-disable-next-line global-require
-          Image: require("@/assets/images/banner03.jpg"),
-          movie_name: "World War",
-          price: "100.00",
-          theater_details: "sigma , panadura",
-          full_name: "pubudi Fernando",
-          email: "abcd@gmail.com",
-          noofseats: "4",
-          showtime: "2.00 - 4.00",
-          movietype: "kids",
-          theatertype: "Balcony",
-        },
-        {
-          // eslint-disable-next-line global-require
-          Image: require("@/assets/images/banner04.jpg"),
-          movie_name: "Workld War",
-          price: "600.00",
-          theater_details: "sigma , colombo",
-          full_name: "pubudi Fernando",
-          email: "abcd@gmail.com",
-          noofseats: "4",
-          showtime: "2.00 - 4.00",
-          movietype: "18+",
-          theatertype: "3d",
-        },
-        {
-          // eslint-disable-next-line global-require
-          Image: require("@/assets/images/banner05.jpg"),
-          movie_name: "Tenet",
-          price: "400.00",
-          theater_details: "baska , Kadawatha",
-          full_name: "Madura Fernando",
-          email: "Madura@gmail.com",
-          noofseats: "2",
-          showtime: "4.00 - 6.00",
-          movietype: "Adult",
-          theatertype: "3d - Balcony",
-        },
+        { key: "movie_type", label: "Movie Type", sortable: true },
+        { key: "theater_type", label: "Theater  Type", sortable: true },
       ],
     };
   },
@@ -212,9 +157,10 @@ export default {
         .map((f) => ({ text: f.label, value: f.key }));
     },
   },
-  mounted() {
+  async mounted() {
     // Set the initial number of items
     this.totalRows = this.items.length;
+    await this.index();
   },
   methods: {
     shift() {
@@ -237,6 +183,12 @@ export default {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length;
       this.currentPage = 1;
+    },
+
+    async index() {
+      const res = await BookingApi.index();
+      this.bookings = res.data.data.data;
+      this.items = this.bookings;
     },
   },
 };

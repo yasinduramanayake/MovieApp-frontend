@@ -1,6 +1,6 @@
 export default [
   {
-    path: '/paydetails',
+    path: '/paydetails/:baseprice/:name/:seats/:total',
     name: 'payment',
     component: () => import('@/views/payment/paydetails.vue'),
     meta: {
