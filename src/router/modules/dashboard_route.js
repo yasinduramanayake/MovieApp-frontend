@@ -8,7 +8,6 @@ export default [
       breadcrumb: [
         {
           text: 'Home',
-          active: true,
         },
       ],
     },

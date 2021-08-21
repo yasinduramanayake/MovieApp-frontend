@@ -2,8 +2,8 @@ import { api } from '@/Api/index'
 import notification from '@/ApiConstance/toast'
 
 export default {
-  async index() {
-    return await api.get('/getbookings')
+  async index(name) {
+    return await api.get(`getbookings?filter[full_name]=${name}`)
   },
 
   async store(payload) {
@@ -15,12 +15,14 @@ export default {
   async update(payload, id) {
     return await api.put(`/updatebooking/${id}`, payload).then((res) => {
       notification.toast('Successfully Updated', 'success')
+      window.location.href = '/mybooking'
     })
   },
 
   async delete(id) {
     return await api.delete(`/deletebooking/${id}`).then((res) => {
       notification.toast('Successfully Deleted ', 'success')
+      window.location.href = '/mybooking'
     })
   },
 }

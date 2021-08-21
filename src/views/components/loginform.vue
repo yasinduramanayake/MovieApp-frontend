@@ -49,7 +49,7 @@
                 <b-form-input
                   id="login-password"
                   placeholder="Password..."
-                  v-model="password"
+                  v-model="userpassword"
                   :state="errors.length > 0 ? false : null"
                   class="form-control-merge"
                   :type="passwordFieldType"
@@ -148,7 +148,7 @@ export default {
   data() {
     return {
       status: "",
-      password: "",
+      userpassword: "",
       userEmail: "",
 
       required,
@@ -174,12 +174,17 @@ export default {
         });
         this.payload = {
           email: this.userEmail,
-          password: this.password,
+          password: this.userpassword,
         };
-        await this.login(this.payload).catch(({ response }) => {
-          this.$vs.loading.close();
-        });
+        await this.login(this.payload)
+          .then(({ response }) => {
+            this.$vs.loading.close();
+          })
+          .catch(({ response }) => {
+            this.$vs.loading.close();
+          });
       }
+
       setTimeout(() => {
         this.userEmail = "";
         this.password = "";

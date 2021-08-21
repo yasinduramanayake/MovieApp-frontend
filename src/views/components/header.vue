@@ -25,16 +25,24 @@
       <b-col cols="1"> </b-col>
       <b-col cols="11">
         <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#news">News</a></li>
-          <li><a href="#contact">Contact</a></li>
-
-          <li><a href="#news">Movies</a></li>
+          <li><a style="color:white" @click="pushmovie()">movie</a></li>
           <li v-if="!token" v-b-toggle.sidebar-right>
             <a style="color:white">Login</a>
           </li>
-          <li v-if="token"><a href="#contact">Profile</a></li>
-          <li v-if="token"><a href="#contact">Logout</a></li>
+          <li v-if="token">
+            <a style="color:white" @click="pushprofile()">Profile</a>
+          </li>
+
+          <li v-if="token">
+            <a style="color:white" @click="pushpayment()">My payments</a>
+          </li>
+          <li v-if="token">
+            <a style="color:white" @click="pushbooking()">My bookings</a>
+          </li>
+
+          <li v-if="token">
+            <a style="color:white" @click="logout()">logout</a>
+          </li>
         </ul>
       </b-col>
     </b-row>
@@ -56,6 +64,9 @@ import VuexyLogo from "@core/layouts/components/Logo.vue";
 import login from "@/views/components/loginform.vue";
 import Ripple from "vue-ripple-directive";
 import Dropdown from "vue-simple-search-dropdown";
+import auth from "@/Api/Modules/auth";
+import { clearToken } from "@/Api/index";
+import { mapActions } from "vuex";
 import {
   BLink,
   BContainer,
@@ -92,6 +103,29 @@ export default {
     "b-toggle": VBToggle,
     Ripple,
     Dropdown,
+  },
+  methods: {
+    ...mapActions(["logout"]),
+    async localLogout() {
+      await this.logout();
+      clearToken();
+    },
+
+    pushmovie() {
+      this.$router.push("/movie");
+    },
+    pushprofile() {
+      this.$router.push("/userprofile");
+    },
+    pushprofile() {
+      this.$router.push("/userprofile");
+    },
+    pushpayment() {
+      this.$router.push("/mypaydetails");
+    },
+    pushbooking() {
+      this.$router.push("/mybooking");
+    },
   },
 };
 </script>

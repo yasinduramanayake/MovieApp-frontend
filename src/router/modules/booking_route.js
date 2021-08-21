@@ -11,6 +11,17 @@ export default [
   },
 
   {
+    path: '/mybooking',
+    name: 'mybooking',
+    component: () => import('@/views/Bookings/UserView/mybookings.vue'),
+    meta: {
+      layout: 'full',
+      redirectIfLoggedIn: true,
+      noAuth: true,
+    },
+  },
+
+  {
     path: '/Allbookings',
     name: 'Allbookings',
     component: () => import('@/views/Bookings/AdminView/index.vue'),

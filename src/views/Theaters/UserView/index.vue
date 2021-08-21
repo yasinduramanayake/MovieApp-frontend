@@ -21,7 +21,7 @@
             </b-form-group>
           </b-col>
           <b-col cols="3">
-            <b-button variant="dark">Search location.....</b-button>
+            <b-button variant="gradient-primary">Search location.....</b-button>
           </b-col>
         </b-row>
         <br />
@@ -101,7 +101,7 @@
                         block
                         variant="gradient-primary"
                       >
-                        Book Now!
+                        Add to Bookings
                       </b-button>
                     </b-form>
                   </validation-observer>
@@ -146,8 +146,6 @@ import {
   BCardText,
   BButton,
   BFormGroup,
-  BModal,
-  VBModal,
   BFormTimepicker,
   BContainer,
   BCard,
@@ -182,6 +180,7 @@ import Ripple from "vue-ripple-directive";
 import vSelect from "vue-select";
 import Theaterapi from "@/Api/Modules/theater";
 import BookingApi from "@/Api/Modules/booking";
+import notification from "@/ApiConstance/toast";
 // import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
 export default {
@@ -196,28 +195,26 @@ export default {
     BFormTimepicker,
     ValidationProvider,
     ValidationObserver,
-    BModal,
+
     BRow,
     BFormInput,
     Footer,
-    BCardText,
+
     BButton,
-    VBModal,
 
     BForm,
 
     // BCard,
-    VBToggle,
+
     // vSelect,
     // BCard,
     BCardText,
-    BButton,
   },
   data() {
     return {
       form: {
-        full_name: "Yasindu Ramanayake",
-        email: "Yasindu Ramanayake123@gmail.com",
+        full_name: localStorage.name,
+        email: localStorage.email,
         movie_name: this.$route.params.name,
         movie_type: this.$route.params.type,
         theater_type: null,
@@ -252,10 +249,7 @@ export default {
       length,
     };
   },
-  directives: {
-    "b-toggle": VBToggle,
-    "b-modal": VBModal,
-  },
+
   async mounted() {
     await this.FetchTheaters();
   },
@@ -266,29 +260,35 @@ export default {
     },
 
     async AddBooking(e, e1) {
-      await this.$vs.loading({
-        scale: 0.8,
-      });
-
-      this.form.theater_type = e;
-      this.form.theater_name = e1;
-      this.form.price = this.baseprice * this.form.seats;
-
-      await BookingApi.store(this.form)
-        .then(({ res }) => {
-          this.$vs.loading.close();
-        })
-        .catch(({ res }) => {
-          this.$vs.loading.close();
+      if (!localStorage.token) {
+        notification.toast("Please Login Before", "error");
+      } else {
+        await this.$vs.loading({
+          scale: 0.8,
         });
 
-      this.$router.push(
-        `/paydetails/${this.baseprice}/${this.form.movie_name}/${this.form.seats}/${this.form.price}`
-      );
+        this.form.theater_type = e;
+        this.form.theater_name = e1;
+        this.form.price = this.baseprice * this.form.seats;
 
-      setTimeout(() => {
-        this.form = "";
-      }, 8000);
+        await BookingApi.store(this.form)
+          .then(({ res }) => {
+            this.$vs.loading.close();
+          })
+          .catch(({ res }) => {
+            this.$vs.loading.close();
+          });
+
+        // this.$router.push(
+        //   `/paydetails/${this.baseprice}/${this.form.movie_name}/${this.form.seats}/${this.form.price}`
+        // );
+        // /mybooking
+        this.$router.push("/mybooking");
+
+        setTimeout(() => {
+          this.form = "";
+        }, 8000);
+      }
     },
   },
 };
@@ -298,10 +298,6 @@ export default {
 @import "@core/scss/vue/pages/page-auth.scss";
 @import "@core/scss/vue/libs/vue-select.scss";
 @import "@core/scss/vue/libs/vue-select.scss";
-img {
-  height: 250px;
-  width: 100%;
-}
 
 .background2 {
   background-color: white;

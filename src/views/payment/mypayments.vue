@@ -9,7 +9,10 @@
         <br />
         <br />
         <!--/Content-->
-        <b-card style="padding-left:460px" title="Welcome to Your Bookings">
+        <b-card style="padding-left:460px" title="Welcome to Your Payments">
+          <b-card-text>
+            This data only can see you...
+          </b-card-text>
         </b-card>
         <br />
         <br />
@@ -17,75 +20,53 @@
           <b-col cols="9">
             <b-form-group>
               <b-form-input
+                v-model="selected"
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
                 label="title"
               />
             </b-form-group>
           </b-col>
           <b-col cols="3">
-            <b-button variant="gradient-primary">Search Movie...</b-button>
+            <b-button variant="gradient-primary">Search date...</b-button>
           </b-col>
         </b-row>
         <b-row>
-          <b-col v-for="booking in bookings" :key="booking.id" md="1" lg="4">
+          <b-col v-for="payment in payments" :key="payment.id" md="1" lg="4">
             <b-card
               :title="
-                momentFormat(booking.created_at, 'MMMM Do YYYY, h:mm:ss a')
+                momentFormat(payment.created_at, 'MMMM Do YYYY, h:mm:ss a')
               "
             >
               <b-row>
                 <b-col cols="12">
                   <b-card-text>
-                    <b> Movie</b> : {{ booking.movie_name }} </b-card-text
+                    <b> Card Number</b> : {{ payment.cardnumber }} </b-card-text
                   ><br />
 
                   <b-card-text>
-                    <b>Theater</b> : {{ booking.theater_name }}</b-card-text
+                    <b>Expire date</b> : {{ payment.expiredate }}</b-card-text
                   >
                   <br />
 
-                  <b-card-text>
-                    <b> Booked Seates</b> : {{ booking.seats }}</b-card-text
+                  <b-card-text> <b> Cvv</b> : {{ payment.cvv }}</b-card-text
                   ><br />
 
-                  <b-card-text>
-                    <b> Movie Type</b> : {{ booking.movie_type }}</b-card-text
-                  >
-                  <br />
-                  <b-card-text>
-                    <b>Theater Type</b> :
-                    {{ booking.theater_type }}</b-card-text
-                  >
-                  <br />
-                  <b-card-text>
-                    <b>Expended Price</b> :
-                    {{ getPrice(booking.price) }}</b-card-text
-                  >
-                  <br />
-                  <b-card-text>
-                    <b>Selected Time</b> : {{ booking.showtime }}</b-card-text
-                  ><b-row>
-                    <b-col cols="4">
+                  <b-row>
+                    <b-col cols="6">
                       <b-button variant="gradient-primary"
                         >Edit</b-button
                       ></b-col
                     >
-                    <b-col cols="4">
+                    <b-col cols="6">
                       <b-button
                         variant="gradient-primary"
-                        @click="deletebooking(booking.id)"
+                        @click="deletepayment(payment.id)"
                         >Delete</b-button
                       ></b-col
-                    >
+                    > </b-row
+                  ><br />
 
-                    <b-col cols="4">
-                      <b-button
-                        variant="gradient-primary"
-                        @click="deletebooking(booking.id)"
-                        >Delete</b-button
-                      ></b-col
-                    >
-                  </b-row>
+                  <br /><br />
                 </b-col>
               </b-row>
             </b-card>
@@ -124,8 +105,7 @@ import {
 } from "bootstrap-vue";
 
 // import vSelect from "vue-select";
-
-import BookingApi from "@/Api/Modules/booking";
+import PaymentApi from "@/Api/Modules/payment";
 
 // import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
@@ -151,7 +131,8 @@ export default {
   },
   data() {
     return {
-      bookings: [],
+      payments: [],
+      selected: "",
     };
   },
 
@@ -160,14 +141,15 @@ export default {
   },
   methods: {
     async index() {
-      const res = await BookingApi.index(localStorage.name);
-      this.bookings = res.data.data.data;
+      const res = await PaymentApi.index("yasindurramanayake123@gmail.com");
+      this.payments = res.data.data.data;
     },
-    async deletebooking(id) {
+
+    async deletepayment(id) {
       await this.$vs.loading({
         scale: 0.8,
       });
-      await BookingApi.delete(id)
+      await PaymentApi.delete(id)
         .then(({ res }) => {
           this.$vs.loading.close();
         })

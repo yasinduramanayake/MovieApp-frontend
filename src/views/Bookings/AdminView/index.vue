@@ -186,7 +186,7 @@ export default {
     },
 
     async index() {
-      const res = await BookingApi.index();
+      const res = await BookingApi.index("Yasindu Ramanayake");
       this.bookings = res.data.data.data;
       this.items = this.bookings;
     },
