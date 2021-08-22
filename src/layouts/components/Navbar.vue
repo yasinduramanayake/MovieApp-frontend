@@ -84,6 +84,7 @@ import {
 } from "bootstrap-vue";
 import DarkToggler from "@core/layouts/components/app-navbar/components/DarkToggler.vue";
 import { mapActions, mapGetters } from "vuex";
+import { clearToken } from "@/Api/index";
 
 export default {
   components: {
@@ -115,6 +116,7 @@ export default {
     ...mapActions(["logout"]),
     async localLogout() {
       await this.logout();
+      clearToken();
       this.$router.push({ name: "login" });
     },
   },

@@ -37,8 +37,8 @@ export default {
     // eslint-disable-next-line no-unused-vars
     async afterLogin({ commit }, fromLogin) {
       if (!fromLogin) {
-        if (localStorage.role === 'admin') {
-          router.replace('/dashboard')
+        if (localStorage.role === 'User') {
+          router.replace('/')
         }
       }
     },
@@ -73,6 +73,7 @@ export default {
         await commit('CLEAR_CURRENT_USER')
       }
       await commit('CLEAR_CURRENT_USER')
+      window.location.href = '/'
     },
     async updateCurrentUserPhotoUrl({ commit }, newUrl) {
       commit('UPDATE_USER_INFO', {

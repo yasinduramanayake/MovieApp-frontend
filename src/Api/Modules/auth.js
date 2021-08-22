@@ -21,7 +21,7 @@ export default {
       localStorage.setItem('email', email)
       localStorage.setItem('role', role)
       notification.toast('Successfully logged in', 'success')
-      if (localStorage.role === 'admin') {
+      if (localStorage.role === 'Admin') {
         window.location.href = '/dashboard'
       }
     })

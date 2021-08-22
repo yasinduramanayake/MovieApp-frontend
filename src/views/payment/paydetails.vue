@@ -189,13 +189,11 @@ import {
   BCardTitle,
   BButton,
   BCard,
-  BCardImg,
   BRow,
   BForm,
   BCol,
   BFormGroup,
   BFormInput,
-  BFormCheckbox,
   VBModal,
 
   // BCard,
@@ -210,13 +208,12 @@ import PaymentApi from "@/Api/Modules/payment";
 
 export default {
   components: {
-    BCardImg,
     BRow,
     BForm,
     BCol,
     BFormGroup,
     BFormInput,
-    BFormCheckbox,
+
     BCardTitle,
     Header,
     Footer,
@@ -260,7 +257,7 @@ export default {
         await this.$vs.loading({
           scale: 0.8,
         });
-        this.form.email = "yasindurramanayake123@gmail.com";
+        this.form.email = localStorage.email;
         await PaymentApi.store(this.form)
           .then(({ res }) => {
             this.$vs.loading.close();

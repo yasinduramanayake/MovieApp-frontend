@@ -9,4 +9,15 @@ export default [
       noAuth: true,
     },
   },
+
+  {
+    path: '/mypaydetails',
+    name: 'mypayment',
+    component: () => import('@/views/payment/mypayments.vue'),
+    meta: {
+      layout: 'full',
+      redirectIfLoggedIn: true,
+      noAuth: true,
+    },
+  },
 ]

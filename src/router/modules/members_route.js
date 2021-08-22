@@ -19,8 +19,6 @@ export default [
     component: () => import('@/views/Members/UserSide/profile.vue'),
     meta: {
       layout: 'full',
-      redirectIfLoggedIn: true,
-      noAuth: true,
     },
   },
 ]
