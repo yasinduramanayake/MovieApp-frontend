@@ -79,7 +79,11 @@
                     >
                   </b-row>
                   <br />
-                  <b-button variant="gradient-primary" block @click=""
+                  <b-button
+                    style="width:340px"
+                    variant="gradient-primary"
+                    block
+                    @click=""
                     >Checkout to pay</b-button
                   >
                 </b-col>

@@ -43,9 +43,12 @@
               <b-card-text> </b-card-text>
               <b-row>
                 <b-col cols="12">
-                  <b> Show time 1</b> : {{ theater.time1 }} A.M <br />
-                  <b>Show time 2</b> : {{ theater.time2 }} P.M <br />
-                  <b> Show time 3</b> : {{ theater.time3 }} P.M <br /><br />
+                  <b> Show time 1</b> :
+                  {{ momentFormat(theater.time1, "h:mm:ss a") }} <br />
+                  <b>Show time 2</b> :
+                  {{ momentFormat(theater.time2, "h:mm:ss a") }} <br />
+                  <b> Show time 3</b> :
+                  {{ momentFormat(theater.time3, "h:mm:ss a") }}<br /><br />
                   <b> Type</b> : {{ theater.type }} <br />
 
                   <validation-observer ref="bookForm" #default="{invalid}">
