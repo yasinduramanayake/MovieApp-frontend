@@ -33,28 +33,6 @@
           </b-form-group>
         </b-col>
 
-        <!-- Movies Array -->
-        <b-col cols="12">
-          <b-form-group>
-            <label>Select Movie/s</label>
-            <validation-provider
-              #default="{ errors }"
-              rules="required"
-              name="text"
-            >
-              <b-form-select v-model="form.movies" multiple class="mb-1">
-                <b-form-select-option
-                  v-for="movie in movies"
-                  :key="movie.id"
-                  :value="movie.name"
-                  >{{ firstLetterUpperCase(movie.name) }}</b-form-select-option
-                >
-              </b-form-select>
-              <small class="text-danger">{{ errors[0] }}</small>
-            </validation-provider>
-          </b-form-group>
-        </b-col>
-
         <b-col cols="12">
           <!-- Location -->
           <b-form-group label="Location">
