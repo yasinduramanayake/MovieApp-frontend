@@ -56,30 +56,6 @@
               </b-form-group>
             </b-col>
 
-            <!-- Movies Array -->
-            <b-col cols="12">
-              <b-form-group>
-                <label>Select Movie/s</label>
-                <validation-provider
-                  #default="{ errors }"
-                  rules="required"
-                  name="text"
-                >
-                  <b-form-select v-model="form.movies" multiple class="mb-1">
-                    <b-form-select-option
-                      v-for="movie in movies"
-                      :key="movie.id"
-                      :value="movie.name"
-                      >{{
-                        firstLetterUpperCase(movie.name)
-                      }}</b-form-select-option
-                    >
-                  </b-form-select>
-                  <small class="text-danger">{{ errors[0] }}</small>
-                </validation-provider>
-              </b-form-group>
-            </b-col>
-
             <b-col cols="12">
               <!-- Show Time One -->
               <b-form-group>
@@ -279,12 +255,6 @@
             <b-avatar :src="data.value" size="60px" />
           </template>
 
-          <template #cell(movies)="data">
-            <b-card v-for="data in data.value" :key="data.id">
-              {{ firstLetterUpperCase(data) }} <br />
-            </b-card>
-          </template>
-
           <template #cell(name)="data">
             {{ firstLetterUpperCase(data.value) }}
           </template>
@@ -479,7 +449,7 @@ export default {
         { key: "time3", label: "Show 3", sortable: true },
         { key: "type", label: "Type", sortable: true },
         { key: "description", label: "Description", sortable: true },
-        { key: "movies", label: "Showing Movies", sortable: true },
+
         { key: "action", label: "Action", sortable: true },
       ],
     };
@@ -581,7 +551,7 @@ export default {
       await TheaterApi.delete(item.id);
     },
     async index() {
-      const res = await TheaterApi.index();
+      const res = await TheaterApi.index("");
       this.theaters = res.data.data.data;
       this.items = this.theaters;
     },

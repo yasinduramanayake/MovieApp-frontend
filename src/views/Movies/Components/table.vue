@@ -162,9 +162,11 @@
           <b-input-group size="sm">
             <b-form-input
               id="filterInput"
-              v-model="filter"
+              v-model="movietype"
+              @change="index(event)"
+              @reset="index(event)"
               type="search"
-              placeholder="Type to Search"
+              placeholder="Enter Movie Type(EX..English,Tamil).."
             />
             <b-input-group-append>
               <b-button>
@@ -333,6 +335,7 @@ export default {
       selctedFile: "",
       mode: "",
       button: "",
+      movietype: "",
       option: [
         { title: "Tamil" },
         { title: "English" },
@@ -361,6 +364,7 @@ export default {
       length,
 
       //  table data
+      timeout: "",
       id: "",
       perPage: 5,
       pageOptions: [3, 5, 10],
@@ -455,8 +459,21 @@ export default {
       this.currentPage = 1;
     },
 
+    search(event) {
+      // clear timeout variable
+      clearTimeout(this.timeout);
+
+      var self = this;
+      this.timeout = setTimeout(function() {
+        // enter this block of code after 1 second
+        // handle stuff, call search API etc.
+        self.filters.search = event.target.value;
+        self.list(false, true);
+      }, 1000);
+    },
+
     async index() {
-      const res = await MovieApi.index("");
+      const res = await MovieApi.index(this.movietype);
       this.movies = res.data.data.data;
       this.items = this.movies;
     },

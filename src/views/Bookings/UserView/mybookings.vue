@@ -65,20 +65,12 @@
                   <b-card-text>
                     <b>Selected Time</b> : {{ booking.showtime }}</b-card-text
                   ><b-row>
-                    <b-col cols="4">
+                    <b-col cols="6">
                       <b-button variant="gradient-primary"
                         >Edit</b-button
                       ></b-col
                     >
-                    <b-col cols="4">
-                      <b-button
-                        variant="gradient-primary"
-                        @click="deletebooking(booking.id)"
-                        >Delete</b-button
-                      ></b-col
-                    >
-
-                    <b-col cols="4">
+                    <b-col cols="6">
                       <b-button
                         variant="gradient-primary"
                         @click="deletebooking(booking.id)"
@@ -86,6 +78,14 @@
                       ></b-col
                     >
                   </b-row>
+                  <br />
+                  <b-button
+                    style="width:340px"
+                    variant="gradient-primary"
+                    block
+                    @click=""
+                    >Checkout to pay</b-button
+                  >
                 </b-col>
               </b-row>
             </b-card>
@@ -174,6 +174,10 @@ export default {
         .catch(({ res }) => {
           this.$vs.loading.close();
         });
+    },
+
+    cyheckout(route, route2, route3) {
+      this.$router.push(`/`);
     },
   },
 };

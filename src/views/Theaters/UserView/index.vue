@@ -35,7 +35,7 @@
           </b-card-text>
         </b-card>
         <br />
-        <br />
+
         <b-row>
           <b-col v-for="theater in theaters" :key="theater.id" md="1" lg="4">
             <b-card :title="theater.name">
@@ -43,16 +43,20 @@
               <b-card-text> </b-card-text>
               <b-row>
                 <b-col cols="12">
-                  <b> Show time 1</b> : {{ theater.time1 }} A.M <br />
-                  <b>Show time 2</b> : {{ theater.time2 }} P.M <br />
-                  <b> Show time 3</b> : {{ theater.time3 }} P.M <br /><br />
-                  <b> Type</b> : {{ theater.type }} <br /><br />
+                  <b> Show time 1</b> :
+                  {{ momentFormat(theater.time1, "h:mm:ss a") }} <br />
+                  <b>Show time 2</b> :
+                  {{ momentFormat(theater.time2, "h:mm:ss a") }} <br />
+                  <b> Show time 3</b> :
+                  {{ momentFormat(theater.time3, "h:mm:ss a") }}<br /><br />
+                  <b> Type</b> : {{ theater.type }} <br />
 
                   <validation-observer ref="bookForm" #default="{invalid}">
                     <b-form class="auth-register-form mt-2" @submit.prevent>
                       <b-row>
                         <b-col cols="12">
                           <b-form-group>
+                            <!-- Add seats -->
                             <label>Add Seats</label>
                             <validation-provider
                               #default="{ errors }"
@@ -61,6 +65,7 @@
                             >
                               <b-form-input
                                 v-model="form.seats"
+                                @change="condition()"
                                 type="number"
                                 :state="errors.length > 0 ? false : null"
                                 placeholder="No of Seats"
@@ -80,6 +85,7 @@
                               name="time1"
                             >
                               <b-form-timepicker
+                                @change="condition()"
                                 locale="en"
                                 required
                                 v-model="form.showtime"
@@ -288,6 +294,12 @@ export default {
         setTimeout(() => {
           this.form = "";
         }, 8000);
+      }
+    },
+
+    condition() {
+      if (!localStorage.token) {
+        notification.toast("Please Login Before", "error");
       }
     },
   },
