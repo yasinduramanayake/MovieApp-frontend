@@ -24,6 +24,9 @@ export default {
       if (localStorage.role === 'Admin') {
         window.location.href = '/dashboard'
       }
+      if (localStorage.role === 'User') {
+        window.location.href = '/'
+      }
     })
   },
   async profile() {
