@@ -211,7 +211,6 @@ export default {
     Header,
     Footer,
     BCard,
-    BCardText,
     BButton,
   },
   data() {
