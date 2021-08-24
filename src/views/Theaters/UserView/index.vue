@@ -12,11 +12,12 @@
         <b-row>
           <b-col cols="9">
             <b-form-group>
-              <v-select
-                v-model="selected"
+              <b-form-input
+                type="search"
+                v-model="location"
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
-                label="title"
-                :options="option"
+                v-on:input="search($event)"
+                @reset="search($event)"
               />
             </b-form-group>
           </b-col>
@@ -40,7 +41,9 @@
           <b-col v-for="theater in theaters" :key="theater.id" md="1" lg="4">
             <b-card :title="theater.name">
               <b-card-img height="250px" :src="theater.image"></b-card-img>
-              <b-card-text> </b-card-text>
+              <br /><br />
+              <b> Located in {{ theater.venue }} </b>
+              <br /><br />
               <b-row>
                 <b-col cols="12">
                   <b> Show time 1</b> :
@@ -57,7 +60,7 @@
                         <b-col cols="12">
                           <b-form-group>
                             <!-- Add seats -->
-                            <label>Add Seats</label>
+                            <label>Seats</label>
                             <validation-provider
                               #default="{ errors }"
                               rules="required|between:1,20"
@@ -78,7 +81,7 @@
                         <b-col cols="12">
                           <!-- Show Time  -->
                           <b-form-group>
-                            <label>Select Show time </label>
+                            <label>Show time</label>
                             <validation-provider
                               #default="{ errors }"
                               rules="required"
@@ -116,6 +119,17 @@
             </b-card>
           </b-col>
         </b-row>
+
+        <b-pagination
+          v-model="currentPage"
+          :total-rows="total"
+          :per-page="perPage"
+          v-on:input="paginate($event)"
+          align="center"
+          size="sm"
+          class="my-0"
+        />
+
         <br />
         <br />
       </b-container>
@@ -160,11 +174,11 @@ import {
   BForm,
   BCol,
   BFormInput,
+  BPagination,
 
   // BCard,
 
   // BCard,
-  VBToggle,
 } from "bootstrap-vue";
 import {
   required,
@@ -194,6 +208,7 @@ export default {
     BCardImg,
     BCard,
     vSelect,
+    BPagination,
     BContainer,
     Header,
     BFormGroup,
@@ -227,18 +242,17 @@ export default {
         theater_name: null,
         price: null,
       },
+      // pagination
+      perPage: 1,
+      currentPage: 1,
+      total: "",
+
       baseprice: 200.0,
       theater_param: this.$route.params.theaters,
       theaters: [],
 
       description: this.$route.params.description,
-      selected: { title: "Colombo" },
-      option: [
-        { title: "Colombo" },
-        { title: "Rathnapura" },
-        { title: "Panadura" },
-        { title: "Kaluthara" },
-      ],
+      location: "",
 
       // validations
       required,
@@ -260,9 +274,35 @@ export default {
     await this.FetchTheaters();
   },
   methods: {
-    async FetchTheaters() {
-      const res = await Theaterapi.index(this.theater_param);
-      this.theaters = res.data.data.data;
+    search(e) {
+      console.log(e);
+      this.FetchTheaters(true, e);
+      this.theaters = [];
+    },
+    paginate(e) {
+      this.currentPage = e;
+      this.FetchTheaters();
+      this.theaters = [];
+    },
+    async FetchTheaters(reset = false, location = "") {
+      if (reset) {
+        this.currentPage = 1;
+        this.theaters = [];
+      }
+      const res = await Theaterapi.index(
+        this.theater_param,
+        this.currentPage,
+        this.perPage,
+        location
+      );
+      if (this.currentPage == 1) {
+        this.theaters = res.data.data.data;
+      } else {
+        this.theaters = this.theaters.concat(res.data.data.data);
+      }
+      // this.items = this.movies;
+
+      this.total = res.data.data.total;
     },
 
     async AddBooking(e, e1) {
@@ -293,7 +333,7 @@ export default {
 
         setTimeout(() => {
           this.form = "";
-        }, 8000);
+        }, 30000);
       }
     },
 

@@ -10,18 +10,24 @@
         <br />
         <!--/Search Bar-->
         <b-row>
-          <b-col cols="9">
+          <b-col cols="10">
             <b-form-group>
-              <v-select
-                v-model="selected"
+              <b-form-input
+                v-model="moviename"
+                type="search"
+                v-on:input="search($event)"
+                @reset="search($event)"
+                placeholder="Search Movie...."
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
-                label="title"
-                :options="option"
               />
             </b-form-group>
           </b-col>
-          <b-col cols="3">
-            <b-button variant="primary">Search movie.....</b-button>
+          <b-col cols="2">
+            <b-button
+              @click="show('English', moviename)"
+              variant="gradient-primary"
+              >Search</b-button
+            >
           </b-col>
         </b-row>
         <br />
@@ -53,6 +59,16 @@
             </b-card>
           </b-col>
         </b-row>
+
+        <b-pagination
+          v-model="currentpage"
+          :total-rows="total"
+          :per-page="per_page"
+          v-on:input="paginate($event)"
+          align="center"
+          size="sm"
+          class="my-0"
+        />
         <br />
         <br />
       </b-container>
@@ -71,10 +87,11 @@
 import Header from "@/views/components/header.vue";
 import Footer from "@/views/footer.vue";
 import Movieapi from "@/Api/Modules/movie";
+
 import {
-  BCardText,
   BButton,
-  BModal,
+  BFormInput,
+  BPagination,
   VBModal,
   BContainer,
   BCol,
@@ -85,48 +102,75 @@ import {
   // BCard,
 } from "bootstrap-vue";
 // import vSelect from "vue-select";
-import vSelect from "vue-select";
 // import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
 export default {
   components: {
     BCardImg,
     BCard,
-
+    BPagination,
     BContainer,
     BFormGroup,
-    vSelect,
-    Header,
 
+    Header,
+    BFormInput,
     BCol,
-    BModal,
+
     BRow,
 
     Footer,
     // vSelect,
-    // BCard,
-    BCardText,
+
     BButton,
   },
   data() {
     return {
-      selected: { title: "Fast And Furious" },
-      option: [{ title: "Tenet" }, { title: "Jumanji" }, { title: "Thor" }],
       movies: [],
+      moviename: "",
+
+      // pagination
+
+      currentpage: "",
+      total: "",
+      per_page: "3",
     };
+  },
+
+  directives: {
+    "b-modal": VBModal,
   },
   async mounted() {
     await this.show();
   },
-  directives: {
-    "b-modal": VBModal,
-  },
   methods: {
-    async show() {
-      const response = await Movieapi.index("English");
-      this.movies = response.data.data.data;
-      console.log(this.movies);
+    paginate(e) {
+      this.currentpage = e;
+      this.show();
     },
+
+    search(e) {
+      this.show(true, e);
+      this.movies = [];
+    },
+    async show(reset = false, moviename = "") {
+      if (reset) {
+        this.currentpage = 1;
+        this.movies = [];
+      }
+      const response = await Movieapi.index(
+        "English",
+        moviename,
+        this.currentpage,
+        this.per_page
+      );
+      if (this.currentpage == 1) {
+        this.movies = response.data.data.data;
+      } else {
+        this.movies = this.movies.concat(response.data.data.data);
+      }
+      this.total = response.data.data.total;
+    },
+
     routing(route, route1, route2, route3) {
       this.$router.push(
         `/theaterdetails/${route}/${route1}/${route2}/${route3}`

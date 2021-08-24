@@ -1,19 +1,8 @@
 export default [
   {
-    path: '/paydetails/:name/:seats/:total',
+    path: '/paydetails/:movie_name/:seats/:total/:time/:theater_name',
     name: 'payment',
     component: () => import('@/views/payment/paydetails.vue'),
-    meta: {
-      layout: 'full',
-      redirectIfLoggedIn: true,
-      noAuth: true,
-    },
-  },
-
-  {
-    path: '/mypaydetails',
-    name: 'mypayment',
-    component: () => import('@/views/payment/mypayments.vue'),
     meta: {
       layout: 'full',
       redirectIfLoggedIn: true,

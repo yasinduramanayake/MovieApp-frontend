@@ -57,6 +57,14 @@
           <template #cell(price)="data">
             {{ getPrice(data.value) }}
           </template>
+
+          <template #cell(showtime)="data">
+            {{ momentFormat(data.value, "h:mm:ss a") }}
+          </template>
+
+          <template #cell(created_at)="data">
+            {{ momentFormat(data.value, "MMMM Do YYYY, h:mm:ss a") }}
+          </template>
         </b-table>
       </b-col>
 
@@ -136,6 +144,7 @@ export default {
           key: "price",
           label: "Amount",
         },
+        { key: "created_at", label: "Booked Date", sortable: true },
         { key: "theater_name", label: "Theater Name", sortable: true },
         { key: "full_name", label: "Full Name", sortable: true },
         { key: "email", label: "Email", sortable: true },
@@ -186,7 +195,7 @@ export default {
     },
 
     async index() {
-      const res = await BookingApi.index("Yasindu Ramanayake");
+      const res = await BookingApi.index("");
       this.bookings = res.data.data.data;
       this.items = this.bookings;
     },

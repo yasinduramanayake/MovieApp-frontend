@@ -262,7 +262,7 @@ export default {
 
       setTimeout(() => {
         this.payload = "";
-      }, 8000);
+      }, 30000);
     },
   },
 };
