@@ -23,7 +23,11 @@
             </b-form-group>
           </b-col>
           <b-col cols="2">
-            <b-button variant="gradient-primary">Search..</b-button>
+            <b-button
+              @click="FetchTheaters(true, location)"
+              variant="gradient-primary"
+              >Search..</b-button
+            >
           </b-col>
         </b-row>
 
@@ -36,7 +40,21 @@
             <b-card :title="theater.name">
               <b-card-img height="250px" :src="theater.image"></b-card-img>
               <br /><br />
-              <b> Located in {{ theater.venue }} </b>
+              <b-row>
+                <b-col>
+                  <b> Located in {{ theater.venue }} </b>
+                </b-col>
+                <b-col>
+                  <b-button
+                    v-b-modal.modal-info
+                    @click="showmodal(theater.description)"
+                    variant="gradient-primary"
+                    type="submit"
+                  >
+                    Details
+                  </b-button>
+                </b-col>
+              </b-row>
               <br /><br />
               <b-row>
                 <b-col cols="12">
@@ -118,6 +136,18 @@
           <NoResultFound />
         </div>
 
+        <b-modal
+          id="modal-info"
+          :hide-footer="true"
+          modal-class="modal-info"
+          centered
+          title="Theater Info"
+        >
+          <b-card-text>
+            {{ description }}
+          </b-card-text>
+        </b-modal>
+
         <b-pagination
           v-model="currentPage"
           :total-rows="total"
@@ -132,22 +162,7 @@
         <br />
       </b-container>
     </div>
-    <b-modal
-      id="modal-info"
-      ok-only
-      ok-variant="info"
-      ok-title="Accept"
-      modal-class="modal-info"
-      centered
-      title="Info Modal"
-    >
-      <b-card-text>
-        Biscuit chocolate cake gummies. Lollipop I love macaroon bear claw
-        caramels. I love marshmallow tiramisu I love fruitcake I love gummi
-        bears. Carrot cake topping liquorice. Pudding caramels liquorice sweet I
-        love. Donut powder cupcake ice cream tootsie roll jelly.
-      </b-card-text>
-    </b-modal>
+
     <div>
       <Footer />
     </div>
@@ -169,6 +184,8 @@ import {
   BCard,
   BCardImg,
   BRow,
+  BModal,
+  VBModal,
   BForm,
   BCol,
   BFormInput,
@@ -209,6 +226,7 @@ export default {
     BCard,
     BPagination,
     BContainer,
+    BModal,
     Header,
     NoResultFound,
     BFormGroup,
@@ -251,7 +269,7 @@ export default {
       theater_param: this.$route.params.theaters,
       theaters: [],
 
-      description: this.$route.params.description,
+      description: "",
       location: "",
 
       // validations
@@ -269,7 +287,9 @@ export default {
       length,
     };
   },
-
+  directives: {
+    "b-modal": VBModal,
+  },
   async mounted() {
     await this.FetchTheaters();
   },
@@ -304,7 +324,9 @@ export default {
 
       this.total = res.data.data.total;
     },
-
+    showmodal(description) {
+      this.description = description;
+    },
     async AddBooking(e, e1) {
       if (!localStorage.token) {
         notification.toast("Please Login Before", "error");
