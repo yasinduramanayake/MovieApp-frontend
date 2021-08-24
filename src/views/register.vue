@@ -261,7 +261,7 @@ export default {
       }
       setTimeout(() => {
         this.form = "";
-      }, 8000);
+      }, 30000);
     },
   },
 };

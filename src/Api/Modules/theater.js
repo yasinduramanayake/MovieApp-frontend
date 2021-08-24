@@ -2,8 +2,10 @@ import { api } from '@/Api/index'
 import notification from '@/ApiConstance/toast'
 
 export default {
-  async index(name) {
-    return await api.get(`/gettheaters?filter[name]=${name}`)
+  async index(name = '', page = '', per_page = '', venue = '') {
+    return await api.get(
+      `/gettheaters?filter[name]=${name}&page=${page}&per_page=${per_page}&filter[venue]=${venue}`,
+    )
   },
 
   async store(payload) {

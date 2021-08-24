@@ -12,156 +12,44 @@
         <b-row>
           <b-col cols="9">
             <b-form-group>
-              <v-select
-                v-model="selected"
+              <b-form-input
+                v-model="moviename"
+                type="search"
+                v-on:input="search($event)"
+                @reset="search($event)"
+                placeholder="Search Movie...."
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
-                label="title"
-                :options="option"
               />
             </b-form-group>
           </b-col>
           <b-col cols="3">
-            <b-button variant="dark">Search movie.....</b-button>
+            <b-button @click="show('Tamil', moviename)" variant="primary"
+              >Search</b-button
+            >
           </b-col>
         </b-row>
         <br />
         <br />
         <!--/Content-->
         <b-row>
-          <b-col md="1" lg="4">
-            <b-card title="MOVIE 001">
-              <b-card-img
-                height="250px"
-                :src="require('@/assets/images/tamil1.jpg')"
-              ></b-card-img>
-              <b-card-text>
-                Some quick example text to build on the card title and.
-              </b-card-text>
+          <b-col v-for="movie in movies" :key="movie.id" md="1" lg="4">
+            <b-card :title="firstLetterUpperCase(movie.name)">
+              <b-card-img :src="movie.image"></b-card-img>
+              <br />
+              <br />
               <b-row>
                 <b-col cols="6">
-                  <b-button class="btn" variant="gradient-primary">
-                    View Details
-                  </b-button>
-                </b-col>
-
-                <b-col cols="6">
-                  <b-button variant="gradient-primary">
-                    Buy Tickets
-                  </b-button>
-                </b-col>
-              </b-row>
-            </b-card>
-          </b-col>
-
-          <b-col md="1" lg="4">
-            <b-card title="MOVIE 002">
-              <b-card-img
-                :src="require('@/assets/images/tamil2.jpg')"
-              ></b-card-img>
-              <b-card-text>
-                Some quick example text to build on the card title and
-              </b-card-text>
-              <b-row>
-                <b-col cols="6">
-                  <b-button class="btn" variant="gradient-primary">
-                    View Details
-                  </b-button>
-                </b-col>
-
-                <b-col cols="6">
-                  <b-button variant="gradient-primary">
-                    Buy Tickets
-                  </b-button>
-                </b-col>
-              </b-row>
-            </b-card>
-          </b-col>
-          <b-col md="1" lg="4">
-            <b-card title="MOVIE 003">
-              <b-card-img
-                :src="require('@/assets/images/tamil3.jpg')"
-              ></b-card-img>
-              <b-card-text>
-                Some quick example text to build on the card title and
-              </b-card-text>
-              <b-row>
-                <b-col cols="6">
-                  <b-button class="btn" variant="gradient-primary">
-                    View Details
-                  </b-button>
-                </b-col>
-
-                <b-col cols="6">
-                  <b-button variant="gradient-primary">
-                    Buy Tickets
-                  </b-button>
-                </b-col>
-              </b-row>
-            </b-card>
-          </b-col>
-          <b-col md="1" lg="4">
-            <b-card title="MOVIE 004">
-              <b-card-img
-                :src="require('@/assets/images/tamil4.jpg')"
-              ></b-card-img>
-              <b-card-text>
-                Some quick example text to build on the card title and
-              </b-card-text>
-              <b-row>
-                <b-col cols="6">
-                  <b-button class="btn" variant="gradient-primary">
-                    View Details
-                  </b-button>
-                </b-col>
-
-                <b-col cols="6">
-                  <b-button variant="gradient-primary">
-                    Buy Tickets
-                  </b-button>
-                </b-col>
-              </b-row>
-            </b-card>
-          </b-col>
-          <b-col md="1" lg="4">
-            <b-card title="MOVIE 005">
-              <b-card-img
-                :src="require('@/assets/images/tamil5.jpg')"
-              ></b-card-img>
-              <b-card-text>
-                Some quick example text to build on the card title and
-              </b-card-text>
-              <b-row>
-                <b-col cols="6">
-                  <b-button class="btn" variant="gradient-primary">
-                    View Details
-                  </b-button>
-                </b-col>
-
-                <b-col cols="6">
-                  <b-button variant="gradient-primary">
-                    Buy Tickets
-                  </b-button>
-                </b-col>
-              </b-row>
-            </b-card>
-          </b-col>
-          <b-col md="1" lg="4">
-            <b-card title="MOVIE 006">
-              <b-card-img
-                :src="require('@/assets/images/tamil6.jpg')"
-              ></b-card-img>
-              <b-card-text>
-                Some quick example text to build on the card title and
-              </b-card-text>
-              <b-row>
-                <b-col cols="6">
-                  <b-button class="btn" variant="gradient-primary">
-                    View Details
-                  </b-button>
-                </b-col>
-
-                <b-col cols="6">
-                  <b-button variant="gradient-primary">
+                  <b-button
+                    @click="
+                      routing(
+                        movie.name,
+                        movie.type,
+                        movie.description,
+                        movie.theaters
+                      )
+                    "
+                    variant="gradient-primary"
+                  >
                     Buy Tickets
                   </b-button>
                 </b-col>
@@ -169,26 +57,21 @@
             </b-card>
           </b-col>
         </b-row>
+
+        <b-pagination
+          v-model="currentpage"
+          :total-rows="total"
+          :per-page="per_page"
+          v-on:input="paginate($event)"
+          align="center"
+          size="sm"
+          class="my-0"
+        />
         <br />
         <br />
       </b-container>
     </div>
-    <b-modal
-      id="modal-info"
-      ok-only
-      ok-variant="info"
-      ok-title="Accept"
-      modal-class="modal-info"
-      centered
-      title="Info Modal"
-    >
-      <b-card-text>
-        Biscuit chocolate cake gummies. Lollipop I love macaroon bear claw
-        caramels. I love marshmallow tiramisu I love fruitcake I love gummi
-        bears. Carrot cake topping liquorice. Pudding caramels liquorice sweet I
-        love. Donut powder cupcake ice cream tootsie roll jelly.
-      </b-card-text>
-    </b-modal>
+
     <div>
       <Footer />
     </div>
@@ -201,58 +84,98 @@
 /* eslint-disable global-require */
 import Header from "@/views/components/header.vue";
 import Footer from "@/views/footer.vue";
-import vSelect from "vue-select";
+import Movieapi from "@/Api/Modules/movie";
+
 import {
-  BCardText,
   BButton,
-  BModal,
-  VBModal,
+  BFormInput,
+  BPagination,
   BContainer,
   BCol,
   BCard,
   BCardImg,
   BRow,
-  BFormInput,
+  BFormGroup,
   // BCard,
-  VBToggle,
 } from "bootstrap-vue";
 // import vSelect from "vue-select";
-import { togglePasswordVisibility } from "@core/mixins/ui/forms";
-import store from "@/store/index";
-import Ripple from "vue-ripple-directive";
-import Dropdown from "vue-simple-search-dropdown";
+
 // import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
 export default {
   components: {
     BCardImg,
-    BFormInput,
     BCard,
-    vSelect,
+    BPagination,
     BContainer,
+    BFormGroup,
+
     Header,
-    BCol,
-    BModal,
-    BRow,
     BFormInput,
+    BCol,
+
+    BRow,
+
     Footer,
     // vSelect,
-    // BCard,
-    BCardText,
+
     BButton,
   },
-  directives: {
-    "b-toggle": VBToggle,
-    "b-modal": VBModal,
-    Ripple,
-    Dropdown,
-  },
-  mixins: [togglePasswordVisibility],
   data() {
     return {
-      selected: { title: "Master" },
-      option: [{ title: "Palavi" }, { title: "Mathura" }, { title: "Billa" }],
+      movies: [],
+      moviename: "",
+
+      // pagination
+
+      currentpage: "",
+      total: "",
+      per_page: "3",
     };
+  },
+
+  directives: {
+    "b-modal": VBModal,
+  },
+  async mounted() {
+    await this.show();
+  },
+  methods: {
+    paginate(e) {
+      this.currentpage = e;
+
+      this.show();
+      this.movies = [];
+    },
+
+    search(e) {
+      this.show(true, e);
+      this.movies = [];
+    },
+    async show(reset = false, moviename = "") {
+      if (reset) {
+        this.currentpage = 1;
+        this.movies = [];
+      }
+      const response = await Movieapi.index(
+        "Tamil",
+        moviename,
+        this.currentpage,
+        this.per_page
+      );
+      if (this.currentpage == 1) {
+        this.movies = response.data.data.data;
+      } else {
+        this.movies = this.movies.concat(response.data.data.data);
+      }
+      this.total = response.data.data.total;
+    },
+
+    routing(route, route1, route2, route3) {
+      this.$router.push(
+        `/theaterdetails/${route}/${route1}/${route2}/${route3}`
+      );
+    },
   },
 };
 </script>
@@ -260,7 +183,7 @@ export default {
 <style lang="scss">
 @import "@core/scss/vue/pages/page-auth.scss";
 @import "@core/scss/vue/libs/vue-select.scss";
-@import "@core/scss/vue/libs/vue-select.scss";
+
 img {
   height: 250px;
   width: 100%;

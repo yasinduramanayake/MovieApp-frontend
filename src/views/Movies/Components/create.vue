@@ -197,7 +197,6 @@ export default {
   },
   async mounted() {
     await this.Alltheaters();
-    await this.showmeth();
   },
   methods: {
     onChange(e) {
@@ -231,7 +230,7 @@ export default {
 
       setTimeout(() => {
         this.payload = "";
-      }, 8000);
+      }, 30000);
     },
   },
 };

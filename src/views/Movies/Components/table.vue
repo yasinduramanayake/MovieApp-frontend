@@ -138,21 +138,8 @@
     </b-modal>
 
     <b-row>
-      <b-col md="2" sm="4" class="my-1">
-        <b-form-group class="mb-0">
-          <label class="d-inline-block text-sm-left mr-50">Per page</label>
-          <b-form-select
-            id="perPageSelect"
-            v-model="perPage"
-            size="sm"
-            :options="pageOptions"
-            class="w-50"
-          />
-        </b-form-group>
-      </b-col>
       <b-col md="6" class="my-1">
         <b-form-group
-          label="Filter"
           label-cols-sm="3"
           label-align-sm="right"
           label-size="sm"
@@ -162,14 +149,14 @@
           <b-input-group size="sm">
             <b-form-input
               id="filterInput"
-              v-model="movietype"
-              @change="index(event)"
-              @reset="index(event)"
+              v-model="moviename"
+              v-on:input="search($event)"
+              @reset="search($event)"
               type="search"
-              placeholder="Enter Movie Type(EX..English,Tamil).."
+              placeholder="Enter Movie Name.."
             />
             <b-input-group-append>
-              <b-button>
+              <b-button @click="index('', moviename)">
                 Search
               </b-button>
             </b-input-group-append>
@@ -190,9 +177,6 @@
           :sort-by.sync="sortBy"
           :sort-desc.sync="sortDesc"
           :sort-direction="sortDirection"
-          :filter="filter"
-          :filter-included-fields="filterOn"
-          @filtered="onFiltered"
         >
           <template #cell(image)="data">
             <b-avatar :src="data.value" size="60px" />
@@ -239,12 +223,28 @@
           </template>
         </b-table>
       </b-col>
-
+      <div
+        class="img"
+        v-if="items.length === 0"
+        style="padding-left:300px;padding-top:40px"
+      >
+        <b-card
+          class="profile-header mb-2"
+          :img-src="
+            require('@/assets/images/WhatsApp Image 2021-08-24 at 1.17.57 PM.jpeg')
+          "
+          img-top
+          alt="cover photo"
+          body-class="p-0"
+        >
+        </b-card>
+      </div>
       <b-col cols="12">
         <b-pagination
           v-model="currentPage"
-          :total-rows="totalRows"
+          :total-rows="total"
           :per-page="perPage"
+          v-on:input="paginate($event)"
           align="center"
           size="sm"
           class="my-0"
@@ -255,10 +255,12 @@
 </template>
 <script>
 import { ValidationProvider, ValidationObserver } from "vee-validate";
+
 import {
   BTable,
   BAvatar,
   BRow,
+  BEmbed,
   BCol,
   BFormGroup,
   BFormSelect,
@@ -307,6 +309,7 @@ export default {
     vSelect,
     BForm,
     BCardTitle,
+    BEmbed,
     BTable,
     BAvatar,
     BRow,
@@ -335,7 +338,7 @@ export default {
       selctedFile: "",
       mode: "",
       button: "",
-      movietype: "",
+      moviename: "",
       option: [
         { title: "Tamil" },
         { title: "English" },
@@ -364,12 +367,11 @@ export default {
       length,
 
       //  table data
-      timeout: "",
       id: "",
-      perPage: 5,
-      pageOptions: [3, 5, 10],
-      totalRows: 1,
+      perPage: 4,
       currentPage: 1,
+      total: "",
+
       sortBy: "",
       items: [],
       movies: [],
@@ -402,6 +404,9 @@ export default {
   },
 
   computed: {
+    // rows() {
+    //   return this.items.length;
+    // },
     sortOptions() {
       // Create an options list from our fields
       return this.fields
@@ -418,7 +423,7 @@ export default {
 
   async mounted() {
     // Set the initial number of items
-    this.totalRows = this.items.length;
+
     await this.Alltheaters();
   },
 
@@ -449,33 +454,41 @@ export default {
       const res = await TheaterApi.index("");
       this.theaters = res.data.data.data;
     },
+    // paginationevent(e) {
+    //   this.pagination.total = this.pagination.total - this.pagination.per_page;
+    // },
     resetInfoModal() {
       this.infoModal.title = "";
       this.infoModal.content = "";
     },
-    onFiltered(filteredItems) {
-      // Trigger pagination to update the number of buttons/pages due to filtering
-      this.totalRows = filteredItems.length;
-      this.currentPage = 1;
+    search(e) {
+      this.index(true, e);
+      this.items = [];
     },
 
-    search(event) {
-      // clear timeout variable
-      clearTimeout(this.timeout);
-
-      var self = this;
-      this.timeout = setTimeout(function() {
-        // enter this block of code after 1 second
-        // handle stuff, call search API etc.
-        self.filters.search = event.target.value;
-        self.list(false, true);
-      }, 1000);
+    paginate(e) {
+      this.currentPage = e;
+      this.index();
     },
+    async index(reset = false, moviename = "") {
+      if (reset) {
+        this.currentPage = 1;
+        this.items = [];
+      }
+      const res = await MovieApi.index(
+        "",
+        moviename,
+        this.currentPage,
+        this.perPage
+      );
+      if (this.currentPage == 1) {
+        this.items = res.data.data.data;
+      } else {
+        this.items = this.items.concat(res.data.data.data);
+      }
+      // this.items = this.movies;
 
-    async index() {
-      const res = await MovieApi.index(this.movietype);
-      this.movies = res.data.data.data;
-      this.items = this.movies;
+      this.total = res.data.data.total;
     },
     async Updatetheater() {
       if (await this.$refs.movieForm.validate()) {
@@ -499,6 +512,7 @@ export default {
         this.payload = "";
       }, 8000);
     },
+
     async Deletetheater(item, index, button) {
       this.infoModal.title = `Row index: ${index}`;
       this.infoModal.content = JSON.stringify(item, null, 2);
@@ -508,3 +522,4 @@ export default {
   },
 };
 </script>
+<style scoped></style>
