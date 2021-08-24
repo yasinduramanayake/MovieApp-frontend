@@ -68,6 +68,9 @@
         </b-table>
       </b-col>
 
+      <div v-if="items.length === 0">
+        <NoResultFound />
+      </div>
       <b-col cols="12">
         <b-pagination
           v-model="currentPage"
@@ -91,6 +94,7 @@ import {
   BTable,
   BAvatar,
   BRow,
+  BCard,
   BCol,
   BFormGroup,
   BFormSelect,
@@ -101,14 +105,17 @@ import {
   BButton,
 } from "bootstrap-vue";
 import BookingApi from "@/Api/Modules/booking";
+import NoResultFound from "@/views/components/NoResultFoundimage.vue";
 
 export default {
   components: {
     BTable,
     BAvatar,
     BRow,
+    BCard,
     BCol,
     BFormGroup,
+    NoResultFound,
     BFormSelect,
     BPagination,
     BInputGroup,

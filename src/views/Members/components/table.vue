@@ -189,21 +189,8 @@
         </b-table>
       </b-col>
 
-      <div
-        class="img"
-        v-if="items.length === 0"
-        style="padding-left:300px;padding-top:40px"
-      >
-        <b-card
-          class="profile-header mb-2"
-          :img-src="
-            require('@/assets/images/WhatsApp Image 2021-08-24 at 1.17.57 PM.jpeg')
-          "
-          img-top
-          alt="cover photo"
-          body-class="p-0"
-        >
-        </b-card>
+      <div class="img" v-if="items.length === 0">
+        <NoResultFound />
       </div>
       <b-col cols="12">
         <b-pagination
@@ -226,6 +213,7 @@ import {
   BSidebar,
   VBToggle,
   BTable,
+  BCard,
   BAvatar,
   BRow,
   BCol,
@@ -263,12 +251,16 @@ import user from "@/Api/Modules/user";
 import vSelect from "vue-select";
 import { togglePasswordVisibility } from "@core/mixins/ui/forms";
 
+import NoResultFound from "@/views/components/NoResultFoundimage.vue";
+
 export default {
   components: {
     CreateForm,
     BSidebar,
+    NoResultFound,
     vSelect,
     BForm,
+    BCard,
     BCardTitle,
     BTable,
     BAvatar,
