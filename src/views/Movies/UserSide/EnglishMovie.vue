@@ -34,7 +34,7 @@
               <br />
               <br />
               <b-row>
-                <b-col cols="6">
+                <b-col cols="12" offset-md="3">
                   <b-button
                     @click="
                       routing(
@@ -44,9 +44,10 @@
                         movie.theaters
                       )
                     "
-                    variant="gradient-primary"
+                    variant="primary"
+                    type="submit"
                   >
-                    Buy Tickets
+                    Add to my bookings
                   </b-button>
                 </b-col>
               </b-row>
