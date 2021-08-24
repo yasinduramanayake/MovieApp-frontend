@@ -29,13 +29,11 @@
           <li v-if="!token" v-b-toggle.sidebar-right>
             <a style="color:white">Login</a>
           </li>
+
           <li v-if="token">
             <a style="color:white" @click="pushprofile()">Profile</a>
           </li>
-
-          <li v-if="token">
-            <a style="color:white" @click="pushpayment()">My payments</a>
-          </li>
+          
           <li v-if="token">
             <a style="color:white" @click="pushbooking()">My bookings</a>
           </li>
