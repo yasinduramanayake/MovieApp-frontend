@@ -212,7 +212,7 @@ export default {
     BFormGroup,
     BInputGroup,
     BInputGroupAppend,
-    BFormCheckbox,
+  
     // validations
     ValidationProvider,
     ValidationObserver,

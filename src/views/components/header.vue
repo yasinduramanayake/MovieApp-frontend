@@ -114,9 +114,7 @@ export default {
     pushmovie() {
       this.$router.push("/movie");
     },
-    pushprofile() {
-      this.$router.push("/userprofile");
-    },
+    
     pushprofile() {
       this.$router.push("/userprofile");
     },

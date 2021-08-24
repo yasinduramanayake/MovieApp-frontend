@@ -366,7 +366,6 @@ export default {
     BRow,
     BCol,
     BFormGroup,
-    BFormSelect,
     BPagination,
     BInputGroup,
     BFormInput,

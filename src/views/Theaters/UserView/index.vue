@@ -207,7 +207,6 @@ export default {
   components: {
     BCardImg,
     BCard,
-    vSelect,
     BPagination,
     BContainer,
     Header,

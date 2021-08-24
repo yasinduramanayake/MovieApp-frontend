@@ -109,29 +109,15 @@ export default {
   components: {
     BCardImg,
     BCard,
-<<<<<<< HEAD
     BContainer,
     BFormGroup,
-    vSelect,
-    Header,
-    BCol,
-=======
     BPagination,
-    BContainer,
-    BFormGroup,
-
     Header,
     BFormInput,
     BCol,
 
->>>>>>> yasindu
     BRow,
     Footer,
-<<<<<<< HEAD
-=======
-    // vSelect,
-
->>>>>>> yasindu
     BButton,
   },
   data() {

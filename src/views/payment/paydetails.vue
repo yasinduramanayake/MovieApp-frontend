@@ -237,7 +237,6 @@ export default {
       seats: this.$route.params.seats,
       total: this.$route.params.total,
       theater_name: this.$route.params.theater_name,
-      theater_name: this.$route.params.theater_name,
       showtime: this.$route.params.time,
       // validations
       required,
