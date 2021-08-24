@@ -40,23 +40,25 @@
               <br />
               <br />
               <b-row>
-                <b-col cols="6">
+                <b-col offset-md="2">
                   <b-button
                     @click="routing(movie.name, movie.type, movie.theaters)"
                     variant="gradient-primary"
+                    v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                     type="submit"
                   >
-                    Add to my bookings
+                    ADD
                   </b-button>
                 </b-col>
-                <b-col cols="6">
+                <b-col offset-md="2">
                   <b-button
                     v-b-modal.modal-info
                     @click="showmodal(movie.description)"
                     variant="gradient-primary"
+                    v-ripple.400="'rgba(186, 191, 199, 0.15)'"
                     type="submit"
                   >
-                    View Info
+                    Info
                   </b-button>
                 </b-col>
               </b-row>

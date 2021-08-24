@@ -106,7 +106,7 @@
                         block
                         variant="gradient-primary"
                       >
-                        Add to Bookings
+                        Add to my Bookings
                       </b-button>
                     </b-form>
                   </validation-observer>
