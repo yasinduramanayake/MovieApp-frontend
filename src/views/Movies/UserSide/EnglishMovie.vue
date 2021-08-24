@@ -93,20 +93,13 @@ export default {
   components: {
     BCardImg,
     BCard,
-
     BContainer,
     BFormGroup,
     vSelect,
     Header,
-
     BCol,
-    BModal,
     BRow,
-
     Footer,
-    // vSelect,
-    // BCard,
-    BCardText,
     BButton,
   },
   data() {
