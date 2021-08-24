@@ -1,5 +1,5 @@
 <template>
-  <b-carousel id="carousel-interval" controls indicators :interval="2700">
+  <b-carousel id="carousel-interval" controls indicators :interval="5000">
     <b-carousel-slide :img-src="require('@/assets/images/banner06.jpg')" />
     <b-carousel-slide :img-src="require('@/assets/images/banner06.jpg')" />
     <b-carousel-slide :img-src="require('@/assets/images/banner06.jpg')" />

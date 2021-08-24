@@ -107,6 +107,10 @@
             </b-card>
           </b-col>
         </b-row>
+
+        <div v-if="bookings.length === 0">
+          <NoResultFound />
+        </div>
         <br />
         <br />
       </b-container>
@@ -203,6 +207,7 @@ import {
 // import vSelect from "vue-select";
 import { ValidationProvider, ValidationObserver } from "vee-validate";
 import BookingApi from "@/Api/Modules/booking";
+import NoResultFound from "@/views/components/NoresultFoundImageUser.vue";
 
 // import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 import {
@@ -233,7 +238,7 @@ export default {
     BRow,
     BFormInput,
     Footer,
-
+    NoResultFound,
     // BCard,
 
     // vSelect,

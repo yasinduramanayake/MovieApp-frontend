@@ -67,6 +67,8 @@
         <div v-if="movies.length === 0">
           <NoResultFound />
         </div>
+
+
         <b-modal
           id="modal-info"
           :hide-footer="true"

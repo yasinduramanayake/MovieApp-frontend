@@ -114,6 +114,10 @@
           </b-col>
         </b-row>
 
+        <div v-if="theaters.length === 0">
+          <NoResultFound />
+        </div>
+
         <b-pagination
           v-model="currentPage"
           :total-rows="total"
@@ -195,6 +199,8 @@ import vSelect from "vue-select";
 import Theaterapi from "@/Api/Modules/theater";
 import BookingApi from "@/Api/Modules/booking";
 import notification from "@/ApiConstance/toast";
+import NoResultFound from "@/views/components/NoresultFoundImageUser.vue";
+
 // import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
 export default {
@@ -204,6 +210,7 @@ export default {
     BPagination,
     BContainer,
     Header,
+    NoResultFound,
     BFormGroup,
     BCol,
     BFormTimepicker,
