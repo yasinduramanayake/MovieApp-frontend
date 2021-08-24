@@ -23,9 +23,7 @@
             </b-form-group>
           </b-col>
           <b-col cols="2">
-            <b-button
-              @click="show('English', moviename)"
-              variant="gradient-primary"
+            <b-button @click="show(true, moviename)" variant="gradient-primary"
               >Search</b-button
             >
           </b-col>
@@ -70,6 +68,7 @@
         <div v-if="movies.length === 0">
           <NoResultFound />
         </div>
+
         <b-modal
           id="modal-info"
           :hide-footer="true"

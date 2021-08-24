@@ -13,19 +13,29 @@
         </b-card>
         <br />
         <br />
+
         <b-row>
-          <b-col cols="9">
+          <b-col cols="10">
             <b-form-group>
               <b-form-input
+                v-model="movie_name"
+                type="search"
+                v-on:input="search($event)"
+                @reset="search($event)"
+                placeholder="Search Movie...."
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
-                label="title"
               />
             </b-form-group>
           </b-col>
-          <b-col cols="3">
-            <b-button variant="gradient-primary">Search Movie...</b-button>
+          <b-col cols="2">
+            <b-button
+              @click="index(true, movie_name)"
+              variant="gradient-primary"
+              >Search</b-button
+            >
           </b-col>
         </b-row>
+
         <b-row>
           <b-col v-for="booking in bookings" :key="booking.id" md="1" lg="4">
             <b-card
@@ -107,6 +117,20 @@
             </b-card>
           </b-col>
         </b-row>
+
+        <div v-if="bookings.length === 0">
+          <NoResultFound />
+        </div>
+
+        <b-pagination
+          v-model="currentPage"
+          :total-rows="total"
+          :per-page="perPage"
+          v-on:input="paginate($event)"
+          align="center"
+          size="sm"
+          class="my-0"
+        />
         <br />
         <br />
       </b-container>
@@ -189,6 +213,7 @@ import {
   VBModal,
   BFormGroup,
   BContainer,
+  BPagination,
   BCard,
   BCol,
   BFormTimepicker,
@@ -203,6 +228,7 @@ import {
 // import vSelect from "vue-select";
 import { ValidationProvider, ValidationObserver } from "vee-validate";
 import BookingApi from "@/Api/Modules/booking";
+import NoResultFound from "@/views/components/NoresultFoundImageUser.vue";
 
 // import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 import {
@@ -223,7 +249,7 @@ export default {
   components: {
     BCard,
     BFormTimepicker,
-
+    BPagination,
     BContainer,
     Header,
     BFormGroup,
@@ -233,7 +259,7 @@ export default {
     BRow,
     BFormInput,
     Footer,
-
+    NoResultFound,
     // BCard,
 
     // vSelect,
@@ -249,7 +275,11 @@ export default {
       // form data
       form: {},
       id: "",
-
+      movie_name: "",
+      // pagination
+      perPage: 3,
+      currentPage: 1,
+      total: "",
       //input validations
       required,
       email,
@@ -274,11 +304,36 @@ export default {
   },
 
   methods: {
-    async index() {
-      const res = await BookingApi.index(localStorage.name);
-      this.bookings = res.data.data.data;
-    },
+    async index(reset = false, movie = "") {
+      if (reset) {
+        this.currentPage = 1;
+        this.bookings = [];
+      }
+      const res = await BookingApi.index(
+        localStorage.name,
+        "",
+        movie,
+        this.currentPage,
+        this.perPage
+      );
+      if (this.currentPage == 1) {
+        this.bookings = res.data.data.data;
+      } else {
+        this.bookings = this.bookings.concat(res.data.data.data);
+      }
+      // this.items = this.movies;
 
+      this.total = res.data.data.total;
+    },
+    search(e) {
+      this.index(true, e);
+      this.bookings = [];
+    },
+    paginate(e) {
+      this.currentPage = e;
+      this.index();
+      this.bookings = [];
+    },
     Onupdate(data, data1, data3) {
       this.form.seats = data;
       this.form.showtime = data1;
