@@ -47,6 +47,7 @@
                     v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                     type="submit"
                   >
+
                     ADD
                   </b-button>
                 </b-col>
@@ -58,7 +59,7 @@
                     v-ripple.400="'rgba(186, 191, 199, 0.15)'"
                     type="submit"
                   >
-                    Info
+                            Details
                   </b-button>
                 </b-col>
               </b-row>
@@ -66,14 +67,15 @@
           </b-col>
         </b-row>
 
+        <div v-if="movies.length === 0">
+          <NoResultFound />
+        </div>
         <b-modal
           id="modal-info"
-          ok-only
-          ok-variant="info"
-          ok-title="Accept"
+          :hide-footer="true"
           modal-class="modal-info"
           centered
-          title="Info Modal"
+          title="Movie Info"
         >
           <b-card-text>
             {{ description }}
@@ -107,6 +109,7 @@
 import Header from "@/views/components/header.vue";
 import Footer from "@/views/footer.vue";
 import Movieapi from "@/Api/Modules/movie";
+import NoResultFound from "@/views/components/NoresultFoundImageUser.vue";
 
 import {
   BButton,
@@ -128,6 +131,7 @@ export default {
   components: {
     BCardImg,
     BModal,
+    NoResultFound,
     BCard,
     BContainer,
     BFormGroup,

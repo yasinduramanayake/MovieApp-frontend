@@ -10,25 +10,23 @@
         <br />
         <!--/Search Bar-->
         <b-row>
-          <b-col cols="9">
+          <b-col cols="10">
             <b-form-group>
               <b-form-input
                 type="search"
                 v-model="location"
+                placeholder="Search Location..."
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
                 v-on:input="search($event)"
                 @reset="search($event)"
               />
             </b-form-group>
           </b-col>
-          <b-col cols="3">
-            <b-button variant="gradient-primary">Search location.....</b-button>
+          <b-col cols="2">
+            <b-button variant="gradient-primary">Search..</b-button>
           </b-col>
         </b-row>
-        <br />
-        <br />
-        <br />
-        <br />
+
         <!--/Content-->
 
         <br />
@@ -238,7 +236,7 @@ export default {
         price: null,
       },
       // pagination
-      perPage: 1,
+      perPage: 2,
       currentPage: 1,
       total: "",
 

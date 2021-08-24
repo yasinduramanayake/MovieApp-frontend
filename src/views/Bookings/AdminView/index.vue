@@ -1,18 +1,6 @@
 <template>
   <div>
     <b-row>
-      <b-col md="2" sm="4" class="my-1">
-        <b-form-group class="mb-0">
-          <label class="d-inline-block text-sm-left mr-50">Per page</label>
-          <b-form-select
-            id="perPageSelect"
-            v-model="perPage"
-            size="sm"
-            :options="pageOptions"
-            class="w-50"
-          />
-        </b-form-group>
-      </b-col>
       <b-col md="6" class="my-1">
         <b-form-group
           label="Filter"
@@ -24,20 +12,21 @@
         >
           <b-input-group size="sm">
             <b-form-input
+              v-model="date"
+              v-on:input="search($event)"
+              @reset="search($event)"
               id="filterInput"
-              v-model="filter"
               type="search"
-              placeholder="Type to Search"
+              placeholder="Enter Date you want.. "
             />
             <b-input-group-append>
-              <b-button>
+              <b-button @click="index('', date)">
                 Search
               </b-button>
             </b-input-group-append>
           </b-input-group>
         </b-form-group>
       </b-col>
-
       <b-col cols="12">
         <b-table
           striped
@@ -74,8 +63,9 @@
       <b-col cols="12">
         <b-pagination
           v-model="currentPage"
-          :total-rows="totalRows"
+          :total-rows="total"
           :per-page="perPage"
+          v-on:input="paginate($event)"
           align="center"
           size="sm"
           class="my-0"
@@ -105,7 +95,7 @@ import {
   BButton,
 } from "bootstrap-vue";
 import BookingApi from "@/Api/Modules/booking";
-import NoResultFound from "@/views/components/NoResultFoundimage.vue";
+import NoResultFound from "@/views/components/NoResultFoundimageAdmin.vue";
 
 export default {
   components: {
@@ -128,10 +118,7 @@ export default {
       // table data
       bookings: [],
       items: [],
-      perPage: 5,
-      pageOptions: [3, 5, 10],
-      totalRows: 1,
-      currentPage: 1,
+      date: "",
       sortBy: "",
       sortDesc: false,
       sortDirection: "asc",
@@ -142,6 +129,13 @@ export default {
         title: "",
         content: "",
       },
+
+      // pagination
+      perPage: 2,
+      currentPage: 1,
+      total: "",
+
+      // table feilds
       fields: [
         {
           key: "movie_name",
@@ -175,7 +169,6 @@ export default {
   },
   async mounted() {
     // Set the initial number of items
-    this.totalRows = this.items.length;
     await this.index();
   },
   methods: {
@@ -201,10 +194,33 @@ export default {
       this.currentPage = 1;
     },
 
-    async index() {
-      const res = await BookingApi.index("");
-      this.bookings = res.data.data.data;
-      this.items = this.bookings;
+    search(e) {
+      this.index(true, e);
+      this.items = [];
+    },
+    paginate(e) {
+      this.currentPage = e;
+      this.index();
+    },
+    async index(reset = false, data = "") {
+      if (reset) {
+        this.currentPage = 1;
+        this.items = [];
+      }
+      const res = await BookingApi.index(
+        "",
+        data,
+        this.currentPage,
+        this.perPage
+      );
+      if (this.currentPage == 1) {
+        this.items = res.data.data.data;
+      } else {
+        this.items = this.items.concat(res.data.data.data);
+      }
+      // this.items = this.movies;
+
+      this.total = res.data.data.total;
     },
   },
 };

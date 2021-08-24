@@ -212,7 +212,7 @@
               @reset="search($event)"
               id="filterInput"
               type="search"
-              placeholder="Type to Search"
+              placeholder="Enter theater name you want.."
             />
             <b-input-group-append>
               <b-button @click="index('', theatername)">
@@ -297,7 +297,7 @@
 </template>
 <script>
 import { ValidationProvider, ValidationObserver } from "vee-validate";
-import NoResultFound from "@/views/components/NoResultFoundimage.vue";
+import NoResultFound from "@/views/components/NoResultFoundimageAdmin.vue";
 import {
   BTable,
   BAvatar,

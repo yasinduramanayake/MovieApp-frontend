@@ -153,7 +153,7 @@
               v-on:input="search($event)"
               @reset="search($event)"
               type="search"
-              placeholder="Enter Movie Name.."
+              placeholder="Enter Movie Name you want.."
             />
             <b-input-group-append>
               <b-button @click="index('', moviename)">
@@ -242,7 +242,7 @@
 </template>
 <script>
 import { ValidationProvider, ValidationObserver } from "vee-validate";
-import NoResultFound from "@/views/components/NoResultFoundimage.vue";
+import NoResultFound from "@/views/components/NoResultFoundimageAdmin.vue";
 
 import {
   BTable,
