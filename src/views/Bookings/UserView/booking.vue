@@ -83,28 +83,6 @@
                         </b-form-group>
                       </b-col>
 
-                      <!--   <div class="demo-inline-spacing">
-
-     <b-dropdown
-    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-      text="Primary"
-      variant="outline-primary"
-    >
-      <b-dropdown-item>
-        Option 1
-      </b-dropdown-item>
-      <b-dropdown-item>
-        Option 2
-      </b-dropdown-item>
-      <b-dropdown-item>
-        Option 3
-      </b-dropdown-item>
-      <b-dropdown-divider />
-      <b-dropdown-item>Separated link</b-dropdown-item>
-    </b-dropdown>
-
-        </div> -->
-
                       <!-- Show Time -->
                       <b-col cols="12">
                         <b-form-group
@@ -211,7 +189,6 @@ export default {
     Header,
     Footer,
     BCard,
-    BCardText,
     BButton,
   },
   data() {

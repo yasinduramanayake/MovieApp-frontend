@@ -14,7 +14,7 @@ export default [
     },
   },
   {
-    path: '/theaterdetails/:name/:type/:description/:theaters',
+    path: '/theaterdetails/:name/:type/:theaters',
     name: 'theaterdetails',
     component: () => import('@/views/Theaters/UserView/index.vue'),
     meta: {

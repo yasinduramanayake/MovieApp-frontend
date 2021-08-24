@@ -175,7 +175,6 @@ export default {
       between,
       alpha,
       integer,
-      password,
       min,
       digits,
       alphaDash,

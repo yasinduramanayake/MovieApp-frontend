@@ -42,23 +42,41 @@
               <b-row>
                 <b-col cols="6">
                   <b-button
-                    @click="
-                      routing(
-                        movie.name,
-                        movie.type,
-                        movie.description,
-                        movie.theaters
-                      )
-                    "
+                    @click="routing(movie.name, movie.type, movie.theaters)"
                     variant="gradient-primary"
+                    type="submit"
                   >
-                    Buy Tickets
+                    Add to my bookings
+                  </b-button>
+                </b-col>
+                <b-col cols="6">
+                  <b-button
+                    v-b-modal.modal-info
+                    @click="showmodal(movie.description)"
+                    variant="gradient-primary"
+                    type="submit"
+                  >
+                    View Info
                   </b-button>
                 </b-col>
               </b-row>
             </b-card>
           </b-col>
         </b-row>
+
+        <b-modal
+          id="modal-info"
+          ok-only
+          ok-variant="info"
+          ok-title="Accept"
+          modal-class="modal-info"
+          centered
+          title="Info Modal"
+        >
+          <b-card-text>
+            {{ description }}
+          </b-card-text>
+        </b-modal>
 
         <b-pagination
           v-model="currentpage"
@@ -97,9 +115,9 @@ import {
   BCol,
   BCard,
   BCardImg,
+  BModal,
   BRow,
   BFormGroup,
-  // BCard,
 } from "bootstrap-vue";
 // import vSelect from "vue-select";
 // import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
@@ -107,27 +125,23 @@ import {
 export default {
   components: {
     BCardImg,
+    BModal,
     BCard,
-    BPagination,
     BContainer,
     BFormGroup,
-
+    BPagination,
     Header,
     BFormInput,
     BCol,
-
     BRow,
-
     Footer,
-    // vSelect,
-
     BButton,
   },
   data() {
     return {
       movies: [],
       moviename: "",
-
+      description: "",
       // pagination
 
       currentpage: "",
@@ -146,6 +160,7 @@ export default {
     paginate(e) {
       this.currentpage = e;
       this.show();
+      this.movies = [];
     },
 
     search(e) {
@@ -170,11 +185,11 @@ export default {
       }
       this.total = response.data.data.total;
     },
-
-    routing(route, route1, route2, route3) {
-      this.$router.push(
-        `/theaterdetails/${route}/${route1}/${route2}/${route3}`
-      );
+    showmodal(description) {
+      this.description = description;
+    },
+    routing(route, route1, route2) {
+      this.$router.push(`/theaterdetails/${route}/${route1}/${route2}`);
     },
   },
 };
