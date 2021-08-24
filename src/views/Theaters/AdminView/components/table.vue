@@ -312,7 +312,6 @@ import {
   BRow,
   BCol,
   BFormGroup,
-  BFormSelect,
   BPagination,
   BInputGroup,
   BFormInput,
@@ -324,7 +323,6 @@ import {
   BNavItemDropdown,
   BDropdownDivider,
   BDropdownItem,
-  BFormSelectOption,
   BFormTimepicker,
   BForm,
   BFormFile,
@@ -352,8 +350,6 @@ import MovieApi from "@/Api/Modules/movie";
 export default {
   components: {
     BFormTextarea,
-
-    BFormSelectOption,
     BFormTimepicker,
     BFormFile,
     vSelect,
@@ -364,7 +360,6 @@ export default {
     BRow,
     BCol,
     BFormGroup,
-    BFormSelect,
     BPagination,
     BInputGroup,
     BFormInput,

@@ -1,4 +1,5 @@
 import notification from '@/ApiConstance/toast'
+
 export default {
   init(router, store) {
     router.beforeEach(async (to, _, next) => {
@@ -12,21 +13,16 @@ export default {
       const { isLogedIn } = store.getters
 
       if (to.meta.redirectIfLoggedIn && isLogedIn) {
-       
+        if (localStorage.role === 'User') {
+          next()
+        } else {
           next({
             path: '/dashboard',
             replace: true,
           })
-        
-
-        // } else if (localStorage.role === 'User' && !to.meta.access) {
-        //   next({
-        //     path: '/',
-        //     replace: true,
-        //   })
-        // }
+        }
       }
-
+        
       if (!to.meta.noAuth & !isLogedIn) {
         notification.toast('You required login before enter this page', 'error')
         next({

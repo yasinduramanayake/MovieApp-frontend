@@ -24,32 +24,13 @@
     <b-row>
       <b-col cols="1"> </b-col>
       <b-col cols="11">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#news">News</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li>
-          <div class="dropdown">
-            <button class="dropbtn">Dropdown</button>
-            <div class="dropdown-content">
-              <a href="#">Link 1</a>
-              <a href="#">Link 2</a>
-              <a href="#">Link 3</a>
-            </div>
-          </div>
-        </li>
-      </b-col>
-    </b-row>
-      <!--<ul>
         <ul>
           <li><a style="color:white" @click="pushmovie()">movie</a></li>
           <li v-if="!token" v-b-toggle.sidebar-right>
             <a style="color:white">Login</a>
           </li>
-          <li v-if="token"><a href="#contact">Logout</a></li>
-      </ul>
-    -->
-      <b-row>
           <li v-if="token">
+            <a style="color:white" @click="pushprofile()">Profile</a>
           </li>
 
           <li v-if="token">
@@ -62,9 +43,12 @@
           <li v-if="token">
             <a style="color:white" @click="logout()">logout</a>
           </li>
+        </ul>
+      </b-col>
     </b-row>
     <b-sidebar
       id="sidebar-right"
+      bg-variant="dark"
       text-variant="light"
       right
       backdrop
@@ -98,16 +82,13 @@ export default {
   components: {
     BSidebar,
     BButton,
-
     login,
     BContainer,
     BCol,
     BRow,
     // vSelect,
     // BCard,
-
     BLink,
-
     VuexyLogo,
   },
   data() {
@@ -126,7 +107,6 @@ export default {
       await this.logout();
       clearToken();
     },
-
     pushmovie() {
       this.$router.push("/movie");
     },
@@ -165,7 +145,6 @@ export default {
 .header1 {
   height: 5%;
 }
-
 ul {
   list-style-type: none;
   margin: 0;
@@ -190,12 +169,10 @@ li a:hover:not(.active) {
 .active {
   background-color: #04aa6d;
 }
-
 .dropdown {
   float: left;
   overflow: hidden;
 }
-
 .dropdown .dropbtn {
   font-size: 16px;
   border: none;
@@ -206,14 +183,10 @@ li a:hover:not(.active) {
   font-family: inherit;
   margin: 0;
 }
-
 .navbar a:hover,
-.dropdown:hover, 
-.dropdown:hover,
- .dropbtn {
+.dropdown:hover .dropbtn {
   background-color: #111;
 }
-
 .dropdown-content {
   display: none;
   position: absolute;
@@ -222,7 +195,6 @@ li a:hover:not(.active) {
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
-
 .dropdown-content a {
   float: none;
   color: black;
@@ -231,11 +203,9 @@ li a:hover:not(.active) {
   display: block;
   text-align: left;
 }
-
 .dropdown-content a:hover {
   background-color: #ddd;
 }
-
 .dropdown:hover .dropdown-content {
   display: block;
 }

@@ -9,7 +9,6 @@ export default {
   async store(payload) {
     return await api.post('/addmovie', payload).then((res) => {
       notification.toast('Successfully Added ', 'success')
-      window.location.href = '/movies'
     })
   },
 

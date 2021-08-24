@@ -1,5 +1,5 @@
 <template>
-  <layout-vertical>
+  <layout-vertical v-if="data === 'Admin'">
     <router-view />
 
     <template #navbar="{ toggleVerticalMenuActive }">
