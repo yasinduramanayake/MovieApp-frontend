@@ -46,7 +46,7 @@
                     variant="gradient-primary"
                     type="submit"
                   >
-                    Add to my bookings
+                    Add
                   </b-button>
                 </b-col>
                 <b-col cols="6">
@@ -56,7 +56,7 @@
                     variant="gradient-primary"
                     type="submit"
                   >
-                    View Info
+                    Details
                   </b-button>
                 </b-col>
               </b-row>
@@ -66,12 +66,10 @@
 
         <b-modal
           id="modal-info"
-          ok-only
-          ok-variant="info"
-          ok-title="Accept"
+          :hide-footer="true"
           modal-class="modal-info"
           centered
-          title="Info Modal"
+          title="Movie Info"
         >
           <b-card-text>
             {{ description }}
