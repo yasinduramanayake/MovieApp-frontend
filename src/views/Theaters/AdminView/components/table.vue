@@ -212,7 +212,7 @@
               @reset="search($event)"
               id="filterInput"
               type="search"
-              placeholder="Type to Search"
+              placeholder="Enter theater name you want.."
             />
             <b-input-group-append>
               <b-button @click="index('', theatername)">
