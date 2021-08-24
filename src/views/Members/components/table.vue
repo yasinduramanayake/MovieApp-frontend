@@ -192,6 +192,7 @@
       <div class="img" v-if="items.length === 0">
         <NoResultFound />
       </div>
+
       <b-col cols="12">
         <b-pagination
           v-model="currentPage"
@@ -251,7 +252,7 @@ import user from "@/Api/Modules/user";
 import vSelect from "vue-select";
 import { togglePasswordVisibility } from "@core/mixins/ui/forms";
 
-import NoResultFound from "@/views/components/NoResultFoundimage.vue";
+import NoResultFound from "@/views/components/NoResultFoundimageAdmin.vue";
 
 export default {
   components: {

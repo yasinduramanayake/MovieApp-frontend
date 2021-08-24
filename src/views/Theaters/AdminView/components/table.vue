@@ -297,7 +297,7 @@
 </template>
 <script>
 import { ValidationProvider, ValidationObserver } from "vee-validate";
-import NoResultFound from "@/views/components/NoResultFoundimage.vue";
+import NoResultFound from "@/views/components/NoResultFoundimageAdmin.vue";
 import {
   BTable,
   BAvatar,

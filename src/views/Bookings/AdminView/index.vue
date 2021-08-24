@@ -95,7 +95,7 @@ import {
   BButton,
 } from "bootstrap-vue";
 import BookingApi from "@/Api/Modules/booking";
-import NoResultFound from "@/views/components/NoResultFoundimage.vue";
+import NoResultFound from "@/views/components/NoResultFoundimageAdmin.vue";
 
 export default {
   components: {

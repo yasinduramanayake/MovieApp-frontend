@@ -64,6 +64,9 @@
           </b-col>
         </b-row>
 
+        <div v-if="movies.length === 0">
+          <NoResultFound />
+        </div>
         <b-modal
           id="modal-info"
           :hide-footer="true"
@@ -103,6 +106,7 @@
 import Header from "@/views/components/header.vue";
 import Footer from "@/views/footer.vue";
 import Movieapi from "@/Api/Modules/movie";
+import NoResultFound from "@/views/components/NoresultFoundImageUser.vue";
 
 import {
   BButton,
@@ -124,6 +128,7 @@ export default {
   components: {
     BCardImg,
     BModal,
+    NoResultFound,
     BCard,
     BContainer,
     BFormGroup,
