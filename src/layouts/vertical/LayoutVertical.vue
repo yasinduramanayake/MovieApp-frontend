@@ -28,7 +28,6 @@ export default {
   data() {
     return {
       data: localStorage.role,
-      // showCustomizer: $themeConfig.layout.customizer,
     };
   },
 };
