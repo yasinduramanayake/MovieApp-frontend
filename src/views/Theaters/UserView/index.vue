@@ -30,11 +30,7 @@
         <br />
         <br />
         <!--/Content-->
-        <b-card title="About Movie">
-          <b-card-text>
-            {{ this.description }}
-          </b-card-text>
-        </b-card>
+
         <br />
 
         <b-row>
