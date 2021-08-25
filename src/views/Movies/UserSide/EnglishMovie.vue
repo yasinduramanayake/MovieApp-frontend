@@ -72,9 +72,7 @@ import Header from "@/views/components/header.vue";
 import Footer from "@/views/footer.vue";
 import Movieapi from "@/Api/Modules/movie";
 import {
-  BCardText,
   BButton,
-  BModal,
   VBModal,
   BContainer,
   BCol,
@@ -99,19 +97,17 @@ export default {
     Header,
 
     BCol,
-    BModal,
     BRow,
 
     Footer,
     // vSelect,
     // BCard,
-    BCardText,
     BButton,
   },
   data() {
     return {
       selected: { title: "Fast And Furious" },
-      option: [{ title: "Tenet" }, { title: "Jumanji" }, { title: "Thor" }],
+      option: [{ title: "Harry Poter" }, { title: "Lord of the Rings" }, { title: "Thor" }],
       movies: [],
     };
   },
