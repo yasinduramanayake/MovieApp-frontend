@@ -191,9 +191,7 @@ import {
   BFormInput,
   BPagination,
 
-  // BCard,
 
-  // BCard,
 } from "bootstrap-vue";
 import {
   required,
@@ -234,19 +232,11 @@ export default {
     BFormTimepicker,
     ValidationProvider,
     ValidationObserver,
-
     BRow,
     BFormInput,
     Footer,
-
     BButton,
-
     BForm,
-
-    // BCard,
-
-    // vSelect,
-    // BCard,
     BCardText,
   },
   data() {

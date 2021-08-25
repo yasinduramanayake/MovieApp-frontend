@@ -148,7 +148,7 @@
             <!-- submit button -->
             <b-col cols="12">
               <b-button variant="primary" type="submit" @click="AddPayment()">
-                Submit
+                Pay Now
               </b-button>
             </b-col>
           </b-form>
