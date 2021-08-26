@@ -78,7 +78,6 @@
 <script>
 // import Units from '@/apis/modules/units'
 // import Items from '@/apis/modules/items'
-
 import {
   VBToggle,
   BTable,
@@ -96,7 +95,6 @@ import {
 } from "bootstrap-vue";
 import BookingApi from "@/Api/Modules/booking";
 import NoResultFound from "@/views/components/NoResultFoundimageAdmin.vue";
-
 export default {
   components: {
     BTable,
@@ -129,12 +127,10 @@ export default {
         title: "",
         content: "",
       },
-
       // pagination
       perPage: 2,
       currentPage: 1,
       total: "",
-
       // table feilds
       fields: [
         {
@@ -193,7 +189,6 @@ export default {
       this.totalRows = filteredItems.length;
       this.currentPage = 1;
     },
-
     search(e) {
       this.index(true, e);
       this.items = [];
@@ -219,7 +214,6 @@ export default {
         this.items = this.items.concat(res.data.data.data);
       }
       // this.items = this.movies;
-
       this.total = res.data.data.total;
     },
   },
