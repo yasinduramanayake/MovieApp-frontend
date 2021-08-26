@@ -46,7 +46,7 @@
                     type="submit"
                   >
 
-                    ADD
+                    Add
                   </b-button>
                 </b-col>
                 <b-col offset-md="2">
