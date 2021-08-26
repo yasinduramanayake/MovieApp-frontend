@@ -315,7 +315,7 @@ export default {
         this.perPage,
         location
       );
-      if (this.currentPage == 1) {
+      if (this.currentPage === 1) {
         this.theaters = res.data.data.data;
       } else {
         this.theaters = this.theaters.concat(res.data.data.data);

@@ -68,6 +68,7 @@
                   <b-form-timepicker
                     locale="en"
                     required
+                    :placeholder="momentFormat(form.time1, 'h:mm:ss a')"
                     v-model="form.time1"
                   />
 
@@ -88,6 +89,7 @@
                     <b-form-timepicker
                       locale="en"
                       required
+                      :placeholder="momentFormat(form.time2, 'h:mm:ss a')"
                       v-model="form.time2"
                     />
                     <div class="mt-2"></div>
@@ -110,6 +112,7 @@
                     <b-form-timepicker
                       locale="en"
                       required
+                      :placeholder="momentFormat(form.time3, 'h:mm:ss a')"
                       v-model="form.time3"
                     />
                     <div class="mt-2"></div>
@@ -244,6 +247,16 @@
 
           <template #cell(name)="data">
             {{ firstLetterUpperCase(data.value) }}
+          </template>
+
+          <template #cell(time1)="data">
+            {{ momentFormat(data.value, "h:mm:ss a") }}
+          </template>
+          <template #cell(time2)="data">
+            {{ momentFormat(data.value, "h:mm:ss a") }}
+          </template>
+          <template #cell(time3)="data">
+            {{ momentFormat(data.value, "h:mm:ss a") }}
           </template>
 
           <template #cell(description)="data">
