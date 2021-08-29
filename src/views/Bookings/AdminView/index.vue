@@ -17,7 +17,7 @@
               @reset="search($event)"
               id="filterInput"
               type="search"
-              placeholder="Enter Date you want.. "
+              placeholder="Enter Date you want(ex.22,23).. "
             />
             <b-input-group-append>
               <b-button @click="index('', date)">
