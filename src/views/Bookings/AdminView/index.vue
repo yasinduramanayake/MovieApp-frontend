@@ -204,7 +204,7 @@ export default {
       this.currentPage = e;
       this.index();
     },
-
+    // comment
     // fetch All data
     async index(reset = false, data = "") {
       if (reset) {
