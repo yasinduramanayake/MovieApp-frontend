@@ -204,7 +204,7 @@ export default {
       this.currentPage = e;
       this.index();
     },
-    // comment for testing git
+    // comment for testing git hub
     // fetch All data
     async index(reset = false, data = "") {
       if (reset) {
