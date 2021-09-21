@@ -28,4 +28,8 @@ export default {
       window.location.href = '/theaters'
     })
   },
+
+  async genaratePdf() {
+    return await api.get(`/genaratereport`)
+  },
 }

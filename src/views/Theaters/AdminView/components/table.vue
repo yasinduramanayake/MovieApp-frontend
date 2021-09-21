@@ -306,6 +306,20 @@
         />
       </b-col>
     </b-row>
+    <br />
+
+    <div style="padding-left:20%">
+      <b-row>
+        <b-col>
+          <b-form-input type="file"></b-form-input>
+        </b-col>
+        <b-col>
+          <b-button variant="primary" @click="genaratereport()"
+            >Genarate Report</b-button
+          >
+        </b-col>
+      </b-row>
+    </div>
   </div>
 </template>
 <script>
@@ -326,7 +340,6 @@ import {
   VBModal,
   BFormTextarea,
   BNav,
-  BCard,
   BNavItemDropdown,
   BDropdownDivider,
   BDropdownItem,
@@ -357,7 +370,7 @@ import MovieApi from "@/Api/Modules/movie";
 export default {
   components: {
     BFormTextarea,
-    BCard,
+
     NoResultFound,
     BFormTimepicker,
     BFormFile,
@@ -486,6 +499,7 @@ export default {
   },
 
   methods: {
+    // upload image
     onChange(e) {
       const image = e.target.files[0];
       const reader = new FileReader();
@@ -494,11 +508,12 @@ export default {
         this.form.image = e.target.result;
       };
     },
-
+    // filter theaters
     search(e) {
       this.index(true, e);
       this.items = [];
     },
+    // paginate
     paginate(e) {
       this.currentPage = e;
       this.index();
@@ -535,6 +550,7 @@ export default {
       this.currentPage = 1;
     },
 
+    // update theater
     async Updatetheater() {
       if (await this.$refs.theaterForm.validate()) {
         await this.$vs.loading({
@@ -558,12 +574,17 @@ export default {
         this.payload = "";
       }, 30000);
     },
+
+    // delete theater
+
     async Deletetheater(item, index, button) {
       this.infoModal.title = `Row index: ${index}`;
       this.infoModal.content = JSON.stringify(item, null, 2);
       this.$root.$emit("bv::show::modal", this.infoModal.id, button);
       await TheaterApi.delete(item.id);
     },
+
+    // retreive all theaters
     async index(reset = false, theatername = "") {
       if (reset) {
         this.currentPage = 1;
@@ -582,6 +603,11 @@ export default {
       // this.items = this.movies;
 
       this.total = res.data.data.total;
+    },
+
+    // genarate report
+    async genaratereport() {
+      await TheaterApi.genaratePdf();
     },
   },
 };

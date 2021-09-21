@@ -80,7 +80,7 @@
                             >
                               <b-form-input
                                 v-model="form.seats"
-                                @change="condition()"
+                                v-on:input="condition()"
                                 type="number"
                                 :state="errors.length > 0 ? false : null"
                                 placeholder="No of Seats"
@@ -100,7 +100,7 @@
                               name="time1"
                             >
                               <b-form-timepicker
-                                @change="condition()"
+                               v-on:input="condition()"
                                 locale="en"
                                 required
                                 v-model="form.showtime"

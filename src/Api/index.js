@@ -31,6 +31,7 @@ api.interceptors.response.use(
     return response
   },
   function (error) {
+    console.log(error.response.config.url)
     if (typeof error.response !== 'undefined') {
       //Setup Generic Response Messages
       if (error.response.status === 401) {
@@ -42,8 +43,14 @@ api.interceptors.response.use(
       } else if (error.response.status === 422) {
         notification.toast('Given data is invalid', 'error')
       }
-      if (error.response.status === 500) {
-        notification.toast('Internal Server Error', 'error')
+      if (error.response.config.url !== '/genaratereport') {
+        if (error.response.status === 500) {
+          notification.toast('Internal Server Error', 'error')
+        }
+      } else if (error.response.config.url === '/genaratereport') {
+        if (error.response.status === 500) {
+          notification.toast(' See your pc D:pdf folder', 'success')
+        }
       }
     }
     return Promise.reject(error)
