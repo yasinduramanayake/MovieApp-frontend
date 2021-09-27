@@ -1,6 +1,5 @@
 <template>
-  <layout-horizontal>
-
+  <layout-horizontal v-if="data === 'Admin'">
     <router-view />
 
     <template #navbar="{ toggleVerticalMenuActive }">
@@ -16,11 +15,11 @@
 </template>
 
 <script>
-import LayoutHorizontal from '@core/layouts/layout-horizontal/LayoutHorizontal.vue'
+import LayoutHorizontal from "@core/layouts/layout-horizontal/LayoutHorizontal.vue";
 // import AppCustomizer from '@core/layouts/components/app-customizer/AppCustomizer.vue'
 // import { $themeConfig } from '@themeConfig'
-import AppNavbarHorizontalLayoutBrand from '@core/layouts/components/app-navbar/AppNavbarHorizontalLayoutBrand.vue'
-import Navbar from '../components/Navbar.vue'
+import AppNavbarHorizontalLayoutBrand from "@core/layouts/components/app-navbar/AppNavbarHorizontalLayoutBrand.vue";
+import Navbar from "../components/Navbar.vue";
 
 export default {
   components: {
@@ -31,8 +30,9 @@ export default {
   },
   data() {
     return {
+      data: localStorage.role,
       // showCustomizer: $themeConfig.layout.customizer,
-    }
+    };
   },
-}
+};
 </script>

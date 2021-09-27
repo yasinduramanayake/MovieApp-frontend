@@ -1,16 +1,15 @@
 export default [
   {
-    path: "/dashboard",
-    name: "dashboard",
-    component: () => import("@/views/dashboard/index.vue"),
+    path: '/dashboard',
+    name: 'dashboard',
+    component: () => import('@/views/dashboard/index.vue'),
     meta: {
-      pageTitle: "Home",
+      pageTitle: 'Home',
       breadcrumb: [
         {
-          text: "Home",
-          active: true
-        }
-      ]
-    }
-  }
-];
+          text: 'Home',
+        },
+      ],
+    },
+  },
+]

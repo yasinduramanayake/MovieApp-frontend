@@ -27,7 +27,7 @@ export default {
     // Layouts
     LayoutHorizontal,
     LayoutVertical,
-    LayoutFull
+    LayoutFull,
   },
   // ! We can move this computed: layout & contentLayoutType once we get to use Vue 3
   // Currently, router.currentRoute is not reactive and doesn't trigger any change
@@ -38,7 +38,7 @@ export default {
     },
     contentLayoutType() {
       return this.$store.state.appConfig.layout.type;
-    }
+    },
   },
   beforeCreate() {
     // Set colors in theme
@@ -50,7 +50,7 @@ export default {
       "warning",
       "danger",
       "light",
-      "dark"
+      "dark",
     ];
 
     // eslint-disable-next-line no-plusplus
@@ -89,23 +89,23 @@ export default {
     // Demos will still use Options API for ease
     provideToast({
       hideProgressBar: true,
-      closeOnClick: false,
-      closeButton: false,
-      icon: false,
-      timeout: 3000,
-      transition: "Vue-Toastification__fade"
+      closeOnClick: true,
+      closeButton: true,
+      icon: true,
+      timeout: 2000,
+      transition: "Vue-Toastification__fade",
     });
 
     // Set Window Width in store
     store.commit("app/UPDATE_WINDOW_WIDTH", window.innerWidth);
     const { width: windowWidth } = useWindowSize();
-    watch(windowWidth, val => {
+    watch(windowWidth, (val) => {
       store.commit("app/UPDATE_WINDOW_WIDTH", val);
     });
 
     return {
-      skinClasses
+      skinClasses,
     };
-  }
+  },
 };
 </script>
