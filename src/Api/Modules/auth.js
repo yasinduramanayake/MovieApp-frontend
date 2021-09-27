@@ -36,4 +36,8 @@ export default {
     clearToken()
     return await api.get('/logout')
   },
+
+  async reset(payload) {
+    return await api.post('/forgotpassword' , payload)
+  },
 }

@@ -47,11 +47,8 @@ api.interceptors.response.use(
         if (error.response.status === 500) {
           notification.toast('Internal Server Error', 'error')
         }
-      } else if (error.response.config.url === '/genaratereport') {
-        if (error.response.status === 500) {
-          notification.toast(' See your pc D:pdf folder', 'success')
-        }
-      }
+      } 
+      
     }
     return Promise.reject(error)
   },
