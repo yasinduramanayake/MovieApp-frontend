@@ -186,8 +186,8 @@ export default {
       }
 
       setTimeout(() => {
-        this.userEmail = "";
-        this.password = "";
+        this.userEmail = " ";
+        this.password = " ";
       }, 3000);
     },
   },

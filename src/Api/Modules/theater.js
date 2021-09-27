@@ -29,7 +29,7 @@ export default {
     })
   },
 
-  async genaratePdf() {
-    return await api.get(`/genaratereport`)
+  async genaratePdf(payload) {
+    return await api.post(`/genaratereport` ,payload )
   },
 }
