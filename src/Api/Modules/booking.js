@@ -27,4 +27,8 @@ export default {
       window.location.href = '/mybooking'
     })
   },
+
+  async genaratePdf() {
+    return await api.get(`/genaratereport`)
+  },
 }
