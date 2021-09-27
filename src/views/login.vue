@@ -15,17 +15,15 @@
         <b-container>
           <b-row>
             <b-col md="1" lg="4">
-              <b-card title="Card title">
+              <b-card title="The Kissing Booth">
                 <b-card-img
                   :src="
                     require('@/assets/images/MV5BYzE1YzViNzktZTU5Ny00ZjYzLWE0YjItZWNkNDU1MzFiOWNhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg')
                   "
                   width="10px"
                 ></b-card-img>
-                <b-card-text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </b-card-text>
+                <br />
+                <br />
                 <b-button
                   v-ripple.400="'rgba(0, 207, 232, 0.15)'"
                   v-b-modal.modal-info
@@ -36,16 +34,14 @@
               </b-card>
             </b-col>
             <b-col md="6" lg="4">
-              <b-card title="Card title">
+              <b-card title="F9">
                 <b-card-img
                   :src="
                     require('@/assets/images/01-f9-dm-mainstage-mobile-banner-1080x793-pl-f01-013120-5e3867f0cf333-1.jpg')
                   "
                 ></b-card-img>
-                <b-card-text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </b-card-text>
+                <br />
+                <br />
                 <b-button
                   v-ripple.400="'rgba(0, 207, 232, 0.15)'"
                   v-b-modal.modal-info
@@ -53,83 +49,20 @@
                 >
                   Info
                 </b-button>
+                <br />
+                <br />
               </b-card>
             </b-col>
 
             <b-col md="6" lg="4">
-              <b-card title="Card title">
+              <b-card title="The Kissing Booth 2">
                 <b-card-img
                   :src="
                     require('@/assets/images/The_Kissing_Booth_2_poster.jpg')
                   "
                 ></b-card-img>
-                <b-card-text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </b-card-text>
-                <b-button
-                  v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-                  v-b-modal.modal-info
-                  variant="outline-info"
-                >
-                  Info
-                </b-button>
-              </b-card>
-            </b-col>
-
-            <b-col md="6" lg="4">
-              <b-card title="Card title">
-                <b-card-img
-                  :src="
-                    require('@/assets/images/The_Kissing_Booth_2_poster.jpg')
-                  "
-                ></b-card-img>
-                <b-card-text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </b-card-text>
-                <b-button
-                  v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-                  v-b-modal.modal-info
-                  variant="outline-info"
-                >
-                  Info
-                </b-button>
-              </b-card>
-            </b-col>
-
-            <b-col md="6" lg="4">
-              <b-card title="Card title">
-                <b-card-img
-                  :src="
-                    require('@/assets/images/The_Kissing_Booth_2_poster.jpg')
-                  "
-                ></b-card-img>
-                <b-card-text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </b-card-text>
-                <b-button
-                  v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-                  v-b-modal.modal-info
-                  variant="outline-info"
-                >
-                  Info
-                </b-button>
-              </b-card>
-            </b-col>
-
-            <b-col md="6" lg="4">
-              <b-card title="Card title">
-                <b-card-img
-                  :src="
-                    require('@/assets/images/The_Kissing_Booth_2_poster.jpg')
-                  "
-                ></b-card-img>
-                <b-card-text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </b-card-text>
+                <br />
+                <br />
                 <b-button
                   v-ripple.400="'rgba(0, 207, 232, 0.15)'"
                   v-b-modal.modal-info
@@ -141,129 +74,7 @@
             </b-col>
           </b-row>
         </b-container>
-        <b-row>
-          <b-col md="1" lg="4">
-            <b-card img-height="200" img-width="200" title="Card title">
-              <b-card-img
-                :src="
-                  require('@/assets/images/MV5BYzE1YzViNzktZTU5Ny00ZjYzLWE0YjItZWNkNDU1MzFiOWNhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg')
-                "
-                width="10px"
-              ></b-card-img>
-              <b-card-text>
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </b-card-text>
-              <b-button
-                v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-                v-b-modal.modal-info
-                variant="outline-info"
-              >
-                View Details
-              </b-button>
-            </b-card>
-          </b-col>
-          <b-col md="6" lg="4">
-            <b-card title="Card title">
-              <b-card-img
-                :src="
-                  require('@/assets/images/01-f9-dm-mainstage-mobile-banner-1080x793-pl-f01-013120-5e3867f0cf333-1.jpg')
-                "
-              ></b-card-img>
-              <b-card-text>
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </b-card-text>
-              <b-button
-                v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-                v-b-modal.modal-info
-                variant="outline-info"
-              >
-                View Details
-              </b-button>
-            </b-card>
-          </b-col>
 
-          <b-col md="6" lg="4">
-            <b-card title="Card title">
-              <b-card-img
-                :src="require('@/assets/images/The_Kissing_Booth_2_poster.jpg')"
-              ></b-card-img>
-              <b-card-text>
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </b-card-text>
-              <b-button
-                v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-                v-b-modal.modal-info
-                variant="outline-info"
-              >
-                View Details
-              </b-button>
-            </b-card>
-          </b-col>
-
-          <b-col md="6" lg="4">
-            <b-card title="Card title">
-              <b-card-img
-                :src="require('@/assets/images/The_Kissing_Booth_2_poster.jpg')"
-              ></b-card-img>
-              <b-card-text>
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </b-card-text>
-              <b-button
-                v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-                v-b-modal.modal-info
-                variant="outline-info"
-              >
-                View Details
-              </b-button>
-            </b-card>
-          </b-col>
-
-          <b-col md="6" lg="4">
-            <b-card title="Card title">
-              <b-card-img
-                :src="
-                  require('@/assets/images/MV5BYzE1YzViNzktZTU5Ny00ZjYzLWE0YjItZWNkNDU1MzFiOWNhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg')
-                "
-              ></b-card-img>
-              <b-card-text>
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </b-card-text>
-              <b-button
-                v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-                v-b-modal.modal-info
-                variant="outline-info"
-              >
-                View Details
-              </b-button>
-            </b-card>
-          </b-col>
-
-          <b-col md="6" lg="4">
-            <b-card title="Card title">
-              <b-card-img
-                :src="
-                  require('@/assets/images/01-f9-dm-mainstage-mobile-banner-1080x793-pl-f01-013120-5e3867f0cf333-1.jpg')
-                "
-              ></b-card-img>
-              <b-card-text>
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </b-card-text>
-              <b-button
-                v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-                v-b-modal.modal-info
-                variant="outline-info"
-              >
-                View Details
-              </b-button>
-            </b-card>
-          </b-col>
-        </b-row>
         <br />
         <br />
       </b-container>
@@ -271,17 +82,15 @@
     <b-modal
       id="modal-info"
       ok-only
+      hide-footer
       ok-variant="info"
       ok-title="Accept"
       modal-class="modal-info"
       centered
-      title="Info Modal"
+      title="Details"
     >
       <b-card-text>
-        Biscuit chocolate cake gummies. Lollipop I love macaroon bear claw
-        caramels. I love marshmallow tiramisu I love fruitcake I love gummi
-        bears. Carrot cake topping liquorice. Pudding caramels liquorice sweet I
-        love. Donut powder cupcake ice cream tootsie roll jelly.
+        This is a Most awaiting movie..
       </b-card-text>
     </b-modal>
     <div>

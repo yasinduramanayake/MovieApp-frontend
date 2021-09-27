@@ -174,6 +174,7 @@ export default {
     open(row) {
       console.log(this.items[row].movie_name);
     },
+    // get table items
     info(item, index, button) {
       this.infoModal.title = `Row index: ${index}`;
       this.infoModal.content = JSON.stringify(item, null, 2);
@@ -189,14 +190,17 @@ export default {
       this.totalRows = filteredItems.length;
       this.currentPage = 1;
     },
+    // search
     search(e) {
       this.index(true, e);
       this.items = [];
     },
+    // paginate
     paginate(e) {
       this.currentPage = e;
       this.index();
     },
+    // fetch All data
     async index(reset = false, data = "") {
       if (reset) {
         this.currentPage = 1;
@@ -205,6 +209,7 @@ export default {
       const res = await BookingApi.index(
         "",
         data,
+        "",
         this.currentPage,
         this.perPage
       );
