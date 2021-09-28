@@ -38,6 +38,15 @@ export default {
   },
 
   async reset(payload) {
-    return await api.post('/forgotpassword' , payload)
+    return await api.post('/forgotpassword' , payload).then((res) => {
+      notification.toast('Successfully sent email', 'success');
+    })
+  },
+
+  async resetconfirm(payload) {
+    return await api.post('/resetpassword' , payload).then((res) => {
+      notification.toast('Password resetted successfully', 'success');
+      window.location.href = '/'
+    })
   },
 }

@@ -1,5 +1,4 @@
 import profile from '@/Api/Modules/auth'
-import Cookies from 'js-cookie'
 import router from '@/router/index'
 
 export default {

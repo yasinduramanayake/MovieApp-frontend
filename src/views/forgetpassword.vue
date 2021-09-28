@@ -118,7 +118,14 @@ export default {
   },
   methods:{
     async resetpassword(){
-     await AuthApi.reset(this.form)
+       await this.$vs.loading({
+          scale: 0.8,
+        });
+     await AuthApi.reset(this.form).then((res) => {
+      this.$vs.loading.close();
+    }).catch((res) => {
+      this.$vs.loading.close();
+    })
     }
   },
   };
