@@ -204,9 +204,6 @@ import {
   VBToggle,
 } from "bootstrap-vue";
 // import vSelect from "vue-select";
-import { togglePasswordVisibility } from "@core/mixins/ui/forms";
-import store from "@/store/index";
-import Ripple from "vue-ripple-directive";
 import PaymentApi from "@/Api/Modules/payment";
 // import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
@@ -217,14 +214,12 @@ export default {
     BCol,
     BFormGroup,
     BFormInput,
-
     BCardTitle,
     Header,
     Footer,
     BCard,
     BCardText,
     BButton,
-
     ValidationProvider,
     ValidationObserver,
   },

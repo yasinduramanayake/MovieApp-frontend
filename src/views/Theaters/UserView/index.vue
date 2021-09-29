@@ -182,7 +182,6 @@ import {
   BFormTimepicker,
   BContainer,
   BCard,
-  BCardImg,
   BRow,
   BModal,
   VBModal,
@@ -220,7 +219,6 @@ import NoResultFound from "@/views/components/NoresultFoundImageUser.vue";
 
 export default {
   components: {
-    BCardImg,
     BCard,
     BPagination,
     BContainer,

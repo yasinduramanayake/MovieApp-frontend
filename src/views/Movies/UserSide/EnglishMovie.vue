@@ -18,8 +18,7 @@
                 v-on:input="search($event)"
                 @reset="search($event)"
                 placeholder="Search Movie...."
-                :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
-              />
+                :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"/>
             </b-form-group>
           </b-col>
           <b-col cols="2">
@@ -37,30 +36,30 @@
               <b-card-img :src="movie.image"></b-card-img>
               <br />
               <br />
+              <center>
               <b-row>
-                <b-col offset-md="2">
+                <b-col offset-md="0">
                   <b-button
                     @click="routing(movie.name, movie.type, movie.theaters)"
                     variant="gradient-primary"
+                    style="text: center"
                     v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                     type="submit"
-                  >
-
-                    Add
+                  >Add
                   </b-button>
                 </b-col>
-                <b-col offset-md="2">
+                <b-col offset-md="0">
                   <b-button
                     v-b-modal.modal-info
                     @click="showmodal(movie.description)"
                     variant="gradient-primary"
-                    v-ripple.400="'rgba(186, 191, 199, 0.15)'"
+                    v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                     type="submit"
-                  >
-                            Details
+                  > Details
                   </b-button>
                 </b-col>
               </b-row>
+              </center>
             </b-card>
           </b-col>
         </b-row>

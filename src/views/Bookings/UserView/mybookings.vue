@@ -76,29 +76,31 @@
                     <b>Selected Time</b> :
                     {{
                       momentFormat(booking.showtime, "h:mm:ss a")
-                    }}</b-card-text
-                  ><b-row>
+                    }}</b-card-text>
+                    <center>
+                  <b-row>
                     <b-col cols="6">
                       <b-button
                         v-b-modal.modal-info
                         @click="
-                          Onupdate(booking.seats, booking.showtime, booking.id)
-                        "
+                          Onupdate(booking.seats, booking.showtime, booking.id)"
+                        style="padding:15px 50px"
                         variant="gradient-primary"
                         >Edit</b-button
                       ></b-col
                     >
-                    <b-col cols="6">
                       <b-button
+                        style="padding:15px 50px"
                         variant="gradient-primary"
                         @click="deletebooking(booking.id)"
-                        >Delete</b-button
-                      ></b-col
-                    >
+                        >Delete</b-button>
                   </b-row>
+                    </center>
                   <br />
+                  <center>
+                  
                   <b-button
-                    style="width:340px"
+                    style="padding:15px 0px"
                     variant="gradient-primary"
                     block
                     @click="
@@ -107,11 +109,10 @@
                         booking.seats,
                         booking.price,
                         booking.showtime,
-                        booking.theater_name
-                      )
-                    "
-                    >Checkout to pay</b-button
-                  >
+                        booking.theater_name)"
+                    >Checkout to pay</b-button>
+                 
+                    </center>
                 </b-col>
               </b-row>
             </b-card>
