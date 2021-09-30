@@ -1,18 +1,14 @@
 <template>
   <div>
     <b-card
-      class="profile-header mb-2"
-      :img-src="require('@/assets/images/banner04.jpg')"
-      img-top
-      alt="cover photo"
-      body-class="p-0"
+      
     >
       <!-- profile picture -->
       <div class="position-relative">
         <div class="profile-img-container d-flex align-items-center">
           <div class="profile-img">
             <b-img
-              :src="require('@/assets/images/avatars/4.png')"
+              :src="require('@/assets/images/profile-photo-vector-placeholder-pic-260nw-535853263.jpg')"
               rounded
               fluid
               alt="profile photo"
@@ -21,11 +17,9 @@
           <!-- profile title -->
           <div class="profile-title ml-3">
             <h2 class="text-black">
-              Yasindu Ramanayake
+              {{ firstLetterUpperCase(name)}}
             </h2>
-            <p class="text-black">
-              FullsStack Developer
-            </p>
+           
           </div>
 
           <!--/ profile title -->
@@ -60,6 +54,7 @@ import { BCard, BImg, BNavbar, BNavbarToggle, BCollapse } from "bootstrap-vue";
 import Ripple from "vue-ripple-directive";
 import Post from "@/views/Members/UserSide/posts.vue";
 
+
 export default {
   components: {
     BCard,
@@ -68,6 +63,12 @@ export default {
     BNavbarToggle,
     BCollapse,
     BImg,
+  },
+  data() {
+    return {
+      name: localStorage.current_name,
+    
+    };
   },
   directives: {
     Ripple,

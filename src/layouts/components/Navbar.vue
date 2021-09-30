@@ -27,7 +27,7 @@
             <p class="user-name font-weight-bolder mb-0">
               {{ name }}
             </p>
-            <span class="user-status">Admin</span>
+            <span class="user-status">{{role}}</span>
           </div>
           <b-avatar
             size="40"
@@ -44,23 +44,9 @@
           <span>Profile</span>
         </b-dropdown-item>
 
-        <b-dropdown-item link-class="d-flex align-items-center">
-          <feather-icon size="16" icon="MailIcon" class="mr-50" />
-          <span>Inbox</span>
-        </b-dropdown-item>
+      
 
-        <b-dropdown-item link-class="d-flex align-items-center">
-          <feather-icon size="16" icon="CheckSquareIcon" class="mr-50" />
-          <span>Task</span>
-        </b-dropdown-item>
-
-        <b-dropdown-item link-class="d-flex align-items-center">
-          <feather-icon size="16" icon="MessageSquareIcon" class="mr-50" />
-          <span>Chat</span>
-        </b-dropdown-item>
-
-        <b-dropdown-divider />
-
+      
         <b-dropdown-item
           link-class="d-flex align-items-center"
           @click="localLogout"
@@ -101,6 +87,7 @@ export default {
   data() {
     return {
       name: localStorage.name,
+       role: localStorage.role,
     };
   },
   props: {

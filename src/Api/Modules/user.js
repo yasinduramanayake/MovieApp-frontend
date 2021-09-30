@@ -19,6 +19,12 @@ export default {
       window.location.href = '/members'
     })
   },
+  async updateCurrentUser(payload, id) {
+    return await api.put(`/updateuser/${id}`, payload).then((res) => {
+      notification.toast('Successfully Updated', 'success')
+      window.location.href = '/'
+    })
+  },
 
   async delete(id) {
     return await api.delete(`/deleteuser/${id}`).then((res) => {

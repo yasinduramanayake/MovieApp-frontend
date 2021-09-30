@@ -46,6 +46,12 @@ export default {
         const cacheUserToken = localStorage.getItem('token')
         if (!this.getters.isLogedIn && cacheUserToken) {
           const cacheUserData = (await profile.profile()).data.data
+          localStorage.setItem('current_name', cacheUserData.name);
+          localStorage.setItem('current_email', cacheUserData.email);
+          localStorage.setItem('current_mobile', cacheUserData.mobile);
+          localStorage.setItem('current_id', cacheUserData.id);
+
+
           commit('SET_CURRENT_USER', {
             user: cacheUserData,
             access_token: cacheUserToken,

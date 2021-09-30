@@ -111,18 +111,7 @@
     </b-modal>
 
     <b-row>
-      <b-col md="2" sm="4" class="my-1">
-        <b-form-group class="mb-0">
-          <label class="d-inline-block text-sm-left mr-50">Per page</label>
-          <b-form-select
-            id="perPageSelect"
-            v-model="perPage"
-            size="sm"
-            :options="pageOptions"
-            class="w-50"
-          />
-        </b-form-group>
-      </b-col>
+     
       <b-col md="6" class="my-1">
         <b-form-group
           label="Filter"
