@@ -50,8 +50,6 @@
               </validation-provider>
             </b-form-group>
 
-
-
             <!-- password -->
             <b-form-group label="New Password" label-for="reset-password-new">
               <validation-provider

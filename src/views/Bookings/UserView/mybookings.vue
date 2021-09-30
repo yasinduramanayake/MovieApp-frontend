@@ -317,7 +317,7 @@ export default {
         this.currentPage,
         this.perPage
       );
-      if (this.currentPage == 1) {
+      if (this.currentPage === 1) {
         this.bookings = res.data.data.data;
       } else {
         this.bookings = this.bookings.concat(res.data.data.data);

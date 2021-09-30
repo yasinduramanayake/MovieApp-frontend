@@ -68,19 +68,19 @@
           v-on:input="paginate($event)"
           align="center"
           size="sm"
-          class="my-0"
-        />
+          class="my-0"/>
       </b-col>
     </b-row>
+    <br/>
     <div style="padding-left:20%">
       <b-row>
         <b-col>
-          <b-form-input type="file"></b-form-input>
+          <b-form-input v-model="link.text" type="file" placeholder="Enter file path..(path must include at least '\') "></b-form-input>
         </b-col>
         <b-col>
-          <b-button variant="primary" @click="genaratereport()"
-            >Genarate Report</b-button
-          >
+          <b-button variant="primary" @click="genaratereport()">
+          Genarate Report
+          </b-button>
         </b-col>
       </b-row>
     </div>
@@ -101,6 +101,7 @@ import {
   BFormInput,
   BInputGroupAppend,
   BButton,
+  
 } from "bootstrap-vue";
 import BookingApi from "@/Api/Modules/booking";
 import NoResultFound from "@/views/components/NoResultFoundimageAdmin.vue";
@@ -116,10 +117,12 @@ export default {
     BFormInput,
     BInputGroupAppend,
     BButton,
+    
   },
   data() {
     return {
       // table data
+      link:{},
       bookings: [],
       items: [],
       date: "",
@@ -232,7 +235,9 @@ export default {
 
     // genarate report
     async genaratereport() {
-      await BookingApi.genaratePdf();
+      await BookingApi.genaratePdf(this.link).catch((res) => { 
+      notification.toast('See your' + '  ' +  this.link.text + '  ' + 'Folder', 'success')
+    });
     },
   },
 };
