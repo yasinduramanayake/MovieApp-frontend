@@ -22,17 +22,16 @@
         <!-- form -->
         <validation-observer ref="simpleRules">
           <b-form
-            method="POST"
             class="auth-reset-password-form mt-2"
-            @submit.prevent="validationForm"
+            @submit.prevent
           >
-            <!-- password -->
-            <b-form-group label="New Password" label-for="reset-password-new">
+
+             <b-form-group label="code" label-for="reset-password-new">
               <validation-provider
                 #default="{ errors }"
-                name="Password"
-                vid="Password"
-                rules="required|alpha-dash|min:3|password"
+                name="code"
+                vid="code"
+                rules="required"
               >
                 <b-input-group
                   class="input-group-merge"
@@ -40,7 +39,34 @@
                 >
                   <b-form-input
                     id="reset-password-new"
-                    v-model="password"
+                    v-model="form.code"
+                    :state="errors.length > 0 ? false : null"
+                    class="form-control-merge"
+                    name="reset-password-new"
+                    placeholder="verification code.."
+                  />
+                </b-input-group>
+                <small class="text-danger">{{ errors[0] }}</small>
+              </validation-provider>
+            </b-form-group>
+
+
+
+            <!-- password -->
+            <b-form-group label="New Password" label-for="reset-password-new">
+              <validation-provider
+                #default="{ errors }"
+                name="Password"
+                vid="Password"
+                rules="required|password|min:6"
+              >
+                <b-input-group
+                  class="input-group-merge"
+                  :class="errors.length > 0 ? 'is-invalid' : null"
+                >
+                  <b-form-input
+                    id="reset-password-new"
+                    v-model="form.password"
                     :type="password1FieldType"
                     :state="errors.length > 0 ? false : null"
                     class="form-control-merge"
@@ -75,7 +101,7 @@
                 >
                   <b-form-input
                     id="reset-password-confirm"
-                    v-model="cPassword"
+                    v-model="form.password_confirmation"
                     :type="password2FieldType"
                     class="form-control-merge"
                     :state="errors.length > 0 ? false : null"
@@ -95,17 +121,11 @@
             </b-form-group>
 
             <!-- submit button -->
-            <b-button block type="submit" variant="primary">
+            <b-button block @click="resetpassword()" variant="primary">
               Set New Password
             </b-button>
           </b-form>
         </validation-observer>
-
-        <p class="text-center mt-2">
-          <b-link :to="{ name: 'auth-login-v1' }">
-            <feather-icon icon="ChevronLeftIcon" /> Back to login
-          </b-link>
-        </p>
       </b-card>
       <!-- /Reset Password v1 -->
     </div>
@@ -142,6 +162,7 @@ import {
   alphaDash,
   length,
 } from "@validations";
+import Auth from "@/Api/Modules/auth";
 export default {
   components: {
     VuexyLogo,
@@ -160,11 +181,9 @@ export default {
   },
   data() {
     return {
-      userEmail: "",
-      cPassword: "",
-      password: "",
+      form:{},
       // validation
-
+password:'',
       // Toggle Password
       password1FieldType: "password",
       password2FieldType: "password",
@@ -198,19 +217,24 @@ export default {
       this.password2FieldType =
         this.password2FieldType === "password" ? "text" : "password";
     },
-    validationForm() {
-      this.$refs.simpleRules.validate().then((success) => {
-        if (success) {
-          this.$toast({
-            component: ToastificationContent,
-            props: {
-              title: "Form Submitted",
-              icon: "EditIcon",
-              variant: "success",
-            },
+   
+   async resetpassword() {
+      if (await this.$refs.simpleRules.validate()) {
+        await this.$vs.loading({
+          scale: 0.8,
+        });
+
+        await Auth.resetconfirm(this.form)
+          .then(({ res }) => {
+            this.$vs.loading.close();
+          })
+          .catch(({ res }) => {
+            this.$vs.loading.close();
           });
-        }
-      });
+      }
+      setTimeout(() => {
+        this.form = "";
+      }, 30000);
     },
   },
 };

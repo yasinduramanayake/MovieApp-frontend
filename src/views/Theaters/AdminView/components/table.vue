@@ -311,10 +311,11 @@
     <div style="padding-left:20%">
       <b-row>
         <b-col>
-          <b-form-input type="file"></b-form-input>
+          <b-form-input v-model="link.text"  id="text" placeholder="Enter file path..(path must include at least '\') "></b-form-input>
+       
         </b-col>
         <b-col>
-          <b-button variant="primary" @click="genaratereport()"
+          <b-button variant="primary"  @click="genaratereport()"
             >Genarate Report</b-button
           >
         </b-col>
@@ -331,7 +332,6 @@ import {
   BRow,
   BCol,
   BFormGroup,
-  BFormSelect,
   BPagination,
   BInputGroup,
   BFormInput,
@@ -366,11 +366,11 @@ import vSelect from "vue-select";
 import { togglePasswordVisibility } from "@core/mixins/ui/forms";
 import TheaterApi from "@/Api/Modules/theater";
 import MovieApi from "@/Api/Modules/movie";
+import notification from '@/ApiConstance/toast'
 
 export default {
   components: {
     BFormTextarea,
-
     NoResultFound,
     BFormTimepicker,
     BFormFile,
@@ -401,6 +401,7 @@ export default {
   data() {
     return {
       // form data
+      link:{},
       movies: [],
       selctedFile: "",
       mode: "",
@@ -595,7 +596,7 @@ export default {
         this.currentPage,
         this.perPage
       );
-      if (this.currentPage == 1) {
+      if (this.currentPage === 1) {
         this.items = res.data.data.data;
       } else {
         this.items = this.items.concat(res.data.data.data);
@@ -607,8 +608,10 @@ export default {
 
     // genarate report
     async genaratereport() {
-      await TheaterApi.genaratePdf();
+      await TheaterApi.genaratePdf(this.link).catch((res) => { 
+      notification.toast('See your' + '  ' +  this.link.text + '  ' + 'Folder' , 'success')
+    });
     },
-  },
+  }, 
 };
 </script>
