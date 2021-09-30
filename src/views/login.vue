@@ -26,7 +26,7 @@
                 <br />
                 <b-button
                   v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-                  v-b-modal.modal-info
+                  v-b-modal.modal-info1
                   variant="outline-info"
                 >
                   Info
@@ -44,7 +44,7 @@
                 <br />
                 <b-button
                   v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-                  v-b-modal.modal-info
+                  v-b-modal.modal-info2
                   variant="outline-info"
                 >
                   Info
@@ -65,7 +65,7 @@
                 <br />
                 <b-button
                   v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-                  v-b-modal.modal-info
+                  v-b-modal.modal-info3
                   variant="outline-info"
                 >
                   Info
@@ -80,7 +80,7 @@
       </b-container>
     </div>
     <b-modal
-      id="modal-info"
+      id="modal-info1"
       ok-only
       hide-footer
       ok-variant="info"
@@ -90,7 +90,57 @@
       title="Details"
     >
       <b-card-text>
-        This is a Most awaiting movie..
+        The Kissing Booth is a 2018 American teen romantic comedy film written
+        and directed by Vince Marcello, based on the 2012 novel of the same name
+        by Beth Reekles. It stars Joey King, Jacob Elordi, and Joel Courtney.
+      </b-card-text>
+    </b-modal>
+
+    <b-modal
+      id="modal-info2"
+      ok-only
+      hide-footer
+      ok-variant="info"
+      ok-title="Accept"
+      modal-class="modal-info"
+      centered
+      title="Details"
+    >
+      <b-card-text>
+        F9 (also known as F9: The Fast Saga and internationally as Fast &
+        Furious 9) is a 2021 American action film directed by Justin Lin from a
+        screenplay by Daniel Casey and Lin.
+        <br /><br />
+        ... In F9, Dominic Toretto and the team come together to stop a
+        world-shattering plot headed by Toretto's brother, Jakob. Starring: Vin
+        Diesel; Michelle Rodriguez; Tyrese ... <br /><br />
+        Production companies: Original Film; One Race ... Produced by: Neal H.
+        Moritz; Vin Diesel; Justin ... Release date: May 19, 2021
+        (International);
+      </b-card-text>
+    </b-modal>
+
+    <b-modal
+      id="modal-info3"
+      ok-only
+      hide-footer
+      ok-variant="info"
+      ok-title="Accept"
+      modal-class="modal-info"
+      centered
+      title="Details"
+    >
+      <b-card-text>
+        The Kissing Booth 2 is a 2020 American teen romantic comedy film
+        directed by Vince Marcello, from a screenplay by Marcello and Jay
+        Arnold. The film is a direct sequel to the 2018 film The Kissing Booth,
+        and is the second installment in the Kissing Booth trilogy. Based on The
+        Kissing Booth books by Beth Reekles, the film stars Joey King, Joel
+        Courtney and Jacob Elordi.
+        <br /><br />
+        The film was released on July 24, 2020, by Netflix. Like its
+        predecessor, the film received generally negative reviews from critics.
+        A third installment was released on August 11, 2021.
       </b-card-text>
     </b-modal>
     <div>
