@@ -75,12 +75,13 @@
     <div style="padding-left:20%">
       <b-row>
         <b-col>
-          <b-form-input v-model="link.text" type="file" placeholder="Enter file path..(path must include at least '\') "></b-form-input>
+          <b-form-input v-model="link.text"  id="text" placeholder="Enter file path..(path must include at least '\') "></b-form-input>
+       
         </b-col>
         <b-col>
-          <b-button variant="primary" @click="genaratereport()">
-          Genarate Report
-          </b-button>
+          <b-button variant="primary"  @click="genaratereport()"
+            >Genarate Report</b-button
+          >
         </b-col>
       </b-row>
     </div>
@@ -103,6 +104,7 @@ import {
   BButton,
   
 } from "bootstrap-vue";
+import notification from '@/ApiConstance/toast'
 import BookingApi from "@/Api/Modules/booking";
 import NoResultFound from "@/views/components/NoResultFoundimageAdmin.vue";
 export default {
@@ -235,8 +237,10 @@ export default {
 
     // genarate report
     async genaratereport() {
+
+      
       await BookingApi.genaratePdf(this.link).catch((res) => { 
-      notification.toast('See your' + '  ' +  this.link.text + '  ' + 'Folder', 'success')
+       notification.toast('See your' + '  ' +  this.link.text + '  ' + 'Folder', 'success')
     });
     },
   },

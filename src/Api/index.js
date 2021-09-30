@@ -43,7 +43,7 @@ api.interceptors.response.use(
       } else if (error.response.status === 422) {
         notification.toast('Given data is invalid', 'error')
       }
-      if (error.response.config.url !== '/genaratereport') {
+      if (error.response.config.url !== '/genaratereport' && error.response.config.url !== '/genaratebookingreport' ) {
         if (error.response.status === 500) {
           notification.toast('Internal Server Error', 'error')
         }
