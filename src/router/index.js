@@ -31,7 +31,7 @@ const router = new VueRouter({
     ...bookingRoute,
     ...theaterRoute,
     ...forgetRoute,
-    ...resetRoute,
+    ...resetRoute
   ],
 })
 

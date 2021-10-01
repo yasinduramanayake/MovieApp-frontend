@@ -187,7 +187,7 @@
               {{ firstLetterUpperCase(data) }} <br />
             </div>
           </template>
-
+          
           <template #cell(name)="data">
             {{ firstLetterUpperCase(data.value) }}
           </template>
@@ -264,7 +264,6 @@ import {
   BNavItemDropdown,
   BDropdownDivider,
   BDropdownItem,
-  BCard,
   BForm,
   BFormFile,
   BCardTitle,
@@ -293,7 +292,6 @@ export default {
     BFormTextarea,
     NoResultFound,
     BFormFile,
-    BCard,
     BFormSelectOption,
     vSelect,
     BForm,

@@ -23,9 +23,13 @@
             </b-form-group>
           </b-col>
           <b-col cols="3">
+<<<<<<< HEAD
             <b-button @click="show('Tamil', moviename)" variant="primary"
               >Search</b-button
             >
+=======
+            <b-button variant="primary">Search movie.....</b-button>
+>>>>>>> madura
           </b-col>
         </b-row>
         <br />
@@ -85,11 +89,17 @@
 import Header from "@/views/components/header.vue";
 import Footer from "@/views/footer.vue";
 import Movieapi from "@/Api/Modules/movie";
+<<<<<<< HEAD
 
 import {
   BButton,
   BFormInput,
   BPagination,
+=======
+import {
+  BButton,
+  VBModal,
+>>>>>>> madura
   BContainer,
   BCol,
   BCard,
@@ -99,13 +109,18 @@ import {
   // BCard,
 } from "bootstrap-vue";
 // import vSelect from "vue-select";
+<<<<<<< HEAD
 
+=======
+import vSelect from "vue-select";
+>>>>>>> madura
 // import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
 export default {
   components: {
     BCardImg,
     BCard,
+<<<<<<< HEAD
     BPagination,
     BContainer,
     BFormGroup,
@@ -114,15 +129,29 @@ export default {
     BFormInput,
     BCol,
 
+=======
+
+    BContainer,
+    BFormGroup,
+    vSelect,
+    Header,
+
+    BCol,
+>>>>>>> madura
     BRow,
 
     Footer,
     // vSelect,
+<<<<<<< HEAD
 
+=======
+    // BCard,
+>>>>>>> madura
     BButton,
   },
   data() {
     return {
+<<<<<<< HEAD
       movies: [],
       moviename: "",
 
@@ -171,6 +200,25 @@ export default {
       this.total = response.data.data.total;
     },
 
+=======
+      selected: { title: "Singham I" },
+      option: [{ title: "Master" }, { title: "Venam" }, { title: "Singham II" }],
+      movies: [],
+    };
+  },
+  async mounted() {
+    await this.show();
+  },
+  directives: {
+    "b-modal": VBModal,
+  },
+  methods: {
+    async show() {
+      const response = await Movieapi.index("Tamil");
+      this.movies = response.data.data.data;
+      console.log(this.movies);
+    },
+>>>>>>> madura
     routing(route, route1, route2, route3) {
       this.$router.push(
         `/theaterdetails/${route}/${route1}/${route2}/${route3}`
