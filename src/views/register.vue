@@ -177,7 +177,6 @@ import {
   BFormGroup,
   BInputGroup,
   BInputGroupAppend,
-  BFormCheckbox,
 } from "bootstrap-vue";
 import VuexyLogo from "@core/layouts/components/Logo.vue";
 import {
@@ -195,7 +194,6 @@ import {
   length,
 } from "@validations";
 import { togglePasswordVisibility } from "@core/mixins/ui/forms";
-import ToastificationContent from "@core/components/toastification/ToastificationContent.vue";
 import Auth from "@/Api/Modules/auth";
 export default {
   name: "Register",

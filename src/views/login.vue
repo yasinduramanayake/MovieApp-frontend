@@ -15,20 +15,22 @@
         <b-container>
           <b-row>
             <b-col md="1" lg="4">
+<<<<<<< HEAD
               <b-card title="Friends III">
+=======
+              <b-card title="The Kissing Booth">
+>>>>>>> yasindu
                 <b-card-img
                   :src="
                     require('@/assets/images/MV5BYzE1YzViNzktZTU5Ny00ZjYzLWE0YjItZWNkNDU1MzFiOWNhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg')
                   "
                   width="10px"
                 ></b-card-img>
-                <b-card-text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </b-card-text>
+                <br />
+                <br />
                 <b-button
                   v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-                  v-b-modal.modal-info
+                  v-b-modal.modal-info1
                   variant="outline-info"
                 >
                   View Details
@@ -36,39 +38,46 @@
               </b-card>
             </b-col>
             <b-col md="6" lg="4">
+<<<<<<< HEAD
               <b-card title="The Fast SAGA Summer">
+=======
+              <b-card title="F9">
+>>>>>>> yasindu
                 <b-card-img
                   :src="
                     require('@/assets/images/01-f9-dm-mainstage-mobile-banner-1080x793-pl-f01-013120-5e3867f0cf333-1.jpg')
                   "
                 ></b-card-img>
-                <b-card-text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </b-card-text>
+                <br />
+                <br />
                 <b-button
                   v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-                  v-b-modal.modal-info
+                  v-b-modal.modal-info2
                   variant="outline-info"
                 >
                   View Details
                 </b-button>
+                <br />
+                <br />
               </b-card>
             </b-col>
 
             <b-col md="6" lg="4">
+<<<<<<< HEAD
               <b-card title="Promising Young Women">
+=======
+              <b-card title="The Kissing Booth 2">
+>>>>>>> yasindu
                 <b-card-img
                   :src="
                     require('@/assets/images/The_Kissing_Booth_2_poster.jpg')
                   "
                 ></b-card-img>
-                <b-card-text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </b-card-text>
+                <br />
+                <br />
                 <b-button
                   v-ripple.400="'rgba(0, 207, 232, 0.15)'"
+<<<<<<< HEAD
                   v-b-modal.modal-info
                   variant="outline-info"
                 >
@@ -133,6 +142,9 @@
                 <b-button
                   v-ripple.400="'rgba(0, 207, 232, 0.15)'"
                   v-b-modal.modal-info
+=======
+                  v-b-modal.modal-info3
+>>>>>>> yasindu
                   variant="outline-info"
                 >
                   View Details
@@ -141,6 +153,7 @@
             </b-col>
           </b-row>
         </b-container>
+<<<<<<< HEAD
         <b-row>
           <b-col md="1" lg="4">
             <b-card img-height="200" img-width="200" title="Venaom">
@@ -207,24 +220,75 @@
             </b-card>
           </b-col>
         </b-row>
+=======
+
+>>>>>>> yasindu
         <br />
         <br />
       </b-container>
     </div>
     <b-modal
-      id="modal-info"
+      id="modal-info1"
       ok-only
+      hide-footer
       ok-variant="info"
       ok-title="Accept"
       modal-class="modal-info"
       centered
-      title="Info Modal"
+      title="Details"
     >
       <b-card-text>
-        Biscuit chocolate cake gummies. Lollipop I love macaroon bear claw
-        caramels. I love marshmallow tiramisu I love fruitcake I love gummi
-        bears. Carrot cake topping liquorice. Pudding caramels liquorice sweet I
-        love. Donut powder cupcake ice cream tootsie roll jelly.
+        The Kissing Booth is a 2018 American teen romantic comedy film written
+        and directed by Vince Marcello, based on the 2012 novel of the same name
+        by Beth Reekles. It stars Joey King, Jacob Elordi, and Joel Courtney.
+      </b-card-text>
+    </b-modal>
+
+    <b-modal
+      id="modal-info2"
+      ok-only
+      hide-footer
+      ok-variant="info"
+      ok-title="Accept"
+      modal-class="modal-info"
+      centered
+      title="Details"
+    >
+      <b-card-text>
+        F9 (also known as F9: The Fast Saga and internationally as Fast &
+        Furious 9) is a 2021 American action film directed by Justin Lin from a
+        screenplay by Daniel Casey and Lin.
+        <br /><br />
+        ... In F9, Dominic Toretto and the team come together to stop a
+        world-shattering plot headed by Toretto's brother, Jakob. Starring: Vin
+        Diesel; Michelle Rodriguez; Tyrese ... <br /><br />
+        Production companies: Original Film; One Race ... Produced by: Neal H.
+        Moritz; Vin Diesel; Justin ... Release date: May 19, 2021
+        (International);
+      </b-card-text>
+    </b-modal>
+
+    <b-modal
+      id="modal-info3"
+      ok-only
+      hide-footer
+      ok-variant="info"
+      ok-title="Accept"
+      modal-class="modal-info"
+      centered
+      title="Details"
+    >
+      <b-card-text>
+        The Kissing Booth 2 is a 2020 American teen romantic comedy film
+        directed by Vince Marcello, from a screenplay by Marcello and Jay
+        Arnold. The film is a direct sequel to the 2018 film The Kissing Booth,
+        and is the second installment in the Kissing Booth trilogy. Based on The
+        Kissing Booth books by Beth Reekles, the film stars Joey King, Joel
+        Courtney and Jacob Elordi.
+        <br /><br />
+        The film was released on July 24, 2020, by Netflix. Like its
+        predecessor, the film received generally negative reviews from critics.
+        A third installment was released on August 11, 2021.
       </b-card-text>
     </b-modal>
     <div>

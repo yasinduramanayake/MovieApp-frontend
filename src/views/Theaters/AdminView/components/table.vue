@@ -68,6 +68,7 @@
                   <b-form-timepicker
                     locale="en"
                     required
+                    :placeholder="momentFormat(form.time1, 'h:mm:ss a')"
                     v-model="form.time1"
                   />
 
@@ -88,6 +89,7 @@
                     <b-form-timepicker
                       locale="en"
                       required
+                      :placeholder="momentFormat(form.time2, 'h:mm:ss a')"
                       v-model="form.time2"
                     />
                     <div class="mt-2"></div>
@@ -110,6 +112,7 @@
                     <b-form-timepicker
                       locale="en"
                       required
+                      :placeholder="momentFormat(form.time3, 'h:mm:ss a')"
                       v-model="form.time3"
                     />
                     <div class="mt-2"></div>
@@ -246,6 +249,16 @@
             {{ firstLetterUpperCase(data.value) }}
           </template>
 
+          <template #cell(time1)="data">
+            {{ momentFormat(data.value, "h:mm:ss a") }}
+          </template>
+          <template #cell(time2)="data">
+            {{ momentFormat(data.value, "h:mm:ss a") }}
+          </template>
+          <template #cell(time3)="data">
+            {{ momentFormat(data.value, "h:mm:ss a") }}
+          </template>
+
           <template #cell(description)="data">
             {{ firstLetterUpperCase(data.value) }}
           </template>
@@ -293,6 +306,21 @@
         />
       </b-col>
     </b-row>
+    <br />
+
+    <div style="padding-left:20%">
+      <b-row>
+        <b-col>
+          <b-form-input v-model="link.text"  id="text" placeholder="Enter file path..(path must include at least '\') "></b-form-input>
+       
+        </b-col>
+        <b-col>
+          <b-button variant="primary"  @click="genaratereport()"
+            >Genarate Report</b-button
+          >
+        </b-col>
+      </b-row>
+    </div>
   </div>
 </template>
 <script>
@@ -312,7 +340,6 @@ import {
   VBModal,
   BFormTextarea,
   BNav,
-  BCard,
   BNavItemDropdown,
   BDropdownDivider,
   BDropdownItem,
@@ -339,11 +366,11 @@ import vSelect from "vue-select";
 import { togglePasswordVisibility } from "@core/mixins/ui/forms";
 import TheaterApi from "@/Api/Modules/theater";
 import MovieApi from "@/Api/Modules/movie";
+import notification from '@/ApiConstance/toast'
 
 export default {
   components: {
     BFormTextarea,
-    BCard,
     NoResultFound,
     BFormTimepicker,
     BFormFile,
@@ -374,6 +401,7 @@ export default {
   data() {
     return {
       // form data
+      link:{},
       movies: [],
       selctedFile: "",
       mode: "",
@@ -472,6 +500,7 @@ export default {
   },
 
   methods: {
+    // upload image
     onChange(e) {
       const image = e.target.files[0];
       const reader = new FileReader();
@@ -480,11 +509,12 @@ export default {
         this.form.image = e.target.result;
       };
     },
-
+    // filter theaters
     search(e) {
       this.index(true, e);
       this.items = [];
     },
+    // paginate
     paginate(e) {
       this.currentPage = e;
       this.index();
@@ -521,6 +551,7 @@ export default {
       this.currentPage = 1;
     },
 
+    // update theater
     async Updatetheater() {
       if (await this.$refs.theaterForm.validate()) {
         await this.$vs.loading({
@@ -544,12 +575,17 @@ export default {
         this.payload = "";
       }, 30000);
     },
+
+    // delete theater
+
     async Deletetheater(item, index, button) {
       this.infoModal.title = `Row index: ${index}`;
       this.infoModal.content = JSON.stringify(item, null, 2);
       this.$root.$emit("bv::show::modal", this.infoModal.id, button);
       await TheaterApi.delete(item.id);
     },
+
+    // retreive all theaters
     async index(reset = false, theatername = "") {
       if (reset) {
         this.currentPage = 1;
@@ -560,7 +596,7 @@ export default {
         this.currentPage,
         this.perPage
       );
-      if (this.currentPage == 1) {
+      if (this.currentPage === 1) {
         this.items = res.data.data.data;
       } else {
         this.items = this.items.concat(res.data.data.data);
@@ -569,6 +605,13 @@ export default {
 
       this.total = res.data.data.total;
     },
-  },
+
+    // genarate report
+    async genaratereport() {
+      await TheaterApi.genaratePdf(this.link).catch((res) => { 
+      notification.toast('See your' + '  ' +  this.link.text + '  ' + 'Folder' , 'success')
+    });
+    },
+  }, 
 };
 </script>

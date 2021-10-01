@@ -5,7 +5,7 @@
         v-b-toggle.sidebar-right
         type="filled"
         @click="shift()"
-        variant="success"
+        variant="primary"
       >
         <feather-icon icon="PlusIcon" class="mr-50" />
         Add Theater

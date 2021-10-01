@@ -39,7 +39,7 @@
           <li v-if="token">
             <a style="color:white" @click="pushprofile()">Profile</a>
           </li>
-          
+
           <li v-if="token">
             <a style="color:white" @click="pushbooking()">My bookings</a>
           </li>
@@ -120,6 +120,10 @@ export default {
     pushmovie2() {
       this.$router.push("/hindi_movies");
     },
+<<<<<<< HEAD
+=======
+
+>>>>>>> yasindu
     pushprofile() {
       this.$router.push("/userprofile");
     },

@@ -21,10 +21,9 @@
         </b-card-text>
 
         <!-- form -->
-        <validation-observer ref="simpleRules">
+        <validation-observer >
           <b-form
             class="auth-forgot-password-form mt-2"
-            @submit.prevent="validationForm"
           >
             <!-- email -->
             <b-form-group label="Email" label-for="forgot-password-email">
@@ -35,7 +34,7 @@
               >
                 <b-form-input
                   id="forgot-password-email"
-                  v-model="userEmail"
+                  v-model="form.email"
                   :state="errors.length > 0 ? false : null"
                   name="forgot-password-email"
                   placeholder="john@example.com"
@@ -45,17 +44,11 @@
             </b-form-group>
 
             <!-- submit button -->
-            <b-button variant="primary" block type="submit">
+            <b-button variant="primary" @click="resetpassword()" block >
               Send reset link
             </b-button>
           </b-form>
         </validation-observer>
-
-        <b-card-text class="text-center mt-2">
-          <b-link :to="{ name: 'auth-login-v1' }">
-            <feather-icon icon="ChevronLeftIcon" /> Back to login
-          </b-link>
-        </b-card-text>
       </b-card>
       <!-- /Forgot Password v1 -->
     </div>
@@ -89,6 +82,7 @@ import {
   alphaDash,
   length,
 } from "@validations";
+import AuthApi from "@/Api/Modules/auth";
 
 export default {
   components: {
@@ -106,7 +100,7 @@ export default {
   },
   data() {
     return {
-      userEmail: "",
+      form:{},
       // validation
       required,
       email,
@@ -122,16 +116,20 @@ export default {
       length,
     };
   },
-  methods: {
-    validationForm() {
-      this.$refs.simpleRules.validate().then((success) => {
-        if (success) {
-          this.$router.push({ name: "auth-reset-password-v1" });
-        }
-      });
-    },
+  methods:{
+    async resetpassword(){
+       await this.$vs.loading({
+          scale: 0.8,
+        });
+     await AuthApi.reset(this.form).then((res) => {
+      this.$vs.loading.close();
+    }).catch((res) => {
+      this.$vs.loading.close();
+    })
+    }
   },
-};
+  };
+  
 </script>
 
 <style lang="scss">

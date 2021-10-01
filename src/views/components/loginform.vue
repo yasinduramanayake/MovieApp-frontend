@@ -90,7 +90,7 @@
         <span>&nbsp;Sign up</span>
       </b-link>
       <br />
-      <b-link :to="{ name: 'register' }">
+      <b-link :to="{ name: 'forgetpassword' }">
         <span>&nbsp;Forget Passoword?</span>
       </b-link>
     </b-card-text>
@@ -186,8 +186,8 @@ export default {
       }
 
       setTimeout(() => {
-        this.userEmail = "";
-        this.password = "";
+        this.userEmail = " ";
+        this.password = " ";
       }, 3000);
     },
   },
