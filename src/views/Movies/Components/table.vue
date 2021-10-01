@@ -238,6 +238,22 @@
         />
       </b-col>
     </b-row>
+
+      <br />
+
+    <div style="padding-left:20%">
+      <b-row>
+        <b-col>
+          <b-form-input v-model="link.text"  id="text" placeholder="Enter file path..(path must include at least '\') "></b-form-input>
+       
+        </b-col>
+        <b-col>
+          <b-button variant="primary"  @click="genaratereport()"
+            >Genarate Report</b-button
+          >
+        </b-col>
+      </b-row>
+    </div>
   </div>
 </template>
 <script>
@@ -496,6 +512,13 @@ export default {
       setTimeout(() => {
         this.payload = "";
       }, 8000);
+    },
+
+      // genarate report
+    async genaratereport() {
+      await MovieApi.genaratePdf(this.link).catch((res) => { 
+      notification.toast('See your' + '  ' +  this.link.text + '  ' + 'Folder' , 'success')
+    });
     },
 
     async Deletetheater(item, index, button) {
