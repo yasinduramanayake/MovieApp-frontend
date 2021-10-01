@@ -3,10 +3,7 @@
     <b-container>
       <b-row>
         <b-col class="nev" cols="11">
-          <b-link>
-
-
-          
+          <b-link> 
             <vuexy-logo />
           </b-link>
         </b-col>
@@ -120,10 +117,7 @@ export default {
     pushmovie2() {
       this.$router.push("/hindi_movies");
     },
-<<<<<<< HEAD
-=======
 
->>>>>>> yasindu
     pushprofile() {
       this.$router.push("/userprofile");
     },

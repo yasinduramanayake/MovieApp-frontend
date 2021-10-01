@@ -301,6 +301,7 @@ import vSelect from "vue-select";
 import { togglePasswordVisibility } from "@core/mixins/ui/forms";
 import MovieApi from "@/Api/Modules/movie";
 import TheaterApi from "@/Api/Modules/theater";
+import notification from '@/ApiConstance/toast'
 
 export default {
   components: {
@@ -514,18 +515,18 @@ export default {
       }, 8000);
     },
 
-      // genarate report
-    async genaratereport() {
-      await MovieApi.genaratePdf(this.link).catch((res) => { 
-      notification.toast('See your' + '  ' +  this.link.text + '  ' + 'Folder' , 'success')
-    });
-    },
-
     async Deletetheater(item, index, button) {
       this.infoModal.title = `Row index: ${index}`;
       this.infoModal.content = JSON.stringify(item, null, 2);
       this.$root.$emit("bv::show::modal", this.infoModal.id, button);
       await MovieApi.delete(item.id);
+    },
+
+    // genarate report
+    async genaratereport() {
+      await MovieApi.genaratePdf(this.link).catch((res) => { 
+      notification.toast('See your' + '  ' +  this.link.text + '  ' + 'Folder' , 'success')
+    });
     },
   },
 };
