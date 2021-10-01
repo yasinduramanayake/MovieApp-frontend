@@ -31,4 +31,8 @@ export default {
   async show(id) {
     return await api.get(`/showmovie/${id}`).then((res) => {})
   },
+
+  async genaratePdf(payload) {
+    return await api.post(`/genaratereport` ,payload )
+  },
 }
