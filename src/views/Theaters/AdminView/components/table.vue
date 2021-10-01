@@ -196,18 +196,6 @@
     </b-modal>
 
     <b-row>
-      <b-col md="2" sm="4" class="my-1">
-        <b-form-group class="mb-0">
-          <label class="d-inline-block text-sm-left mr-50">Per page</label>
-          <b-form-select
-            id="perPageSelect"
-            v-model="perPage"
-            size="sm"
-            :options="pageOptions"
-            class="w-50"
-          />
-        </b-form-group>
-      </b-col>
       <b-col md="6" class="my-1">
         <b-form-group
           label="Filter"
@@ -219,13 +207,15 @@
         >
           <b-input-group size="sm">
             <b-form-input
+              v-model="theatername"
+              v-on:input="search($event)"
+              @reset="search($event)"
               id="filterInput"
-              v-model="filter"
               type="search"
-              placeholder="Type to Search"
+              placeholder="Enter theater name you want.."
             />
             <b-input-group-append>
-              <b-button>
+              <b-button @click="index('', theatername)">
                 Search
               </b-button>
             </b-input-group-append>
@@ -247,9 +237,6 @@
           :sort-by.sync="sortBy"
           :sort-desc.sync="sortDesc"
           :sort-direction="sortDirection"
-          :filter="filter"
-          :filter-included-fields="filterOn"
-          @filtered="onFiltered"
         >
           <template #cell(image)="data">
             <b-avatar :src="data.value" size="60px" />
@@ -291,11 +278,15 @@
         </b-table>
       </b-col>
 
+      <div class="img" v-if="items.length === 0">
+        <NoResultFound />
+      </div>
       <b-col cols="12">
         <b-pagination
           v-model="currentPage"
-          :total-rows="totalRows"
+          :total-rows="total"
           :per-page="perPage"
+          v-on:input="paginate($event)"
           align="center"
           size="sm"
           class="my-0"
@@ -306,6 +297,7 @@
 </template>
 <script>
 import { ValidationProvider, ValidationObserver } from "vee-validate";
+import NoResultFound from "@/views/components/NoResultFoundimageAdmin.vue";
 import {
   BTable,
   BAvatar,
@@ -320,6 +312,7 @@ import {
   VBModal,
   BFormTextarea,
   BNav,
+  BCard,
   BNavItemDropdown,
   BDropdownDivider,
   BDropdownItem,
@@ -350,6 +343,8 @@ import MovieApi from "@/Api/Modules/movie";
 export default {
   components: {
     BFormTextarea,
+    BCard,
+    NoResultFound,
     BFormTimepicker,
     BFormFile,
     vSelect,
@@ -382,6 +377,7 @@ export default {
       movies: [],
       selctedFile: "",
       mode: "",
+      theatername: "",
       button: "",
       option: [
         { title: "Multiplex" },
@@ -416,10 +412,11 @@ export default {
 
       //  table data
       id: "",
-      perPage: 5,
-      pageOptions: [3, 5, 10],
-      totalRows: 1,
+
+      perPage: 2,
       currentPage: 1,
+      total: "",
+
       sortBy: "",
       items: [],
       theaters: [],
@@ -470,7 +467,7 @@ export default {
 
   async mounted() {
     // Set the initial number of items
-    this.totalRows = this.items.length;
+
     await this.Allmovies();
   },
 
@@ -484,6 +481,14 @@ export default {
       };
     },
 
+    search(e) {
+      this.index(true, e);
+      this.items = [];
+    },
+    paginate(e) {
+      this.currentPage = e;
+      this.index();
+    },
     // retrive movies
 
     async Allmovies() {
@@ -537,7 +542,7 @@ export default {
 
       setTimeout(() => {
         this.payload = "";
-      }, 8000);
+      }, 30000);
     },
     async Deletetheater(item, index, button) {
       this.infoModal.title = `Row index: ${index}`;
@@ -545,10 +550,24 @@ export default {
       this.$root.$emit("bv::show::modal", this.infoModal.id, button);
       await TheaterApi.delete(item.id);
     },
-    async index() {
-      const res = await TheaterApi.index("");
-      this.theaters = res.data.data.data;
-      this.items = this.theaters;
+    async index(reset = false, theatername = "") {
+      if (reset) {
+        this.currentPage = 1;
+        this.items = [];
+      }
+      const res = await TheaterApi.index(
+        theatername,
+        this.currentPage,
+        this.perPage
+      );
+      if (this.currentPage == 1) {
+        this.items = res.data.data.data;
+      } else {
+        this.items = this.items.concat(res.data.data.data);
+      }
+      // this.items = this.movies;
+
+      this.total = res.data.data.total;
     },
   },
 };

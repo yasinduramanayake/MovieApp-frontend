@@ -189,6 +189,10 @@
         </b-table>
       </b-col>
 
+      <div class="img" v-if="items.length === 0">
+        <NoResultFound />
+      </div>
+
       <b-col cols="12">
         <b-pagination
           v-model="currentPage"
@@ -210,6 +214,7 @@ import {
   BSidebar,
   VBToggle,
   BTable,
+  BCard,
   BAvatar,
   BRow,
   BCol,
@@ -247,12 +252,16 @@ import user from "@/Api/Modules/user";
 import vSelect from "vue-select";
 import { togglePasswordVisibility } from "@core/mixins/ui/forms";
 
+import NoResultFound from "@/views/components/NoResultFoundimageAdmin.vue";
+
 export default {
   components: {
     CreateForm,
     BSidebar,
+    NoResultFound,
     vSelect,
     BForm,
+    BCard,
     BCardTitle,
     BTable,
     BAvatar,
@@ -420,7 +429,7 @@ export default {
 
       setTimeout(() => {
         this.payload = "";
-      }, 8000);
+      }, 30000);
     },
 
     async deleteuser(item, index, button) {

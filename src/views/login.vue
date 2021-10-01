@@ -15,7 +15,7 @@
         <b-container>
           <b-row>
             <b-col md="1" lg="4">
-              <b-card title="Card title">
+              <b-card title="Friends III">
                 <b-card-img
                   :src="
                     require('@/assets/images/MV5BYzE1YzViNzktZTU5Ny00ZjYzLWE0YjItZWNkNDU1MzFiOWNhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg')
@@ -31,12 +31,12 @@
                   v-b-modal.modal-info
                   variant="outline-info"
                 >
-                  Info
+                  View Details
                 </b-button>
               </b-card>
             </b-col>
             <b-col md="6" lg="4">
-              <b-card title="Card title">
+              <b-card title="The Fast SAGA Summer">
                 <b-card-img
                   :src="
                     require('@/assets/images/01-f9-dm-mainstage-mobile-banner-1080x793-pl-f01-013120-5e3867f0cf333-1.jpg')
@@ -51,13 +51,13 @@
                   v-b-modal.modal-info
                   variant="outline-info"
                 >
-                  Info
+                  View Details
                 </b-button>
               </b-card>
             </b-col>
 
             <b-col md="6" lg="4">
-              <b-card title="Card title">
+              <b-card title="Promising Young Women">
                 <b-card-img
                   :src="
                     require('@/assets/images/The_Kissing_Booth_2_poster.jpg')
@@ -72,16 +72,16 @@
                   v-b-modal.modal-info
                   variant="outline-info"
                 >
-                  Info
+                 View Details
                 </b-button>
               </b-card>
             </b-col>
 
             <b-col md="6" lg="4">
-              <b-card title="Card title">
+              <b-card title="Harley Queen">
                 <b-card-img
                   :src="
-                    require('@/assets/images/The_Kissing_Booth_2_poster.jpg')
+                    require('@/assets/images/harley.jpg')
                   "
                 ></b-card-img>
                 <b-card-text>
@@ -93,16 +93,16 @@
                   v-b-modal.modal-info
                   variant="outline-info"
                 >
-                  Info
+                  View Details
                 </b-button>
               </b-card>
             </b-col>
 
             <b-col md="6" lg="4">
-              <b-card title="Card title">
+              <b-card title="Impossible">
                 <b-card-img
                   :src="
-                    require('@/assets/images/The_Kissing_Booth_2_poster.jpg')
+                    require('@/assets/images/im.jpg')
                   "
                 ></b-card-img>
                 <b-card-text>
@@ -114,16 +114,16 @@
                   v-b-modal.modal-info
                   variant="outline-info"
                 >
-                  Info
+                  View Details
                 </b-button>
               </b-card>
             </b-col>
 
             <b-col md="6" lg="4">
-              <b-card title="Card title">
+              <b-card title="Bharath">
                 <b-card-img
                   :src="
-                    require('@/assets/images/The_Kissing_Booth_2_poster.jpg')
+                    require('@/assets/images/baharth.jpg')
                   "
                 ></b-card-img>
                 <b-card-text>
@@ -135,7 +135,7 @@
                   v-b-modal.modal-info
                   variant="outline-info"
                 >
-                  Info
+                  View Details
                 </b-button>
               </b-card>
             </b-col>
@@ -143,10 +143,10 @@
         </b-container>
         <b-row>
           <b-col md="1" lg="4">
-            <b-card img-height="200" img-width="200" title="Card title">
+            <b-card img-height="200" img-width="200" title="Venaom">
               <b-card-img
                 :src="
-                  require('@/assets/images/MV5BYzE1YzViNzktZTU5Ny00ZjYzLWE0YjItZWNkNDU1MzFiOWNhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg')
+                  require('@/assets/images/en7.jpg')
                 "
                 width="10px"
               ></b-card-img>
@@ -163,11 +163,13 @@
               </b-button>
             </b-card>
           </b-col>
+          
+
           <b-col md="6" lg="4">
-            <b-card title="Card title">
+            <b-card title="Z World War">
               <b-card-img
                 :src="
-                  require('@/assets/images/01-f9-dm-mainstage-mobile-banner-1080x793-pl-f01-013120-5e3867f0cf333-1.jpg')
+                  require('@/assets/images/banner04.jpg')
                 "
               ></b-card-img>
               <b-card-text>
@@ -185,69 +187,10 @@
           </b-col>
 
           <b-col md="6" lg="4">
-            <b-card title="Card title">
-              <b-card-img
-                :src="require('@/assets/images/The_Kissing_Booth_2_poster.jpg')"
-              ></b-card-img>
-              <b-card-text>
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </b-card-text>
-              <b-button
-                v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-                v-b-modal.modal-info
-                variant="outline-info"
-              >
-                View Details
-              </b-button>
-            </b-card>
-          </b-col>
-
-          <b-col md="6" lg="4">
-            <b-card title="Card title">
-              <b-card-img
-                :src="require('@/assets/images/The_Kissing_Booth_2_poster.jpg')"
-              ></b-card-img>
-              <b-card-text>
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </b-card-text>
-              <b-button
-                v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-                v-b-modal.modal-info
-                variant="outline-info"
-              >
-                View Details
-              </b-button>
-            </b-card>
-          </b-col>
-
-          <b-col md="6" lg="4">
-            <b-card title="Card title">
+            <b-card title="Belongs To Her">
               <b-card-img
                 :src="
-                  require('@/assets/images/MV5BYzE1YzViNzktZTU5Ny00ZjYzLWE0YjItZWNkNDU1MzFiOWNhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg')
-                "
-              ></b-card-img>
-              <b-card-text>
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </b-card-text>
-              <b-button
-                v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-                v-b-modal.modal-info
-                variant="outline-info"
-              >
-                View Details
-              </b-button>
-            </b-card>
-          </b-col>
-
-          <b-col md="6" lg="4">
-            <b-card title="Card title">
-              <b-card-img
-                :src="
-                  require('@/assets/images/01-f9-dm-mainstage-mobile-banner-1080x793-pl-f01-013120-5e3867f0cf333-1.jpg')
+                  require('@/assets/images/en5.jpg')
                 "
               ></b-card-img>
               <b-card-text>

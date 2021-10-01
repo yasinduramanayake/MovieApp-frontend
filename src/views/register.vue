@@ -212,7 +212,7 @@ export default {
     BFormGroup,
     BInputGroup,
     BInputGroupAppend,
-    BFormCheckbox,
+  
     // validations
     ValidationProvider,
     ValidationObserver,
@@ -261,7 +261,7 @@ export default {
       }
       setTimeout(() => {
         this.form = "";
-      }, 8000);
+      }, 30000);
     },
   },
 };

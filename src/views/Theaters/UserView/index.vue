@@ -10,37 +10,52 @@
         <br />
         <!--/Search Bar-->
         <b-row>
-          <b-col cols="9">
+          <b-col cols="10">
             <b-form-group>
-              <v-select
-                v-model="selected"
+              <b-form-input
+                type="search"
+                v-model="location"
+                placeholder="Search Location..."
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
-                label="title"
-                :options="option"
+                v-on:input="search($event)"
+                @reset="search($event)"
               />
             </b-form-group>
           </b-col>
-          <b-col cols="3">
-            <b-button variant="gradient-primary">Search location.....</b-button>
+          <b-col cols="2">
+            <b-button
+              @click="FetchTheaters(true, location)"
+              variant="gradient-primary"
+              >Search..</b-button
+            >
           </b-col>
         </b-row>
-        <br />
-        <br />
-        <br />
-        <br />
+
         <!--/Content-->
-        <b-card title="About Movie">
-          <b-card-text>
-            {{ this.description }}
-          </b-card-text>
-        </b-card>
+
         <br />
 
         <b-row>
           <b-col v-for="theater in theaters" :key="theater.id" md="1" lg="4">
             <b-card :title="theater.name">
               <b-card-img height="250px" :src="theater.image"></b-card-img>
-              <b-card-text> </b-card-text>
+              <br /><br />
+              <b-row>
+                <b-col>
+                  <b> Located in {{ theater.venue }} </b>
+                </b-col>
+                <b-col>
+                  <b-button
+                    v-b-modal.modal-info
+                    @click="showmodal(theater.description)"
+                    variant="gradient-primary"
+                    type="submit"
+                  >
+                    Details
+                  </b-button>
+                </b-col>
+              </b-row>
+              <br /><br />
               <b-row>
                 <b-col cols="12">
                   <b> Show time 1</b> :
@@ -57,7 +72,7 @@
                         <b-col cols="12">
                           <b-form-group>
                             <!-- Add seats -->
-                            <label>Add Seats</label>
+                            <label>Seats</label>
                             <validation-provider
                               #default="{ errors }"
                               rules="required|between:1,20"
@@ -78,7 +93,7 @@
                         <b-col cols="12">
                           <!-- Show Time  -->
                           <b-form-group>
-                            <label>Select Show time </label>
+                            <label>Show time</label>
                             <validation-provider
                               #default="{ errors }"
                               rules="required"
@@ -116,26 +131,38 @@
             </b-card>
           </b-col>
         </b-row>
+
+        <div v-if="theaters.length === 0">
+          <NoResultFound />
+        </div>
+
+        <b-modal
+          id="modal-info"
+          :hide-footer="true"
+          modal-class="modal-info"
+          centered
+          title="Theater Info"
+        >
+          <b-card-text>
+            {{ description }}
+          </b-card-text>
+        </b-modal>
+
+        <b-pagination
+          v-model="currentPage"
+          :total-rows="total"
+          :per-page="perPage"
+          v-on:input="paginate($event)"
+          align="center"
+          size="sm"
+          class="my-0"
+        />
+
         <br />
         <br />
       </b-container>
     </div>
-    <b-modal
-      id="modal-info"
-      ok-only
-      ok-variant="info"
-      ok-title="Accept"
-      modal-class="modal-info"
-      centered
-      title="Info Modal"
-    >
-      <b-card-text>
-        Biscuit chocolate cake gummies. Lollipop I love macaroon bear claw
-        caramels. I love marshmallow tiramisu I love fruitcake I love gummi
-        bears. Carrot cake topping liquorice. Pudding caramels liquorice sweet I
-        love. Donut powder cupcake ice cream tootsie roll jelly.
-      </b-card-text>
-    </b-modal>
+
     <div>
       <Footer />
     </div>
@@ -157,14 +184,16 @@ import {
   BCard,
   BCardImg,
   BRow,
+  BModal,
+  VBModal,
   BForm,
   BCol,
   BFormInput,
+  BPagination,
 
   // BCard,
 
   // BCard,
-  VBToggle,
 } from "bootstrap-vue";
 import {
   required,
@@ -187,15 +216,19 @@ import vSelect from "vue-select";
 import Theaterapi from "@/Api/Modules/theater";
 import BookingApi from "@/Api/Modules/booking";
 import notification from "@/ApiConstance/toast";
+import NoResultFound from "@/views/components/NoresultFoundImageUser.vue";
+
 // import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
 export default {
   components: {
     BCardImg,
     BCard,
-    vSelect,
+    BPagination,
     BContainer,
+    BModal,
     Header,
+    NoResultFound,
     BFormGroup,
     BCol,
     BFormTimepicker,
@@ -227,18 +260,17 @@ export default {
         theater_name: null,
         price: null,
       },
+      // pagination
+      perPage: 2,
+      currentPage: 1,
+      total: "",
+
       baseprice: 200.0,
       theater_param: this.$route.params.theaters,
       theaters: [],
 
-      description: this.$route.params.description,
-      selected: { title: "Colombo" },
-      option: [
-        { title: "Colombo" },
-        { title: "Rathnapura" },
-        { title: "Panadura" },
-        { title: "Kaluthara" },
-      ],
+      description: "",
+      location: "",
 
       // validations
       required,
@@ -255,16 +287,46 @@ export default {
       length,
     };
   },
-
+  directives: {
+    "b-modal": VBModal,
+  },
   async mounted() {
     await this.FetchTheaters();
   },
   methods: {
-    async FetchTheaters() {
-      const res = await Theaterapi.index(this.theater_param);
-      this.theaters = res.data.data.data;
+    search(e) {
+      console.log(e);
+      this.FetchTheaters(true, e);
+      this.theaters = [];
     },
+    paginate(e) {
+      this.currentPage = e;
+      this.FetchTheaters();
+      this.theaters = [];
+    },
+    async FetchTheaters(reset = false, location = "") {
+      if (reset) {
+        this.currentPage = 1;
+        this.theaters = [];
+      }
+      const res = await Theaterapi.index(
+        this.theater_param,
+        this.currentPage,
+        this.perPage,
+        location
+      );
+      if (this.currentPage == 1) {
+        this.theaters = res.data.data.data;
+      } else {
+        this.theaters = this.theaters.concat(res.data.data.data);
+      }
+      // this.items = this.movies;
 
+      this.total = res.data.data.total;
+    },
+    showmodal(description) {
+      this.description = description;
+    },
     async AddBooking(e, e1) {
       if (!localStorage.token) {
         notification.toast("Please Login Before", "error");
@@ -293,7 +355,7 @@ export default {
 
         setTimeout(() => {
           this.form = "";
-        }, 8000);
+        }, 30000);
       }
     },
 

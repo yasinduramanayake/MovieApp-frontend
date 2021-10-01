@@ -13,19 +13,29 @@
         </b-card>
         <br />
         <br />
+
         <b-row>
-          <b-col cols="9">
+          <b-col cols="10">
             <b-form-group>
               <b-form-input
+                v-model="movie_name"
+                type="search"
+                v-on:input="search($event)"
+                @reset="search($event)"
+                placeholder="Search Movie...."
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
-                label="title"
               />
             </b-form-group>
           </b-col>
-          <b-col cols="3">
-            <b-button variant="gradient-primary">Search Movie...</b-button>
+          <b-col cols="2">
+            <b-button
+              @click="index(true, movie_name)"
+              variant="gradient-primary"
+              >Search</b-button
+            >
           </b-col>
         </b-row>
+
         <b-row>
           <b-col v-for="booking in bookings" :key="booking.id" md="1" lg="4">
             <b-card
@@ -63,10 +73,18 @@
                   >
                   <br />
                   <b-card-text>
-                    <b>Selected Time</b> : {{ booking.showtime }}</b-card-text
+                    <b>Selected Time</b> :
+                    {{
+                      momentFormat(booking.showtime, "h:mm:ss a")
+                    }}</b-card-text
                   ><b-row>
                     <b-col cols="6">
-                      <b-button variant="gradient-primary"
+                      <b-button
+                        v-b-modal.modal-info
+                        @click="
+                          Onupdate(booking.seats, booking.showtime, booking.id)
+                        "
+                        variant="gradient-primary"
                         >Edit</b-button
                       ></b-col
                     >
@@ -83,7 +101,15 @@
                     style="width:340px"
                     variant="gradient-primary"
                     block
-                    @click=""
+                    @click="
+                      checkout(
+                        booking.movie_name,
+                        booking.seats,
+                        booking.price,
+                        booking.showtime,
+                        booking.theater_name
+                      )
+                    "
                     >Checkout to pay</b-button
                   >
                 </b-col>
@@ -91,6 +117,20 @@
             </b-card>
           </b-col>
         </b-row>
+
+        <div v-if="bookings.length === 0">
+          <NoResultFound />
+        </div>
+
+        <b-pagination
+          v-model="currentPage"
+          :total-rows="total"
+          :per-page="perPage"
+          v-on:input="paginate($event)"
+          align="center"
+          size="sm"
+          class="my-0"
+        />
         <br />
         <br />
       </b-container>
@@ -100,7 +140,66 @@
       <Footer />
     </div>
 
-    <!-- Left Text-->
+    <!-- booking update -->
+    <b-modal id="modal-info" :hide-footer="true">
+      <h4>{{ makeUpperCase("Edit Booking") }}</h4>
+
+      <validation-observer ref="bookForm" #default="{invalid}">
+        <b-form class="auth-register-form mt-2" @submit.prevent>
+          <b-row>
+            <b-col cols="12">
+              <b-form-group>
+                <!-- Update seats -->
+                <label>Seats</label>
+                <validation-provider
+                  #default="{ errors }"
+                  rules="required|between:1,20"
+                  name="Number of Seats"
+                >
+                  <b-form-input
+                    v-model="form.seats"
+                    type="number"
+                    :state="errors.length > 0 ? false : null"
+                    placeholder="No of Seats"
+                  />
+                  <small class="text-danger">{{ errors[0] }}</small>
+                </validation-provider>
+              </b-form-group>
+            </b-col>
+
+            <b-col cols="12">
+              <!-- Show Time  -->
+              <b-form-group>
+                <label>Show time </label>
+                <validation-provider
+                  #default="{ errors }"
+                  rules="required"
+                  name="time1"
+                >
+                  <b-form-timepicker
+                    locale="en"
+                    required
+                    v-model="form.showtime"
+                  />
+
+                  <small class="text-danger">{{ errors[0] }}</small>
+                </validation-provider>
+              </b-form-group>
+            </b-col>
+          </b-row>
+
+          <b-button
+            @click="UpdateBooking()"
+            :disabled="invalid"
+            type="submit"
+            block
+            variant="gradient-primary"
+          >
+            Update
+          </b-button>
+        </b-form>
+      </validation-observer>
+    </b-modal>
   </div>
 </template>
 
@@ -111,11 +210,14 @@ import Footer from "@/views/footer.vue";
 import {
   BCardText,
   BButton,
+  VBModal,
   BFormGroup,
   BContainer,
+  BPagination,
   BCard,
-  BRow,
   BCol,
+  BFormTimepicker,
+  BRow,
   BFormInput,
 
   // BCard,
@@ -124,24 +226,40 @@ import {
 } from "bootstrap-vue";
 
 // import vSelect from "vue-select";
-
+import { ValidationProvider, ValidationObserver } from "vee-validate";
 import BookingApi from "@/Api/Modules/booking";
+import NoResultFound from "@/views/components/NoresultFoundImageUser.vue";
 
 // import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
-
+import {
+  required,
+  email,
+  confirmed,
+  url,
+  between,
+  alpha,
+  integer,
+  password,
+  min,
+  digits,
+  alphaDash,
+  length,
+} from "@validations";
 export default {
   components: {
     BCard,
-
+    BFormTimepicker,
+    BPagination,
     BContainer,
     Header,
     BFormGroup,
     BCol,
-
+    ValidationProvider,
+    ValidationObserver,
     BRow,
     BFormInput,
     Footer,
-
+    NoResultFound,
     // BCard,
 
     // vSelect,
@@ -151,18 +269,103 @@ export default {
   },
   data() {
     return {
+      //  fetch data
       bookings: [],
+
+      // form data
+      form: {},
+      id: "",
+      movie_name: "",
+      // pagination
+      perPage: 3,
+      currentPage: 1,
+      total: "",
+      //input validations
+      required,
+      email,
+      confirmed,
+      url,
+      between,
+      alpha,
+      integer,
+      password,
+      min,
+      digits,
+      alphaDash,
+      length,
     };
   },
 
+  directives: {
+    "b-modal": VBModal,
+  },
   async mounted() {
     await this.index();
   },
+
   methods: {
-    async index() {
-      const res = await BookingApi.index(localStorage.name);
-      this.bookings = res.data.data.data;
+    async index(reset = false, movie = "") {
+      if (reset) {
+        this.currentPage = 1;
+        this.bookings = [];
+      }
+      const res = await BookingApi.index(
+        localStorage.name,
+        "",
+        movie,
+        this.currentPage,
+        this.perPage
+      );
+      if (this.currentPage == 1) {
+        this.bookings = res.data.data.data;
+      } else {
+        this.bookings = this.bookings.concat(res.data.data.data);
+      }
+      // this.items = this.movies;
+
+      this.total = res.data.data.total;
     },
+    search(e) {
+      this.index(true, e);
+      this.bookings = [];
+    },
+    paginate(e) {
+      this.currentPage = e;
+      this.index();
+      this.bookings = [];
+    },
+    Onupdate(data, data1, data3) {
+      this.form.seats = data;
+      this.form.showtime = data1;
+      this.id = data3;
+    },
+
+    async UpdateBooking() {
+      await this.$vs.loading({
+        scale: 0.8,
+      });
+
+      this.form.price = 200.0 * this.form.seats;
+
+      await BookingApi.update(this.form, this.id)
+        .then(({ res }) => {
+          this.$vs.loading.close();
+        })
+        .catch(({ res }) => {
+          this.$vs.loading.close();
+        });
+
+      // this.$router.push(
+      //   `/paydetails/${this.baseprice}/${this.form.movie_name}/${this.form.seats}/${this.form.price}`
+      // );
+      // /mybooking
+      this.$router.push("/mybooking");
+
+      setTimeout(() => {
+        this.form = "";
+      }, 30000);
+    },
+
     async deletebooking(id) {
       await this.$vs.loading({
         scale: 0.8,
@@ -176,8 +379,10 @@ export default {
         });
     },
 
-    cyheckout(route, route2, route3) {
-      this.$router.push(`/`);
+    checkout(route, route2, route3, route4, route5) {
+      this.$router.push(
+        `/paydetails/${route}/${route2}/${route3}/${route4}/${route5}`
+      );
     },
   },
 };

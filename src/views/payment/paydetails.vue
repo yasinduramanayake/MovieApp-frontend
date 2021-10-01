@@ -12,11 +12,15 @@
           <b-card title="Booking Summary">
             <b-card style="padding-left:1px;padding-right:10px">
               <b-card-text>
-                {{ getPrice(baseprice) }}
+                Ticket Price : {{ getPrice("200") }}
                 <br />
-                {{ name }}
+                Movie : {{ movie_name }}
                 <br />
-                Tickets Quntity: {{ seats }}
+                Theater : {{ theater_name }}
+                <br />
+                Selected Time : {{ momentFormat(showtime, "h:mm:ss a") }}
+                <br />
+                Tickets Quntity : {{ seats }}
                 <br />
                 ------------------------------------------------
                 <br />
@@ -229,10 +233,11 @@ export default {
       // form data
       form: {},
 
-      baseprice: this.$route.params.baseprice,
-      name: this.$route.params.name,
+      movie_name: this.$route.params.movie_name,
       seats: this.$route.params.seats,
       total: this.$route.params.total,
+      theater_name: this.$route.params.theater_name,
+      showtime: this.$route.params.time,
       // validations
       required,
       confirmed,
@@ -269,7 +274,7 @@ export default {
 
       setTimeout(() => {
         this.form = "";
-      }, 8000);
+      }, 30000);
     },
   },
 };
