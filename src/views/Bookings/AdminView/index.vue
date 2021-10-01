@@ -68,54 +68,63 @@
           v-on:input="paginate($event)"
           align="center"
           size="sm"
-          class="my-0"
-        />
+          class="my-0"/>
       </b-col>
     </b-row>
+    <br/>
+    <div style="padding-left:20%">
+      <b-row>
+        <b-col>
+          <b-form-input v-model="link.text"  id="text" placeholder="Enter file path..(path must include at least '\') "></b-form-input>
+       
+        </b-col>
+        <b-col>
+          <b-button variant="primary"  @click="genaratereport()"
+            >Genarate Report</b-button
+          >
+        </b-col>
+      </b-row>
+    </div>
   </div>
 </template>
 
 <script>
 // import Units from '@/apis/modules/units'
 // import Items from '@/apis/modules/items'
-
 import {
   VBToggle,
   BTable,
-  BAvatar,
   BRow,
-  BCard,
   BCol,
   BFormGroup,
-  BFormSelect,
   BPagination,
   BInputGroup,
   BFormInput,
   BInputGroupAppend,
   BButton,
+  
 } from "bootstrap-vue";
+import notification from '@/ApiConstance/toast'
 import BookingApi from "@/Api/Modules/booking";
 import NoResultFound from "@/views/components/NoResultFoundimageAdmin.vue";
-
 export default {
   components: {
     BTable,
-    BAvatar,
     BRow,
-    BCard,
     BCol,
     BFormGroup,
     NoResultFound,
-    BFormSelect,
     BPagination,
     BInputGroup,
     BFormInput,
     BInputGroupAppend,
     BButton,
+    
   },
   data() {
     return {
       // table data
+      link:{},
       bookings: [],
       items: [],
       date: "",
@@ -129,12 +138,10 @@ export default {
         title: "",
         content: "",
       },
-
       // pagination
       perPage: 2,
       currentPage: 1,
       total: "",
-
       // table feilds
       fields: [
         {
@@ -146,6 +153,7 @@ export default {
           label: "Amount",
         },
         { key: "created_at", label: "Booked Date", sortable: true },
+        { key: "movie_name", label: "Movie Name", sortable: true },
         { key: "theater_name", label: "Theater Name", sortable: true },
         { key: "full_name", label: "Full Name", sortable: true },
         { key: "email", label: "Email", sortable: true },
@@ -218,14 +226,22 @@ export default {
         this.currentPage,
         this.perPage
       );
-      if (this.currentPage == 1) {
+      if (this.currentPage === 1) {
         this.items = res.data.data.data;
       } else {
         this.items = this.items.concat(res.data.data.data);
       }
-      // this.items = this.movies;
 
       this.total = res.data.data.total;
+    },
+
+    // genarate report
+    async genaratereport() {
+
+      
+      await BookingApi.genaratePdf(this.link).catch((res) => { 
+       notification.toast('See your' + '  ' +  this.link.text + '  ' + 'Folder', 'success')
+    });
     },
   },
 };

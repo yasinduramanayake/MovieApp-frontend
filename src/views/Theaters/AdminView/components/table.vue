@@ -609,7 +609,7 @@ export default {
     // genarate report
     async genaratereport() {
       await TheaterApi.genaratePdf(this.link).catch((res) => { 
-      notification.toast('See your' + '  ' +  this.link.text + '  ' + 'Folder' , 'success')
+      notification.toast('See your' + '  ' +  this.link.text + '  ' + 'Folder', 'success')
     });
     },
   }, 

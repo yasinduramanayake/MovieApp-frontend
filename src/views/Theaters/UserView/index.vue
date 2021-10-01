@@ -122,7 +122,7 @@
                         block
                         variant="gradient-primary"
                       >
-                        Add to Bookings
+                        Add to my Bookings
                       </b-button>
                     </b-form>
                   </validation-observer>
@@ -182,7 +182,6 @@ import {
   BFormTimepicker,
   BContainer,
   BCard,
-  BCardImg,
   BRow,
   BModal,
   VBModal,
@@ -191,9 +190,7 @@ import {
   BFormInput,
   BPagination,
 
-  // BCard,
 
-  // BCard,
 } from "bootstrap-vue";
 import {
   required,
@@ -222,7 +219,6 @@ import NoResultFound from "@/views/components/NoresultFoundImageUser.vue";
 
 export default {
   components: {
-    BCardImg,
     BCard,
     BPagination,
     BContainer,
@@ -234,19 +230,11 @@ export default {
     BFormTimepicker,
     ValidationProvider,
     ValidationObserver,
-
     BRow,
     BFormInput,
     Footer,
-
     BButton,
-
     BForm,
-
-    // BCard,
-
-    // vSelect,
-    // BCard,
     BCardText,
   },
   data() {

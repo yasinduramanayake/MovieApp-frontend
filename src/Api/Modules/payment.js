@@ -8,7 +8,7 @@ export default {
 
   async store(payload) {
     return await api.post('/addpayment', payload).then((res) => {
-      notification.toast('Successfully Added ', 'success')
+      notification.toast('Payment Successfull! ', 'success')
     })
   },
 
