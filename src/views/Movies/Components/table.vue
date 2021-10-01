@@ -181,13 +181,13 @@
           <template #cell(image)="data">
             <b-avatar :src="data.value" size="60px" />
           </template>
-
+          <!-- eslint-disable-next-line -->
           <template #cell(theaters)="data">
             <div v-for="data in data.value" :key="data.id">
               {{ firstLetterUpperCase(data) }} <br />
             </div>
           </template>
-          
+
           <template #cell(name)="data">
             {{ firstLetterUpperCase(data.value) }}
           </template>
@@ -243,12 +243,10 @@
 <script>
 import { ValidationProvider, ValidationObserver } from "vee-validate";
 import NoResultFound from "@/views/components/NoResultFoundimageAdmin.vue";
-
 import {
   BTable,
   BAvatar,
   BRow,
-  BEmbed,
   BCol,
   BFormGroup,
   BFormSelect,
@@ -296,7 +294,7 @@ export default {
     vSelect,
     BForm,
     BCardTitle,
-    BEmbed,
+
     BTable,
     BAvatar,
     BRow,
@@ -410,6 +408,7 @@ export default {
 
   async mounted() {
     // Set the initial number of items
+    /* eslint-disable */
 
     await this.Alltheaters();
   },
@@ -468,7 +467,7 @@ export default {
         this.currentPage,
         this.perPage
       );
-      if (this.currentPage == 1) {
+      if (this.currentPage === 1) {
         this.items = res.data.data.data;
       } else {
         this.items = this.items.concat(res.data.data.data);
@@ -509,5 +508,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

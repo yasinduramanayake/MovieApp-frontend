@@ -157,6 +157,7 @@
   </div>
 </template>
 <script>
+/* eslint-disable */
 import { ValidationProvider, ValidationObserver } from "vee-validate";
 import {
   BCol,

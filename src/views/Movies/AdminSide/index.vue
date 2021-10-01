@@ -36,13 +36,9 @@ export default {
   components: {
     BButton,
     BSidebar,
-    VBToggle,
+
     Create,
     Table,
-  },
-
-  directives: {
-    "b-toggle": VBToggle,
   },
 };
 </script>

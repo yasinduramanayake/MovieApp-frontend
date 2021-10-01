@@ -27,7 +27,7 @@
             <p class="user-name font-weight-bolder mb-0">
               {{ name }}
             </p>
-            <span class="user-status">{{role}}</span>
+            <span class="user-status">{{ role }}</span>
           </div>
           <b-avatar
             size="40"
@@ -44,9 +44,6 @@
           <span>Profile</span>
         </b-dropdown-item>
 
-      
-
-      
         <b-dropdown-item
           link-class="d-flex align-items-center"
           @click="localLogout"
@@ -65,7 +62,6 @@ import {
   BNavbarNav,
   BNavItemDropdown,
   BDropdownItem,
-  BDropdownDivider,
   BAvatar,
 } from "bootstrap-vue";
 import DarkToggler from "@core/layouts/components/app-navbar/components/DarkToggler.vue";
@@ -78,7 +74,7 @@ export default {
     BNavbarNav,
     BNavItemDropdown,
     BDropdownItem,
-    BDropdownDivider,
+
     BAvatar,
 
     // Navbar Components
@@ -87,7 +83,7 @@ export default {
   data() {
     return {
       name: localStorage.name,
-       role: localStorage.role,
+      role: localStorage.role,
     };
   },
   props: {

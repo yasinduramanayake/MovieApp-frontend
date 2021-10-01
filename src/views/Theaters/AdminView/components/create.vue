@@ -185,8 +185,6 @@ import {
   BButton,
   BFormTimepicker,
   BForm,
-  BFormSelect,
-  BFormSelectOption,
   BFormGroup,
   BCardTitle,
   BFormTextarea,
@@ -211,8 +209,7 @@ import {
 export default {
   components: {
     ValidationProvider,
-    BFormSelect,
-    BFormSelectOption,
+
     BFormTextarea,
     BFormFile,
     BFormTimepicker,
@@ -242,7 +239,7 @@ export default {
         { title: "3D" },
       ],
       option1: [{ title1: "Colombo" }, { title1: "Waadduwa" }],
-      dir: "ltr",
+
       form: { movies: [] },
       type: { title: "IMAX" },
       venue: { title1: "Colombo" },

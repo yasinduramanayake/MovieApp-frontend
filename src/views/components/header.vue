@@ -4,9 +4,6 @@
       <b-row>
         <b-col class="nev" cols="11">
           <b-link>
-
-
-          
             <vuexy-logo />
           </b-link>
         </b-col>
@@ -29,9 +26,15 @@
       <b-col cols="11">
         <ul class="horizontal">
           <li><a href="/" style="color:white">Home</a></li>
-          <li v-if="token"><a style="color:white" @click="pushmovie()">English Movies</a></li>
-          <li v-if="token"><a style="color:white" @click="pushmovie1()">Tamil Movies</a></li>
-          <li v-if="token"><a style="color:white" @click="pushmovie2()">Hindi Movies</a></li>  
+          <li v-if="token">
+            <a style="color:white" @click="pushmovie()">English Movies</a>
+          </li>
+          <li v-if="token">
+            <a style="color:white" @click="pushmovie1()">Tamil Movies</a>
+          </li>
+          <li v-if="token">
+            <a style="color:white" @click="pushmovie2()">Hindi Movies</a>
+          </li>
           <li v-if="!token" v-b-toggle.sidebar-right>
             <a style="color:white">Login</a>
           </li>
@@ -114,16 +117,12 @@ export default {
     pushmovie() {
       this.$router.push("/english_movie");
     },
-<<<<<<< HEAD
-
-=======
     pushmovie1() {
       this.$router.push("/tamil_movies");
     },
     pushmovie2() {
       this.$router.push("/hindi_movies");
     },
->>>>>>> madura
     pushprofile() {
       this.$router.push("/userprofile");
     },
@@ -193,5 +192,4 @@ li a:hover:not(.active) {
 .active {
   background-color: #04aa6d;
 }
-
 </style>

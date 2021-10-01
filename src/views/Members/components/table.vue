@@ -111,7 +111,6 @@
     </b-modal>
 
     <b-row>
-     
       <b-col md="6" class="my-1">
         <b-form-group
           label="Filter"
@@ -200,15 +199,10 @@
 // import Items from '@/apis/modules/items'
 import { ValidationProvider, ValidationObserver } from "vee-validate";
 import {
-  BSidebar,
-  VBToggle,
   BTable,
-  BCard,
-  BAvatar,
   BRow,
   BCol,
   BFormGroup,
-  BFormSelect,
   BPagination,
   BInputGroup,
   BFormInput,
@@ -245,19 +239,17 @@ import NoResultFound from "@/views/components/NoResultFoundimageAdmin.vue";
 
 export default {
   components: {
-    CreateForm,
-    BSidebar,
     NoResultFound,
     vSelect,
     BForm,
-    BCard,
+
     BCardTitle,
     BTable,
-    BAvatar,
+
     BRow,
     BCol,
     BFormGroup,
-    BFormSelect,
+
     BPagination,
     BInputGroup,
     BFormInput,
@@ -297,6 +289,7 @@ export default {
 
       // validations
       required,
+      // eslint-disable-next-line
       email,
       confirmed,
       url,
@@ -389,7 +382,9 @@ export default {
     },
 
     // fetch users
+    // eslint-disable-next-line
     async index() {
+      // eslint-disable-next-line
       let response = await user.index();
       this.users = response.data.data.data;
       this.items = this.users;
