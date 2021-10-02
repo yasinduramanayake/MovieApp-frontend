@@ -122,7 +122,7 @@
             </b-col>
 
             <!-- Button -->
-
+            
             <b-button
               variant="primary"
               @click="Updatetheater()"
