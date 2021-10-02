@@ -4,6 +4,9 @@
       <b-row>
         <b-col class="nev" cols="11">
           <b-link>
+
+
+          
             <vuexy-logo />
           </b-link>
         </b-col>
@@ -24,8 +27,11 @@
     <b-row>
       <b-col cols="1"> </b-col>
       <b-col cols="11">
-        <ul>
-          <li><a style="color:white" @click="pushmovie()">movie</a></li>
+        <ul class="horizontal">
+          <li><a href="/" style="color:white">Home</a></li>
+          <li v-if="token"><a style="color:white" @click="pushmovie()">English Movies</a></li>
+          <li v-if="token"><a style="color:white" @click="pushmovie1()">Tamil Movies</a></li>
+          <li v-if="token"><a style="color:white" @click="pushmovie2()">Hindi Movies</a></li>  
           <li v-if="!token" v-b-toggle.sidebar-right>
             <a style="color:white">Login</a>
           </li>
@@ -80,16 +86,13 @@ export default {
   components: {
     BSidebar,
     BButton,
-
     login,
     BContainer,
     BCol,
     BRow,
     // vSelect,
     // BCard,
-
     BLink,
-
     VuexyLogo,
   },
   data() {
@@ -108,11 +111,19 @@ export default {
       await this.logout();
       clearToken();
     },
-
     pushmovie() {
-      this.$router.push("/movie");
+      this.$router.push("/english_movie");
     },
+<<<<<<< HEAD
 
+=======
+    pushmovie1() {
+      this.$router.push("/tamil_movies");
+    },
+    pushmovie2() {
+      this.$router.push("/hindi_movies");
+    },
+>>>>>>> madura
     pushprofile() {
       this.$router.push("/userprofile");
     },
@@ -167,6 +178,15 @@ li a {
   text-decoration: cornsilk;
   font-size: 15px;
 }
+
+.horizontal li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 22px;
+  text-decoration: cornsilk;
+  font-size: 15px;
+}
 li a:hover:not(.active) {
   background-color: #111;
 }
@@ -174,50 +194,4 @@ li a:hover:not(.active) {
   background-color: #04aa6d;
 }
 
-.dropdown {
-  float: left;
-  overflow: hidden;
-}
-
-.dropdown .dropbtn {
-  font-size: 16px;
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
-}
-
-.navbar a:hover,
-.dropdown:hover .dropbtn {
-  background-color: #111;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.dropdown-content a:hover {
-  background-color: #ddd;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
 </style>

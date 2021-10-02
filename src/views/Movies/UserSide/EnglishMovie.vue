@@ -111,8 +111,11 @@ import NoResultFound from "@/views/components/NoresultFoundImageUser.vue";
 
 import {
   BButton,
+<<<<<<< HEAD
   BFormInput,
   BPagination,
+=======
+>>>>>>> madura
   VBModal,
   BContainer,
   BCol,
@@ -139,10 +142,20 @@ export default {
     BCol,
     BRow,
     Footer,
+<<<<<<< HEAD
+=======
+    // vSelect,
+    // BCard,
+>>>>>>> madura
     BButton,
   },
   data() {
     return {
+<<<<<<< HEAD
+=======
+      selected: { title: "Fast And Furious" },
+      option: [{ title: "Harry Poter" }, { title: "Lord of the Rings" }, { title: "Thor" }],
+>>>>>>> madura
       movies: [],
       moviename: "",
       description: "",

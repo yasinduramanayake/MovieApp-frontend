@@ -187,7 +187,7 @@
               {{ firstLetterUpperCase(data) }} <br />
             </div>
           </template>
-
+          
           <template #cell(name)="data">
             {{ firstLetterUpperCase(data.value) }}
           </template>
