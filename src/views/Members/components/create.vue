@@ -216,12 +216,15 @@ export default {
 
       // validations
       required,
+      // eslint-disable-next-line
       email,
       confirmed,
       url,
       between,
       alpha,
+      // eslint-disable-next-line
       integer,
+      // eslint-disable-next-line
       password,
       min,
       digits,

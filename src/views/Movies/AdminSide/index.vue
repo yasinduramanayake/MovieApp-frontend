@@ -27,7 +27,7 @@
 // import Units from '@/apis/modules/units'
 // import Items from '@/apis/modules/items'
 
-import { BButton, BSidebar, VBToggle } from "bootstrap-vue";
+import { BButton, BSidebar } from "bootstrap-vue";
 import vSelect from "vue-select";
 import Create from "@/views/Movies/Components/create.vue";
 import Table from "@/views/Movies/Components/table.vue";
@@ -36,13 +36,9 @@ export default {
   components: {
     BButton,
     BSidebar,
-    VBToggle,
+
     Create,
     Table,
-  },
-
-  directives: {
-    "b-toggle": VBToggle,
   },
 };
 </script>

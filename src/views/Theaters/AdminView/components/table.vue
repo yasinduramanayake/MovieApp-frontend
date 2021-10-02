@@ -311,11 +311,14 @@
     <div style="padding-left:20%">
       <b-row>
         <b-col>
-          <b-form-input v-model="link.text"  id="text" placeholder="Enter file path..(path must include at least '\') "></b-form-input>
-       
+          <b-form-input
+            v-model="link.text"
+            id="text"
+            placeholder="Enter file path..(path must include at least '\') "
+          ></b-form-input>
         </b-col>
         <b-col>
-          <b-button variant="primary"  @click="genaratereport()"
+          <b-button variant="primary" @click="genaratereport()"
             >Genarate Report</b-button
           >
         </b-col>
@@ -366,7 +369,7 @@ import vSelect from "vue-select";
 import { togglePasswordVisibility } from "@core/mixins/ui/forms";
 import TheaterApi from "@/Api/Modules/theater";
 import MovieApi from "@/Api/Modules/movie";
-import notification from '@/ApiConstance/toast'
+import notification from "@/ApiConstance/toast";
 
 export default {
   components: {
@@ -401,7 +404,7 @@ export default {
   data() {
     return {
       // form data
-      link:{},
+      link: {},
       movies: [],
       selctedFile: "",
       mode: "",
@@ -608,10 +611,15 @@ export default {
 
     // genarate report
     async genaratereport() {
-      await TheaterApi.genaratePdf(this.link).catch((res) => { 
-      notification.toast('See your' + '  ' +  this.link.text + '  ' + 'Folder', 'success')
-    });
+      await TheaterApi.genaratePdf(this.link).catch((res) => {
+        // eslint-disable-next-line
+        notification.toast(
+          // eslint-disable-next-line
+          "See your" + "  " + this.link.text + "  " + "Folder",
+          "success"
+        );
+      });
     },
-  }, 
+  },
 };
 </script>

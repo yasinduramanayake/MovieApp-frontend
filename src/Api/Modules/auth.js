@@ -38,7 +38,6 @@ export default {
   },
 
   async reset(payload) {
-<<<<<<< HEAD
     return await api.post("/forgotpassword", payload).then((res) => {
       notification.toast("Successfully sent email", "success");
       window.location.href = "/prompt";
@@ -50,17 +49,5 @@ export default {
       notification.toast("Password resetted successfully", "success");
       window.location.href = "/";
     });
-=======
-    return await api.post('/forgotpassword', payload).then((res) => {
-      notification.toast('Successfully sent email', 'success');
-    })
-  },
-
-  async resetconfirm(payload) {
-    return await api.post('/resetpassword', payload).then((res) => {
-      notification.toast('Password resetted successfully', 'success');
-      window.location.href = '/'
-    })
->>>>>>> pubudi
   },
 };

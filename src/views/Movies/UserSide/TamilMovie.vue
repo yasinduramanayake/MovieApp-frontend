@@ -134,9 +134,6 @@ export default {
     };
   },
 
-  directives: {
-    "b-modal": VBModal,
-  },
   async mounted() {
     await this.show();
   },
@@ -163,7 +160,7 @@ export default {
         this.currentpage,
         this.per_page
       );
-      if (this.currentpage == 1) {
+      if (this.currentpage === 1) {
         this.movies = response.data.data.data;
       } else {
         this.movies = this.movies.concat(response.data.data.data);

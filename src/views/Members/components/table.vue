@@ -111,7 +111,6 @@
     </b-modal>
 
     <b-row>
-     
       <b-col md="6" class="my-1">
         <b-form-group
           label="Filter"
@@ -200,15 +199,10 @@
 // import Items from '@/apis/modules/items'
 import { ValidationProvider, ValidationObserver } from "vee-validate";
 import {
-  BSidebar,
-  VBToggle,
   BTable,
-  BCard,
-  BAvatar,
   BRow,
   BCol,
   BFormGroup,
-  BFormSelect,
   BPagination,
   BInputGroup,
   BFormInput,
@@ -240,24 +234,17 @@ import {
 import user from "@/Api/Modules/user";
 import vSelect from "vue-select";
 import { togglePasswordVisibility } from "@core/mixins/ui/forms";
-
 import NoResultFound from "@/views/components/NoResultFoundimageAdmin.vue";
-
 export default {
   components: {
-    CreateForm,
-    BSidebar,
     NoResultFound,
     vSelect,
     BForm,
-    BCard,
     BCardTitle,
     BTable,
-    BAvatar,
     BRow,
     BCol,
     BFormGroup,
-    BFormSelect,
     BPagination,
     BInputGroup,
     BFormInput,
@@ -267,13 +254,11 @@ export default {
     BNavItemDropdown,
     BDropdownDivider,
     BDropdownItem,
-
     // validations
     ValidationProvider,
     ValidationObserver,
   },
   mixins: [togglePasswordVisibility],
-
   data() {
     return {
       // Genaral data
@@ -284,7 +269,6 @@ export default {
       dateFilter: null,
       perPage: 5,
       editabledata: {},
-
       // form inputs
       role: { title: "Admin" },
       option: [{ title: "User" }, { title: "Admin" }],
@@ -294,9 +278,9 @@ export default {
       id: "",
       status: "",
       payload: {},
-
       // validations
       required,
+      // eslint-disable-next-line
       email,
       confirmed,
       url,
@@ -308,7 +292,6 @@ export default {
       digits,
       alphaDash,
       length,
-
       // table data
       pageOptions: [3, 5, 10],
       totalRows: 1,
@@ -335,7 +318,6 @@ export default {
   directives: {
     "b-modal": VBModal,
   },
-
   computed: {
     sortOptions() {
       // Create an options list from our fields
@@ -350,7 +332,6 @@ export default {
   async created() {
     await this.index();
   },
-
   mounted() {
     // Set the initial number of items
     this.totalRows = this.items.length;
@@ -360,7 +341,6 @@ export default {
       if (value && value.name === "members") this.index();
     },
   },
-
   methods: {
     shift() {
       this.shiftmode = "Add";
@@ -387,14 +367,14 @@ export default {
       this.totalRows = filteredItems.length;
       this.currentPage = 1;
     },
-
     // fetch users
+    // eslint-disable-next-line
     async index() {
+      // eslint-disable-next-line
       let response = await user.index();
       this.users = response.data.data.data;
       this.items = this.users;
     },
-
     async Updateuser() {
       if (await this.$refs.registerForm.validate()) {
         await this.$vs.loading({
@@ -415,12 +395,10 @@ export default {
             this.$vs.loading.close();
           });
       }
-
       setTimeout(() => {
         this.payload = "";
       }, 30000);
     },
-
     async deleteuser(item, index, button) {
       this.infoModal.title = `Row index: ${index}`;
       this.infoModal.content = JSON.stringify(item, null, 2);

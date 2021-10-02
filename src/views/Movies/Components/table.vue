@@ -181,7 +181,7 @@
           <template #cell(image)="data">
             <b-avatar :src="data.value" size="60px" />
           </template>
-
+          <!-- eslint-disable-next-line -->
           <template #cell(theaters)="data">
             <div v-for="data in data.value" :key="data.id">
               {{ firstLetterUpperCase(data) }} <br />
@@ -243,12 +243,10 @@
 <script>
 import { ValidationProvider, ValidationObserver } from "vee-validate";
 import NoResultFound from "@/views/components/NoResultFoundimageAdmin.vue";
-
 import {
   BTable,
   BAvatar,
   BRow,
-  BEmbed,
   BCol,
   BFormGroup,
   BFormSelect,
@@ -264,7 +262,6 @@ import {
   BNavItemDropdown,
   BDropdownDivider,
   BDropdownItem,
-  BCard,
   BForm,
   BFormFile,
   BCardTitle,
@@ -287,18 +284,15 @@ import vSelect from "vue-select";
 import { togglePasswordVisibility } from "@core/mixins/ui/forms";
 import MovieApi from "@/Api/Modules/movie";
 import TheaterApi from "@/Api/Modules/theater";
-
 export default {
   components: {
     BFormTextarea,
     NoResultFound,
     BFormFile,
-    BCard,
     BFormSelectOption,
     vSelect,
     BForm,
     BCardTitle,
-    BEmbed,
     BTable,
     BAvatar,
     BRow,
@@ -314,13 +308,11 @@ export default {
     BNavItemDropdown,
     BDropdownDivider,
     BDropdownItem,
-
     // validations
     ValidationProvider,
     ValidationObserver,
   },
   mixins: [togglePasswordVisibility],
-
   data() {
     return {
       // form data
@@ -339,9 +331,7 @@ export default {
       form: { theaters: [] },
       type: { title: "Tenet" },
       image: "",
-
       // validations
-
       required,
       email,
       confirmed,
@@ -354,13 +344,11 @@ export default {
       digits,
       alphaDash,
       length,
-
       //  table data
       id: "",
       perPage: 4,
       currentPage: 1,
       total: "",
-
       sortBy: "",
       items: [],
       movies: [],
@@ -373,7 +361,6 @@ export default {
         title: "",
         content: "",
       },
-
       // colomns
       fields: [
         {
@@ -391,7 +378,6 @@ export default {
   directives: {
     "b-modal": VBModal,
   },
-
   computed: {
     // rows() {
     //   return this.items.length;
@@ -409,13 +395,11 @@ export default {
   async created() {
     await this.index();
   },
-
   async mounted() {
     // Set the initial number of items
-
+    /* eslint-disable */
     await this.Alltheaters();
   },
-
   methods: {
     onChange(e) {
       const image = e.target.files[0];
@@ -454,7 +438,6 @@ export default {
       this.index(true, e);
       this.items = [];
     },
-
     paginate(e) {
       this.currentPage = e;
       this.index();
@@ -470,13 +453,12 @@ export default {
         this.currentPage,
         this.perPage
       );
-      if (this.currentPage == 1) {
+      if (this.currentPage === 1) {
         this.items = res.data.data.data;
       } else {
         this.items = this.items.concat(res.data.data.data);
       }
       // this.items = this.movies;
-
       this.total = res.data.data.total;
     },
     async Updatetheater() {
@@ -484,9 +466,7 @@ export default {
         await this.$vs.loading({
           scale: 0.8,
         });
-
         this.form.type = this.type.title || this.type;
-
         await MovieApi.update(this.form, this.id)
           .then(({ res }) => {
             this.$vs.loading.close();
@@ -496,12 +476,10 @@ export default {
             console.log(this.type);
           });
       }
-
       setTimeout(() => {
         this.payload = "";
       }, 8000);
     },
-
     async Deletetheater(item, index, button) {
       this.infoModal.title = `Row index: ${index}`;
       this.infoModal.content = JSON.stringify(item, null, 2);
@@ -511,5 +489,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

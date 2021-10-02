@@ -185,8 +185,6 @@ import {
   BButton,
   BFormTimepicker,
   BForm,
-  BFormSelect,
-  BFormSelectOption,
   BFormGroup,
   BCardTitle,
   BFormTextarea,
@@ -207,12 +205,9 @@ import {
   alphaDash,
   length,
 } from "@validations";
-
 export default {
   components: {
     ValidationProvider,
-    BFormSelect,
-    BFormSelectOption,
     BFormTextarea,
     BFormFile,
     BFormTimepicker,
@@ -242,13 +237,11 @@ export default {
         { title: "3D" },
       ],
       option1: [{ title1: "Colombo" }, { title1: "Waadduwa" }],
-      dir: "ltr",
       form: { movies: [] },
       type: { title: "IMAX" },
       venue: { title1: "Colombo" },
       image: "",
       dir: "ltr",
-
       //   validations
       selected3: [{ title: "Kids" }, { title: "Teen" }],
       required,
@@ -277,19 +270,16 @@ export default {
         this.form.image = e.target.result;
       };
     },
-
     async Allmovies() {
       const res = await MovieApi.index();
       this.movies = res.data.data.data;
     },
-
     // Add theater
     async Addtheater() {
       if (await this.$refs.theaterForm.validate()) {
         await this.$vs.loading({
           scale: 0.8,
         });
-
         this.form.type = this.type.title;
         this.form.venue = this.venue.title1;
         await TheaterApi.store(this.form)
@@ -300,7 +290,6 @@ export default {
             this.$vs.loading.close();
           });
       }
-
       setTimeout(() => {
         this.payload = "";
       }, 30000);

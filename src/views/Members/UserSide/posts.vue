@@ -1,32 +1,29 @@
 <template>
   <b-tabs
     content-class="mt-2"
-  
     pills
     class="profile-tabs mt-1 mt-md-0"
     nav-class="mb-0"
   >
     <b-tab active title="My Mobile">
       <b-card-text>
-       {{ mobile}}
+        {{ mobile }}
       </b-card-text>
-     
     </b-tab>
     <b-tab active title="My Email">
       <b-card-text>
-      {{email}}
+        {{ email }}
       </b-card-text>
-     
     </b-tab>
-    <br>
-    <br><br>
+    <br />
+    <br /><br />
 
-   <b-button variant="primary" class="ml-auto"  v-b-modal.modal-info>
-        <feather-icon icon="EditIcon" class="d-block d-md-none" />
-        <span class="font-weight-bold d-none d-md-block">Edit Profile</span>
-      </b-button>
+    <b-button variant="primary" class="ml-auto" v-b-modal.modal-info>
+      <feather-icon icon="EditIcon" class="d-block d-md-none" />
+      <span class="font-weight-bold d-none d-md-block">Edit Profile</span>
+    </b-button>
 
-       <b-modal id="modal-info" :hide-footer="true">
+    <b-modal id="modal-info" :hide-footer="true">
       <div>
         <b-card-title title-tag="h2" style="color:black" class="mb-2">
           <b-col cols="12">
@@ -78,7 +75,6 @@
             </b-col>
 
             <!-- role-->
-           
 
             <!-- Contact Number -->
             <b-col cols="12">
@@ -130,27 +126,20 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from "vee-validate";
-import { BTabs, BTab, BCardText, BButton,  VBModal,  BSidebar,
-  BTable,
-  BCard,
-  BAvatar,
-  BRow,
+import {
+  BTabs,
+  BTab,
+  BCardText,
+  BButton,
+  VBModal,
   BCol,
   BFormGroup,
-  BFormSelect,
-  BPagination,
-  BInputGroup,
   BFormInput,
-  BInputGroupAppend,
- 
-  BNav,
-  BNavItemDropdown,
-  BDropdownDivider,
-  BDropdownItem,
   BForm,
-  BCardTitle, } from "bootstrap-vue";
-  import user from "@/Api/Modules/user";
-  import {
+  BCardTitle,
+} from "bootstrap-vue";
+import user from "@/Api/Modules/user";
+import {
   required,
   email,
   confirmed,
@@ -164,66 +153,52 @@ import { BTabs, BTab, BCardText, BButton,  VBModal,  BSidebar,
   alphaDash,
   length,
 } from "@validations";
-
 export default {
   components: {
     BCardText,
     BTabs,
-    
     BTab,
-      BSidebar,
-  BTable,
-  BCard,
-  BAvatar,
-  BRow,
-  BCol,
-  BFormGroup,
-  BFormSelect,
-  BPagination,
-  BInputGroup,
-  BFormInput,
-  BInputGroupAppend,
-  BButton,
-  BNav,
-  BNavItemDropdown,
-  BDropdownDivider,
-  BDropdownItem,
-  BForm,
-  BCardTitle,
-   ValidationProvider, ValidationObserver 
+    BCol,
+    BFormGroup,
+    BFormInput,
+    BButton,
+    BForm,
+    BCardTitle,
+    ValidationProvider,
+    ValidationObserver,
   },
-  data(){
-    return{
-        email: '',
-      mobile: '',
-       name: '',
-       id:'',
-
+  data() {
+    return {
+      email: "",
+      mobile: "",
+      name: "",
+      id: "",
       //  validations
-        required,
-  email,
-  confirmed,
-  url,
-  between,
-  alpha,
-  integer,
-  password,
-  min,
-  digits,
-  alphaDash,
-  length,
-    }
+      required,
+      // eslint-disable-next-line
+      email,
+      confirmed,
+      url,
+      between,
+      alpha,
+      integer,
+      password,
+      min,
+      digits,
+      alphaDash,
+      length,
+    };
   },
   directives: {
     "b-modal": VBModal,
   },
-  mounted(){
-      this.email= localStorage.current_email;
-      this.mobile= localStorage.current_mobile;
-       this.name= localStorage.current_name;
-       this.id = localStorage.current_id;
+  mounted() {
+    this.email = localStorage.current_email;
+    this.mobile = localStorage.current_mobile;
+    this.name = localStorage.current_name;
+    this.id = localStorage.current_id;
   },
-methods:{
+  methods: {
     async Updateuser() {
       if (await this.$refs.registerForm.validate()) {
         await this.$vs.loading({
@@ -233,7 +208,7 @@ methods:{
           name: this.name,
           email: this.email,
           mobile: this.mobile,
-          role: 'User',
+          role: "User",
         };
         await user
           .updateCurrentUser(this.payload, this.id)
@@ -244,12 +219,10 @@ methods:{
             this.$vs.loading.close();
           });
       }
-
       setTimeout(() => {
         this.payload = "";
       }, 30000);
     },
-}
-  
+  },
 };
 </script>
