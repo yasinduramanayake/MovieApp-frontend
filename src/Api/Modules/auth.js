@@ -40,7 +40,6 @@ export default {
   async reset(payload) {
     return await api.post("/forgotpassword", payload).then((res) => {
       notification.toast("Successfully sent email", "success");
-      window.location.href = "/prompt";
     });
   },
 

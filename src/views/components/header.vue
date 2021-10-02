@@ -26,13 +26,13 @@
       <b-col cols="11">
         <ul class="horizontal">
           <li><a href="/" style="color:white">Home</a></li>
-          <li v-if="token">
+          <li>
             <a style="color:white" @click="pushmovie()">English Movies</a>
           </li>
-          <li v-if="token">
+          <li>
             <a style="color:white" @click="pushmovie1()">Tamil Movies</a>
           </li>
-          <li v-if="token">
+          <li>
             <a style="color:white" @click="pushmovie2()">Hindi Movies</a>
           </li>
           <li v-if="!token" v-b-toggle.sidebar-right>

@@ -21,10 +21,8 @@
         </b-card-text>
 
         <!-- form -->
-        <validation-observer >
-          <b-form
-            class="auth-forgot-password-form mt-2"
-          >
+        <validation-observer>
+          <b-form class="auth-forgot-password-form mt-2">
             <!-- email -->
             <b-form-group label="Email" label-for="forgot-password-email">
               <validation-provider
@@ -44,12 +42,13 @@
             </b-form-group>
 
             <!-- submit button -->
-            <b-button variant="primary" @click="resetpassword()" block >
+            <b-button variant="primary" @click="resetpassword()" block>
               Send reset link
             </b-button>
           </b-form>
         </validation-observer>
       </b-card>
+
       <!-- /Forgot Password v1 -->
     </div>
   </div>
@@ -83,6 +82,7 @@ import {
   length,
 } from "@validations";
 import AuthApi from "@/Api/Modules/auth";
+import Ripple from "vue-ripple-directive";
 
 export default {
   components: {
@@ -98,9 +98,12 @@ export default {
     ValidationProvider,
     ValidationObserver,
   },
+  directives: {
+    Ripple,
+  },
   data() {
     return {
-      form:{},
+      form: {},
       // validation
       required,
       email,
@@ -116,20 +119,34 @@ export default {
       length,
     };
   },
-  methods:{
-    async resetpassword(){
-       await this.$vs.loading({
-          scale: 0.8,
+  methods: {
+    async resetpassword() {
+      await this.$vs.loading({
+        scale: 0.8,
+      });
+      await AuthApi.reset(this.form)
+        .then((res) => {
+          this.$vs.loading.close();
+          this.success();
+        })
+        .catch((res) => {
+          this.$vs.loading.close();
         });
-     await AuthApi.reset(this.form).then((res) => {
-      this.$vs.loading.close();
-    }).catch((res) => {
-      this.$vs.loading.close();
-    })
-    }
+    },
+
+    success() {
+      this.$swal({
+        title: "Email Has Sent!",
+        text: "Go to Your Gmail Inbox And Copy Verification Code",
+        icon: "success",
+        customClass: {
+          confirmButton: "btn btn-primary",
+        },
+        buttonsStyling: false,
+      });
+    },
   },
-  };
-  
+};
 </script>
 
 <style lang="scss">
