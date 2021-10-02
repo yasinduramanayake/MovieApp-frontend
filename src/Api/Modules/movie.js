@@ -33,6 +33,6 @@ export default {
   },
 
   async genaratePdf(payload) {
-    return await api.post(`/genaratereport` ,payload )
+    return await api.post(`/generatemoviereport` ,payload )
   },
 }
