@@ -76,43 +76,51 @@
                     <b>Selected Time</b> :
                     {{
                       momentFormat(booking.showtime, "h:mm:ss a")
-                    }}</b-card-text>
-                    <center>
-                  <b-row>
-                    <b-col cols="6">
-                      <b-button
-                        v-b-modal.modal-info
-                        @click="
-                          Onupdate(booking.seats, booking.showtime, booking.id)"
-                        style="padding:15px 50px"
-                        variant="gradient-primary"
-                        >Edit</b-button
-                      ></b-col
-                    >
+                    }}</b-card-text
+                  >
+                  <center>
+                    <b-row>
+                      <b-col cols="6">
+                        <b-button
+                          v-b-modal.modal-info
+                          @click="
+                            Onupdate(
+                              booking.seats,
+                              booking.showtime,
+                              booking.id
+                            )
+                          "
+                          style="padding:15px 50px"
+                          variant="gradient-primary"
+                          >Edit</b-button
+                        ></b-col
+                      >
                       <b-button
                         style="padding:15px 50px"
                         variant="gradient-primary"
                         @click="deletebooking(booking.id)"
-                        >Delete</b-button>
-                  </b-row>
-                    </center>
+                        >Delete</b-button
+                      >
+                    </b-row>
+                  </center>
                   <br />
                   <center>
-                  
-                  <b-button
-                    style="padding:15px 0px"
-                    variant="gradient-primary"
-                    block
-                    @click="
-                      checkout(
-                        booking.movie_name,
-                        booking.seats,
-                        booking.price,
-                        booking.showtime,
-                        booking.theater_name)"
-                    >Checkout to pay</b-button>
-                 
-                    </center>
+                    <b-button
+                      style="padding:15px 0px"
+                      variant="gradient-primary"
+                      block
+                      @click="
+                        checkout(
+                          booking.movie_name,
+                          booking.seats,
+                          booking.price,
+                          booking.showtime,
+                          booking.theater_name
+                        )
+                      "
+                      >Checkout to pay</b-button
+                    >
+                  </center>
                 </b-col>
               </b-row>
             </b-card>
@@ -306,6 +314,9 @@ export default {
 
   methods: {
     async index(reset = false, movie = "") {
+      await this.$vs.loading({
+        scale: 0.8,
+      });
       if (reset) {
         this.currentPage = 1;
         this.bookings = [];
@@ -317,6 +328,7 @@ export default {
         this.currentPage,
         this.perPage
       );
+      this.$vs.loading.close();
       if (this.currentPage === 1) {
         this.bookings = res.data.data.data;
       } else {

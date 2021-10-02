@@ -10,7 +10,7 @@
         <br />
         <!--/Search Bar-->
         <b-row>
-          <b-col cols="9">
+          <b-col cols="10">
             <b-form-group>
               <b-form-input
                 v-model="moviename"
@@ -22,7 +22,7 @@
               />
             </b-form-group>
           </b-col>
-          <b-col cols="3">
+          <b-col cols="2">
             <b-button @click="show('Tamil', moviename)" variant="primary"
               >Search</b-button
             >

@@ -249,7 +249,7 @@ export default {
         price: null,
       },
       // pagination
-      perPage: 1,
+      perPage: 6,
       currentPage: 1,
       total: "",
 
