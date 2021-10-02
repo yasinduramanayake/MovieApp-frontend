@@ -33,6 +33,11 @@ import Create from "@/views/Movies/Components/create.vue";
 import Table from "@/views/Movies/Components/table.vue";
 
 export default {
+  data() {
+    return {
+      shiftmode: "",
+    };
+  },
   components: {
     BButton,
     BSidebar,
@@ -40,6 +45,17 @@ export default {
     Create,
     Table,
   },
+<<<<<<< HEAD
+=======
+  directives: {
+    "b-toggle": VBToggle,
+  },
+  methods: {
+    shift() {
+      this.shiftmode = "Add";
+    },
+  },
+>>>>>>> yasindu
 };
 </script>
 

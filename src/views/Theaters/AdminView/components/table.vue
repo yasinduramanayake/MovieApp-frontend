@@ -614,7 +614,13 @@ export default {
     // genarate report
     async genaratereport() {
       await TheaterApi.genaratePdf(this.link).catch((res) => {
+<<<<<<< HEAD
         notification.toast(
+=======
+        // eslint-disable-next-line
+        notification.toast(
+          // eslint-disable-next-line
+>>>>>>> yasindu
           "See your" + "  " + this.link.text + "  " + "Folder",
           "success"
         );

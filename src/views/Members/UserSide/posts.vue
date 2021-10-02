@@ -153,11 +153,11 @@ import {
   alphaDash,
   length,
 } from "@validations";
-
 export default {
   components: {
     BCardText,
     BTabs,
+<<<<<<< HEAD
 
     BTab,
 
@@ -168,6 +168,13 @@ export default {
 
     BButton,
 
+=======
+    BTab,
+    BCol,
+    BFormGroup,
+    BFormInput,
+    BButton,
+>>>>>>> yasindu
     BForm,
     BCardTitle,
     ValidationProvider,
@@ -179,7 +186,10 @@ export default {
       mobile: "",
       name: "",
       id: "",
+<<<<<<< HEAD
 
+=======
+>>>>>>> yasindu
       //  validations
       required,
       // eslint-disable-next-line
@@ -226,7 +236,6 @@ export default {
             this.$vs.loading.close();
           });
       }
-
       setTimeout(() => {
         this.payload = "";
       }, 30000);

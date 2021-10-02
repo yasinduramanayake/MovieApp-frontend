@@ -26,6 +26,11 @@
             <b-button @click="show('Tamil', moviename)" variant="primary"
               >Search</b-button
             >
+<<<<<<< HEAD
+=======
+
+            <b-button variant="primary">Search movie.....</b-button>
+>>>>>>> yasindu
           </b-col>
         </b-row>
         <br />
@@ -78,10 +83,18 @@
 import Header from "@/views/components/header.vue";
 import Footer from "@/views/footer.vue";
 import Movieapi from "@/Api/Modules/movie";
+<<<<<<< HEAD
+=======
+
+>>>>>>> yasindu
 import {
-  BButton,
   BFormInput,
   BPagination,
+<<<<<<< HEAD
+=======
+  BButton,
+  VBModal,
+>>>>>>> yasindu
   BContainer,
   BCol,
   BCard,
@@ -96,16 +109,33 @@ export default {
   components: {
     BCardImg,
     BCard,
+<<<<<<< HEAD
     BPagination,
     BContainer,
     BFormGroup,
     Header,
     BFormInput,
+=======
+    BButton,
+    BPagination,
+
+    Header,
+    BFormInput,
+
+    BContainer,
+    BFormGroup,
+
+>>>>>>> yasindu
     BCol,
     BRow,
     Footer,
     // vSelect,
+<<<<<<< HEAD
     BButton,
+=======
+
+    // BCard,
+>>>>>>> yasindu
   },
   data() {
     return {
@@ -142,14 +172,19 @@ export default {
         this.currentpage,
         this.per_page
       );
-      if (this.currentpage == 1) {
+      if (this.currentpage === 1) {
         this.movies = response.data.data.data;
       } else {
         this.movies = this.movies.concat(response.data.data.data);
       }
       this.total = response.data.data.total;
     },
+<<<<<<< HEAD
     routing(route, route1, route2, route3) {
+=======
+
+    routing(route, route1, route2) {
+>>>>>>> yasindu
       this.$router.push(`/theaterdetails/${route}/${route1}/${route2}`);
     },
   },

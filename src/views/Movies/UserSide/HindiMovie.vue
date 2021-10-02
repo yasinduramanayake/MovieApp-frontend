@@ -26,6 +26,22 @@
             <b-button @click="show('Hindi', moviename)" variant="primary"
               >Search</b-button
             >
+<<<<<<< HEAD
+=======
+          </b-col>
+          <b-col cols="9">
+            <b-form-group>
+              <v-select
+                v-model="selected"
+                :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
+                label="title"
+                :options="option"
+              />
+            </b-form-group>
+          </b-col>
+          <b-col cols="3">
+            <b-button variant="primary">Search movie.....</b-button>
+>>>>>>> yasindu
           </b-col>
         </b-row>
         <br />
@@ -67,6 +83,10 @@
           size="sm"
           class="my-0"
         />
+<<<<<<< HEAD
+=======
+
+>>>>>>> yasindu
         <br />
         <br />
       </b-container>
@@ -85,6 +105,10 @@
 import Header from "@/views/components/header.vue";
 import Footer from "@/views/footer.vue";
 import Movieapi from "@/Api/Modules/movie";
+<<<<<<< HEAD
+=======
+
+>>>>>>> yasindu
 import {
   BButton,
   BFormInput,
@@ -104,18 +128,34 @@ export default {
     BCardImg,
     BCard,
     BPagination,
+<<<<<<< HEAD
     BContainer,
     BFormGroup,
     Header,
     BFormInput,
     BCol,
+=======
+
+    BButton,
+    Header,
+    BFormInput,
+
+    BContainer,
+    BFormGroup,
+
+    BCol,
+    BRow,
+>>>>>>> yasindu
 
     BRow,
     Footer,
     // vSelect,
     // BCard,
+<<<<<<< HEAD
 
     BButton,
+=======
+>>>>>>> yasindu
   },
   data() {
     return {
@@ -152,13 +192,17 @@ export default {
         this.currentpage,
         this.per_page
       );
-      if (this.currentpage == 1) {
+      if (this.currentpage === 1) {
         this.movies = response.data.data.data;
       } else {
         this.movies = this.movies.concat(response.data.data.data);
       }
       this.total = response.data.data.total;
     },
+<<<<<<< HEAD
+=======
+
+>>>>>>> yasindu
     routing(route, route1, route2, route3) {
       this.$router.push(`/theaterdetails/${route}/${route1}/${route2}`);
     },
