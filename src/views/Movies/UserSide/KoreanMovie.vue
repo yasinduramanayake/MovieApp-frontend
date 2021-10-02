@@ -85,10 +85,6 @@
 import Header from "@/views/components/header.vue";
 import Footer from "@/views/footer.vue";
 import Movieapi from "@/Api/Modules/movie";
-<<<<<<< HEAD
-=======
-
->>>>>>> yasindu
 import {
   BButton,
   BFormInput,
@@ -164,12 +160,8 @@ export default {
       }
       this.total = response.data.data.total;
     },
-<<<<<<< HEAD
-    routing(route, route1, route2, route3) {
-=======
 
     routing(route, route1, route2) {
->>>>>>> yasindu
       this.$router.push(`/theaterdetails/${route}/${route1}/${route2}`);
     },
   },

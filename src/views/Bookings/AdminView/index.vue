@@ -3,7 +3,6 @@
     <b-row>
       <b-col md="6" class="my-1">
         <b-form-group
-          label="Filter"
           label-cols-sm="3"
           label-align-sm="right"
           label-size="sm"
@@ -217,6 +216,9 @@ export default {
     // comment for testing git hub
     // fetch All data
     async index(reset = false, data = "") {
+      await this.$vs.loading({
+        scale: 0.8,
+      });
       if (reset) {
         this.currentPage = 1;
         this.items = [];
@@ -228,6 +230,7 @@ export default {
         this.currentPage,
         this.perPage
       );
+      this.$vs.loading.close();
       if (this.currentPage === 1) {
         this.items = res.data.data.data;
       } else {
@@ -239,14 +242,22 @@ export default {
 
     // genarate report
     async genaratereport() {
-      await BookingApi.genaratePdf(this.link).catch((res) => {
-        // eslint-disable-next-line
-        notification.toast(
-          // eslint-disable-next-line
-          "See your" + "  " + this.link.text + "  " + "Folder",
-          "success"
-        );
+      await this.$vs.loading({
+        scale: 0.8,
       });
+      await BookingApi.genaratePdf(this.link)
+        .then(({ res }) => {
+          this.$vs.loading.close();
+        })
+        .catch((res) => {
+          // eslint-disable-next-line
+          notification.toast(
+            // eslint-disable-next-line
+            "See your" + "  " + this.link.text + "  " + "Folder",
+            "success"
+          );
+          this.$vs.loading.close();
+        });
     },
   },
 };

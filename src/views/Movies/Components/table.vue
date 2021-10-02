@@ -311,10 +311,6 @@ export default {
     vSelect,
     BForm,
     BCardTitle,
-<<<<<<< HEAD
-
-=======
->>>>>>> yasindu
     BTable,
     BAvatar,
     BRow,
@@ -421,10 +417,6 @@ export default {
   async mounted() {
     // Set the initial number of items
     /* eslint-disable */
-<<<<<<< HEAD
-
-=======
->>>>>>> yasindu
     await this.Alltheaters();
   },
   methods: {
@@ -470,6 +462,9 @@ export default {
       this.index();
     },
     async index(reset = false, moviename = "") {
+      await this.$vs.loading({
+        scale: 0.8,
+      });
       if (reset) {
         this.currentPage = 1;
         this.items = [];
@@ -480,6 +475,7 @@ export default {
         this.currentPage,
         this.perPage
       );
+      this.$vs.loading.close();
       if (this.currentPage === 1) {
         this.items = res.data.data.data;
       } else {
@@ -508,19 +504,36 @@ export default {
       }, 8000);
     },
     async Deletetheater(item, index, button) {
+      await this.$vs.loading({
+        scale: 0.8,
+      });
       this.infoModal.title = `Row index: ${index}`;
       this.infoModal.content = JSON.stringify(item, null, 2);
       this.$root.$emit("bv::show::modal", this.infoModal.id, button);
-      await MovieApi.delete(item.id);
+      await MovieApi.delete(item.id)
+        .then(({ res }) => {
+          this.$vs.loading.close();
+        })
+        .catch((res) => {
+          this.$vs.loading.close();
+        });
     },
 
     async genaratereport() {
-      await MovieApi.genaratePdf(this.link).catch((res) => {
-        notification.toast(
-          "See your" + "  " + this.link.text + "  " + "Folder",
-          "success"
-        );
+      await this.$vs.loading({
+        scale: 0.8,
       });
+      await MovieApi.genaratePdf(this.link)
+        .then(({ res }) => {
+          this.$vs.loading.close();
+        })
+        .catch((res) => {
+          notification.toast(
+            "See your" + "  " + this.link.text + "  " + "Folder",
+            "success"
+          );
+          this.$vs.loading.close();
+        });
     },
   },
 };

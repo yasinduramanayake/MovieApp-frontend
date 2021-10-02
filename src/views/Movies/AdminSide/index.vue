@@ -45,8 +45,6 @@ export default {
     Create,
     Table,
   },
-<<<<<<< HEAD
-=======
   directives: {
     "b-toggle": VBToggle,
   },
@@ -55,7 +53,6 @@ export default {
       this.shiftmode = "Add";
     },
   },
->>>>>>> yasindu
 };
 </script>
 

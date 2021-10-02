@@ -10,7 +10,7 @@
         <br />
         <!--/Search Bar-->
         <b-row>
-          <b-col cols="6">
+          <b-col cols="9">
             <b-form-group>
               <b-form-input
                 v-model="moviename"
@@ -22,26 +22,10 @@
               />
             </b-form-group>
           </b-col>
-          <b-col cols="6">
-            <b-button @click="show('Hindi', moviename)" variant="primary"
+          <b-col cols="3">
+            <b-button @click="show('Tamil', moviename)" variant="primary"
               >Search</b-button
             >
-<<<<<<< HEAD
-=======
-          </b-col>
-          <b-col cols="9">
-            <b-form-group>
-              <v-select
-                v-model="selected"
-                :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
-                label="title"
-                :options="option"
-              />
-            </b-form-group>
-          </b-col>
-          <b-col cols="3">
-            <b-button variant="primary">Search movie.....</b-button>
->>>>>>> yasindu
           </b-col>
         </b-row>
         <br />
@@ -56,14 +40,7 @@
               <b-row>
                 <b-col cols="6">
                   <b-button
-                    @click="
-                      routing(
-                        movie.name,
-                        movie.type,
-
-                        movie.theaters
-                      )
-                    "
+                    @click="routing(movie.name, movie.type, movie.theaters)"
                     variant="gradient-primary"
                   >
                     Buy Tickets
@@ -73,7 +50,9 @@
             </b-card>
           </b-col>
         </b-row>
-
+        <div v-if="movies.length === 0">
+          <NoResultFound />
+        </div>
         <b-pagination
           v-model="currentpage"
           :total-rows="total"
@@ -83,10 +62,6 @@
           size="sm"
           class="my-0"
         />
-<<<<<<< HEAD
-=======
-
->>>>>>> yasindu
         <br />
         <br />
       </b-container>
@@ -105,10 +80,6 @@
 import Header from "@/views/components/header.vue";
 import Footer from "@/views/footer.vue";
 import Movieapi from "@/Api/Modules/movie";
-<<<<<<< HEAD
-=======
-
->>>>>>> yasindu
 import {
   BButton,
   BFormInput,
@@ -121,6 +92,7 @@ import {
   BFormGroup,
   // BCard,
 } from "bootstrap-vue";
+import NoResultFound from "@/views/components/NoresultFoundImageUser.vue";
 // import vSelect from "vue-select";
 // import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 export default {
@@ -128,34 +100,16 @@ export default {
     BCardImg,
     BCard,
     BPagination,
-<<<<<<< HEAD
     BContainer,
     BFormGroup,
     Header,
     BFormInput,
     BCol,
-=======
-
-    BButton,
-    Header,
-    BFormInput,
-
-    BContainer,
-    BFormGroup,
-
-    BCol,
-    BRow,
->>>>>>> yasindu
-
+    NoResultFound,
     BRow,
     Footer,
     // vSelect,
-    // BCard,
-<<<<<<< HEAD
-
     BButton,
-=======
->>>>>>> yasindu
   },
   data() {
     return {
@@ -182,6 +136,9 @@ export default {
       this.movies = [];
     },
     async show(reset = false, moviename = "") {
+      await this.$vs.loading({
+        scale: 0.8,
+      });
       if (reset) {
         this.currentpage = 1;
         this.movies = [];
@@ -192,6 +149,7 @@ export default {
         this.currentpage,
         this.per_page
       );
+      this.$vs.loading.close();
       if (this.currentpage === 1) {
         this.movies = response.data.data.data;
       } else {
@@ -199,10 +157,6 @@ export default {
       }
       this.total = response.data.data.total;
     },
-<<<<<<< HEAD
-=======
-
->>>>>>> yasindu
     routing(route, route1, route2, route3) {
       this.$router.push(`/theaterdetails/${route}/${route1}/${route2}`);
     },
@@ -213,10 +167,7 @@ export default {
 <style lang="scss">
 @import "@core/scss/vue/pages/page-auth.scss";
 @import "@core/scss/vue/libs/vue-select.scss";
-img {
-  height: 250px;
-  width: 100%;
-}
+
 .background2 {
   background-color: white;
 }

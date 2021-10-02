@@ -45,10 +45,17 @@
               <v-select
                 v-model="venue"
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
-                label="title1"
-                :options="option1"
+                label="name"
+                :options="cityList"
               />
-
+              <!-- <b-form-select v-model="venue" class="mb-1">
+                <b-form-select-option
+                  v-for="city in cityList"
+                  :key="city.ID"
+                  :value="city.name"
+                  >{{ firstLetterUpperCase(city.name) }}</b-form-select-option
+                >
+              </b-form-select> -->
               <small class="text-danger">{{ errors[0] }}</small>
             </validation-provider>
           </b-form-group>
@@ -176,14 +183,18 @@
   </div>
 </template>
 <script>
+let cities = require("@/views/cities.js");
 import { ValidationProvider, ValidationObserver } from "vee-validate";
 import vSelect from "vue-select";
 import TheaterApi from "@/Api/Modules/theater";
 import MovieApi from "@/Api/Modules/movie";
+
 import {
   BCol,
   BButton,
   BFormTimepicker,
+  BFormSelectOption,
+  BFormSelect,
   BForm,
   BFormGroup,
   BCardTitle,
@@ -208,13 +219,11 @@ import {
 export default {
   components: {
     ValidationProvider,
-<<<<<<< HEAD
-
-=======
->>>>>>> yasindu
     BFormTextarea,
     BFormFile,
     BFormTimepicker,
+    BFormSelectOption,
+    BFormSelect,
     vSelect,
     ValidationObserver,
     BCardTitle,
@@ -227,6 +236,7 @@ export default {
   data() {
     return {
       // form data
+      cityList: cities,
       selctedFile: "",
       mode: "",
       button: "",
@@ -241,13 +251,9 @@ export default {
         { title: "3D" },
       ],
       option1: [{ title1: "Colombo" }, { title1: "Waadduwa" }],
-<<<<<<< HEAD
-
-=======
->>>>>>> yasindu
       form: { movies: [] },
       type: { title: "IMAX" },
-      venue: { title1: "Colombo" },
+      venue: { name: "Colombo" },
       image: "",
       dir: "ltr",
       //   validations
@@ -289,7 +295,7 @@ export default {
           scale: 0.8,
         });
         this.form.type = this.type.title;
-        this.form.venue = this.venue.title1;
+        this.form.venue = this.venue.name;
         await TheaterApi.store(this.form)
           .then(({ res }) => {
             this.$vs.loading.close();

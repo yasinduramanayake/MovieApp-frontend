@@ -113,7 +113,6 @@
     <b-row>
       <b-col md="6" class="my-1">
         <b-form-group
-          label="Filter"
           label-cols-sm="3"
           label-align-sm="right"
           label-size="sm"
@@ -240,22 +239,11 @@ export default {
     NoResultFound,
     vSelect,
     BForm,
-<<<<<<< HEAD
-
-    BCardTitle,
-    BTable,
-
-    BRow,
-    BCol,
-    BFormGroup,
-
-=======
     BCardTitle,
     BTable,
     BRow,
     BCol,
     BFormGroup,
->>>>>>> yasindu
     BPagination,
     BInputGroup,
     BFormInput,
@@ -340,16 +328,15 @@ export default {
       return this.passwordFieldType === "password" ? "EyeIcon" : "EyeOffIcon";
     },
   },
-  async created() {
-    await this.index();
-  },
-  mounted() {
+
+  async mounted() {
     // Set the initial number of items
+    await this.Allusers();
     this.totalRows = this.items.length;
   },
   watch: {
     $route(value) {
-      if (value && value.name === "members") this.index();
+      if (value && value.name === "members") this.Allusers();
     },
   },
   methods: {
@@ -373,16 +360,24 @@ export default {
       this.infoModal.title = "";
       this.infoModal.content = "";
     },
-    onFiltered(filteredItems) {
+    async onFiltered(filteredItems) {
+      await this.$vs.loading({
+        scale: 0.8,
+      });
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length;
       this.currentPage = 1;
+      this.$vs.loading.close();
     },
     // fetch users
     // eslint-disable-next-line
-    async index() {
+    async Allusers() {
+      await this.$vs.loading({
+        scale: 0.8,
+      });
       // eslint-disable-next-line
       let response = await user.index();
+      this.$vs.loading.close();
       this.users = response.data.data.data;
       this.items = this.users;
     },

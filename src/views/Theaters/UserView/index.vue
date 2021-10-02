@@ -38,7 +38,7 @@
         <b-row>
           <b-col v-for="theater in theaters" :key="theater.id" md="1" lg="4">
             <b-card :title="theater.name">
-              <b-card-img height="250px" :src="theater.image"></b-card-img>
+              <b-card-img :src="theater.image"></b-card-img>
               <br /><br />
               <b-row>
                 <b-col>
@@ -100,7 +100,7 @@
                               name="time1"
                             >
                               <b-form-timepicker
-                               v-on:input="condition()"
+                                v-on:input="condition()"
                                 locale="en"
                                 required
                                 v-model="form.showtime"
@@ -189,8 +189,7 @@ import {
   BCol,
   BFormInput,
   BPagination,
-
-
+  BCardImg,
 } from "bootstrap-vue";
 import {
   required,
@@ -224,6 +223,7 @@ export default {
     BContainer,
     BModal,
     Header,
+    BCardImg,
     NoResultFound,
     BFormGroup,
     BCol,
@@ -249,7 +249,7 @@ export default {
         price: null,
       },
       // pagination
-      perPage: 2,
+      perPage: 1,
       currentPage: 1,
       total: "",
 
@@ -293,6 +293,9 @@ export default {
       this.theaters = [];
     },
     async FetchTheaters(reset = false, location = "") {
+      await this.$vs.loading({
+        scale: 0.8,
+      });
       if (reset) {
         this.currentPage = 1;
         this.theaters = [];
@@ -303,6 +306,7 @@ export default {
         this.perPage,
         location
       );
+      this.$vs.loading.close();
       if (this.currentPage === 1) {
         this.theaters = res.data.data.data;
       } else {

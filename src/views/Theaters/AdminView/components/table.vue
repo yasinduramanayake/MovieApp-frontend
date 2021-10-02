@@ -1,5 +1,4 @@
 <template>
-
   <div>
     <b-modal id="modal-info" :hide-footer="true">
       <div>
@@ -48,8 +47,8 @@
                   <v-select
                     v-model="venue"
                     :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
-                    label="title1"
-                    :options="option1"
+                    label="name"
+                    :options="cityList"
                   />
 
                   <small class="text-danger">{{ errors[0] }}</small>
@@ -202,7 +201,6 @@
     <b-row>
       <b-col md="6" class="my-1">
         <b-form-group
-          label="Filter"
           label-cols-sm="3"
           label-align-sm="right"
           label-size="sm"
@@ -328,6 +326,8 @@
   </div>
 </template>
 <script>
+let cities = require("@/views/cities.js");
+
 import { ValidationProvider, ValidationObserver } from "vee-validate";
 import NoResultFound from "@/views/components/NoResultFoundimageAdmin.vue";
 import {
@@ -407,6 +407,7 @@ export default {
     return {
       // form data
       link: {},
+      cityList: cities,
       movies: [],
       selctedFile: "",
       mode: "",
@@ -425,7 +426,7 @@ export default {
       dir: "ltr",
       form: { movies: [] },
       type: { title: "IMAX" },
-      venue: { title1: "Colombo" },
+      venue: { name: "Colombo" },
       image: "",
 
       // validations
@@ -528,6 +529,7 @@ export default {
 
     async Allmovies() {
       const res = await MovieApi.index();
+
       this.movies = res.data.data.data;
     },
     //row info
@@ -564,7 +566,7 @@ export default {
         });
 
         this.form.type = this.type.title || this.type;
-        this.form.venue = this.venue.title1 || this.venue;
+        this.form.venue = this.venue.name || this.venue;
 
         await TheaterApi.update(this.form, this.id)
           .then(({ res }) => {
@@ -584,14 +586,26 @@ export default {
     // delete theater
 
     async Deletetheater(item, index, button) {
+      await this.$vs.loading({
+        scale: 0.8,
+      });
       this.infoModal.title = `Row index: ${index}`;
       this.infoModal.content = JSON.stringify(item, null, 2);
       this.$root.$emit("bv::show::modal", this.infoModal.id, button);
-      await TheaterApi.delete(item.id);
+      await TheaterApi.delete(item.id)
+        .then(({ res }) => {
+          this.$vs.loading.close();
+        })
+        .catch(({ res }) => {
+          this.$vs.loading.close();
+        });
     },
 
     // retreive all theaters
     async index(reset = false, theatername = "") {
+      await this.$vs.loading({
+        scale: 0.8,
+      });
       if (reset) {
         this.currentPage = 1;
         this.items = [];
@@ -601,6 +615,7 @@ export default {
         this.currentPage,
         this.perPage
       );
+      this.$vs.loading.close();
       if (this.currentPage === 1) {
         this.items = res.data.data.data;
       } else {
@@ -613,14 +628,12 @@ export default {
 
     // genarate report
     async genaratereport() {
+      await this.$vs.loading({
+        scale: 0.8,
+      });
       await TheaterApi.genaratePdf(this.link).catch((res) => {
-<<<<<<< HEAD
+        this.$vs.loading.close();
         notification.toast(
-=======
-        // eslint-disable-next-line
-        notification.toast(
-          // eslint-disable-next-line
->>>>>>> yasindu
           "See your" + "  " + this.link.text + "  " + "Folder",
           "success"
         );

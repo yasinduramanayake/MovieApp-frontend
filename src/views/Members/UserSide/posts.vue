@@ -157,24 +157,11 @@ export default {
   components: {
     BCardText,
     BTabs,
-<<<<<<< HEAD
-
-    BTab,
-
-    BCol,
-    BFormGroup,
-
-    BFormInput,
-
-    BButton,
-
-=======
     BTab,
     BCol,
     BFormGroup,
     BFormInput,
     BButton,
->>>>>>> yasindu
     BForm,
     BCardTitle,
     ValidationProvider,
@@ -186,10 +173,6 @@ export default {
       mobile: "",
       name: "",
       id: "",
-<<<<<<< HEAD
-
-=======
->>>>>>> yasindu
       //  validations
       required,
       // eslint-disable-next-line

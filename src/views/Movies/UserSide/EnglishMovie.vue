@@ -10,7 +10,7 @@
         <br />
         <!--/Search Bar-->
         <b-row>
-          <b-col cols="10">
+          <b-col cols="9">
             <b-form-group>
               <b-form-input
                 v-model="moviename"
@@ -22,8 +22,8 @@
               />
             </b-form-group>
           </b-col>
-          <b-col cols="2">
-            <b-button @click="show(true, moviename)" variant="gradient-primary"
+          <b-col cols="3">
+            <b-button @click="show('Tamil', moviename)" variant="primary"
               >Search</b-button
             >
           </b-col>
@@ -37,51 +37,22 @@
               <b-card-img :src="movie.image"></b-card-img>
               <br />
               <br />
-              <center>
-                <b-row>
-                  <b-col offset-md="0">
-                    <b-button
-                      @click="routing(movie.name, movie.type, movie.theaters)"
-                      variant="gradient-primary"
-                      style="text: center"
-                      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-                      type="submit"
-                      >Add
-                    </b-button>
-                  </b-col>
-                  <b-col offset-md="0">
-                    <b-button
-                      v-b-modal.modal-info
-                      @click="showmodal(movie.description)"
-                      variant="gradient-primary"
-                      v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-                      type="submit"
-                    >
-                      Details
-                    </b-button>
-                  </b-col>
-                </b-row>
-              </center>
+              <b-row>
+                <b-col cols="6">
+                  <b-button
+                    @click="routing(movie.name, movie.type, movie.theaters)"
+                    variant="gradient-primary"
+                  >
+                    Buy Tickets
+                  </b-button>
+                </b-col>
+              </b-row>
             </b-card>
           </b-col>
         </b-row>
-
         <div v-if="movies.length === 0">
           <NoResultFound />
         </div>
-
-        <b-modal
-          id="modal-info"
-          :hide-footer="true"
-          modal-class="modal-info"
-          centered
-          title="Movie Info"
-        >
-          <b-card-text>
-            {{ description }}
-          </b-card-text>
-        </b-modal>
-
         <b-pagination
           v-model="currentpage"
           :total-rows="total"
@@ -109,52 +80,48 @@
 import Header from "@/views/components/header.vue";
 import Footer from "@/views/footer.vue";
 import Movieapi from "@/Api/Modules/movie";
-import NoResultFound from "@/views/components/NoresultFoundImageUser.vue";
 import {
   BButton,
   BFormInput,
   BPagination,
-  VBModal,
   BContainer,
   BCol,
   BCard,
   BCardImg,
-  BModal,
   BRow,
   BFormGroup,
+  // BCard,
 } from "bootstrap-vue";
+import NoResultFound from "@/views/components/NoresultFoundImageUser.vue";
 // import vSelect from "vue-select";
 // import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 export default {
   components: {
     BCardImg,
-    BModal,
-    NoResultFound,
     BCard,
+    BPagination,
     BContainer,
     BFormGroup,
-    BPagination,
     Header,
     BFormInput,
     BCol,
+    NoResultFound,
     BRow,
     Footer,
+    // vSelect,
     BButton,
   },
   data() {
     return {
       movies: [],
       moviename: "",
-      description: "",
       // pagination
       currentpage: "",
       total: "",
       per_page: "3",
     };
   },
-  directives: {
-    "b-modal": VBModal,
-  },
+
   async mounted() {
     await this.show();
   },
@@ -169,6 +136,9 @@ export default {
       this.movies = [];
     },
     async show(reset = false, moviename = "") {
+      await this.$vs.loading({
+        scale: 0.8,
+      });
       if (reset) {
         this.currentpage = 1;
         this.movies = [];
@@ -179,6 +149,7 @@ export default {
         this.currentpage,
         this.per_page
       );
+      this.$vs.loading.close();
       if (this.currentpage === 1) {
         this.movies = response.data.data.data;
       } else {
@@ -186,10 +157,7 @@ export default {
       }
       this.total = response.data.data.total;
     },
-    showmodal(description) {
-      this.description = description;
-    },
-    routing(route, route1, route2) {
+    routing(route, route1, route2, route3) {
       this.$router.push(`/theaterdetails/${route}/${route1}/${route2}`);
     },
   },
@@ -199,10 +167,7 @@ export default {
 <style lang="scss">
 @import "@core/scss/vue/pages/page-auth.scss";
 @import "@core/scss/vue/libs/vue-select.scss";
-img {
-  height: 250px;
-  width: 100%;
-}
+
 .background2 {
   background-color: white;
 }
