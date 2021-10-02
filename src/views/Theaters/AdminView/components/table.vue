@@ -374,10 +374,7 @@ import notification from "@/ApiConstance/toast";
 export default {
   components: {
     BFormTextarea,
-<<<<<<< HEAD
     NoResultFound,
-=======
->>>>>>> madura
     BFormTimepicker,
     BFormFile,
     vSelect,

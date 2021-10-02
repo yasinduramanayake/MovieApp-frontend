@@ -187,7 +187,7 @@
               {{ firstLetterUpperCase(data) }} <br />
             </div>
           </template>
-          
+
           <template #cell(name)="data">
             {{ firstLetterUpperCase(data.value) }}
           </template>
@@ -238,6 +238,23 @@
         />
       </b-col>
     </b-row>
+    <br />
+    <div style="padding-left:20%">
+      <b-row>
+        <b-col>
+          <b-form-input
+            v-model="link.text"
+            id="text"
+            placeholder="Enter file path..(path must include at least '\') "
+          ></b-form-input>
+        </b-col>
+        <b-col>
+          <b-button variant="primary" @click="genaratereport()"
+            >Genarate Report</b-button
+          >
+        </b-col>
+      </b-row>
+    </div>
   </div>
 </template>
 <script>
@@ -284,6 +301,7 @@ import vSelect from "vue-select";
 import { togglePasswordVisibility } from "@core/mixins/ui/forms";
 import MovieApi from "@/Api/Modules/movie";
 import TheaterApi from "@/Api/Modules/theater";
+import notification from "@/ApiConstance/toast";
 export default {
   components: {
     BFormTextarea,
@@ -316,6 +334,7 @@ export default {
   data() {
     return {
       // form data
+      link: {},
       selctedFile: "",
       mode: "",
       button: "",
@@ -485,6 +504,15 @@ export default {
       this.infoModal.content = JSON.stringify(item, null, 2);
       this.$root.$emit("bv::show::modal", this.infoModal.id, button);
       await MovieApi.delete(item.id);
+    },
+
+    async genaratereport() {
+      await MovieApi.genaratePdf(this.link).catch((res) => {
+        notification.toast(
+          "See your" + "  " + this.link.text + "  " + "Folder",
+          "success"
+        );
+      });
     },
   },
 };

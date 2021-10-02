@@ -10,7 +10,6 @@
         <br />
         <!--/Search Bar-->
         <b-row>
-<<<<<<< HEAD
           <b-col cols="6">
             <b-form-group>
               <b-form-input
@@ -27,7 +26,7 @@
             <b-button @click="show('Hindi', moviename)" variant="primary"
               >Search</b-button
             >
-=======
+          </b-col>
           <b-col cols="9">
             <b-form-group>
               <v-select
@@ -40,7 +39,6 @@
           </b-col>
           <b-col cols="3">
             <b-button variant="primary">Search movie.....</b-button>
->>>>>>> madura
           </b-col>
         </b-row>
         <br />
@@ -59,7 +57,7 @@
                       routing(
                         movie.name,
                         movie.type,
-                        movie.description,
+
                         movie.theaters
                       )
                     "
@@ -72,7 +70,6 @@
             </b-card>
           </b-col>
         </b-row>
-<<<<<<< HEAD
 
         <b-pagination
           v-model="currentpage"
@@ -83,8 +80,7 @@
           size="sm"
           class="my-0"
         />
-=======
->>>>>>> madura
+
         <br />
         <br />
       </b-container>
@@ -103,19 +99,11 @@
 import Header from "@/views/components/header.vue";
 import Footer from "@/views/footer.vue";
 import Movieapi from "@/Api/Modules/movie";
-<<<<<<< HEAD
 
 import {
   BButton,
   BFormInput,
   BPagination,
-=======
-import {
-  BCardText,
-  BButton,
-  BModal,
-  VBModal,
->>>>>>> madura
   BContainer,
   BCol,
   BCard,
@@ -125,48 +113,30 @@ import {
   // BCard,
 } from "bootstrap-vue";
 // import vSelect from "vue-select";
-<<<<<<< HEAD
-=======
-import vSelect from "vue-select";
->>>>>>> madura
 // import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
 export default {
   components: {
     BCardImg,
     BCard,
-<<<<<<< HEAD
     BPagination,
-    BContainer,
-    BFormGroup,
 
+    BButton,
     Header,
     BFormInput,
-    BCol,
-    BModal,
-=======
 
     BContainer,
     BFormGroup,
-    vSelect,
-    Header,
 
     BCol,
->>>>>>> madura
     BRow,
 
     Footer,
     // vSelect,
     // BCard,
-<<<<<<< HEAD
-    BCardText,
-=======
->>>>>>> madura
-    BButton,
   },
   data() {
     return {
-<<<<<<< HEAD
       movies: [],
       moviename: "",
 
@@ -178,9 +148,6 @@ export default {
     };
   },
 
-  directives: {
-    "b-modal": VBModal,
-  },
   async mounted() {
     await this.show();
   },
@@ -207,7 +174,7 @@ export default {
         this.currentpage,
         this.per_page
       );
-      if (this.currentpage == 1) {
+      if (this.currentpage === 1) {
         this.movies = response.data.data.data;
       } else {
         this.movies = this.movies.concat(response.data.data.data);
@@ -215,29 +182,8 @@ export default {
       this.total = response.data.data.total;
     },
 
-=======
-      selected: { title: "Fast And Furious" },
-      option: [{ title: "Tenet" }, { title: "Jumanji" }, { title: "Thor" }],
-      movies: [],
-    };
-  },
-  async mounted() {
-    await this.show();
-  },
-  directives: {
-    "b-modal": VBModal,
-  },
-  methods: {
-    async show() {
-      const response = await Movieapi.index("Hindi");
-      this.movies = response.data.data.data;
-      console.log(this.movies);
-    },
->>>>>>> madura
     routing(route, route1, route2, route3) {
-      this.$router.push(
-        `/theaterdetails/${route}/${route1}/${route2}/${route3}`
-      );
+      this.$router.push(`/theaterdetails/${route}/${route1}/${route2}`);
     },
   },
 };
