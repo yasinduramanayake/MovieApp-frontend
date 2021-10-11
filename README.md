@@ -1,5 +1,8 @@
-# Vue 3 Notes
+This is a movie ticket booking web application front end
 
-## Things to take care of:
+Our group members are 
 
-- Scoped styles
+A.R.D.Y.Y Ramanayake - IT19164304
+Madura Prasad - IT19022116
+Fernando P.P.A - IT19159454
+
