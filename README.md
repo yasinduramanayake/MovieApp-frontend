@@ -1,4 +1,4 @@
-This is a movie ticket booking web application front end
+This is a movie ticket booking web application front end developing with **vue js 3**
 
 Our group members are 
 
